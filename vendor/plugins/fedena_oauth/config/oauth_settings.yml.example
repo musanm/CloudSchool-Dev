@@ -1,0 +1,4 @@
+# Example Oauth Settings
+google:  #Your provider name
+  client_key: "your_client_key" #Your providers client key
+  client_secret: "your_client_secret" #Your providers client secret

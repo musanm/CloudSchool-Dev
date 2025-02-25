@@ -1,0 +1,76 @@
+<%-# Fedena
+#Copyright 2010 Foradian Technologies Private Limited
+#
+#This product includes software developed at
+#Project Fedena - http://www.projectfedena.org/
+#
+#Licensed under the Apache License, Version 2.0 (the "License");
+#you may not use this file except in compliance with the License.
+#You may obtain a copy of the License at
+#
+#  http://www.apache.org/licenses/LICENSE-2.0
+#
+#Unless required by applicable law or agreed to in writing,
+#software distributed under the License is distributed on an
+#"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#KIND, either express or implied.  See the License for the
+#specific language governing permissions and limitations
+#under the License. -%>
+
+
+<div id="content-header">
+  <%= show_header_icon %>
+  <h1><%= t('fedena_custom_import_label') %></h1>
+<div class='header-sep'>|</div>
+<div class='sub-header'><%= t('all_exports') %></div>
+  <div id="inner-tab-menu">
+    <ul>
+      <li class='themed_bg themed-dark-hover-background'><%= link_to "#{t('new_text')}", new_export_path %></li>
+      <li class='themed_bg themed-dark-hover-background'><%= link_to t('view_scheduled_jobs'), scheduled_task_path(:job_object=>"Import",:job_type=>"1") %></li>
+    </ul>
+  </div>
+</div>
+<div id="page-yield">
+  <div class="bread_crumb">
+    <%= make_breadcrumb %>
+    <%= render_breadcrumbs  %>
+  </div>
+  <div id="flash-box">
+    <% unless flash[:notice].nil? %>
+      <p class="flash-msg"> <%= flash[:notice] %> </p>
+    <% end %>
+  </div>
+  <% unless @exports.empty? %>
+    <div class="box">
+      <table id ="listing" align="center" width="100%" cellpadding="1" cellspacing="1">
+        <tr class="tr-head">
+          <td class="sl_no"><%= t('serial_no') %></td>
+          <td class="name"><%= t("name") %></td>
+          <td class="options"><%= t("options") %></td>
+        </tr>
+        <% @exports.each_with_index do |export,index| %>
+          <tr class="tr-<%= cycle('odd', 'even') %>">
+            <td class="sl_no"><%= ((@exports.current_page - 1) * @exports.per_page) + index + 1 %></td>
+            <td class="name">
+              <%= export.name %>
+            </td>
+            <td class="options">
+              <%= link_to t('export_csv'),export_csv_exports_path(:id => export.id) %>
+              | <%= link_to t('import_data'),new_import_path(:id => export.id) %>
+               | <%= link_to t('bulk_edit'),edit_import_path(:id => export.id) %>
+              | <%= link_to t('delete'),export, :confirm => t('sure'), :method => :delete %>
+              | <%= link_to "#{t('imports_text')}", imports_path(:export_id => export.id) %>
+            </td>
+
+          </tr>
+        <% end %>
+      </table>
+      <%= will_paginate @exports %>
+    </div>
+  <% else %>
+    <div id="flash-box">
+      <p class="flash-msg">No Exports present</p>
+    </div>
+  <% end %>
+
+</div>

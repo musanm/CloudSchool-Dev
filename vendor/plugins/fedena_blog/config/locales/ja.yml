@@ -1,0 +1,109 @@
+ja: 
+  activerecord:
+    attributes:
+       applicant:
+          first_name: "姓"
+          date_of_birth: "誕生日"
+
+  date:
+    formats:
+      default: "%e-%m-%Y"
+      normal: "%B %e, %Y"
+      short: "%e. %b"
+      month_year: "%B %Y"
+      long: "%A, %e %B, %Y"
+      only_day: "%e"
+      month: "%B"
+      day: "%a"
+      mont: "%d"
+      day_mon: "%a %d"
+
+
+    day_names: [日曜日, 月曜日, 火曜日, 水曜日, 木曜日, 金曜日, 土曜日]
+    abbr_day_names: [日, 月, 火, 水, 木, 金, 土]
+    month_names: [~, 1月, 2月, 3月, 4月, 5月, 6月, 7月, 8月, 9月, 10月, 11月, 12月]
+    abbr_month_names: [~, 1月, 2月, 3月, 4月, 5月, 6月, 7月, 8月, 9月, 10月, 11月, 12月]
+    order: [ :day, :month, :year ]
+
+  time:
+    formats:
+      default: "%A, %d. %B %Y, %H:%M Uhr"
+      short: "%d. %B, %H:%M Uhr"
+      long: "%A, %d. %B %Y, %H:%M Uhr"
+      time: "%H:%M"
+
+    am: "AM"
+    pm: "PM"
+
+  blog_admin_privilege: "ブログ管理権限"
+  blog_comments: 
+    delete_comment_confirmation: "このコメントを削除しますか？"
+    deleted_user: "削除されたユーザー"
+    flash_admin: "アドミンはブログに参加できません。"
+    comment_deleted: "Comment successfully deleted."
+    comment_created: "Comment successfully created."
+  blog_posts:
+    edit: "Edit"
+    activate: "アクティベート"
+    ban_blog_post: "Blog post is banned successfully"
+    ban_post: "投稿を禁止する。"
+    blog_post_deleted_successfully: "Post deleted successfully"
+    blogs_text: "ブログ"
+    comments: "内容"
+    create_post: "投稿を作成"
+    deactivate: "ディアクティベート"
+    delete_post: "この投稿を削除しますか？"
+    deleted_blog: "削除されたブログ"
+    deleted_user: "削除されたユーザー"
+    edit_blog: "ブログを編集"
+    favourites: "お気に入り"
+    flash2: "Your blog post has been saved successfully."
+    flash3: "Your blog post has been posted successfully."
+    flash_admin: "アドミンはブログに参加できません。"
+    flash_edit: "投稿の編集は成功しました。"
+    flash_no_blog: "当該ユーザーのブログはありません。"
+    flash_no_user: "ユーザーがみつかりません。"
+    flash_not_available: "この内容は現在使用できません。"
+    home: "ホーム"
+    latest_posts: "最新"
+    my_blog: "マイブログ"
+    new_post: "+新規投稿"
+    next_page: "次のページ>"
+    no_blog_found: "ブログが見つかりません。"
+    no_blog_posts: "No blog posts"
+    no_post: "あなた宛の投稿はありません。"
+    not_authorized: "この内容を閲覧する権限がありません。"
+    notifications: "アクティブ"
+    on_text: "オン"
+    popular_posts: "人気"
+    posted_by: "投稿者"
+    posts: "投稿"
+    prev_page: "< 前のページ"
+    publish: "公開"
+    published_successfully: "Published Successfully"
+    save_as_draft: "下書きとして保存"
+    search: "検索"
+    search_blogs: "ブログを検索"
+    unban_blog_post: "Blog post is un-banned successfully"
+    unpublish: "非公開"
+    unpublished_successfully: "Unpublished Successfully"
+  blog_text: "ブログ"
+  blogs:
+    edit: "Edit"
+    activities: "アクティビティ"
+    blog_activated: "User's blog is activated successfully"
+    blog_deactivated: "User's blog is deactivated successfully"
+    blogs_text: "ブログ"
+    commented: "投稿にコメントがあります。"
+    deleted_user: "削除されたユーザー"
+    flash1: "自分のブログの作成を先に行ってください。"
+    flash_admin: "アドミンはブログに参加できません。"
+    flash_update: "ブログのアップデートは成功しました。"
+    my_blog: "マイブログ"
+    no_notification: "最近のアクティビティはありません。"
+    notifications: "アクティビティ"
+    on_text: "オン"
+    register: "登録"
+    search: "検索"
+  manage_blog: "他ユーザのブログの投稿及び閲覧"
+  blog_activity_present: "Has blog related activities"

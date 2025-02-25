@@ -1,0 +1,48 @@
+
+
+<div id="content-header">
+  <%= show_header_icon %>
+  <h1><%= t('blogs_text') %></h1>
+  <div class='header-sep'>|</div>
+  <div class='sub-header'><%= t('edit_blog') %></div>
+  <div id="inner-tab-menu">
+    <ul>
+      <li class='themed_bg themed-dark-hover-background'><%= link_to t('home'),blog_blog_posts_path(@current_user.id) %></li>
+      <li class='themed_bg themed-dark-hover-background'><%= link_to t('my_blog'),my_blog_path %></li>
+      <li class='themed_bg themed-dark-hover-background'><%= link_to t('notifications'),notification_blogs_path %></li>
+      <li class='themed_bg themed-dark-hover-background'><%= link_to t('search'),search_blog_blog_posts_path %></li>
+    </ul>
+  </div>
+</div>
+<div id="page-yield">
+  <div class="bread_crumb">
+    <% breadcrumb :blog_posts_edit, [@blog_post,@blog_post.blog.user_id]%>
+    <%= render_breadcrumbs  %>
+  </div>
+  <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+
+  <% form_for [@blog,@blog_post] do |f| %>
+    <%= f.error_messages %>
+    <%= hidden_field_tag :user_id,@user.id %>
+    <div class="label-field-pair">
+      <%= f.label :title %>
+      <%= f.text_field :title %>
+    </div>
+    <div class="label-field-pair">
+      <%= f.label :body %>
+      <div id="blog_post_content_text_field_bg">
+  <%#= fckeditor_textarea :blog_post,:body,:lang => I18n.locale,:langdir => (rtl? ? 'rtl' : 'ltr') %>
+        <%= f.redactor :body %>
+      </div>
+    </div>
+    <div class="button_area">
+      <%= f.submit 'Save',:class => 'submit-button'%>
+    </div>
+
+  <% end %>
+
+  <%= load_redactor_script %>
+
+</div>

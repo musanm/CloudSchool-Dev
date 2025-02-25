@@ -1,0 +1,19 @@
+
+<div class="favourite">
+  <% if can_favourite(bp) %>
+    <div class="favourite_content"><span><%=  "#{bp.votes_for} #{t('favourites')}" %></span></div>
+    <% if @current_user.voted_for?(bp) %>
+      <div class="favourite_link_active"></div>
+    <% else %>
+      <%= link_to '<div class="favourite_link"></div>',:controller => "blog_posts",:action => "blog_like",:blog_id => bp.id,:page => @blog_posts.current_page %>
+    <% end %>
+  <% end %>
+
+  <% if @current_user.admin? or @current_user.privileges.map(&:name).include? "BlogAdmin" %>
+    <% if bp.is_active == false %>
+      <%= link_to "<div class='ban_link_active' title='Un-ban'></div>",:controller => "blog_posts",:action => "ban_blog",:blog_id => bp.id,:page => @blog_posts.current_page %>
+    <% else %>
+      <%= link_to "<div class='ban_link' title=#{t('ban_post')} ></div>",:controller => "blog_posts",:action => "ban_blog",:blog_id => bp.id,:page => @blog_posts.current_page %>
+    <% end %>
+  <% end %>
+</div>

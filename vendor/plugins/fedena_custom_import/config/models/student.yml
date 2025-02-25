@@ -1,0 +1,63 @@
+ student:
+    primary_keys:
+      admission_no: "Admission no"
+    overrides:
+      batch_id: "Batch Name"
+      nationality_id: "Nationality Name"
+      student_category_id: "Student Category Name"
+      country_id: "Country Name"
+      immediate_contact_id: "Immediate Contact Name"
+      employee_grade_id: "Employee Grade Name"
+      is_sms_enabled: "SMS Enabled"
+      is_email_enabled: "EMail Enabled"
+      biometric_id: "Biometric ID"
+      phone2: "Mobile"
+    associations:
+     - :batch
+     - :nationality
+     - :student_category
+     - :country
+     - :immediate_contact
+    associated_columns:
+      nationality: "name_as"
+      student_category: "name"
+      country: "name_as"
+    booleans:
+     - :is_sms_enabled
+     - :has_paid_fees
+     - :is_email_enabled
+     - :has_paid_fees_for_batch
+    filters:
+     - :status_description
+     - :is_active
+     - :is_deleted
+     - :passport_number
+     - :enrollment_date
+     - :photo_file_name
+     - :photo_content_type
+     - :photo_data
+     - :photo_file_size
+     - :library_card
+     - :user_id
+     - :school_id
+     - :immediate_contact_id
+     - :sibling_id
+     - :roll_number
+    map_combination:
+     batch: "full_name"
+    mandatory_header_associates:
+     - :immediate_contact
+    associates:
+     student_additional_detail: "student_additional_field"
+    associate_columns:
+      student_additional_detail: "additional_info"
+    associate_column_search:
+      student_additional_field: "name"
+    dependent: "user"
+    attr_accessor_list:
+      - :biometric_id
+    associate_primary_keys:
+      student_additional_detail:
+        additional_field_id: 
+
+# Please refer to employee.yml for basic concept

@@ -1,0 +1,48 @@
+
+<div id="content-header">
+  <%= show_header_icon %>
+  <h1><%= t('email_send') %></h1>
+  <div class='header-sep'>|</div>
+  <div class='sub-header'><%= t('home') %></div>
+</div>
+<div id="page-yield">
+  <div class="bread_crumb">
+    <%= make_breadcrumb %>
+    <%= render_breadcrumbs  %>
+  </div>
+  <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+
+  <div class="box">
+    <% if permitted_to? :show, :email_alerts %>
+      <div class="link-box">
+        <div class="link-heading"><%= link_to "#{t('to_employees')}" ,:controller=>'email_alerts',:action=>'show',:recipient=>"employee" %> </div>
+        <div class="link-descr"><%= t('send_email_to_employees') %></div>
+      </div>
+
+      <div class="link-box">
+        <div class="link-heading"><%= link_to "#{t('to_students')}" ,:controller=>'email_alerts',:action=>'show',:recipient=>"student" %> </div>
+        <div class="link-descr"><%= t('send_email_to_students') %></div>
+      </div>
+
+      <div class="link-box">
+        <div class="link-heading"><%= link_to "#{t('to_guardians')}" ,:controller=>'email_alerts',:action=>'show',:recipient=>"parent" %> </div>
+        <div class="link-descr"><%= t('send_email_to_guardians') %></div>
+      </div>
+    <%end%>
+    <% if permitted_to? :email_alert_settings, :email_alerts %>
+      <div class="link-box">
+        <div class="link-heading"><%= link_to "#{t('settings')}" ,:controller=>'email_alerts',:action=>'email_alert_settings'%> </div>
+        <div class="link-descr"><%= t('email_alert_settings_privilege') %></div>
+      </div>
+    <%end%>
+
+    <% if permitted_to? :email_unsubscription_list, :email_alerts %>
+      <div class="link-box">
+        <div class="link-heading"><%= link_to "#{t('unsubscription_list')}" ,{:controller=>"email_alerts",:action=>"email_unsubscription_list"}%> </div>
+        <div class="link-descr"><%= t('list_of_unsuscribed_students') %></div>
+      </div>
+    <%end%>
+  </div>
+</div>

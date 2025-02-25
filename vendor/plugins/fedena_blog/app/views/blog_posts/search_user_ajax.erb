@@ -1,0 +1,39 @@
+<%-# Fedena
+#Copyright 2010 Foradian Technologies Private Limited
+#
+#This product includes software developed at
+#Project Fedena - http://www.projectfedena.org/
+#
+#Licensed under the Apache License, Version 2.0 (the "License");
+#you may not use this file except in compliance with the License.
+#You may obtain a copy of the License at
+#
+#  http://www.apache.org/licenses/LICENSE-2.0
+#
+#Unless required by applicable law or agreed to in writing,
+#software distributed under the License is distributed on an
+#"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#KIND, either express or implied.  See the License for the
+#specific language governing permissions and limitations
+#under the License. -%>
+
+<% unless @blogs.blank? %>
+  <table class="search_blog">
+    <% @blogs %>
+    <% @blogs.each do |blog| %>
+      <tr>
+        <td colspan="3" class="seperator">
+        </td>
+      </tr>
+      <tr class="search_line hover">
+        <td class="user_name hover"><%= link_to "#{blog.first_name} #{blog.last_name}",blog_directory_path(blog.id) %></td>
+        <td class="identity_number hover"><%= link_to "#{blog.username}",blog_directory_path(blog.id) %></td>
+        <td class="blog_name hover"><%= link_to "#{blog.name}",blog_directory_path(blog.id) %>
+        </td>
+      </tr>
+
+    <% end %>
+  </table>
+<% else %>
+  <p class="flash-msg"> <%= t('no_blog_found') %> </p>
+<% end %>

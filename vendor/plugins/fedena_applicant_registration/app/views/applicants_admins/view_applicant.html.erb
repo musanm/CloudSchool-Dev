@@ -1,0 +1,219 @@
+<div class="page">
+  <div id="content-header">
+    <%= show_header_icon %>
+    <h1><%= t('applicant_s')%></h1>
+    <div class='header-sep'>|</div>
+    <div class='sub-header'><%= t('view_details') %></div>
+    <div id="inner-tab-menu">
+      <ul>
+        <li class='themed_bg themed-dark-hover-background'><%= link_to t('ed_it'), :controller=>"applicants", :action => 'edit', :id => @applicant.id %></li>
+        <li class='themed_bg themed-dark-hover-background'><%= link_to t('print'),print_application_applicants_path(:id => @applicant.id),:target=>'_blank' %></li>
+      </ul>
+    </div>
+
+  </div>
+  <div id="page-yield">
+    <div class="bread_crumb">
+      <% breadcrumb :applicants_admins_view_applicants ,@applicant%>
+      <%= render_breadcrumbs  %>
+    </div>
+    <% unless flash[:notice].nil? %>
+      <p class="flash-msg"> <%= flash[:notice] %> </p>
+    <% end %>
+    <div class="content-wrapper">
+      <div class="page-yield">
+        <% unless flash[:warn_notice].nil? %>
+          <div id="errorExplanation1">
+            <ul>
+              <li>
+                <%= flash[:warn_notice] %>
+              </li>
+            </ul>
+          </div>
+        <% end %>
+        <% if @applicant.is_academically_cleared == true and @applicant.is_financially_cleared == true and @applicant.status != "alloted" %>
+          <p id="conf-status-U">
+            <%= link_to_remote t('admit_applicant_to_a_batch'),:url=>{:action=>"admit_applicant",:id=>@applicant.id},:html=>{:onclick=>'perform_operation();'} %>
+          </p>
+        <% end %>
+        <% if @applicant.is_academically_cleared == true and @applicant.registration_course.enable_approval_system == true and (@current_user.admin? or @current_user.privileges.map(&:name).include? 'FinanceControl')%>
+          <% unless @applicant.has_paid? %>
+            <p id="conf-status-U">
+              <%= t('applicant_has_not_paid_fees') %>.
+              <%= link_to_remote t('mark_paid'),:url=>{:action=>"mark_paid",:id=>@applicant.id} %>
+            </p>
+          <% end %>
+        <% else %>
+          <% if @applicant.is_academically_cleared != true and @applicant.registration_course.enable_approval_system == true %>
+            <p id="conf-status-U">
+              <%= t('mark_applicant_as_academically_cleared') %>.
+              <%= link_to_remote t('mark_cleared'),:url=>{:action=>"mark_academically_cleared",:id=>@applicant.id} %>
+            </p>
+          <% else %>
+            <% unless @applicant.has_paid? %>
+              <p id="conf-status-U">
+                <%= t('applicant_has_not_paid_fees') %>.
+                <%= link_to_remote t('mark_paid'),:url=>{:action=>"mark_paid",:id=>@applicant.id} %>
+              </p>
+            <% end %>
+          <% end %>
+        <% end %>
+        <div id="modal-box" style="display:none;"></div>
+        <div class="section photo-section">
+
+          <h4 class="section-heading themed_text"><%= t('basic_information') %></h4>
+          <div id="applicant_photo">
+            <%= image_tag @applicant.photo.url(:original, false) %>
+          </div>
+          <%= attr_pair(t('application_date'),format_date(@applicant.created_at,:format=>:long))  %>
+          <%= attr_pair(t('last_name'),@applicant.last_name) %>
+          <%= attr_pair(t('middle_name'),@applicant.middle_name) %>
+          <%= attr_pair(t('first_name'),@applicant.first_name) %>
+          <%= attr_pair(t('application_status'),@applicant.status.gsub('alloted','allotted').capitalize) %>
+          <%= attr_pair(t('application_fee'),@applicant.has_paid ? t('paid') : t('not_paid')) %>
+          <%= attr_pair(t('gender'),@applicant.gender.downcase=="m" ? t('male') : t('female')) %>
+          <%= attr_pair(t('nationality'),@applicant.nationality.full_name)  if @applicant.nationality.present?%>
+          <% if !course_pin_system_registered_for_course(@applicant.registration_course.course_id) %>
+            <%= attr_pair(t('pin_no'),@applicant.pin_number)  unless @applicant.pin_number.nil? %>
+          <% end %>
+          <%= attr_pair(t('registration_amount'),@applicant.finance_transaction.nil?? precision_label(@applicant.amount) : precision_label(@applicant.finance_transaction.amount.to_f) ) %>
+          <%unless @financetransaction.nil? %>
+            <%= attr_pair(t('receipt_no'),@financetransaction.receipt_no) %>
+          <% end %>
+          <% if (FedenaPlugin.can_access_plugin?("fedena_pay") and @online_transaction_id.present?) %>
+            <%= attr_pair(t('online_transaction_id'),@online_transaction_id) %>
+          <% end %>
+        </div>
+        <div class="section">
+          <h4 class="section-heading themed_text"><%= t('admission_information') %></h4>
+          <%= attr_pair(t('course'),@applicant.registration_course.course.full_name) %>
+          <%= attr_pair(t('reg_no'),@applicant.reg_no) %>
+        </div>
+        <div class="extender"></div>
+        <div class="section">
+
+          <h4 class="section-heading themed_text"><%= t('contact_information') %></h4>
+          <% if @applicant.address_line1.present?%>
+            <%= attr_pair(t('address'),@applicant.address_line1 + ", "+ @applicant.address_line2 ) %>
+          <% else %>
+            <%= attr_pair(t('address'),@applicant.address_line1 + @applicant.address_line2 ) %>
+          <% end %>
+          <%= attr_pair(t('city'),@applicant.city) %>
+          <%= attr_pair(t('state'),@applicant.state) %>
+          <%= attr_pair(t('zip_code'),@applicant.pin_code) %>
+          <%= attr_pair(t('country'),@applicant.country.full_name) %>
+          <%= attr_pair(t('phone'),@applicant.phone1) %>
+          <%= attr_pair(t('mobile'),@applicant.phone2) %>
+          <%= attr_pair(t('email'),@applicant.email) %>
+          <%= attr_pair(t('date_of_birth'),format_date(@applicant.date_of_birth)) %>
+        </div>
+        <div class="extender"></div>
+        <% unless @applicant.applicant_guardian.blank? %>
+          <% applicant_guardian = @applicant.applicant_guardian %>
+          <div class="section">
+            <h4 class="section-heading themed_text"><%= t('guardian_information') %></h4>
+            <%= attr_pair(t('first_name'),applicant_guardian.first_name) %>
+            <%= attr_pair(t('last_name'),applicant_guardian.last_name) %>
+            <%= attr_pair(t('relation'),applicant_guardian.relation) %>
+            <%= attr_pair(t('occupation'),applicant_guardian.occupation) %>
+            <%= attr_pair(t('income'),applicant_guardian.income) %>
+            <%= attr_pair(t('education'),applicant_guardian.education) %>
+            <%= attr_pair(t('dob'),format_date(applicant_guardian.dob)) %>
+          </div>
+          <div class="extender"></div>
+          <div class="section">
+            <h4 class="section-heading themed_text"><%= t('guardian_contact_information') %></h4>
+            <% if applicant_guardian.office_address_line1.present? %>
+              <%= attr_pair(t('address'),applicant_guardian.office_address_line1 + ", "+ applicant_guardian.office_address_line2 ) %>
+            <% else %>
+              <%= attr_pair(t('address'),applicant_guardian.office_address_line1 + applicant_guardian.office_address_line2 ) %>
+            <% end %>
+            <%= attr_pair(t('city'),applicant_guardian.city) %>
+            <%= attr_pair(t('state'),applicant_guardian.state) %>
+            <%= attr_pair(t('country'),applicant_guardian.country.full_name) %>
+            <%= attr_pair(t('office_phone1'),applicant_guardian.office_phone1) %>
+            <%= attr_pair(t('office_phone2'),applicant_guardian.office_phone2) %>
+            <%= attr_pair(t('mobile'),applicant_guardian.mobile_phone) %>
+            <%= attr_pair(t('email'),applicant_guardian.email) %>
+          </div>
+        <% end %>
+        <div class="extender"></div>
+        <%if @applicant.registration_course.is_subject_based_registration%>
+          <div class="section">
+            <h4 class="section-heading themed_text"><%= t('applicants.chosen_electives') %></h4>
+            <%count=1%>
+            <%unless @elective_name.blank?%>
+              <%@elective_name.each do |sub|%>
+                <div class="attr_pair">
+                  <div class="attr_label_1">
+                    <%="#{count})"%>
+                  </div>
+                  <div class="attr_value_1">
+                    <%=sub.name%>
+                  </div>
+                </div>
+                <%count=count+1%>
+              <%end%>
+
+            <%end%>
+          </div>
+        <%end%>
+        <div class="extender"></div>
+        <% unless @applicant.applicant_previous_data.blank? %>
+          <% previous_data = @applicant.applicant_previous_data %>
+          <div class="section">
+            <h4 class="section-heading themed_text"><%= t('last_attended_institution_details') %></h4>
+            <%= attr_pair(t('last_attended_school'),previous_data.last_attended_school) %>
+            <%= attr_pair(t('qualifying_exam'),previous_data.qualifying_exam) %>
+  <%#= attr_pair(t('qualifying_exam_year'),previous_data.qualifying_exam_year) %>
+            <%= attr_pair(t('qualifying_exam_roll'),previous_data.qualifying_exam_roll) %>
+            <%= attr_pair(t('qualifying_exam_final_score'),previous_data.qualifying_exam_final_score) %>
+          </div>
+        <% end %>
+        <div class="extender"></div>
+        <div class="section">
+          <h4 class="section-heading themed_text"><%= t('additional_detail') %></h4>
+          <% @additional_details.each do |additional_data| %>
+            <%= attr_pair(additional_data.additional_field.try(:name),additional_data.additional_info.gsub(/\n/, '<br>')) %>
+          <% end %>
+        </div>
+        <div class="extender"></div>
+        <% unless @applicant.registration_course.applicant_addl_field_groups.blank? %>
+          <% @applicant.registration_course.applicant_addl_field_groups.active.each do |grp| %>
+            <div class="extender"></div>
+            <div class="section">
+              <h4 class="section-heading themed_text"><%= grp.name %></h4>
+              <% grp.applicant_addl_fields.active.each do |f| %>
+                <% opt= @addl_values.select{|s| s.applicant_addl_field_id==f.id} %>
+                <% v = opt.blank? ? "-" : opt.first.value%>
+                <%= attr_pair(f.field_name,v) %>
+              <% end %>
+            </div>
+          <% end %>
+        <% end %>
+        <% unless @applicant.applicant_addl_attachments.blank? %>
+
+          <div class="extender"></div>
+          <div class="section addl-attachment">
+            <h4 class="section-heading themed_text"> Additional Attachments </h4>
+            <% @applicant.applicant_addl_attachments.each do |att| %>
+              <%= attr_pair(truncate(att.attachment_file_name, :length => 15,:ommision => '...'),"#{link_to t('download_text'),att.attachment.url(:original, false),:class=>"themed_text",:target=>"blank"}") %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+
+      <br />
+      <br />
+
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  function perform_operation(){
+    if (j('#conf-status-U').children().size()==1){
+      j('#conf-status-U').children().first().hide();
+      j('#conf-status-U').append('<span>Please wait...</span>');
+    }
+  }
+</script>

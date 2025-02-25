@@ -1,0 +1,11 @@
+es:
+  oauth:
+    account: "cuenta"
+    could_not_authenticate_with: "Lo sentimos, no se pudo autenticar utilizando"
+    enter_user_email: "Introducir su dirección de correo electrónico"
+    login_with_google: "Iniciar sesión con su"
+    no_user_with_email: "No hay usuario con la dirección de correo electrónico"
+    select_user: "Seleccionar Usuarios"
+  manage_clients: "Gestionar Clientes"
+  enable_oauth: "Habilitar Oauth"
+  

@@ -1,0 +1,47 @@
+exam_score:
+    primary_keys:
+      student_id: "Student Admission Number"
+      exam_id: "exam_group_name"
+    overrides:
+      grading_level_id: "Grading Level Name"
+      student_id: "Student Admission Number"
+    associations:
+     - :grading_level
+     - :student
+     - :exam
+    associated_columns:
+      grading_level: "name"
+      student: "admission_no"
+      exam: "id"
+    inject:
+    - :exam_group_name
+    - :batch_name
+    - :subject_code
+    finders:
+      exam_group:
+        name: "exam_group_name"
+        batch_id: "batch_name"
+      subject:
+        code: "subject_code"
+        batch_id: "batch_name"
+      exam:
+       - :exam_group
+       - :subject
+      grading_level:
+        batch_id: "batch_name"
+        name: "grading_level_name"
+    map_combination:
+      batch: "full_name"
+      grading_level: "full_name"
+    map_column:
+      batch_id: "batch"
+    filters:
+     - :is_failed
+     - :school_id
+     - :exam_id
+
+# Please refer to employee.yml for basic concept.
+
+# Whenever some column data needed to be fetched from some parent table,those extra columns should be mentioned
+# in the inject array.
+    

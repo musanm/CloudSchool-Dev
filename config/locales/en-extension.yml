@@ -1,0 +1,171 @@
+en-k12:
+  activerecord:
+    model :
+      course : "Class"
+    attributes:
+      course:
+        course_name: "Class Name"
+    errors:
+      template:
+        header:
+#          one: "1 error prohibited this from being saved"
+#          other: "{{count}} errors prohibited this from being saved"
+      messages:
+#        must_be_less_than_5_mb : "must be less than 5 MB"
+  manage_course: "Manage Class"
+  manage_course_and_create_batches: "Manage class and create batches"
+  course_batch_details: "Class / Batch Details"
+  course_fee_defaulters: "Class fee defaulters details"
+  select_a_course: "Select a class"
+  select_course: "Select Class"
+  course_and_batch: "Class & Batch"
+  course_text: "Class"
+  courses_text: "Classes"
+  manage_course_batch: "Manage Class/Batch"
+  add_a_new_course_or_batch: "Add a new class or batch for this academic year"
+  course_name: "Class name"
+  manage_course_and_create_batches: "Manage classes and create batches"
+  select_more_course: "Select more classes"
+  course_associated: "Class associated"
+  no_course_selected: "No class is selected for this event yet"
+  my_course_event: "My class events"
+  manage_course_batch_privilege: "Manage class/batch"
+  last_course: "Last attended Class"
+  course_for_category: "Class for this category"
+  fees_submission_by_course: "Fee Submission by Class"
+  fees_submit_by_each_course: "Fees submission by selecting each class"
+  course: "Class"
+  student_ranking_per_course: "Student Ranking per Class"
+  generates_reports_for_course_wise: "Generates reports for class-wise student ranks"
+  no_courses_for_this_school: "No classes for this school"
+  no_courses_present: "No classes present"
+  course_wise: "Class-wise"
+  course_wise_cumulative_grade_point: "Class-wise Cumulative Grade Point Average (CGPA)"
+  course_wise_combined_weighted_average: "Class-wise Combined Weighted Average (CWA)"
+  course_wise_combined_percentage: "Class-wise Combined Percentage"
+  all_courses : "All Classes"
+  no_students_in_this_course : "No students in this class"
+  no_batches_in_this_course : "No batches in this class"
+  no_active_batches_found: "No active batch exist for this class"
+  no_inactive_batches_found: "No inactive batch exist for this class"
+  no_courses_assigned:  "No classes assigned"
+  assign_courses:   "Assign classes"
+  select_courses:   "Select class"
+  assign_cce_weightages_descr:  "Assign Weightages to Classes"
+  assign_weightage_to_courses: "Assign weightages to class"
+  observation_groups_assignment_descr:  "Assign Observation Groups to Classes"
+  reset_to_course_default: "Reset to class default"
+  course_and_batch_details: "Class & Batch details"
+  manage_subjects_corresponding: "Manage subjects corresponding to different classes"
+  common_to_all_message: "This event is common across all classes and departments"
+  course_prefix_text: "This is the default course prefix."
+  create_course_wise_exam: "Class Wise Exam"
+  course_wise_exam: "Class-wise Exam"
+
+#courses controller translation
+  courses:
+    flash1: "Created class successfully"
+    flash2: "Updated class details successfully"
+    flash3: "Class deleted successfully"
+    flash4: "Unable to delete class. Please remove associated batches and students."
+
+#event controller translation
+  event:
+    flash1: "Event created for selected classes"
+
+#exam controller translation
+  exam:
+    flash12: "No inactive batches in the selected class"
+    flash13: "Select a class to continue"
+
+  #autosuggest menu
+  autosuggest_menu:
+   manage_course: "Manage Class"
+   fee_submission_by_course: "Fee Submission by Class"
+   add_course: "Add Class"
+
+en-hd:
+  activerecord:
+    model :
+      course : "Class"
+    attributes:
+      course:
+        course_name: "Course Name"
+    errors:
+      template:
+        header:
+#          one: "1 error prohibited this from being saved"
+#          other: "{{count}} errors prohibited this from being saved"
+      messages:
+#        must_be_less_than_5_mb : "must be less than 5 MB"
+  manage_course: "Manage Course"
+  manage_course_and_create_batches: "Manage course and create batches"
+  course_batch_details: "Course / Batch Details"
+  course_fee_defaulters: "Course fee defaulters details"
+  select_a_course: "Select a course"
+  select_course: "Select course"
+  course_and_batch: "Course & Batch"
+  course_text: "Course"
+  courses_text: "Courses"
+  manage_course_batch: "Manage Course/Batch"
+  add_a_new_course_or_batch: "Add a new course or batch for this academic year"
+  course_name: "Course name"
+  manage_course_and_create_batches: "Manage courses and create batches"
+  select_more_course: "Select more courses"
+  course_associated: "Course associated"
+  no_course_selected: "No course is selected for this event yet"
+  my_course_event: "My course events"
+  manage_course_batch_privilege: "Manage course/batch"
+  last_course: "Last attended Course"
+  course_for_category: "Course for this category"
+  fees_submission_by_course: "Fee Submission by Course"
+  fees_submit_by_each_course: "Fees submission by selecting each course"
+  course: "Course"
+  student_ranking_per_course: "Student Ranking per Course"
+  generates_reports_for_course_wise: "Generates reports for course-wise student ranks"
+  no_courses_for_this_school: "No courses for this school"
+  no_courses_present: "No courses present"
+  course_wise: "Course-wise"
+  course_wise_cumulative_grade_point: "Course-wise Cumulative Grade Point Average (CGPA)"
+  course_wise_combined_weighted_average: "Course-wise Combined Weighted Average (CWA)"
+  course_wise_combined_percentage: "Course-wise Combined Percentage"
+  all_courses : "All Courses"
+  no_students_in_this_course : "No students in this course"
+  no_batches_in_this_course : "No batches in this course"
+  no_active_batches_found: "No active batch exist for this course"
+  no_inactive_batches_found: "No inactive batch exist for this course"
+  no_courses_assigned:  "No courses assigned"
+  assign_courses:   "Assign courses"
+  select_courses:   "Select course"
+  assign_cce_weightages_descr:  "Assign Weightages to Courses"
+  assign_weightage_to_courses: "Assign weightages to course"
+  observation_groups_assignment_descr:  "Assign Observation Groups to Courses"
+  reset_to_course_default: "Reset to course default"
+  course_and_batch_details: "Course & Batch details"
+  manage_subjects_corresponding: "Manage subjects corresponding to different courses"
+  common_to_all_message: "This event is common across all courses and departments"
+  course_prefix_text: "This is the default course prefix."
+  create_course_wise_exam: "Course Wise Exam"
+  course_wise_exam: "Course-wise Exam"
+
+#courses controller translation
+  courses:
+    flash1: "Created course successfully"
+    flash2: "Updated course details successfully"
+    flash3: "Course deleted successfully"
+    flash4: "Unable to delete course. Please remove associated batches and students."
+
+#event controller translation
+  event:
+    flash1: "Event created for selected courses"
+
+# translation for exam controller
+  exam:
+    flash12: "No inactive batches in the selected course"
+    flash13: "Select a course to continue"
+
+  #autosuggest menu
+  autosuggest_menu:
+   manage_course: "Manage Course"
+   fee_submission_by_course: "Fee Submission by Course"
+   add_course: "Add Course"

@@ -1,0 +1,100 @@
+<div id="content-header">
+  <h1>Automated SMS</h1>
+  <div class='header-sep'>|</div>
+  <div class='sub-header'>Edit</div>
+  <div id="inner-tab-menu">
+    <ul>
+      <%# if @attach_signatures.count < 2 %>
+        <li class='themed_bg themed-dark-hover-background'><%= link_to 'Back', attendance_messsage_path(@attendance_messsage) %></li>
+      <%# end%>
+    </ul>
+
+  </div>
+</div>
+
+<div id="page-yield">
+  <div class="bread_crumb">
+    <a href="<%= root_path %>">Home</a> 
+    <div class="bread-crumb-separator"> &gt; </div><a href="/configuration">Configuration</a>
+    <div class="bread-crumb-separator"> &gt; </div><a href="/sms">SMS</a>
+    <div class="bread-crumb-separator"> &gt; </div><a href="/attendance_messsages">Automated SMS</a>
+    <div class="bread-crumb-separator"> &gt; </div><a href="#">Edit</a>
+  </div>
+
+  <div class="box">
+    <div id="update_batch"></div>
+    <div class="extender"></div>
+  </div>
+</div>
+
+<div id="page-yield">
+  <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+
+
+
+  <% form_for(@attendance_messsage, :html=> {:multipart=>true}) do |f| %>
+    <%= f.error_messages %>
+    <div id="admission1_form">
+      <div class="label-field-pair">
+        <label for="student_grade">In Message</label>
+        <div class="text-input-bg">
+          <%= f.text_area :in_message %>
+          <input id="attach_signature_name" size="30" type="text" value="asdasdas" disabled="disabled">
+        </div>
+      </div>
+    </div>
+
+    <div id="admission1_form">
+      <div class="label-field-pair">
+        <label for="student_grade">Out Message</label>
+        <div class="text-input-bg">
+          <%= f.text_area :out_message %>
+        </div>
+      </div>
+    </div>
+
+    <div id="admission1_form">
+      <div class="label-field-pair">
+        <label for="student_grade">Absent Message</label>
+        <div class="text-input-bg">
+          <%= f.text_area :absent_message %>
+        </div>
+      </div>
+    </div>
+
+    <%= submit_tag "", :value => "► #{t('save_and_proceed')}", :class => "submit_button", :disable_with => "► #{t('please_wait')}" %>
+  <% end %>
+</div>
+
+<style>
+  textarea {
+    -webkit-border-radius: 10px;
+    background: #EEEEEE none repeat scroll 0 0;
+    border: 1px solid #C6C6C6;
+    font-family: Arial;
+    height: 40px;
+    padding: 5px;
+    width: 470px;
+    margin-bottom: 10px;
+  }
+
+  #admission1_form{
+    padding-top: 20px;
+  }
+  .submit_button {
+    margin-top: 15px;
+    margin-left: 200px;
+    padding: 7px 10px;
+    color: #fff;
+    background: #27292B;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    font-weight: bold;
+    font-size: 14px;
+    border: none;
+    font-family: arial;
+    cursor: pointer;
+
+  </style>

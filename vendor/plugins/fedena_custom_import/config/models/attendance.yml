@@ -1,0 +1,36 @@
+attendance:
+    primary_keys:
+      student_id:
+      month_date:
+    overrides: 
+      student_id: "Student Admission Number"
+      batch_id: "Batch Name"
+      forenoon: "Forenoon Attendance"
+      afternoon: "Afternoon Attendance"
+      reason: "Reason"
+    booleans:
+     - :forenoon
+     - :afternoon
+    associations:
+     - :student
+     - :batch
+    associated_columns:
+      student: "admission_no"
+    map_combination:
+      batch: "full_name"
+    filters:
+     - :period_table_entry_id
+     - :school_id
+
+# Please refer to employee.yml for basic concept.
+
+# Forenoon and afternoon are boolean fields.It will only be having true and false values.Whenever such
+# columns comes,place all those inside booleans array.If any value is present in the csv for those
+# it will enter an entry as true,if left blank,will be entered as false
+
+# Batch will be entered as full name only.But cannot be searched as search.Bacause no such column called
+# full_name is there in the database.But full name can be fetched by method.
+# Value will be a combination of course code and batch name.Such kind of case,where a method is to be used
+# to search an associated value,to be placed inside map_combination hash.
+
+    

@@ -1,0 +1,8 @@
+<% if @error.present? %>
+  j("#student_register").html("")
+  j("#error").html("<%= @error %>")  
+<% else %>
+  j("#student_register").html('<%=escape_javascript(render :partial => "attendance_reports/in_out_report", :header => @header, :data => @data, :result => @result) %>');
+  j(".pdf_report_div").removeClass("none")
+  j(".pdf_report_div").html('<%=escape_javascript(link_to "Pdf Report", get_in_out_attendance_pdf_report_attendance_reports_path(:advance_search=> params["advance_search"]),  :class => "pdf_report_btn",:target => "_blank") %>');
+<% end %>

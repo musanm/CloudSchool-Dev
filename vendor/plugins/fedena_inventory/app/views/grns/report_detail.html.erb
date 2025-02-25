@@ -1,0 +1,135 @@
+
+<div id="content-header">
+  <%= show_header_icon %>
+  <h1><%= t('inventory') %> <%= t('transaction_report') %></h1>
+  <div class='header-sep'>|</div>
+  <div class='sub-header'><%= t('transaction_report') %></div>
+
+
+  <div id="inner-tab-menu">
+    <ul>
+      <li class='themed_bg themed-dark-hover-background'>
+        <%= link_to "#{t('pdf_report')}", grn_pdf_grn_path(:id => @grn_report.id),:target => '_blank' %>
+      </li>
+    </ul>
+  </div>
+
+</div>
+<div id="page-yield">
+  <div class="bread_crumb">
+    <% breadcrumb :grns_report_detail, [@grn_report,[@start_date,@end_date]] %>
+    <%= render_breadcrumbs  %>
+  </div>
+  <% total =0 %>
+
+  <b id="fee-report-title"><%= "#{t('inventory_transaction_report')}"%>  </b>
+
+  <div class="extender"></div>
+
+  <div class="label-field-show">
+    <div class="label-container1"><%= "#{t('raised_by')}" %></div>
+    <div class="label-output">:  <%=h @user.first_name unless @user.nil?  %></div>
+  </div>
+
+  <div class="label-field-show">
+    <div class="label-container1"><%= "#{t('grn_no')}" %></div>
+    <div class="label-output">:  <%=h @grn_report.grn_no  %></div>
+  </div>
+
+  <% supplier = @grn_report.purchase_order.supplier %>
+  <% supplier_type = supplier.nil? ? nil : supplier.supplier_type %>
+
+  <div class="extender"></div>
+  <div class="label-field-show">
+    <div class="label-container1"><%= "#{t('supplier_type')}" %></div>
+    <div class="label-output">:  <%=h  supplier_type.name unless supplier_type.nil? %></div>
+  </div>
+
+
+  <div class="label-field-show">
+    <div class="label-container1"><%= "#{t('supplier')}" %></div>
+    <div class="label-output">:  <%=h  supplier.name unless supplier.nil? %></div>
+  </div>
+
+
+  <div class="extender"></div>
+  <div class="label-field-show">
+    <div class="label-container1"><%= "#{t('purchase_order')}" %></div>
+    <div class="label-output">:  <%=h  @grn_report.purchase_order.po_no unless @grn_report.purchase_order.nil?  %></div>
+  </div>
+
+  <div class="label-field-show">
+    <div class="label-container1"><%= "#{t('store')}" %></div>
+    <div class="label-output">:  <%=h @grn_report.purchase_order.store.name %></div>
+  </div>
+
+
+  <div class="extender"></div>
+  <div class="label-field-show">
+    <div class="label-container1"><%= "#{t('invoice_no')}" %></div>
+    <div class="label-output">:  <%=h @grn_report.invoice_no %></div>
+  </div>
+
+
+
+
+  <div class="label-field-show">
+    <div class="label-container1"><%= "#{t('grn_date')}" %></div>
+    <div class="label-output">:  <%=h format_date(@grn_report.grn_date,:format=>:long_date) %></div>
+  </div>
+
+  <div class="extender"></div>
+  <div class="label-field-show">
+    <div class="label-container1"><%= "#{t('invoice_date')}" %></div>
+    <div class="label-output">:  <%=h format_date(@grn_report.invoice_date,:format=>:long_date) %></div>
+  </div>
+
+
+  <div class="label-field-show">
+    <div class="label-container1"><%= "#{t('other_charges')}" %></div>
+    <div class="label-output">:  <%=h precision_label @grn_report.other_charges  %></div>
+  </div>
+
+  <div class="extender"></div>
+
+
+  <div id="fees-table">
+    <% unless @grn_report.grn_items.blank? %>
+      <div class="fees-th">
+        <div class="fees-table-payee"><%= t('item') %></div>
+        <div class="fees-table-category"><%= t('quantity') %></div>
+        <div class="fees-table-date"><%= t('price') %></div>
+        <div class="fees-table-date"><%= t('discount') %></div>
+        <div class="fees-table-reciept"><%= t('tax') %></div>
+        <div class="fees-table-amount"><%= t('amount') %></div>
+      </div>
+      <% total_net_amount = 0 %>
+      <%  @grn_report.grn_items.each_with_index do |i, p| %>
+        <div class="list<%=cycle('odd', 'even')%>">
+
+          <div class="fees-table-payee"> <%=h  i.store_item.item_name  unless i.store_item.nil? %></div>
+          <div class="fees-table-category"> <%=h  i.quantity %></div>
+          <div class="fees-table-date"> <%=h precision_label i.store_item.unit_price  %></div>
+          <div class="fees-table-date"> <%=h precision_label i.discount %></div>
+          <div class="fees-table-reciept"><%=h precision_label(i.tax) unless i.tax.nil?%></div>
+          <div class="fees-table-amount">
+            <%=h precision_label(i.quantity *  i.store_item.unit_price + ( i.quantity *  i.store_item.unit_price *  i.tax * 0.01) - ( i.quantity *  i.unit_price )* ( i.discount * 0.01))  %>
+          </div>
+
+
+        </div>
+      <% end %>
+    <% end %>
+    <br/>
+    <div class="fees-th">
+      <div class="fees-table-total-name"><%= t('total_fees') %>:</div>
+      <div class="fees-table-category"></div>
+      <% unless  @grn_report.other_charges.nil? %>
+        <div class="fees-table-total-amount"> <%=h precision_label(@total+=  @grn_report.other_charges) %></div>
+      <% else  %>
+        <div class="fees-table-total-amount"><%=h precision_label @total %> </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+

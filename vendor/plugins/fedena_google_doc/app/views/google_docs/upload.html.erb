@@ -1,0 +1,32 @@
+
+<div id="content-header">
+<%= show_header_icon %>
+  <h1><%= t('google_docs') %></h1>
+<div class='header-sep'>|</div>
+<div class='sub-header'><%= t('upload_document') %></div>
+
+</div>
+<div id="page-yield">
+  <div class="bread_crumb">
+    <%= make_breadcrumb %>
+    <%= render_breadcrumbs  %>
+  </div>
+  <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+
+  <div class="box">
+    <% form_for(:document,{}, :html=> {:multipart=>true}) do |f| %>
+
+      <div class="label-field-pair">
+        <label for="student_image_file"><%= t('select_file') %></label>
+        <%= hidden_field_tag "MAX_FILE_SIZE", 1024 %>
+        <div class="text-input-bg"><%=f.file_field :file, :size=>12  %></div>
+      </div>
+
+      <%= f.submit "#{t('upload')}", :class => "submit_button" %>
+    <% end %>
+
+    <div class="extender"></div>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<label for="student_course" id="batch_text"><%=t('batch')%></label>
+<div class="text-input-bg">
+  <%= select :batch, :id,
+    @batches.map {|b| [b.full_name, b.id] },
+    {:prompt => "#{t('select_a_batch')}"},
+    {:onchange => "#{remote_function(
+    :url => { :action => 'batch_summary' },
+    :with => "'batch_id='+value+'&request_id='+1",
+    :update =>'display_area',
+    :before => "Element.show('loader1')",
+    :success => "Element.hide('loader1');get_tutors();get_duration();",
+    :complete=> "tab_action();inner_tab_menu();")}"} %>
+  <%= image_tag("loader.gif",:align => "absmiddle",:border => 0,:id => "loader1", :style =>"display: none;" ) %>
+</div>

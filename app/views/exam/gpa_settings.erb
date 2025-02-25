@@ -1,0 +1,58 @@
+<div id="content-header">
+  <%= show_header_icon %>
+  <h1><%= t('gpa_settings') %></h1>
+  <div class='header-sep'>|</div>
+  <div class='sub-header'><%= t('gpa_settings') %></div>
+</div>
+<div id="page-yield">
+  <div class="bread_crumb">
+    <%= make_breadcrumb %>
+    <%= render_breadcrumbs  %>
+  </div>
+
+  <%unless flash[:notice].nil?%>
+    <p class="flash-msg"><%= flash[:notice] %></p>
+  <% end %>
+  <h5><%= t('cgpa_calculation_format') %></h5>
+
+  <% form_for(@cgpa_setting, :url => {:action=> 'gpa_settings'}, :html=> {:multipart=>true}) do |s| %>
+
+  <div class="by_average">
+    <div class="label_field_pair">
+      <div class="student_gender_value">
+          <%= s.radio_button  "config_value", "0", :checked => "checked" %>
+          <label class="label_for_gender" for="configuration_config_value_0"> <%= t('by_gpa_average') %></label>
+       </div>
+    </div>
+    <div class="average_example themed_text">
+      <%= link_to_remote "#{t('view_example')}",:url => { :controller=>"exam",:action => 'cgpa_average_example'},  :html => {:class => 'themed_text'} %>
+    </div>
+
+    <div class="formula">
+      <div class="numerator"><%= t('average_gpas') %></div>
+      <div class="denominator"><%= "#{t('total_batches')}" %> </div>
+    </div>
+  </div>
+
+  <div class="by_credit_hours">
+    <div class="label_field_pair">
+      <div class="student_gender_value">
+          <%= s.radio_button  "config_value", "1" %>
+          <label class="label_for_gender" for="configuration_config_value_1"> <%= t('by_credit_hours') %></label>
+       </div>
+     </div>
+     <div class="credit_hour_example themed_text">
+       <%= link_to_remote "#{t('view_example')}",:url => { :controller=>"exam",:action => 'cgpa_credit_hours_example'},:method => 'get', :html => {:class => 'themed_text'} %>
+     </div>
+
+     <div class="formula">
+      <div class="numerator"><%= t('total_credit_points') %></div>
+      <div class="denominator"><%= t('total_credit_hours')%> </div>
+    </div>
+   </div>
+   <%= submit_tag "", :value => "#{t('submit')}", :class => "submit_button", :disable_with => "► #{t('please_wait')}" %>
+<% end %>
+
+  <div id="modal-box" style="display:none;"></div>
+
+</div>

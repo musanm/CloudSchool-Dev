@@ -1,0 +1,490 @@
+<table id="no-border" style="border: none !important;">
+    <tr>
+      <td>Attendance Timing Report</td>
+      <td></td>
+      <td rowspan="5" style="width: 400px; text-align: center;">
+        <div id="top_logo">
+          <%= wicked_pdf_image_tag current_school_detail.logo,:s3=>true,:style=>:original,:timestamp=>false , :style => "height: 170px;width: 250px;" rescue nil %>
+        </div>
+      </td>
+      <td rowspan="5" style="width: 1300px; text-align: center;">
+        <h1>
+          <%= Configuration.get_config_value('InstitutionName'); %><br>
+          <%= Configuration.get_config_value('InstitutionAddress') %>
+        </h1>
+      </td>
+    </tr>
+    <tr>
+      <td>Department:</td>
+      <td><%= @department.name %></td>
+    </tr>
+    <tr>
+      <td>Working Days</td>
+      <td><%#= @result["working_days"] %></td>
+    </tr>
+    <tr>
+      <td>Principal</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Month</td>
+      <td><%= @date %></td>
+    </tr>
+  </table><br>
+
+    <% if @department.present? && @date.present? %>
+      <% start_date = @date.beginning_of_month.beginning_of_day %>
+      <% end_date   = @date.end_of_month.end_of_day %>
+      <table id="register-table">
+        <tbody>
+          
+          <tr class="tr-head">
+            <td colspan="2" class="head-td-name head-td-name themed_text">Employees</td>
+            <td class="head-td-date themed_text">
+                <div class="day"></div>
+                <div class="date themed_text"></div>
+              </td>
+            <% (start_date.to_date..end_date.to_date).each do |date| %>
+              <td class="head-td-date themed_text">
+                <div class="day" style="font-size: 20px;"><%= date.strftime("%a") %></div>
+                <div class="date themed_text" style="font-size: 20px;"><%= date.day %></div>
+              </td>
+            <% end %>  
+            <td class="head-td-date themed_text">
+              <div class="day"></div>
+              <div class="head-td-name head-td-name themed_text" >Present/Absent</div>
+            </td>
+          </tr>
+          
+          <% daily_attendance_percentage = Hash.new %>
+          <% school_in_time = SchoolDetail.first.try(:in_time) %>
+          <% @department.employees.each_with_index do |employee,i| %>
+            <% working_days = 0 %>
+            <% absent_days = 0 %>
+            <tr class="">
+              <td class="head-td-name head-td-name" style="width: 15px;"><%= i+1 %></td>
+              <td class="head-td-name head-td-name" style="min-width: 175px;font-size: 20px;"><%= employee.full_name %></td>
+              <td class="head-td-date">
+                <div class="day in" style="min-width: 95px;">IN</div>
+                <div class="date out" style="font-size: 20px;">OUT</div>
+              </td>
+              <% (start_date.to_date..end_date.to_date).each_with_index do |date, j| %>
+                <% if !daily_attendance_percentage[j].present? %>
+                  <% daily_attendance_percentage[j] = {}  %>
+                  <% daily_attendance_percentage[j]["total_days"] = 0  %>
+                  <% daily_attendance_percentage[j]["absent_days"] = 0 %>
+                <% end %>
+                <%# debugger if ((date.day.to_i == 26) && (employee.id == 504)) %>
+                <% attendance = EmployeeAttendance.find(:all, :conditions => {:employee_id =>employee.id, :attendance_date  => date.beginning_of_day..date.end_of_day}) %>
+                <% in_time = attendance.present? ? "A" : StudentAttendance.find(:all, :conditions => {:employee_id => employee.id, :in_time  => date.beginning_of_day..date.end_of_day}).first.in_time.strftime("%H:%M")  rescue nil %>
+                <% out_time = attendance.present? ? "A" : StudentAttendance.find(:all, :conditions => {:employee_id => employee.id, :out_time => date.beginning_of_day..date.end_of_day}).first.out_time.strftime("%H:%M") rescue nil %>
+                <% late_in = ((Date.today.strftime("%d-%m-%Y ") + in_time).to_datetime > (Date.today.strftime("%d-%m-%Y ") + employee.get_employee_in_time ).to_datetime) ? true : false rescue false %>
+                <td class="head-td-date <%#= class_name %>" style="min-width: 95px;">
+                  <% if attendance.present? || in_time.present? %>
+                    <% working_days += 1 %>
+                    <% daily_attendance_percentage[j]["total_days"] += 1 %>
+                  <% end %>
+                  <% if attendance.present? %>
+                    <div style="font-size: 30px;">
+                      A
+                      <% absent_days += 1 %>
+                      <% daily_attendance_percentage[j]["absent_days"] += 1 %>
+                    </div>
+                  <% else %>
+                    <div style="font-size: 20px;" class="day in <%#= class_name %> <%= 'late_in_class' if late_in%>"><%= in_time %></div>
+                    <div style="font-size: 20px;" class="date out <%#= class_name %>"><%= out_time %></div>
+                  <% end %>
+                </td>
+              <% end %>
+              <td class="head-td-date" style="min-width: 75px;font-size: 20px;">
+                <% per = ((working_days - absent_days).to_f/working_days.to_f)*100 rescue nil %>
+                <%= per.round(2) rescue nil %><%#= working_days %>/<%= absent_days rescue nil %>
+              </td>
+            </tr>
+          <% end %>
+          <tr class="" >
+            <td class="head-td-date" colspan="3" style="min-width: 95px;font-size: 30px;">
+              <div class="daily_att">Daily Attendance (%)</div>
+            </td>
+            <% (start_date.to_date..end_date.to_date).each_with_index do |date, i| %>
+              <% total_days = daily_attendance_percentage[i]["total_days"].to_f %>
+              <% absent_days = daily_attendance_percentage[i]["absent_days"].to_f %>
+              <td style="min-width: 95px;font-size: 30px;" class="head-td-date"><%= (((total_days - absent_days)/total_days)* 100).round(2) rescue nil %></td>
+            <% end %>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    <% else %>
+      <div>No Records found</div>
+    <% end %>
+
+
+
+
+
+
+<style>
+  .sat_or_sun{
+    background-color: #E0CBC6 !important;
+  }
+  #no-border tr td{
+    border: none !important;
+  }
+  #no-border td{
+    text-align: left;
+    font-size: 20px
+  }
+  #submit_button {
+      margin-top: 30px;
+      padding: 7px 10px;
+      color: #fff;
+      background: #27292B;
+      -moz-border-radius: 10px;
+      -webkit-border-radius: 10px;
+      font-weight: bold;
+      font-size: 14px;
+      border: none;
+      font-family: arial;
+      cursor: pointer;
+      height: 30px;
+  }
+  #register{
+      background: #C3D9FF;
+      -moz-border-radius:8px;
+      -webkit-border-radius:8px;
+      margin-top:130px;
+      margin-bottom:50px;
+  }
+  .quick-attendance-div{
+      margin-top:-20px;
+      float:right;
+      width:272px;
+  }
+  .attendance-label{
+      font-size:13px;
+      font-weight:bold;
+      margin-left:5px;
+      float:right;
+      cursor:pointer;
+  }
+  #quick-attendance-check{
+      margin-top:1px;
+      float:right;
+      cursor:pointer;
+      /*    margin-left:0;*/
+  }
+  .box-1{
+      margin-left: 8px;
+      overflow-x: auto;
+      padding: 16px;
+      width: 921px;
+  }
+  .box-2{
+      height:400px;
+      /*overflow:auto;*/
+      width: 965px;
+  }
+  .header{
+      width:420px;
+      margin:0px auto;
+      margin-bottom:20px;
+      padding-top:15px;
+  }
+  .next a{
+      float:left;
+      -moz-border-radius:40px;
+      -webkit-border-radius:40px;
+      width:25px;
+      height:25px;
+      padding:5px;
+      background: #fff;
+      text-align:right;
+      color:#121212;
+      font-size:22px;
+      text-decoration:none;
+      outline:none;
+      display:block;
+  }
+  .prev a{
+      float:left;
+      -moz-border-radius:40px;
+      -webkit-border-radius:40px;
+      width:25px;
+      height:25px;
+      padding:5px;
+      background: #fff;
+      text-align:left;
+      color:#121212;
+      font-size:22px;
+      text-decoration:none;
+      outline:none;
+      display:block;
+  }
+  .next a:hover, .prev a:hover{
+      color: #9B0C12;
+  }
+  .month{
+      -moz-border-radius:8px;
+      -webkit-border-radius:8px;
+      width:300px;
+      background: #fff;
+      padding:5px 0 5px 0;
+      text-align:center;
+      float:left;
+      font-size:20px;
+      color:#121212;
+      font-weight:bold;
+      margin:0 20px 0 20px;
+  }
+  table#attendance{
+
+  }
+  .tr-odd{
+      background: #fff;
+      padding:5px;
+  }
+  .tr-even{
+      background: #f1f6ff;
+      padding:5px;
+  }
+  .tr-head{
+      color:#990A10;
+      height: 40px;
+  }
+  .td-mark{
+      min-width:20px;
+      /*    width: auto;*/
+      width: 900px;
+      text-align:center;
+
+
+  }
+  .td-name{
+      padding:5px;
+      color:#2D2D2D;
+      /*    padding-left:23px;*/
+      font-weight:bold;
+      width:58px;
+      font-size:12px;
+      height:25px;
+      /*    cursor:pointer;*/
+  }
+  .head-td-name{
+      background: #fff;
+      padding-left:5px;
+      padding-right:5px;
+      font-weight:bold;
+      font-size:13px;
+      overflow:hidden;
+      width:67px;
+      text-align:center;
+  }
+  
+  .head-td-date{
+    font-size:11px;
+    background: #f1f6ff;
+    font-weight:bold;
+    min-width:150px;
+    width:auto;
+    text-align: center;
+  }
+
+  .head-td-date .day{
+      text-align:center;
+      min-width:20px;
+      padding:3px 1px;
+  }
+  .head-td-date .date{
+      background: #fff;
+      padding:2px;
+      text-align:center;
+      color:#2D2D2D;
+  }
+  .td-mark a.absent{
+      text-decoration: none;
+      font-size:12px;
+      font-weight:bold;
+  }
+  .tr-odd .td-mark a.present{
+      color:#fff;
+      padding:5px;
+  }
+  .tr-even .td-mark a.present{
+      color:#f1f6ff;
+      padding:5px;
+  }
+  table.table{
+
+  }
+  .td-mark .date{
+      position: relative;
+      left: -172px;
+      top: -73px;
+  }
+  .td-name .date{
+      position: relative;
+      left: -77px;
+      top: -73px;
+  }
+  .td-mark .date span,.td-name .date span{
+      display: none;
+      margin-left: 145px;
+      margin-top: 80px;
+      word-wrap: break-word;
+      width: 100px;
+  }
+  .td-mark:hover .date span{
+      display: block;
+      position: absolute;
+      min-width: 100px;
+      background-color: #fff;
+      border:4px solid #c3d9ff;
+      min-height: 40px;
+      left: -90px;
+      top: -78px;
+      padding: 5px;
+      -moz-border-radius:8px;
+      -webkit-border-radius:8px;
+      padding-top:10px;
+      font-weight:bold;
+  }
+  .active{
+      background: #FEFFAF !important;
+  }
+  .tr-even .active a.present, .tr-odd .active a.present{
+      color:#FEFFAF;
+  }
+  .td-mark:hover .date span div{
+      color:#000;
+  }
+  .td-mark:hover,.td-mark:hover a.present{
+      background:#C3D9FF;
+      /*    color:#C3D9FF;*/
+  }
+  .td-name:hover .date span{
+      display: block;
+      position: absolute;
+      min-width: 89px;
+      background-color: #fff;
+      border:4px solid #c3d9ff;
+      min-height: 40px;
+      left: 50px;
+      top: -10px;
+      color: #FFFFFF;
+      padding: 5px;
+      -moz-border-radius:8px;
+      -webkit-border-radius:8px;
+      padding-top:10px;
+      color:#990A10;
+      font-weight:bold;
+  }
+
+  #MB_frame .submit-button {
+      -moz-border-radius:8px 8px 8px 8px;
+      -webkit-border-radius:8px 8px 8px 8px;
+      background:none repeat scroll 0 0 #27292B;
+      border:medium none;
+      color:#FFFFFF;
+      cursor:pointer;
+      float:left;
+      font-size:14px;
+      font-weight:bold;
+      margin:0 0 0 210px;
+      padding:6px 8px;
+  }
+
+  a {
+      cursor: pointer;
+  }
+  .holiday {
+      background-color: #eee;
+  }
+  .nohover:hover{
+      background:#eee;
+  }
+  .helper_info
+  {
+      width: 250px;
+      padding:10px;
+      /*    top: 30%;*/
+      z-index: 8;
+      position: absolute;
+      background: #FFFFFF;
+      border: 1px solid #B2B2B2;
+      pointer-events: none;
+      color: #27292b;
+      text-align: left;
+      font-size: 13px;
+      margin-top:25px;
+  }
+  .helper_info:after, .helper_info:before
+  {
+      bottom: 100%;
+      left: 88%;
+      border: solid transparent;
+      content: " ";
+      height: 0;
+      width: 0;
+      position: absolute;
+      pointer-events: none;
+  }
+
+  .helper_info:after
+  {
+      border-color: rgba(255, 255, 255, 0);
+      border-bottom-color: #FFFFFF;
+      border-width: 10px;
+      margin-left: -10px;
+  }
+  .helper_info:before
+  {
+      border-color: rgba(178, 178, 178, 0);
+      border-bottom-color: #B2B2B2;
+      border-width: 11px;
+      margin-left: -11px;
+  }
+  .info_wrapper:hover{
+      /*    opacity: 1;*/
+      color: #27292b;
+  }
+
+  .info_wrapper:hover .helper_info {
+      /*    opacity: 1;*/
+  }
+
+  .flash_msg{
+      padding: 5px;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 600;
+  }
+  .head-td-date .in{
+    padding: 5px 5px 0px 5px;
+    min-height: 40px;
+  }
+  .head-td-date .out{
+    padding: 5px 5px 5px 5px;
+    min-height: 40px;
+    font-weight:bold;
+  }
+  td {
+    text-align: center;
+  }
+  table {
+    border-collapse: collapse;
+  }
+  table, th, td {
+      border: 1px solid black;
+  }
+  .sat_or_sun {
+    background-color: black;
+  }
+  .daily_att{
+    min-height: 23px;
+    margin-top: 9px;
+  }
+  .late_in_class{
+    background-color: yellow;
+  }
+</style>

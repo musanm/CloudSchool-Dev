@@ -1,0 +1,10 @@
+mn: 
+  oauth: 
+    account: "account"
+    could_not_authenticate_with: "Sorry, could not authenticate using "
+    enter_user_email: "Enter your email"
+    login_with_google: "Sign in using your"
+    no_user_with_email: "No user with email "
+    select_user: "Select User"
+  manage_clients: "Manage Clients"
+  enable_oauth: "Enable Oauth"

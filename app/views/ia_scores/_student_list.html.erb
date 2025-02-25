@@ -1,0 +1,25 @@
+<% if @batch.present?  %>
+  <% unless @students.empty?  %>
+    <div class="list_name">
+      <%= t("students_in_batch") %>
+      <%= image_tag("loader.gif",:align => "absmiddle",:border => 0,:id => "loader", :style =>"display: none;" ) %>
+    </div>
+    <ul class="student_list">
+      <% @students.each do |s| %>
+        <li class="student_names">
+          <% if roll_number_enabled? %>
+            <a href="#" id="<%=s.id%>"  class="student-link" > <%= "#{s.roll_number} - #{s.full_name}" %></a>
+           <% else %>
+            <a href="#" id="<%=s.id%>"  class="student-link" > <%= "#{s.full_name} (#{s.admission_no})" %></a>
+           <% end %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <%= t("no_students_in_batch")  %>
+  <% end %>
+<% end %>
+<script>
+  $$('.student-link').invoke('observe','click',draw_report);
+  $$('.student-link').invoke('observe','click',set_active);
+</script>

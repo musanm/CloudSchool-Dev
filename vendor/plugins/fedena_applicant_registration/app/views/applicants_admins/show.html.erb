@@ -1,0 +1,58 @@
+<div id="content-header">
+  <%= show_header_icon %>
+  <h1><%= t('applicant_regi_label') %></h1>
+  <div class='header-sep'>|</div>
+  <div class='sub-header'><%= t('settings') %></div>
+
+  <div id="inner-tab-menu">
+    <ul>
+      <li class='themed_bg themed-dark-hover-background'><%= link_to t('manage_course'), {:controller=>"registration_courses"} %></li>
+      <li class='themed_bg themed-dark-hover-background'><%= link_to t('manage_pins'), pin_groups_path %></li>
+    </ul>
+  </div>
+
+</div>
+<div id="page-yield">
+  <div class="bread_crumb">
+    <%= make_breadcrumb %>
+    <%= render_breadcrumbs  %>
+  </div>
+  <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+  <% unless @enabled_courses.empty? %>
+    <% form_for :search,:url => search_by_registration_applicants_admins_url,:html=>{:method=>:get} do |f| %>
+      <div class="filter">
+        <div class="col">
+          <div class="col-label"><%= t('search_applicant_by_registration_no') %>:</div>
+          <div class="label-field-pair">
+            <div class="text-input-bg">
+              <%= text_field_tag :search,"",:name => "search[registration_no]" %>
+            </div>
+          </div>
+        </div>
+        <%= submit_tag t('filter'),:class=>"submit_1 submit-button" %>
+      </div>
+    <% end %>
+
+    <table id="listing" width="100%" cellpadding="1" cellspacing="1">
+      <tr class="tr-head">
+        <td class="col-1"><%= t('course') %></td>
+        <td class="col-1"><%= t('code') %></td>
+        <td class="col-1"><%= t('actions') %></td>
+      </tr>
+      <% @enabled_courses.each do |c| %>
+        <tr class="tr-<%=cycle('odd','even')%>">
+          <td class="col-1"><%= c.course.course_name %> </td>
+          <td class="col-1"><%= c.course.code %> </td>
+          <td class="col-1"><small><%= link_to t('view_applicants'),:action=>"applicants",:id=>c.id  %> |
+              <%= link_to t('additional_fields'),registration_course_applicant_additional_fields_path(c)  %> </small> </td>
+        </tr>
+      <% end %>
+    </table>
+  <% else %>
+    <p class="flash-msg"> <%= t('no_courses_found') %> </p>
+  <% end %>
+  <%= will_paginate @enabled_courses %>
+  
+</div>

@@ -1,0 +1,18 @@
+--- 
+de: 
+  attendance_reports: 
+    no_subjects_to_show: "Keine Untertanen"
+  attendances: 
+    attendance_marked_for: "Der Besuch markiert für"
+    class_timings_empty: "Keine Klasse Timings wurden ausgewählt."
+    mark_absent: "Mark, wie abwesend"
+    no_subjects_to_show: "Keine Untertanen"
+    no_tte_entries: "Keine Zeitplan Einträge für den ausgewählten Zeitpunkt"
+  calendar: 
+    no_events: "Keine Termine"
+    show_more_entries: "Zeige mehr"
+  reminder: 
+    no_reminders: "Keine Mahnungen"
+    show_more_entries: "Zeige mehr"
+  timetable: 
+    select_weekday: "Wählen Sie einen Wochentag"

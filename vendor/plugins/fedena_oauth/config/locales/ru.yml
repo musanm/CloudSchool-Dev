@@ -1,0 +1,11 @@
+ru:
+  oauth:
+    account: "Учетная запись"
+    could_not_authenticate_with: "К сожалению, не удалось войти при помощи"
+    enter_user_email: "Введите адрес вашей электронной почты"
+    login_with_google: "Войти при помощи вашей"
+    no_user_with_email: "Нет пользователя с таким адресом электронной почты"
+    select_user: "Выбрать пользователя"
+  manage_clients: "Управление клиентами"
+  enable_oauth: "Разрешить протокол Oauth"
+

@@ -1,0 +1,17 @@
+hi:
+  attendance_reports:
+    no_subjects_to_show: "कोई विषय नहीं"
+  attendances:
+    attendance_marked_for: "इसके लिए चिह्नित उपस्थिति"
+    class_timings_empty: "कक्षा के किसी समय का चयन नहीं किया गया है।"
+    mark_absent: "अनुपस्थित के रूप में चिह्नित करें"
+    no_subjects_to_show: "कोई विषय नहीं"
+    no_tte_entries: "चयनित तिथि के लिए समय-सारणी में कोई प्रविष्टि नहीं"
+  calendar:
+    no_events: "कोई ईवेंट नहीं"
+    show_more_entries: "अधिक दिखाएँ"
+  reminder:
+    no_reminders: "कोई अनुस्मारक नहीं"
+    show_more_entries: "अधिक दिखाएँ"
+  timetable:
+    select_weekday: "किसी कार्यदिवस का चयन करें"

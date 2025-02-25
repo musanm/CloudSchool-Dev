@@ -1,0 +1,39 @@
+<div id="content-header">
+<%= show_header_icon %>
+  <h1><%= "#{t('finance_transactions')}"%></h1>
+<div class='header-sep'>|</div>
+<div class='sub-header'><%= "#{t('fees_report')}"%></div>
+
+</div>
+<div id="page-yield">
+   <div class="bread_crumb">
+    <%breadcrumb :hostel_fee_hostel_fees_report,[@start_date,@end_date]%>
+     <%=render_breadcrumbs%>
+  </div>
+  <% total =0 %>
+
+  <b id="fee-report-title"><%= "#{t('fees_transaction_report')}"%>  </b>
+  <div id="fees-table">
+    <div class="fees-th">
+      <div class="fees-table-description"><%= "#{t('description')}"%></div>
+      <div class="fees-table-expenses"><%= "#{t('amount')}"%></div>
+
+    </div>
+    <% @collection.each do |collection| %>
+      <div class="fees-tr">
+        <div class="fees-table-description"><%= link_to "#{collection.batch.present?? (collection.batch.full_name+'&#x200E; (  '+FinanceFeeCollection.shorten_string(collection.name,27)+' ) &#x200E; ') : t('student_text')+' '+ t('wise')+' '+t('fee_collection')+'&#x200E; (  '+FinanceFeeCollection.shorten_string(collection.name,27)+' ) &#x200E; '  }", :action => 'batch_hostel_fees_report',:id =>collection.id,:start_date => @start_date,:end_date => @end_date %></div>
+        <div class="fees-table-income"> 
+          <%#= collection.transaction_amount(@start_date,@end_date) %>
+          <%= precision_label(collection.transaction_amount(@start_date,@end_date)) %>
+        </div>
+      </div>
+      <% total += collection.transaction_amount(@start_date,@end_date) %>
+    <% end %>
+    <br/>
+    <div class="fees-th">
+      <div class="fees-table-description"><%= "#{t('total_fees')}"%> </div>
+      <div class="fees-table-expenses"><%#= total %><%= precision_label total %></div>
+    </div>
+
+  </div>
+</div>

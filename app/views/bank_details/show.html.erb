@@ -1,0 +1,23 @@
+<p>
+  <b>Bank name:</b>
+  <%=h @bank_detail.bank_name %>
+</p>
+
+<p>
+  <b>Account no:</b>
+  <%=h @bank_detail.account_no %>
+</p>
+
+<p>
+  <b>Message:</b>
+  <%=h @bank_detail.message %>
+</p>
+
+<p>
+  <b>School:</b>
+  <%=h @bank_detail.school_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_bank_detail_path(@bank_detail) %> |
+<%= link_to 'Back', bank_details_path %>

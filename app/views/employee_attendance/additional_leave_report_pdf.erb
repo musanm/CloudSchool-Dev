@@ -1,0 +1,55 @@
+<div id="page-yield" class="available_sections1">
+  <div class="page1"></div>
+  <div class="section1 row" >
+    <h2><%= t('employee_additional_leaves') + "&nbsp"%>:<%=  Date::MONTHNAMES[params[:month].to_i]%>-<%= params[:year]%></h2>
+    <div class="extender"> </div>
+  </div>
+  <div class="section1 row">
+    <div class="report">
+      <div id ="main_info">
+        <div class="info-left">
+          <h4><%= t('department') %>   - <%= (params[:department].is_a? String) ? params[:department] : EmployeeDepartment.find(params[:department]).name %></h4>
+        </div>
+        <div class="info-left">
+          <h4> <%= t('total_members') %>- <%= @additional_leave_history.count  %></h4>
+        </div>
+        <div class ="new"><p></p></div>
+      </div>
+    </div>
+  </div>
+
+   <div class="section1 row" id="table-headers">
+    <center>
+      <table id="pdf-table" width="100%">
+        <tr class="table-header">
+          <td class="col-pdf1 name-td"><%= t('name')%></td>
+           <td class= "col-pdf1 name-td"><%= t('employee_number') %></td>
+          <% @leave_types.each do |lt| %>
+            <td class="col-pdf1 lt-td"> <%= lt %>    </td>
+          <% end %>
+          <td class="col-pdf1 lt-total"> <%= t('total') %> </td>
+
+        </tr>
+
+  <% @additional_leave_history.each do |key,value| %>
+      <% c= 'even' %>
+      <tr class="<%= cycle(c,(["odd", "even"]-[c]).first) %>">
+        <td class="col-pdf name-td"><%= value[0] %></td>
+        <td class= "col-pdf name-td"><%= value[1]%></td>
+        <% if value.length == 3 %>
+          <td class= "col-5" colspan = "<%= @leave_types.count + 1 %>"><%= "Reset Date not in selected range" %></td>
+        <% else%>
+          <% i = 2 %>
+          <% while i < value.length - 1 %>
+            <td class = "col-lt leave-td"><%= value[i]%></td>
+            <% i+=1 %>
+          <% end %>
+           <td class="col-lt lt-total"><%= value[value.length-1]%></td>
+        <% end %>
+      </tr>
+        <% end %>
+    </table>
+    </center>
+    </div>
+</div>
+

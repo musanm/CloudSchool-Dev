@@ -1,0 +1,15 @@
+--- 
+settings: 
+  tld_sizes: 
+    test: 0
+    production: 1
+    development: 1
+  domain: fed.cibersense.com
+  installed_id: 1
+  version: 3.4.3
+  email: info@fedena.com
+  max_school_count: 1000
+  organization_details: 
+    school_stats: true
+    whitelabel: true
+    name: Fedena

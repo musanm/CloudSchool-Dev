@@ -1,0 +1,12 @@
+<div class="label-field-pair-gateway">
+  <label><%= t('payment_gateway') %></label>
+  <div class = "gateway-list">
+    <% @gateways.each do|custom_gateway| %>
+      <div class="value gateway-button">
+        <%= radio_button("payment_settings","fedena_gateway",custom_gateway.id,{:checked => @active_gateway == custom_gateway.id.to_s}) %>
+        <div class="custom-gateway-name"><%= custom_gateway.name %></div>
+      </div>
+    <% end %>
+  </div>
+</div>
+<%= submit_tag t('save'),:class => "submit-button" %>

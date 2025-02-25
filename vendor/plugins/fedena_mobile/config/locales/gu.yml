@@ -1,0 +1,18 @@
+--- 
+gu:
+  attendance_reports:
+    no_subjects_to_show: "કોઇ વિષયો નહીં"
+  attendances:
+    attendance_marked_for: "માટે હાજરીને ચિન્હિત કરી"
+    class_timings_empty: "કોઇ વર્ગના સમયને પસંદ કરવામાં આવ્યા નથી."
+    mark_absent: "ગેરહાજર તરીકે ચિન્હિત કરો"
+    no_subjects_to_show: "કોઇ વિષયો નહીં"
+    no_tte_entries: "પસંદ કરેલ તારીખ માટે કોઇ ટાઇમટેબલ એન્ટ્રીઓ નથી"
+  calendar:
+    no_events: "કોઇ પ્રસંગો નહીં"
+    show_more_entries: "વધુ બતાવો"
+  reminder:
+    no_reminders: "કોઇ રિમાઇન્ડર્સ નહીં"
+    show_more_entries: "વધુ બતાવો"
+  timetable:
+    select_weekday: "અઠવાડિયાના દિવસ પસંદ કરો"

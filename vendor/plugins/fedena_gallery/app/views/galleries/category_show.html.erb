@@ -1,0 +1,58 @@
+<div id="content-header">
+  <%= show_header_icon %>
+  <h1><%= t('gallery') %></h1>
+  <div class='header-sep'>|</div>
+  <div class='sub-header'><%= t('pictures') %></div>
+
+  <div id="inner-tab-menu">
+    <ul>
+      <%  if permitted_to? :add_photo,:galleries %>
+        <li class='themed_bg themed-dark-hover-background'><%= link_to t('add_photo'), :action=>"add_photo", :id=>@category.id %> </li>
+      <% end %>
+      <%  if permitted_to? :category_edit,:galleries %>
+        <li class='themed_bg themed-dark-hover-background'><%= link_to t('editt'), :action=>"category_edit", :id=>@category.id %> </li>
+      <% end %>
+      <%  if permitted_to? :category_delete,:galleries %>
+        <li class='themed_bg themed-dark-hover-background'><%= link_to t('delete') , {:action=>"category_delete", :id=>@category.id},:confirm => "#{t('are_you_sure')}" %> </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+<div id="page-yield">
+ <div class="bread_crumb">
+    <%breadcrumb :galleries_category_show,@category%>
+    <%=render_breadcrumbs%>
+  </div>
+
+  <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice]  %> </p>
+  <% end %>
+
+
+  <div >
+    <% i=0 %>
+    <% @photos.each do |file| %>
+      <% if file.gallery_category_id==@category.id %>
+        <div class="t_d">
+          <div class="gallery_background" >
+            <%=  link_to "#{image_tag file.photo.url(:thumb, false)}", file.photo.url(:original, false), :target=>"_blank" %>
+
+          </div>
+          <div class="category_name">
+            <%  if permitted_to? :edit_photo,:galleries %>
+              <b><%= link_to file.name, {:action=>"edit_photo",:id=>file.id},:class=>"themed_text" %></b><br />
+            <% else %>
+              <b><%= link_to file.name, {:action=>"download_image",:id=>file.id}, :target=>"_blank" ,:class=>"themed_text"%></b><br />
+            <% end %>
+            <%= format_date(file.updated_at,:format=>:long_date) %>
+          </div>
+        </div>
+        <% i=i+1 %>
+        <% if i%4==0 %>
+          <br />
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+
+</div>

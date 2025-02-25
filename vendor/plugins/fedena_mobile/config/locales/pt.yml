@@ -1,0 +1,17 @@
+pt:
+  attendance_reports:
+    no_subjects_to_show: Sem matérias
+  attendances:
+    attendance_marked_for: Presenças marcadas para
+    class_timings_empty: Não foram selecionadas horas de aulas.
+    mark_absent: Marcar como ausente
+    no_subjects_to_show: Sem matérias
+    no_tte_entries: Não existem entradas de horário para a data selecionada
+  calendar:
+    no_events: Sem eventos
+    show_more_entries: Mostrar mais
+  reminder:
+    no_reminders: Sem lembretes
+    show_more_entries: Mostrar mais
+  timetable:
+    select_weekday: Selecione um dia da semana

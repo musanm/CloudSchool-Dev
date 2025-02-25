@@ -1,0 +1,38 @@
+No.,Name,Employee ID,Joining date,Department,Position,Manager,Gender
+1,Admin  User,admin,23/12/2015 ,System Admin,System Admin, ,M
+2,Afiya Zulfiqar  ,E2017-0073,01/03/2017 ,School Administration,Director , ,F
+3,Ahmed  Irfan,E2016-0005,19/06/2016 ,School Administration,Director , ,M
+4,Aqsa  ,E2017-0081,11/10/2017 ,Faculty,Teacher , ,F
+5,Asif   Mehmood,E2017-0085,01/11/2017 ,Faculty,Teacher , ,M
+6,Attiqa   Siddiqui,E2017-0077,02/10/2017 ,Faculty,Teacher , ,F
+7,Balqees  Bano,E2014-0033,21/03/2014 ,Faculty,Teacher , ,F
+8,Bibi Sehrish Khan,E2017-0072,12/04/2017 ,Faculty,Teacher , ,F
+9,Bushra   Rasheed,E2015-0048,07/09/2015 ,Faculty,Teacher , ,F
+10,Falak  Naz,E2017-0065,10/03/2017 ,Faculty,Teacher , ,F
+11,Farhat   Rehman,E2017-0084,21/10/2017 , Janitorial Staff ,System Admin,Farhat  Rehman,F
+12,Fayaz   Ahmad,E2016-0053,23/08/2016 , Janitorial Staff ,Guard , ,M
+13,Fozia   Athar,E2012-0008,27/08/2012 ,Faculty,Teacher , ,F
+14,Haseeba  Khan,E2016-0054,08/09/2016 ,Faculty,Teacher , ,F
+15,Hina  Sajid,E2016-0002,01/05/2016 ,School Administration,Director , ,F
+16,Hina  Tubbsam,E2017-0067,21/03/2017 ,Faculty,Teacher , ,F
+17,Imtiaz  Bibi,E2013-0006,03/05/2013 , Janitorial Staff , Maid, ,F
+18,Kanwal   Masood,E2017-0078,02/10/2017 ,Faculty,Teacher , ,F
+19,Kashfana  Aabru,E2013-0017,11/03/2013 ,Faculty,Teacher , ,F
+20,Kashmaila  Khuwaja,E2017-0074,01/08/2017 ,School Administration,Admin Officer, ,F
+21,Kousar  Jehan,E2014-0036,27/08/2012 ,Faculty,Teacher , ,F
+22,Lubna  Shaheen,E2012-0015,11/12/2012 ,Faculty,Teacher , ,F
+23,Maria  Zulfikar,E2016-0004,01/05/2016 ,School Administration,Director , ,F
+24,Memoona  Naseer,E2014-0042,10/10/2014 ,Faculty,Teacher , ,F
+25,Muhammad  Adil,E2017-0082,02/10/2017 , Janitorial Staff ,System Admin, ,M
+26,Muhammad  Mubshir,E2017-0083,21/10/2017 , Janitorial Staff ,System Admin, ,M
+27,Mukashaf  Mobeen,E2013-0024,24/05/2013 ,Faculty,Teacher , ,F
+28,Nagina  ,E2017-0076,05/09/2017 ,Faculty,Teacher , ,F
+29,Naheed  Akhtar,E2017-0066,10/03/2017 ,Faculty,Teacher , ,F
+30,Pakeeza  Malik,E2013-0029,18/11/2013 ,Faculty,Teacher , ,F
+31,Saira  Khurrrum,E2016-0001,01/05/2016 ,School Administration,Director , ,F
+32,Sajid  ,E2017-0080,04/10/2017 , Janitorial Staff ,Sweeper, ,M
+33,Sidra Tul Muntaha,E2015-0049,07/12/2015 ,School Administration,Admin Officer, ,F
+34,Sidra  Bibi,E2015-0045,28/04/2015 ,Faculty,Teacher , ,F
+35,Siraj  Ud  Din ,EN-01,03/12/2012 ,School Administration,Director , ,M
+36,Sumaira  Akhtar,E2016-0059,08/12/2016 ,School Administration,Principal , ,F
+37,zulfaqar  Ali  Chughtai,E2017-0071,01/04/2017 ,School Administration,Director , ,M

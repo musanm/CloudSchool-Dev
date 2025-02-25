@@ -1,0 +1,31 @@
+
+<% form_for :user do |form| %>
+  <fieldset>
+    <div class="span6">
+      <%= form.label :username , t('username')%>
+    </div>
+    <div class="span6">
+      <%= form.text_field :username %>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <div class="span6">
+      <%= form.label :password , t('password')%>
+    </div>
+    <div class="span6">
+      <%= form.password_field :password %>
+    </div>
+  </fieldset>
+  <% if !flash.empty? %>
+    <div class="alert alert-error"><%= flash[:notice] %></div>
+  <% end %>
+  <fieldset>
+    <div class="span6 visible-desktop">
+    </div>
+    <div class="span6">
+      <%= submit_tag t('login'), :class => "btn btn-danger" %>
+    </div>
+  </fieldset>
+
+<% end %>

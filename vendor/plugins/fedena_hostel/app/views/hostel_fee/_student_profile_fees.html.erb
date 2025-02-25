@@ -1,0 +1,18 @@
+<% hostel_fee_collections= student.hostel_fee_collections %>
+<% unless hostel_fee_collections.nil? %>
+  <% hostel_fee_collections.each do |d| %>
+    <li class="list<%=cycle('even', 'odd')%>">
+      <div class="category-name"><%= link_to "#{d.name}"+" - #{t('hostel_text')}", {:controller=>:hostel_fee,:action=>:student_profile_fee_details, :id=>student.id, :id2=>d.id}, :class=>"themed_hover_text" %></div>
+      <div class="due-date"><%= format_date(d.due_date) %></div>
+      <% @balance = student.hostel_fee_balance(d.id)  %>
+      <% if @balance == 0 %>
+        <div class="category-edit"><%=  t('paid')  %></div>
+      <% else %>
+        <div class="category-edit">
+          <%#="#{t('unpaid')} - #{sprintf("%.2f",@balance)}"  %>
+          <%="#{t('unpaid')} - #{precision_label(@balance)}"  %>
+        </div>
+      <% end %>
+    </li>
+  <% end %>
+<% end %>

@@ -1,0 +1,109 @@
+mr: 
+  activerecord:
+    attributes:
+       applicant:
+          first_name: "First name"
+          date_of_birth: "Date of birth"
+
+  date:
+    formats:
+      default: "%e-%m-%Y"
+      normal: "%B %e, %Y"
+      short: "%e. %b"
+      month_year: "%B %Y"
+      long: "%A, %e %B, %Y"
+      only_day: "%e"
+      month: "%B"
+      day: "%a"
+      mont: "%d"
+      day_mon: "%a %d"
+
+
+    day_names: [Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday]
+    abbr_day_names: [Sun, Mon, Tue, Wed, Thur, Fri, Sat]
+    month_names: [~, January, February, March, April, May, June, July, August, September, October, November, December]
+    abbr_month_names: [~, Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec]
+    order: [ :day, :month, :year ]
+
+  time:
+    formats:
+      default: "%A, %d. %B %Y, %H:%M Uhr"
+      short: "%d. %B, %H:%M Uhr"
+      long: "%A, %d. %B %Y, %H:%M Uhr"
+      time: "%H:%M"
+
+    am: "AM"
+    pm: "PM"
+    
+  blog_admin_privilege: "Blog Admin"
+  blog_comments: 
+    delete_comment_confirmation: "Are you sure want to delete this comment?"
+    deleted_user: "Deleted User"
+    flash_admin: "Administrator can not participate in blogging."
+    comment_deleted: "Comment successfully deleted."
+    comment_created: "Comment successfully created."
+  blog_posts:
+    edit: "Edit"
+    activate: "Activate"
+    ban_blog_post: "Blog post is banned successfully"
+    ban_post: "Ban the post"
+    blog_post_deleted_successfully: "Post deleted successfully"
+    blogs_text: "Blog"
+    comments: "Comments"
+    create_post: "Create Post"
+    deactivate: "Deactivate"
+    delete_post: "Are you sure want to delete this post?"
+    deleted_blog: "Deleted Blog"
+    deleted_user: "Deleted User "
+    edit_blog: "Edit blog"
+    favourites: "Favourites"
+    flash2: "Your blog post has been saved successfully."
+    flash3: "Your blog post has been posted successfully."
+    flash_admin: "Administrator can not participate in blogging."
+    flash_edit: "Your post has been edited successfully"
+    flash_no_blog: "No blog found for this user"
+    flash_no_user: "User not found"
+    flash_not_available: "This content is currently unavailable"
+    home: "Home"
+    latest_posts: "Latest"
+    my_blog: "My Blog"
+    new_post: "+ New Post"
+    next_page: "Next Page >"
+    no_blog_found: "No blog found"
+    no_blog_posts: "No blog posts"
+    no_post: "No blog is posted by you."
+    not_authorized: "You are not authorized to view this content"
+    notifications: "Activities"
+    on_text: "on"
+    popular_posts: "Popular"
+    posted_by: "Posted by"
+    posts: "Posts"
+    prev_page: "< Previous Page"
+    publish: "Publish"
+    published_successfully: "Published Successfully"
+    save_as_draft: "Save as draft"
+    search: "Search"
+    search_blogs: "Search Blogs"
+    unban_blog_post: "Blog post is un-banned successfully"
+    unpublish: "Unpublish"
+    unpublished_successfully: "Unpublished Successfully"
+  blog_text: "Blog"
+  blogs:
+    edit: "Edit"
+    activities: "Activities"
+    blog_activated: "User's blog is activated successfully"
+    blog_deactivated: "User's blog is deactivated successfully"
+    blogs_text: "Blog"
+    commented: " commented on your post"
+    deleted_user: "Deleted User"
+    flash1: "Please create a blog for yourself first"
+    flash_admin: "Administrator can not participate in blogging."
+    flash_update: "Blog has been updated successfully"
+    my_blog: "My Blog"
+    no_notification: "No recent activities found"
+    notifications: "Activities"
+    on_text: " on"
+    register: "Register"
+    search: "Search"
+  manage_blog: "Post blog and view blogs by other users"
+  blog_activity_present: "Has blog related activities"

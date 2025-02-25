@@ -1,0 +1,109 @@
+es-DO: 
+  activerecord:
+    attributes:
+       applicant:
+          first_name: "Primer Nombre"
+          date_of_birth: "Fecha de Nacimiento"
+
+  date:
+    formats:
+      default: "%e-%m-%Y"
+      normal: "%B %e, %Y"
+      short: "%e. %b"
+      month_year: "%B %Y"
+      long: "%A, %e %B, %Y"
+      only_day: "%e"
+      month: "%B"
+      day: "%a"
+      mont: "%d"
+      day_mon: "%a %d"
+
+
+    day_names: [Domingo, Lunes, Martes, Miércoles, Jueves, Viernes, Sábado]
+    abbr_day_names: [Dom, Lun, Mar, Mie, Jue, Vie, Sab]
+    month_names: [~, Enero, Febrero, Marzo, Abril, Mayo, Junio, Julio, Agosto, Septiembre, Octubre, Noviembre, Diciembre]
+    abbr_month_names: [~, Ene, Feb, Mar, Abr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dic]
+    order: [ :day, :month, :year ]
+
+  time:
+    formats:
+      default: "%A, %d. %B %Y, %H:%M Uhr"
+      short: "%d. %B, %H:%M Uhr"
+      long: "%A, %d. %B %Y, %H:%M Uhr"
+      time: "%H:%M"
+
+    am: "AM"
+    pm: "PM"
+    
+  blog_admin_privilege: "Administrador Blog"
+  blog_comments: 
+    delete_comment_confirmation: "¿Está seguro de que desea borrar este comentario?"
+    deleted_user: "Usuario Eliminado"
+    flash_admin: "El administrador ColeRed no puede bloguear."
+    comment_deleted: "Comment successfully deleted."
+    comment_created: "Comment successfully created."
+  blog_posts:
+    edit: "Edit"
+    activate: "Activar"
+    ban_blog_post: "Blog post is banned successfully"
+    ban_post: "Prohibir Publicación"
+    blog_post_deleted_successfully: "Eliminación de la Publicación Exitosa"
+    blogs_text: "Blogs"
+    comments: "Comentarios"
+    create_post: "Crear Publicación"
+    deactivate: "Desactivar"
+    delete_post: "¿Está seguro que desea eliminar esta publicación?"
+    deleted_blog: "Blog Eliminado"
+    deleted_user: "Usuario Eliminado"
+    edit_blog: "Editar blog"
+    favourites: "Favoritos"
+    flash2: "Your blog post has been saved successfully."
+    flash3: "Your blog post has been posted successfully."
+    flash_admin: "El administrador ColeRed no puede Bloguear."
+    flash_edit: "Su publicación se editó exitosamente"
+    flash_no_blog: "No hay blogs para este usuario"
+    flash_no_user: "Usuario no encontrado"
+    flash_not_available: "Este contenido no está disponible"
+    home: "Inicio"
+    latest_posts: "Últimas Publicaciones"
+    my_blog: "Mi Blog"
+    new_post: "+ Nueva Publicación"
+    next_page: "Próxima Página >"
+    no_blog_found: "Blog no encontrado"
+    no_blog_posts: "No blog posts"
+    no_post: "Usted no ha publicado blogs."
+    not_authorized: "No está autorizado para ver este contenido"
+    notifications: "Notificaciones"
+    on_text: "en"
+    popular_posts: "Publicaciones Populares"
+    posted_by: "Publicado por"
+    posts: "Publicaciones"
+    prev_page: "< Página Anterior"
+    publish: "Publicar"
+    published_successfully: "Publicado exitosamente"
+    save_as_draft: "Guardar como borrador"
+    search: "Buscar"
+    search_blogs: "Buscar Blogs"
+    unban_blog_post: "Blog post is un-banned successfully"
+    unpublish: "No publicar"
+    unpublished_successfully: "Eliminación de la Publicación Exitosa"
+  blog_text: "Blog"
+  blogs:
+    edit: "Edit"
+    activities: "Actividades"
+    blog_activated: "User's blog is activated successfully"
+    blog_deactivated: "User's blog is deactivated successfully"
+    blogs_text: "Blog"
+    commented: " comentado en su Blog"
+    deleted_user: "Usuario Eliminado"
+    flash1: "Por favor, cree un blog para usted primero"
+    flash_admin: "El administrador de ColeRed no puede participar en los blogs."
+    flash_update: "El Blog ha sido actualizado exitosamente"
+    my_blog: "Mi Blog"
+    no_notification: "No hay Notificaciones"
+    notifications: "Notificaciones"
+    on_text: " en"
+    register: "Registrar"
+    search: "Buscar"
+  manage_blog: "Publicar y Ver Blogs"
+  blog_activity_present: "Has blog related activities"

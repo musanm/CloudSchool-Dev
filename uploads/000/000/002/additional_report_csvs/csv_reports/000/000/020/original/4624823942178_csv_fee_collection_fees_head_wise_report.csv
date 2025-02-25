@@ -1,0 +1,98 @@
+No.,Student name,Batch name,Amount to pay(PKR),PAID Amount(PKR),Particulars,Discount
+1,Aqsa   Khalid(2016-0385),01 - 01-2017-18,5200.00,0.00,Tuition Fee:2700.00,-
+1,Aqsa   Khalid(2016-0385),01 - 01-2017-18,"","",Annual Charges:2500.00,-
+"","",TOTAL,10600.00,0.00,"",""
+2,Asim  Khan(2016-0372),01 - 01-2017-18,4600.00,0.00,Tuition Fee:2700.00,Sibling Disc:600.00
+2,Asim  Khan(2016-0372),01 - 01-2017-18,"","",Annual Charges:2500.00,-
+"","",TOTAL,4600.00,0.00,"",""
+3,Azka  Khalid(2016-0386),01 - 01-2017-18,5200.00,0.00,Tuition Fee:2700.00,-
+3,Azka  Khalid(2016-0386),01 - 01-2017-18,"","",Annual Charges:2500.00,-
+"","",TOTAL,9750.00,0.00,"",""
+4,Banoor  (2015-0283),01 - 01-2017-18,5200.00,0.00,Tuition Fee:2700.00,-
+4,Banoor  (2015-0283),01 - 01-2017-18,"","",Annual Charges:2500.00,-
+"","",TOTAL,5200.00,0.00,"",""
+5,Ehsam  Ali(2015-0275),01 - 01-2017-18,5200.00,0.00,Tuition Fee:2700.00,-
+5,Ehsam  Ali(2015-0275),01 - 01-2017-18,"","",Annual Charges:2500.00,-
+"","",TOTAL,5200.00,0.00,"",""
+6,EMAN   NOOR(2016-0337),01 - 01-2017-18,4600.00,0.00,Tuition Fee:2700.00,Sibling Disc:600.00
+6,EMAN   NOOR(2016-0337),01 - 01-2017-18,"","",Annual Charges:2500.00,-
+"","",TOTAL,4600.00,0.00,"",""
+7,Ereen   Nauman(2016-0412e),01 - 01-2017-18,5200.00,0.00,Tuition Fee:2700.00,-
+7,Ereen   Nauman(2016-0412e),01 - 01-2017-18,"","",Annual Charges:2500.00,-
+"","",TOTAL,5200.00,0.00,"",""
+8,Haris Amir Awan(2015-0270),01 - 01-2017-18,4600.00,0.00,Tuition Fee:2700.00,Sibling Disc:600.00
+8,Haris Amir Awan(2015-0270),01 - 01-2017-18,"","",Annual Charges:2500.00,-
+"","",TOTAL,4600.00,0.00,"",""
+9,Hashir Assad Ullah(2016-0357),01 - 01-2017-18,5200.00,0.00,Tuition Fee:2700.00,-
+9,Hashir Assad Ullah(2016-0357),01 - 01-2017-18,"","",Annual Charges:2500.00,-
+"","",TOTAL,5200.00,0.00,"",""
+10,Hassan Ali Khan(2016-0389),01 - 01-2017-18,5200.00,0.00,Tuition Fee:2700.00,-
+10,Hassan Ali Khan(2016-0389),01 - 01-2017-18,"","",Annual Charges:2500.00,-
+"","",TOTAL,5200.00,0.00,"",""
+11,Haya   Asif(2014-0229),01 - 01-2017-18,5200.00,0.00,Tuition Fee:2700.00,-
+11,Haya   Asif(2014-0229),01 - 01-2017-18,"","",Annual Charges:2500.00,-
+"","",TOTAL,5200.00,0.00,"",""
+12,Mahnoor  (2016-0383),01 - 01-2017-18,4600.00,0.00,Tuition Fee:2700.00,Sibling Disc:600.00
+12,Mahnoor  (2016-0383),01 - 01-2017-18,"","",Annual Charges:2500.00,-
+"","",TOTAL,4600.00,0.00,"",""
+13,Malaika  Fazal(2014-0231),01 - 01-2017-18,4600.00,0.00,Tuition Fee:2700.00,Sibling Disc:600.00
+13,Malaika  Fazal(2014-0231),01 - 01-2017-18,"","",Annual Charges:2500.00,-
+"","",TOTAL,4600.00,0.00,"",""
+14,Meerab  Farhad(2014-0226),01 - 01-2017-18,4600.00,0.00,Tuition Fee:2700.00,Sibling Disc:600.00
+14,Meerab  Farhad(2014-0226),01 - 01-2017-18,"","",Annual Charges:2500.00,-
+"","",TOTAL,4600.00,0.00,"",""
+15,Mishal  Murtaza(2015-0187),01 - 01-2017-18,5200.00,0.00,Tuition Fee:2700.00,-
+15,Mishal  Murtaza(2015-0187),01 - 01-2017-18,"","",Annual Charges:2500.00,-
+"","",TOTAL,5200.00,0.00,"",""
+16,Momoina   Aqeel(2016-0362),01 - 01-2017-18,5200.00,0.00,Tuition Fee:2700.00,-
+16,Momoina   Aqeel(2016-0362),01 - 01-2017-18,"","",Annual Charges:2500.00,-
+"","",TOTAL,5200.00,0.00,"",""
+17,Muhammad  Usman(2014-0238),01 - 01-2017-18,5200.00,0.00,Tuition Fee:2700.00,-
+17,Muhammad  Usman(2014-0238),01 - 01-2017-18,"","",Annual Charges:2500.00,-
+"","",TOTAL,5200.00,0.00,"",""
+18,Muhammad  Ayan(2015-0294),01 - 01-2017-18,5200.00,0.00,Tuition Fee:2700.00,-
+18,Muhammad  Ayan(2015-0294),01 - 01-2017-18,"","",Annual Charges:2500.00,-
+"","",TOTAL,5200.00,0.00,"",""
+19,Muhammad Imran Khan(2016-0267),01 - 01-2017-18,6400.00,0.00,Tuition Fee:2700.00,-
+19,Muhammad Imran Khan(2016-0267),01 - 01-2017-18,"","",Annual Charges:2500.00,-
+19,Muhammad Imran Khan(2016-0267),01 - 01-2017-18,"","",Transport Charges:1200.00,-
+"","",TOTAL,6400.00,0.00,"",""
+20,Muhammad Hamza Dar(2016-0379),01 - 01-2017-18,4600.00,0.00,Tuition Fee:2700.00,Sibling Disc:600.00
+20,Muhammad Hamza Dar(2016-0379),01 - 01-2017-18,"","",Annual Charges:2500.00,-
+"","",TOTAL,4600.00,0.00,"",""
+21,Muneeb  Irfan(2014-0240),01 - 01-2017-18,5200.00,0.00,Tuition Fee:2700.00,-
+21,Muneeb  Irfan(2014-0240),01 - 01-2017-18,"","",Annual Charges:2500.00,-
+"","",TOTAL,5200.00,0.00,"",""
+22,Musa   Khan(2016-0343),01 - 01-2017-18,5200.00,0.00,Tuition Fee:2700.00,-
+22,Musa   Khan(2016-0343),01 - 01-2017-18,"","",Annual Charges:2500.00,-
+"","",TOTAL,5200.00,0.00,"",""
+23,Noor  Emaan(2014-0191),01 - 01-2017-18,5200.00,0.00,Tuition Fee:2700.00,-
+23,Noor  Emaan(2014-0191),01 - 01-2017-18,"","",Annual Charges:2500.00,-
+"","",TOTAL,5200.00,0.00,"",""
+24,Saif Ur Rehman(2015-0272),01 - 01-2017-18,4600.00,0.00,Tuition Fee:2700.00,Sibling Disc:600.00
+24,Saif Ur Rehman(2015-0272),01 - 01-2017-18,"","",Annual Charges:2500.00,-
+"","",TOTAL,4600.00,0.00,"",""
+25,Saim  Ali(2014-0248),01 - 01-2017-18,5200.00,0.00,Tuition Fee:2700.00,-
+25,Saim  Ali(2014-0248),01 - 01-2017-18,"","",Annual Charges:2500.00,-
+"","",TOTAL,5200.00,0.00,"",""
+26,Shahid Ullah Khan(2015-0300),01 - 01-2017-18,4600.00,0.00,Tuition Fee:2700.00,Sibling Disc:600.00
+26,Shahid Ullah Khan(2015-0300),01 - 01-2017-18,"","",Annual Charges:2500.00,-
+"","",TOTAL,4600.00,0.00,"",""
+27,Shayan  Amir(2014-0257),01 - 01-2017-18,5200.00,0.00,Tuition Fee:2700.00,-
+27,Shayan  Amir(2014-0257),01 - 01-2017-18,"","",Annual Charges:2500.00,-
+"","",TOTAL,5200.00,0.00,"",""
+28,Shayan Iqbal Khan(2015-0319),01 - 01-2017-18,5200.00,0.00,Tuition Fee:2700.00,-
+28,Shayan Iqbal Khan(2015-0319),01 - 01-2017-18,"","",Annual Charges:2500.00,-
+"","",TOTAL,5200.00,0.00,"",""
+29,Tahir  Wasi(2015-0308),01 - 01-2017-18,4600.00,0.00,Tuition Fee:2700.00,Sibling Disc:600.00
+29,Tahir  Wasi(2015-0308),01 - 01-2017-18,"","",Annual Charges:2500.00,-
+"","",TOTAL,4600.00,0.00,"",""
+30,Zainab  Ehsaan(2016-0334),01 - 01-2017-18,5200.00,0.00,Tuition Fee:2700.00,-
+30,Zainab  Ehsaan(2016-0334),01 - 01-2017-18,"","",Annual Charges:2500.00,-
+"","",TOTAL,5200.00,0.00,"",""
+31,Zeeshan   Murtaza(2015-0188),01 - 01-2017-18,4600.00,0.00,Tuition Fee:2700.00,Sibling Disc:600.00
+31,Zeeshan   Murtaza(2015-0188),01 - 01-2017-18,"","",Annual Charges:2500.00,-
+"","",TOTAL,4600.00,0.00,"",""
+32,Zobia  Malik(2014-0190),01 - 01-2017-18,5200.00,0.00,Tuition Fee:2700.00,-
+32,Zobia  Malik(2014-0190),01 - 01-2017-18,"","",Annual Charges:2500.00,-
+"","",TOTAL,7600.00,0.00,"",""

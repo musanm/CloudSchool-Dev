@@ -1,0 +1,59 @@
+<div id="content-header">
+  <%= show_header_icon %>
+  <h1><%= "#{t('vehicle_details')}"%></h1>
+  <div class='header-sep'>|</div>
+  <div class='sub-header'><%= "#{t('view_vehicle_details')}"%></div>
+  <div id="inner-tab-menu">
+    <ul>
+      <li class="themed_bg themed-dark-hover-background"><%= link_to "#{t('edit')}", edit_vehicle_path(@vehicle.id) %></li>
+      <li class="themed_bg themed-dark-hover-background"><%= link_to "#{t('view_all')}", vehicles_path %></li>
+    </ul>
+  </div>
+</div>
+<div id="page-yield">
+  <div class="bread_crumb">
+    <% breadcrumb :vehicles_show, @vehicle %>
+    <%= render_breadcrumbs  %>
+  </div>
+  <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+
+  <div class="detail_box">
+    <div class="name"><%= t('vehicle_no') %></div><div class="val themed_text"><span class="themed_text">:</span><%= @vehicle.vehicle_no%></div>
+    <div class="name"><%= t('vehicles.no_of_seats') %></div><div class="val themed_text"><span class="themed_text">:</span><%= @vehicle.no_of_seats %></div>
+    <div class="name"><%= t('vehicles.available_seats') %></div><div class="val themed_text"><span class="themed_text">:</span><%= @vehicle.available_seats  %></div>
+    <div class="name"><%= t('status') %></div><div class="val themed_text"><span class="themed_text">:</span><%= t("#{@vehicle.status.downcase}") %></div>
+    <% @additional_details.each do |additional_detail| %>
+      <%if additional_detail.additional_info.present?%>
+        <div class="name"><%= additional_detail.route_vehicle_additional_field.name %></div><div class="val themed_text"><span>:</span><span class="additional_value"><%=h additional_detail.additional_info %></span></div>
+      <%end%>
+    <% end %>
+  </div>
+  <table id="listing" align="right" width="60%" cellpadding="1" cellspacing="1">
+    <% unless @users.blank? %>
+      <tr class="tr-head">
+        <td><%= t('sl_no') %></td>
+        <td><%= t('passenger') %></td>
+        <td><%= t('routes.destination') %></td>
+      </tr>
+      <tr class="tr-blank"></tr>
+      <% @users.each_with_index do |u,i| %>
+        <tr class="tr-<%= cycle('odd', 'even') %>">
+          <td class="col-3">
+            <%= ((params[:page].to_i==0 ? 0 : params[:page].to_i-1) * 20) + (i + 1) %>
+          </td>
+          <td class="col-3">
+            <%=u.receiver.first_name+" &#x200E;(#{u.receiver_type=='Student' ? u.receiver.admission_no : u.receiver.employee_number})&#x200E;" %>
+          </td>
+          <td class="col-3">
+            <%= u.route.destination %>
+          </td>
+        </tr>
+      <% end %>
+    <% else %>
+      <tr class="tr-head"><td><%= "#{t('no_users_in_this_vehicle')}"%></td></tr>
+    <% end %>
+  </table>
+  <%= will_paginate @users%>
+</div>

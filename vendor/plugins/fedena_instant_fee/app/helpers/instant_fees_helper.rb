@@ -1,0 +1,2 @@
+module InstantFeesHelper
+end

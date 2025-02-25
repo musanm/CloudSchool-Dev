@@ -1,0 +1,12 @@
+<%  if File.exists?("#{Rails.root}/vendor/plugins/fedena_oauth/config/oauth_settings.yml") %>
+  <div class="label-field-pair">
+    <label for="enable_oauth"><%= t('enable_oauth') %></label>
+    <div class="text-input-bg">
+      <% if FedenaOauth.oauth_enabled? == '1' %>
+        <%= check_box :configuration, :enable_oauth, :checked => true %>
+      <% else %>
+        <%= check_box :configuration, :enable_oauth, :checked => false %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

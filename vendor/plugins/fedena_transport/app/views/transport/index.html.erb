@@ -1,0 +1,78 @@
+<script type="text/javascript"> function setOption(optn) {document.getElementById("option").value = optn;} </script>
+
+<div id="content-header">
+  <%= show_header_icon %>
+  <h1><%= t('user_details') %></h1>
+  <div class='header-sep'>|</div>
+  <div class='sub-header'><%= t('view_details') %></div>
+
+  <div id="inner-tab-menu">
+    <ul>
+      <li class='themed_bg themed-dark-hover-background'><%= link_to "#{t('transport_details')}", :controller => "transport", :action => "transport_details" %></li>
+    </ul>
+  </div>
+
+</div>
+<div id="page-yield">
+  <div class="bread_crumb">
+    <%= make_breadcrumb %>
+    <%= render_breadcrumbs  %>
+  </div>
+  <% unless flash[:notice].nil? %> <p class="flash-msg"> <%= flash[:notice] %> </p> <% end %>
+  <div id="search_box_bg">
+    <form name="search_form" action="" style="display:inline;">
+      <%= hidden_field_tag("option", params['option'], :value => "student") %>
+      <label for="user_name"><%= t('search_text') %>
+        <%= image_tag("loader.gif",
+          :align => "absmiddle",
+          :border => 0,
+          :id => "loader",
+          :style =>"display: none;" ) %>
+      </label>
+      <div id="search_textbox">
+        <%= text_field_tag("query", params['query'], :autocomplete => 'off') %>
+
+      </div>
+      <div class="radio_button">
+        <input type="radio" name="setopt" id="search_present_students_radio" checked="checked" onclick="setOption('student')" /><%= t('student_text') %>
+        <input type="radio" name="setopt" id ="search_former_students_radio"onclick="setOption('employee')" /><%= t('employee_text') %>
+      </div>
+    </form>
+  </div>
+  <div class="extender"></div>
+
+</div>
+
+
+<div id="view_all">
+
+</div>
+
+
+
+<%#= observe_fields ['query', 'option'],
+:frequency => 0.5,
+:update => 'information',
+:before => "Element.show('loader')",
+:success => "Element.hide('loader')",
+:url => {:action => 'search_ajax'} %>
+
+<script type="text/javascript">
+  function search_ajax(){
+    if ($('query').value.include("%")) return;
+<%="#{remote_function(:url => {:action => "search_ajax"},
+:with => "j('form').serialize()",
+:before => "Element.show('loader')",
+:success => "Element.hide('loader')",
+:update=>"information"
+)}"%>
+  }
+
+  document.observe("dom:loaded", function() {
+    new Form.Element.Observer('query', 1, search_ajax);
+    new Form.Element.Observer('option', 0.5, search_ajax);
+  });
+
+</script>
+
+<div id="information"></div>

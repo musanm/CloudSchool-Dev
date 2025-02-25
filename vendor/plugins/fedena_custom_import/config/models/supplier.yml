@@ -1,0 +1,15 @@
+ supplier:
+    primary_keys:
+      contact_no: "Contact no"
+      supplier_type_id: "Supplier type code"
+    overrides:
+      supplier_type_id: "Supplier Type Code"
+    associations:
+     - :supplier_type
+    associated_columns:
+      supplier_type: "code"
+    filters:
+     - :school_id
+     - :is_deleted
+
+

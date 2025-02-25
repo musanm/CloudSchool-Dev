@@ -1,0 +1,382 @@
+<% unless flash[:notice].nil? %>
+  <p class="flash-msg"> <%= flash[:notice] %> </p>
+<% end %>
+<% total_fees =0 %>
+<% total_amount_to_pay=0 %>
+<% form_for :multi_fees_transaction, :url => {:controller => "finance_extensions", :action => 'pay_all_fees', :id => @student.id}, :html => {:id => "fees_form"} do |form| %>
+  <% unless @finance_fees.nil? %>
+    
+
+    <div id="payments_details">
+
+      <table id="listing1" align="center" width="100%" cellpadding="1" cellspacing="1">
+        <tr class="tr-head">
+          <td><%= t('sl_no') %></td>
+          <td><%= t('fee_collection') %></td>
+          <td><%= "#{t('actual')} #{t('amount').downcase}" %> (<%= currency %>)</td>
+          <td><%= "#{t('amount_to_pay')} #{t('with')} #{t('fine').downcase}" %> (<%= currency %>)</td>
+          <td><%= t('pay_fees') %> (<%= currency %>)</td>
+
+        </tr>
+
+        <% i = 0 %>
+        <%@finance_fees.group_by(&:fee_type).each do |fees|%>
+          <tr class="tr-blank"></tr>
+          <tr class="tr-head">
+            <td></td>
+            <td colspan="4"><%= fees.first.underscore.humanize() %></td>
+          </tr>
+          <tr class="tr-blank"></tr>
+          <% fees.last.each_with_index do |finance_fee, k| %>
+            <tr class="tr-<%= cycle("odd", "even") %>" id="mft<%= finance_fee.id %>">
+              <%i=i+1%>
+              <td class="col-1"><%= k+=1 %></td>
+              <td class="col-2"><%= finance_fee.collection_name %></td>
+              <td class="col-3"> <%= precision_label(finance_fee.actual_amount) %></td>
+              <% total_fees =total_fees+finance_fee.actual_amount.to_f %>
+
+              <%fine_amount=(finance_fee.is_paid? ? 0 : (finance_fee.is_amount? ? finance_fee.fine_amount : (finance_fee.actual_amount.to_f)*(finance_fee.fine_amount.to_f/100)))%>
+              <td class="col-3 amount_to_pay"><%= precision_label(finance_fee.balance.to_f+fine_amount.to_f) %>
+                <% total_amount_to_pay=total_amount_to_pay+finance_fee.balance.to_f+fine_amount.to_f %>
+              </td>
+              <td class="col-3 center_align">
+
+                <% if ((finance_fee.is_paid) or (precision_label(finance_fee.balance.to_f+fine_amount.to_f)==precision_label(0))) %>
+                  <%= "#{t('paid')}" %>
+                <% else %>
+                  <%= hidden_field_tag 'max_amount', finance_fee.balance.to_f+fine_amount.to_f, options={:disabled => "disabled",:class=>finance_fee.fee_type} %>
+                  <%= text_field_tag "transactions[#{i}][amount]", value="", options={:class => "precision_text payment_box input_amount", :onkeyups => "this.value = minmax(this.value, 0, #{finance_fee.balance.to_f+fine_amount.to_f})"} %>
+                  <%= hidden_field_tag "transactions[#{i}][finance_id]", finance_fee.id %>
+                  <%= hidden_field_tag "transactions[#{i}][finance_type]", finance_fee.fee_type %>
+                  <%= hidden_field_tag "transactions[#{i}][payee_type]", "Student" %>
+                  <%= hidden_field_tag "transactions[#{i}][payee_id]", @student.id %>
+                  <%= hidden_field_tag "transactions[#{i}][category_id]", @transaction_category_id %>
+                  <%= hidden_field_tag "transactions[#{i}][title]", "#{t('receipt_no')}. (#{t('multiple_fees')}) F#{finance_fee.id}" %>
+                  <%= hidden_field_tag "transactions[#{i}][transaction_date]", Date.today, options ={:class => 'fee_transaction_date'} %>
+                  <%= hidden_field_tag "transactions[#{i}][payment_mode]", '', options ={:class => 'mode'} %>
+                  <%= hidden_field_tag "transactions[#{i}][payment_note]", '', options ={:class => 'note'} %>
+                <% end %>
+              </td>
+
+            </tr>
+          <% end %>
+        <%end%>
+
+        <tr class="tr-blank"></tr>
+        <tr class="tr-blank"></tr>
+
+
+        <tr class="tr-blank"></tr>
+        <tr class="tr-blank"></tr>
+        <tr class="tr-<%= cycle("odd", "even") %> height-26" cellpadding="1" cellspacing="1">
+          <td colspan="4">
+            <div class="fright"> <%= "#{t('total')} #{t('amount')}" %>:</div>
+          </td>
+          <td class="col-6 ">
+            <% unless precision_label(total_fees).to_f == 0 %>
+              <%= precision_label(total_fees.to_f) %>
+            <% else %>
+              <%= precision_label(0) %>
+            <% end %>
+          </td>
+        </tr>
+        <tr class="tr-<%= cycle("odd", "even") %> height-26" cellpadding="1" cellspacing="1">
+          <td colspan="4">
+            <div class="fright"> <%= "#{t('amount_to_pay')} #{t('with')} #{t('fine')}" %> :</div>
+          </td>
+          <td class="col-6 total-pay">
+            <% unless precision_label(total_amount_to_pay).to_f == 0 %>
+              <%= precision_label(total_amount_to_pay.to_f) %>
+            <% else %>
+              <%= precision_label(0) %>
+            <% end %>
+          </td>
+        </tr>
+
+
+
+
+        <% unless total_fees == 0 %>
+          <tr>
+            <td colspan="5">
+              <div class="payment_details">
+                <div class="label-field-pair3">
+                  <label><%= t('payment_mode') %>  <%= image_tag("loader.gif",
+                      :align => "absmiddle",
+                      :border => 0,
+                      :id => "loader1",
+                      :style => "display: none;") %></label>
+
+                  <div class="text-input-bg3"><%= select :multi_fees_transaction, :payment_mode, [["#{t('cash')}", "#{t('cash')}"], ["#{t('online_payment')}", "#{t('online_payment')}"], ["#{t('cheque')}", "#{t('cheque')}"], ["#{t('dd')}", "#{t('dd')}"], ["#{t('others')}", "#{t('others')}"]], {}, {:onChange => "#{remote_function(:url => {:controller=>"finance",:action => "select_payment_mode"},
+                      :with => "'payment_mode='+value", :before => "$('loader1').show();",
+                      :success => "$('loader1').hide();")}"} %>
+                  </div>
+                </div>
+                <div class="label-field-pair3-text-area">
+                  <label><%= t('payment_notes') %> </label>
+
+                  <div class="textarea-input-bg3"><%= form.text_area :payment_note, :cols => 50, :rows => 1 %>
+                  </div>
+                </div>
+                <div class="label-field-pair4">
+                  <label><%= t('amount') %> </label>
+
+                  <div class="text-input-bg4">
+                    <%= hidden_field_tag 'multi_fees_transaction[student_id]', @student.id %>
+                    <%= hidden_field_tag 'multi_fees_transaction[transaction_date]', Date.today, options={:class => 'fee_transaction_date'} %>
+                    <%= form.text_field :fees_paid, :value => 0, :class => 'precision_text payment', :readonly => true, :disabled => "disabled" %>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+
+
+        <tr>
+          <td colspan="5">
+            <div class="pay_fees">
+              <div id="payment_mode"></div>
+              <%= transaction_date_field %>
+              <div class="pay_fees_buttons">
+                <% unless total_amount_to_pay == 0 %>
+                  <%= submit_tag "► #{t('pay_fees')}", :class => 'submit_button', :id => 'submit_button' %>
+                <% else %>
+                  <h4><%= t('fees_paid') %></h4>
+                <% end %>
+                <%= link_to "► #{t('print_receipt')}",
+                  {:controller => "finance_extensions", :action => "pay_all_fees_receipt_pdf", :id => @student.id}, :target => '_blank', :class => 'user_button' %>
+              </div>
+            </div>
+          </td>
+        </tr>
+
+
+      </table>
+
+    </div>
+
+  <% end %>
+
+<% end %>
+<% if @paid_fees.present? or @other_transactions.present? %>
+  <div id="payments_details">
+    <div class="label-field-pair3">
+      <label><%= t('payment_history') %> </label>
+    </div>
+    <table id="listing1" align="center" width="100%" cellpadding="1" cellspacing="1">
+      <tr class="tr-head">
+        <td><%= t('s_no') %></td>
+        <td><%= t('receipt_no') %></td>
+        <td><%= t('fee_collections') %></td>
+        <td><%= t('date_text') %></td>
+        <td><%= t('mode') %></td>
+        <td><%= t('cashier') %></td>
+        <td><%= t('payment_notes') %></td>
+        <td><%= t('amount') %> (<%= currency %>)</td>
+        <td class="col-3" style="width:2%;"></td>
+      </tr>
+      <% i=0 %>
+      <tr class="tr-blank"></tr>
+      <% @paid_fees.each do |f| %>
+        <tr class="tr-<%= cycle("odd", "even") %>" id="mft<%= f.id %>">
+          <td class="col-1"><%= i +=1 %></td>
+          <% collections=[] %>
+              <% f.finance_transactions.each { |ft| collections<< (ft.finance.present?? ft.finance.name : ft.finance_type )} %>
+          <td class="col-3 left_align" style="min-width: 120px"><%= f.finance_transactions.collect(&:receipt_no).join(', ') %></td>
+          <td class="col-3 left_align" style="min-width: 180px"><%= collections.join(', ') %></td>
+          <td class="col-3 left_align" style="min-width: 80px"><%= format_date(f.transaction_date) %></td>
+          <td class="col-3 left_align" style="min-width: 80px"><%= f.payment_mode %></td>
+          <td class="col-3 left_align" style="min-width: 80px"><%= f.finance_transactions.present? ? f.finance_transactions.first.cashier_name : '' %></td>
+          <td class="col-2 left_align" style="min-width: 120px; word-break:break-word"><%= f.payment_note %>
+          </td>
+          <td class="col-3" style="min-width: 90px">
+            <%= precision_label(f.amount.to_f) %>
+          </td>
+          <td class="col-3" style="width:2%;">
+            <% if f.finance_transactions.select{|ft| ft.finance_type=='FinanceFee' and ft.finance.fee_refund.present?}.compact.present? %>
+              <div class="disabled-link"> <%= link_to_remote raw(' <div class="delete_icon inactive-delete"></div>'), {:url => {:controller => :finance_extensions, :action => :delete_multi_fees_transaction, :id => @student.id, :transaction_id => f.id, :type => 'multi_fees_transaction'}, :confirm => "#{t('are_you_sure_want_delete_this_transaction')}"}, {:class => "themed_text disable_link"} %></div>
+            <% else %>
+              <%= link_to_remote raw(' <div class="delete_icon"></div>'), {:url => {:controller => :finance_extensions, :action => :delete_multi_fees_transaction, :id => @student.id, :transaction_id => f.id, :type => 'multi_fees_transaction'}, :confirm => "#{t('are_you_sure_want_delete_this_transaction')}"}, {:class => "themed_text"} %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+
+      <% @other_transactions.each do |f| %>
+        <tr class="tr-<%= cycle("odd", "even") %>" id="mft<%= f.id %>">
+          <td class="col-1"><%= i +=1 %></td>
+          <td class="col-3 left_align" style="min-width: 120px"><%= f.receipt_no %></td>
+          <td class="col-3 left_align" style="min-width: 180px"><%= f.finance.name %></td>
+          <td class="col-3 left_align" style="min-width: 80px"><%= format_date(f.transaction_date) %></td>
+          <td class="col-3 left_align" style="min-width: 80px"><%= f.payment_mode %></td>
+          <td class="col-3 left_align" style="min-width: 80px"><%= f.cashier_name%></td>
+          <td class="col-2 left_align" style="min-width: 120px; word-break:break-all "><%= f.payment_note %></td>
+          <td class="col-3" style="min-width: 90px">
+            <%= precision_label(f.amount.to_f) %>
+          </td>
+          <td class="col-3" style="width:2%;">
+            <% if f.finance_type=='FinanceFee' and f.finance.fee_refund %>
+              <div class="disabled-link">  <%= link_to_remote raw(' <div class="delete_icon inactive-delete"></div>'), {:url => {:controller => :finance_extensions, :action => :delete_multi_fees_transaction, :id => @student.id, :transaction_id => f.id, :type => 'other_transaction'}, :confirm => "#{t('are_you_sure_want_delete_this_transaction')}"}, {:class => "themed_text disable_link"} %></div>
+            <% else %>
+              <%= link_to_remote raw(' <div class="delete_icon"></div>'), {:url => {:controller => :finance_extensions, :action => :delete_multi_fees_transaction, :id => @student.id, :transaction_id => f.id, :type => 'other_transaction'}, :confirm => "#{t('are_you_sure_want_delete_this_transaction')}"}, {:class => "themed_text"} %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+
+  </div>
+  <div id="revert-pop-up">
+    <%= "Fees Refunded. You can't revert the transaction!" %>
+    <br/>
+    <div class="revert_arrow_down"></div>
+  </div>
+  </div>
+<% end %>
+<script type="text/javascript">
+
+  precision = parseInt("<%= @precision %>");
+  j('.input_amount').on('click',function(){
+    if(j(this).siblings('#max_amount').attr("class")!='FinanceFee'){
+      this.value =parseFloat(j(this).siblings('#max_amount').val()).toFixed(precision)
+      update_pay_amount();
+    }
+  })
+
+  j('.input_amount').on('input', function () {
+    precision = parseInt("<%= @precision %>");
+    fee_type=j(this).siblings('#max_amount').attr("class")
+    max_value=parseFloat(j(this).siblings('#max_amount').val()).toFixed(precision)
+    if(fee_type=='FinanceFee'){
+      entered_amount=this.value
+    }
+    else{
+          
+      if(this.value>= max_value){
+        entered_amount=max_value
+            
+      }
+      else{
+        entered_amount=0
+      }
+          
+    }
+    this.value = minmax(entered_amount, 0, max_value)
+  })
+  function minmax(value, min, max) {
+      
+    var precision = parseInt("<%= @precision %>");
+    if (parseFloat(value) <= 0 || isNaN(value)) {
+
+
+      return "";
+    }
+    else if (parseFloat(value) > max) {
+
+      return (parseFloat(max).toFixed(precision))
+    }
+    else {
+      return value;
+    }
+  }
+
+  function total_fees() {
+    return j('.payment').val()
+  }
+  j('.payment_box').on('input', function (e) {
+    update_pay_amount();
+  });
+  function update_pay_amount(){
+    var precision = parseInt("<%= @precision %>");
+    j('.payment').val(payment_sum())
+    var total_balance = '<%= total_amount_to_pay%>' - payment_sum()
+    j('.total-pay').text(total_balance.toFixed(precision))
+  }
+
+  function payment_sum() {
+    var precision = parseInt("<%= @precision %>");
+    var sum = 0
+    j('.payment_box').each(function () {
+      sum += +parseFloat(this.value) || 0
+    });
+    if (sum <= 0) {
+      sum = 0
+    }
+    return sum.toFixed(precision)
+  }
+
+  j('#submit_button').click(function (e) {
+    j('#progressbar').show();
+    j('.flash-msg').hide();
+    var input1 = '<input type="hidden" name="multi_fees_transaction[amount]" value= ' + payment_sum() + '>'
+    j('.mode').val(j('#multi_fees_transaction_payment_mode').val())
+    j('.note').val(j('#multi_fees_transaction_payment_note').val())
+    j('#fees_form').append(input1)
+    var array = j('.payment_box')
+    var status = true
+    j.each(array, function (index, value) {
+      if (value.value.length == 0) {
+        j(value).parent().children().attr('disabled', 'disabled')
+      }
+      else {
+        var balance = parseFloat(j(value).parent().parent().children('.amount_to_pay').text())
+        var payment = parseFloat(value.value)
+        status = status && ( balance >= payment )
+      }
+    });
+    if (status == false) {
+      alert('<%=t('cant_pay_more')%>');
+      return activate_payment_boxes()
+      j('#progressbar').hide()
+    }
+  
+    if (j('.payment').val() == 0.0) {
+       j('#progressbar').hide()
+      alert('<%=t('enter_amount')%>');
+      return activate_payment_boxes()
+    }
+    else{
+      j('html, body').animate({scrollTop: 0}, 100);
+    }
+    //      j(j('.payment_box')[1]).parent().children().attr('disabled','disabled')
+    //        var input1 = '<input type="hidden" name="multi_fees_transaction[amount]" value= ' + payment_sum() + '>'
+
+  })
+  j('#fees_form').submit(function () {
+    j('#submit_button').attr('disabled', 'disabled')
+    j('#submit_button').val('<%=t('please_wait') %>')
+  })
+  function activate_payment_boxes() {
+    var array = j('.payment_box')
+    j.each(array, function (index, value) {
+      if (value.value.length == 0) {
+        j(value).parent().children().removeAttr('disabled')
+      }
+    });
+    j('#fees_form').unbind("submit");
+    return false
+
+  }
+
+  $('submit_button').disable();
+  setTimeout(function () {
+    $('submit_button').enable();
+  }, 3000);
+  j(document).delegate('.calendar_date_select', 'click', function () {
+
+
+    j('.fee_transaction_date').val(j('#transaction_date').val())
+
+  })
+
+
+
+  j(document).click(function (e) {
+    j('div#revert-pop-up').hide();
+
+  })
+
+
+
+</script>

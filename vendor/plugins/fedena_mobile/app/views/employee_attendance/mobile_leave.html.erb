@@ -1,0 +1,76 @@
+<% unless flash[:notice].nil? %>
+  <p class="flash-msg"> <%= flash[:notice] %> </p>
+<% end %>
+<% form_for :leave_apply do |f| %>
+  <% unless (error_messages_for :leave_apply).empty? %>
+    <div class="alert alert-error">
+      <%= error_messages_for :leave_apply ,:header_message => nil,:message =>nil %>
+    </div>
+  <% end %>
+
+  <%= f.hidden_field :employee_id, :value=>@employee.id %>
+  <fieldset>
+    <div class="span6">
+      <%= f.label :employee_leave_types_id , t('leave_types') %>
+    </div>
+    <div class="span6">
+      <%= f.select :employee_leave_types_id, @leave_types.map {|s| [s.name, s.id]},:prompt => "#{t('select')}" %>
+    </div>
+  </fieldset>
+  <fieldset>
+    <div class="span6"></div>
+    <div class="span6">
+      <label class="checkbox inline">
+        <%= f.check_box :is_half_day  %>
+        <%= f.label :is_half_day , t("half_day") %>
+      </label>
+    </div>
+  </fieldset>
+  <fieldset>
+    <div class="span6">
+      <%= f.label :start_date , "#{t('start_date')} (DD/MM/YYYY)" %>
+    </div>
+    <div class="span6">
+      <%= f.date_select :start_date, :use_month_numbers=>true, :order=>[:day,:month,:year], :include_blank => false %>
+    </div>
+  </fieldset>
+  <fieldset>
+    <div class="span6">
+      <%= f.label :end_date , "#{t('end_date')} (DD/MM/YYYY)" %>
+    </div>
+    <div class="span6">
+      <%= f.date_select :end_date,:use_month_numbers=>true, :order=>[:day,:month,:year], :include_blank => false %>
+    </div>
+  </fieldset>
+  <fieldset>
+    <div class="span6">
+      <%= f.label :reason , t('reason') %>
+    </div>
+    <div class="span6">
+      <%= f.text_area :reason,  :rows=>5 %>
+    </div>
+  </fieldset>
+  <fieldset>
+    <div class="span6"></div>
+    <div class="span6">
+      <%= submit_tag t('submit'), :class => "btn btn-danger" %>
+    </div>
+  </fieldset>
+<% end %>
+<table class="table table-bordered table-condensed">
+  <tr>
+    <th colspan="2">
+      <label class="name">Available leaves: </label>
+    </th>
+  </tr>
+  <% @leave_count.each do |l| %>
+    <tr>
+      <td>
+        <%= l.employee_leave_type.name %>
+      </td>
+      <td>
+        <%= l.leave_taken %>/<%= l.leave_count %>
+      </td>
+    </tr>
+  <% end %>
+</table>

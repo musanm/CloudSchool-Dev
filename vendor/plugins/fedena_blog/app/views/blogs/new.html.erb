@@ -1,0 +1,33 @@
+
+
+<div id="content-header">
+  <%= show_header_icon %>
+  <h1><%= t('blogs_text') %></h1>
+  <div class='header-sep'>|</div>
+  <div class='sub-header'><%= t('register') %></div>
+
+</div>
+<div id="page-yield">
+  <div class="bread_crumb">
+    <%= make_breadcrumb %>
+    <%= render_breadcrumbs  %>
+  </div>
+  <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+
+  <div id="blog_form">
+    <% form_for @blog do |f| %>
+      <%= f.error_messages %>
+      <div class="label-field-pair">
+        <%= f.label :name %>
+        <%= f.text_field :name %>
+      </div>
+      <%= f.hidden_field :is_active,:value => true %>
+      <%= f.hidden_field :is_published,:value => true  %>
+      <%= f.hidden_field :user_id,:value => @user.id %>
+      <%= f.submit "#{t('save')}",:class => 'submit-button', :disable_with => "#{t('please_wait')}" %>
+    <% end %>
+
+  </div>
+</div>

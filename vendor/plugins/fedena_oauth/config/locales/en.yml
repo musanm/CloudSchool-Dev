@@ -1,0 +1,11 @@
+en: 
+  oauth: 
+    account: "account"
+    could_not_authenticate_with: "Sorry, could not authenticate using "
+    enter_user_email: "Enter your e-mail"
+    login_with_google: "Sign in using your"
+    no_user_with_email: "No user with e-mail"
+    select_user: "Select User"
+  manage_clients: "Manage Clients"
+  enable_oauth: "Enable Oauth"
+  

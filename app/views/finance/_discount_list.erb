@@ -1,0 +1,76 @@
+<div id="particulars-list">
+  <% student_discount_link=false %>
+  <% @categorized_discounts.each do |discount_type| %>
+      <tr class="tr-blank"></tr>
+      <tr class="tr-<%= cycle("odd", "even") %> <%= discount_type.first %>head" cellpadding="1" cellspacing="1">
+        <td class="col-1"></td>
+        <td class="col-1 bold_font" colspan="2">
+          <span><%= "#{discount_type.first.underscore.humanize}-#{t('wise')}" %></span></td>
+      </tr>
+      <% discount_type.last.each do |fee| %>
+          <tr class="tr-<%= cycle("odd", "even") %> particular" id="particular<%= fee.id %>">
+            <td class="col-1 normal_font particular_index"><%= i+=1 %></td>
+            <% discount_text = fee.is_amount == true ? "#{fee.name}" : "#{fee.name}-#{fee.discount}% " %>
+
+              <% if fee.master_receiver_type=='FinanceFeeParticular' %>
+                  <% particular=fee.master_receiver %>
+                <td class="col-2 normal_font"><%= "#{discount_text}  &#x200E;(#{particular.name}) &#x200E;" %></td>
+                <td class="col-6 normal_font"> <%= precision_label(particular.amount * fee.discount.to_f/ (fee.is_amount? ? particular.amount : 100)) %></td>
+              <% else %>
+                <td class="col-2 normal_font"><%= discount_text %></td>
+                <td class="col-6 normal_font"><%= precision_label(@total_payable * fee.discount.to_f/ (fee.is_amount? ? @total_payable : 100)) %></td>
+              <% end %>
+
+            <td class="cancel-disc cancel-color">
+              <% if discount_type.first=='Student' and fee.is_instant and (@financefee.balance.to_f > 0 )%>
+                  <div class="particular-or-discount-deletion" id=<%= fee.id %> finance_id=<%= @financefee.id %> render_action="<%= @target_action %>" render_controller="<%= @target_controller %>" target_action="delete_student_discount">
+                    <%= ("&times") %>
+                  </div>
+                  <%#= link_to_remote ("&times"), {:url => {:controller => :finance_extensions, :action => :delete_student_particular, :id => fee.id}, :confirm => "#{t('are_you_sure_want_delete_this_transaction')}"}, {:class => "themed_text"} %>
+              <% end %>
+            </td>
+          </tr>
+          </div>
+
+      <% end %>
+
+      <% if discount_type.first=='Student' and (@financefee.balance.to_f > 0 ) %>
+          <% student_discount_link=true %>
+          <tr>
+            <td colspan="3" style="width:100%">
+              <div class="instant-particular">
+                <%= link_to_remote '+ Add Discount', :url => {:controller => "finance_extensions", :action => "new_instant_discount", :id => @financefee.id, :current_action => @target_action, :current_controller =>@target_controller} %>
+              </div>
+            </td>
+          </tr>
+      <% end %>
+  <% end %>
+
+  <% if !student_discount_link and (@financefee.balance.to_f > 0)  %>
+      <tr>
+        <td colspan="3" style="width:100%">
+          <div class="instant-particular">
+            <%= link_to_remote '+ Add Discount', :url => {:controller => "finance_extensions", :action => "new_instant_discount", :id => @financefee.id, :current_action => @target_action, :current_controller => @target_controller} %>
+          </div>
+        </td>
+      </tr>
+  <% end %>
+      <script type="text/javascript">
+        j('.particular-or-discount-deletion').click(function(){
+         
+    p_id=j(this).attr('id')
+    fee_id=j(this).attr('finance_id')
+    action=j(this).attr('target_action')
+    render_action=j(this).attr('render_action')
+    render_controller=j(this).attr('render_controller')
+    var proceed=confirm('<%=t('delete_confirm_msg') %>');
+    if (proceed) {
+      j.ajax({
+        url: '/finance_extensions/'+action,
+        data: {id: p_id,finance_fee_id: fee_id,current_action: render_action,current_controller: render_controller}
+
+      })
+    }
+    e.preventDefault();
+  })
+      </script>

@@ -1,0 +1,9 @@
+
+if  @error
+
+  page.replace_html 'fee_submission', :text => ''
+else
+ page.replace_html 'fee_submission', :partial => 'particular_fees_submission_form'
+
+     # jQuery('#fee_submission').html("<%= escape_javascript(render :partial => 'particular_fees_submission_form')%>");
+end

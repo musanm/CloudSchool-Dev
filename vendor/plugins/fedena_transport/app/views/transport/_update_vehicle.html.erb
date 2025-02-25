@@ -1,0 +1,9 @@
+<%= select :transport , :vehicle_id,
+  @vehicles.map{|r| [r.vehicle_no,r.id]},
+  {:prompt => "#{t('select_vehicle')}"},
+  {:onChange => "#{remote_function(:url => {:action => "seat_description"},
+  :with => "'id='+ value",
+  :before => "Element.show('loader')",
+  :success => "Element.hide('loader')"
+  )}"}
+%>

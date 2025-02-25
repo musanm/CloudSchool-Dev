@@ -1,0 +1,99 @@
+en-k12:
+  activerecord:
+    attributes:
+      applicant:
+        registration_course_id: "Registration class"
+
+      course_pin:
+        course_id: "Class"
+
+      pin_group:
+        course_ids: "Class"
+
+      registration_course:
+        course_id: "Class"
+
+    errors:
+      messages:
+        registration_course_is_in_use_and_cannot_be_deleted: "Registration class is in use and cannot be deleted"
+        no_elective_subjects : "No elective subject in selected class"
+
+  applicants:
+    course: "Class"
+    flash5: "This pin is not applicable for the class you applied"
+    no_course_avalible_for_reg: "No class available for registration"
+    select_course: "Select Class"
+
+  applicants_admins:
+    course: "Class"
+    course_s: "Classes"
+    manage_course: "Manage Classes"
+    no_applicants_for_course: "No applicants for this class"
+    no_courses_found: "No classes registered"
+
+  pin_groups:
+    course_ids: "Classes"
+    course_names: "Class names"
+
+  registration_courses:
+    add_course: "Add Class"
+    course: "Class"
+    course_name: "Class Name"
+    course_registration: "Class Registration"
+    course_s: "Classes"
+    create_successfully: "Registration class was successfully created"
+    deleted_successfully: "Registration class was successfully deleted"
+    enabled_courses: "Enabled Classes"
+    no_registration_courses: "No classes found"
+    update_successfully: "Registration class was successfully updated"
+
+
+
+en-hd:
+  activerecord:
+    attributes:
+      applicant:
+        registration_course_id: "Registration course"
+
+      course_pin:
+        course_id: "Course"
+
+      pin_group:
+        course_ids: "Course"
+
+      registration_course:
+        course_id: "Course"
+
+    errors:
+      messages:
+        registration_course_is_in_use_and_cannot_be_deleted: "Registration course is in use and cannot be deleted"
+        no_elective_subjects : "No elective subject in selected course"
+
+  applicants:
+    course: "Course"
+    flash5: "This pin is not applicable for the course you applied"
+    no_course_avalible_for_reg: "No course available for registration"
+    select_course: "Select Course"
+
+  applicants_admins:
+    course: "Course"
+    course_s: "Courses"
+    manage_course: "Manage Courses"
+    no_applicants_for_course: "No applicants for this course"
+    no_courses_found: "No courses registered"
+
+  pin_groups:
+    course_ids: "Courses"
+    course_names: "Course names"
+
+  registration_courses:
+    add_course: "Add Course"
+    course: "Course"
+    course_name: "Course Name"
+    course_registration: "Course Registration"
+    course_s: "Courses"
+    create_successfully: "Registration course was successfully created"
+    deleted_successfully: "Registration course was successfully deleted"
+    enabled_courses: "Enabled Courses"
+    no_registration_courses: "No courses found"
+    update_successfully: "Registration course was successfully updated"

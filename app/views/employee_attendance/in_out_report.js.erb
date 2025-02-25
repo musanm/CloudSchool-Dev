@@ -1,0 +1,6 @@
+<% if @start_date.present? %>
+  j("#employeee_register").html('<%=escape_javascript(render :partial => "attendance_reports/individual_employee_in_out_attendance.html.erb", :locals => {:employee => @employee, :start_date => @start_date} ) %>');
+<% else %>
+  j("#employeee_register").html("")
+  j("#error").html("Please select dates") 
+<% end %>

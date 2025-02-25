@@ -1,0 +1,49 @@
+
+
+<div id="content-header">
+  <%= show_header_icon %>
+  <h1><%= t('blogs_text') %></h1>
+<div class='header-sep'>|</div>
+<div class='sub-header'><%= @user.first_name.capitalize %></div>
+<div id="inner-tab-menu">
+  <ul>
+    <li class='themed_bg themed-dark-hover-background'><%= link_to t('my_blog'),my_blog_path %></li>
+    <li class='themed_bg themed-dark-hover-background'><%= link_to t('home'),blog_blog_posts_path(@current_user.id) %></li>
+    <li class='themed_bg themed-dark-hover-background'><%= link_to t('notifications'),notification_blogs_path %></li>
+  </ul>
+</div>
+</div>
+<div id="page-yield">
+  <div class="bread_crumb">
+    <%if @user.present?%>
+    <% breadcrumb :blog_posts_blog_directory_when_user_present, @user%>
+    <%else%>
+    <%=make_breadcrumb%>
+    <%end%>
+    <%= render_breadcrumbs  %>
+  </div>
+  <div id="flash_notice"></div>
+  <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+  <table class="profile_info" style="height:110px" >
+    <tr>
+      <td class="blog_name themed_text"><%= @blog.name.capitalize %></td>
+      <td class="account_info">
+        <div class="profile_pic"><%= fetch_profile_pic(@user) %></div>
+        <div class="details">
+          <div class="blogger_name"><%= @blog.user.full_name %></div>
+          <div class="identity_number"><%= identity_number(@user) %></div>
+          <div class="posts_count"><%= "#{@blog.blog_posts.showable.count} #{t('posts')}" %></div>
+          <% if @current_user.admin? or @current_user.privileges.map(&:name).include? "BlogAdmin" %>
+            <div id="deactivate_link"><%= link_to @blog.is_active == true ? t('deactivate') : t('activate'),activate_deactivate_blog_path(@blog) ,:class=>"themed_text"%></div>
+          <% end %>
+        </div>
+      </td>
+    </tr>
+  </table>
+
+  <div class="directory_content">
+    <%= render :partial => "list_blog_directory_blog_posts" %>
+  </div>
+</div>

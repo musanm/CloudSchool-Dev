@@ -1,0 +1,18 @@
+--- 
+es-DO: 
+  attendance_reports: 
+    no_subjects_to_show: "No temas"
+  attendances: 
+    attendance_marked_for: "La asistencia marcado para"
+    class_timings_empty: "No hay horarios de clase han sido seleccionados"
+    mark_absent: "Marcar como ausente"
+    no_subjects_to_show: "No temas"
+    no_tte_entries: "No hay entradas calendario para la fecha seleccionada"
+  calendar: 
+    no_events: "No hay eventos"
+    show_more_entries: "mostrar más"
+  reminder: 
+    no_reminders: "No hay avisos"
+    show_more_entries: "mostrar más"
+  timetable: 
+    select_weekday: "Seleccione un día de semana"

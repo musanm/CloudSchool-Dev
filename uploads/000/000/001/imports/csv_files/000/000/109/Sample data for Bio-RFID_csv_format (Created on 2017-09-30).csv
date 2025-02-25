@@ -1,0 +1,30 @@
+Admission no|Student,Admission date|Student,First name|Student,Middle name|Student,Last name|Student,Batch Name|Student,Date of birth|Student,Gender|Student,Blood group|Student,Birth place|Student,Nationality Name|Student,Language|Student,Religion|Student,Student Category Name|Student,Address line1|Student,Address line2|Student,City|Student,State|Student,Pin code|Student,Country Name|Student,Phone1|Student,Mobile|Student,Email|Student,SMS Enabled|Student,Has paid fees|Student,EMail Enabled|Student,Has paid fees for batch|Student,Biometric ID|Student,
+2017-21223,1/3/2017,Absar,Ahmed,,08 - 08-A 2017-18,7/23/2010,m,,sarghoda ,Pakistan,,islam ,JCO,Qtr no8/5 Urak Road Queta,,Quetta ,Balouchistan ,,Pakistan ,,,,TRUE,,TRUE,,,38403-2122652-5
+2017-21099,1/3/2017,Zainab,Ghaffar,,08 - 08-A 2017-18,5/18/2011,f,,lahore,Pakistan,,islam ,C,Civil Hospital Jinnha Road Nursing Hostel Block,,Quetta ,Balouchistan ,,Pakistan ,,,,TRUE,,TRUE,,,35202-2874222-1
+2017-21189,1/3/2017,Baryal,Khan,,08 - 08-A 2017-18,10/8/2011,m,,quetta,Pakistan,pashto,islam ,C,11/B Chiltan Housing Scheme Airpot Road,,Quetta ,Balouchistan ,,Pakistan ,,,,TRUE,,TRUE,,,54400-0542073-1
+2017-21346,5/18/2017,Hamdan,ahmed,,08 - 08-A 2017-18,3/10/2010,m,O+,quetta,Pakistan,,islam ,C,Khudaid road kasi killa,,Quetta ,Balouchistan ,,Pakistan ,,,,TRUE,,TRUE,,,54400-6978830-1
+2017-21353,9/6/2017,Maheen,shafqat,,08 - 08-A 2017-18,8/6/2011,f,A+,,Pakistan,,islam ,S,H no 34 street 3 c & sc ,,Quetta ,Balouchistan ,,Pakistan ,,,,TRUE,,TRUE,,,37405-8197676-3
+2015-20204,3/3/2015,Humais,Mubashir,,08 - 08-A 2017-18,8/6/2010,m,,karachi,Pakistan,,islam ,JCO,Bilgrami Line 12/1 Jco Qtr C&SC,,Quetta ,Balouchistan ,,Pakistan ,,,,TRUE,,TRUE,,,35301-6613499- 2
+2015-20269,3/3/2015,Qamar,Muhammad,,08 - 08-A 2017-18,2/28/2011,m,,lahore,Pakistan,,islam ,B,SIET,,Quetta ,Balouchistan ,,Pakistan ,,,,TRUE,,TRUE,,,35200-3743320-5
+2015-20507,8/20/2015,Muhammad,Aaraiz,,08 - 08-A 2017-18,4/17/2011,m,,rawalpindi ,Pakistan,,islam ,B,H #D-1 Tufail Road,,Quetta ,Balouchistan ,,Pakistan ,,,,TRUE,,TRUE,,,32304-9192178- 5
+2017-21343,5/18/2017,Hasan,shah,,08 - 08-A 2017-18,7/21/2009,m,,,Pakistan,,islam ,C,Cantonment hospital 14 aziz Bhatti road ,,Quetta ,Balouchistan ,,Pakistan ,,,,TRUE,,TRUE,,,54400-9559709-1
+2016-20905,2/27/2016,Ibrahim,,,08 - 08-A 2017-18,12/14/2009,m,,okara ,Pakistan,,islam ,B, Gso1 14 sohail road c &sc ,,Quetta ,Balouchistan ,,Pakistan ,,,,TRUE,,TRUE,,,35302-2045888-3
+2017-21092,1/3/2017,Areeba,Asghar,,08 - 08-A 2017-18,7/25/2011,f,,quetta ,Pakistan,punjabi ,islam ,JCO,H#282/1 Urak road C&SC,,Quetta ,Balouchistan ,,Pakistan ,,,,TRUE,,TRUE,,,33104-2109239-7
+2017-02902,10/7/2017,Warda,waqas,,08 - 08-A 2017-18,9/25/2010,f,B+,rawalpindi ,Pakistan,,islam ,S,4/1 SSC near pani taqseem chowk,,Quetta ,Balouchistan ,,Pakistan ,,,,TRUE,,TRUE,,,37406-2354371-9
+2017-02904,7/7/2017,Zainab,noman,,08 - 08-A 2017-18,1/21/2011,f,A+,kharian ,Pakistan,,islam ,S,187 SSC rd qta ,,Quetta ,Balouchistan ,,Pakistan ,,,,TRUE,,TRUE,,,35202-3090703-3
+2017-02905,8/7/2017,Moh,uzair,,08 - 08-A 2017-18,4/22/2011,m,,rawalpindi ,Pakistan,,islam ,S,H no H 4 khalid Nawaz blk ,,Quetta ,Balouchistan ,,Pakistan ,,,,TRUE,,TRUE,,,36302-7980184-9
+2017-02923,10/7/2017,Maryam,niaz,,08 - 08-A 2017-18,1/1/2011,f,A+,Abbottabad,Pakistan,,islam ,S,F no E 1 awaan line ,,Quetta ,Balouchistan ,,Pakistan ,,,,TRUE,,TRUE,,,13101-6662162-9
+2017-02917,10/7/2017,Momina,zaib,,08 - 08-A 2017-18,2/11/2010,f,,rawalpindi,Pakistan,,islam ,S,F no A 2 khalid Nawaz blk ,,Quetta ,Balouchistan ,,Pakistan ,,,,TRUE,,TRUE,,,37405-0580201-1
+2017-02903,7/7/2017,Mohammad,Hamza,,08 - 08-A 2017-18,1/16/2011,m,,sialkot,Pakistan,,islam ,S,C 3 khalid Rabbani blk ,,Quetta ,Balouchistan ,,Pakistan ,,,,TRUE,,TRUE,,,51404-6788088-3
+2017-02899,7/7/2017,Abdul,nafy,,08 - 08-A 2017-18,11/1/2011,m,,Abbottabad,Pakistan,,islam ,S,F no E 2 khalid Rabbani  ,,Quetta ,Balouchistan ,,Pakistan ,,,,TRUE,,TRUE,,,13101-0884404-5
+2017-02916,7/13/2017,Roman,ahed,,08 - 08-A 2017-18,5/10/2011,f,B+,kohat,Pakistan,,islam ,S,H no 288 anwar rd C&SC ,,Quetta ,Balouchistan ,,Pakistan ,,,,TRUE,,TRUE,,,35202-2819743-9
+2017-02901,10/7/2017,Syeda,areej,,08 - 08-A 2017-18,4/14/2011,f,,karachi ,Pakistan,,islam ,S,I 4 khalid Nawaz blk ,,Quetta ,Balouchistan ,,Pakistan ,,,,TRUE,,TRUE,,,42301-7265800-3
+2017-21377,7/17/2017,Noor,u,lain,08 - 08-A 2017-18,7/9/2011,f,,,Pakistan,,islam ,C,H no chiltan market qta ,,Quetta ,Balouchistan ,,Pakistan ,,,,TRUE,,TRUE,,,54400-8996547-5
+2017-02961,7/14/2017,Ayesha,waqas,,08 - 08-A 2017-18,4/30/2011,f,,rawalpindi ,Pakistan,,islam ,S,H no 140 c abbasi blk c&sc ,,Quetta ,Balouchistan ,,Pakistan ,,,,TRUE,,TRUE,,,37405-2211937-9
+2016-20999,8/16/2016,Ayesha,hussain,,08 - 08-A 2017-18,2/11/2010,f,,khushab ,Pakistan,,islam ,A,h no 74  steet no 5 staff college ,,Quetta ,Balouchistan ,,Pakistan ,,,,TRUE,,TRUE,,,38201-3576980-1
+2016-02605,7/20/2016,WASHMA,,,08 - 08-A 2017-18,4/20/2011,f,A+,,Pakistan,,islam ,A,h no 11 new durrani rd qta ,,Quetta ,Balouchistan ,,Pakistan ,,,,TRUE,,TRUE,,,17201-2306710-5
+2016-02606,7/20/2016,AMNA,,,08 - 08-A 2017-18,3/22/2011,f,,,Pakistan,,islam ,A,H 44 STREET 3 C AND S C ,,Quetta ,Balouchistan ,,Pakistan ,,,,TRUE,,TRUE,,,35201-1678567-9
+2016-02634,7/20/2016,MUHAMMAD,MUSTAFA,ALI,08 - 08-A 2017-18,6/16/2010,m,,,Pakistan,,islam ,DS/PS,HOUSE NO 14 SAHIB ZAD GUL ROAD ,,Quetta ,Balouchistan ,,Pakistan ,,,,TRUE,,TRUE,,,35200-9577066-3
+2017-02900,10/7/2017,Fatima,abbasi,,08 - 08-A 2017-18,2/17/2010,f,O+,sukkur,Pakistan,,islam ,S,176 -A rd -5 DOHS phase 1,,Quetta ,Balouchistan ,,Pakistan ,,,,TRUE,,TRUE,,,45202-6377017-7
+2015-20553,9/16/2015,IBRAHIM,,,08 - 08-A 2017-18,12/15/2010,m,,muree,Pakistan,,islam ,S, EME RECORDS QUETTA,,Quetta ,Balouchistan ,,Pakistan ,,,,TRUE,,TRUE,,,13301-8555539-5
+2015-20583,2/11/2015,WANIA,,,08 - 08-A 2017-18,7/6/2012,f,,rawalpindi,Pakistan,,islam ,A,MOQ 2/2 U BLOCK EME OFFRS,,Quetta ,Balouchistan ,,Pakistan ,,,,TRUE,,TRUE,,,37406-5799629-4

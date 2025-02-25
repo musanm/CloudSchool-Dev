@@ -1,0 +1,25 @@
+<% if @entries.present? %>
+  <table class="table table-striped table-bordered table-condensed">
+    <% @entries.each do |t| %>
+      <tr>
+        <td>
+          <% timing=t.class_timing %>
+          <label class="name"><%= timing.start_time.strftime("%I:%M%p") unless timing.start_time.nil? %>-<%= timing.end_time.strftime("%I:%M%p") unless timing.end_time.nil? %></label>
+          <label class="event">
+            <% unless t.subject.elective_group_id.nil?
+              subject=@student.elective_subjects.find_by_elective_group(t.subject.elective_group)
+            else
+              subject=t.subject
+            end%>
+            <%= subject.name unless subject.nil?%>
+          </label>
+          <label class="description"><%= subject.employees.map{|s| s.first_name.capitalize}.join(", ") unless subject.nil? %></label>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  <div class="alert">
+    <%= t('no_entries_found') %>
+  </div>
+<% end %>

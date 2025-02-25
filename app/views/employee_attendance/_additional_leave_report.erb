@@ -1,0 +1,46 @@
+<% unless @additional_leave_history.empty? %>
+  <table id="listing" align="center" width="100%" cellpadding="1" cellspacing="1">
+    <% unless @employees.blank? or @leave_types.blank? %>
+      <tr class= "tr-head">
+        <td rowspan=2><%= t('name')%></td>
+        <td rowspan= 2><%= t('employee_number') %></td>
+        <td colspan = "<%= @leave_types.count + 1 %>"><%= "#{Date::MONTHNAMES[@month.to_i]}" "&nbsp" "#{@year}"%></td>
+      </tr>
+
+      <tr class= "tr-head">
+        <% @leave_types.each do |lt| %>
+          <td><%= lt %></td>
+        <% end %>
+        <td><%= t('total') %>&nbsp;&nbsp;</td>
+      </tr>
+      <tr class="tr-blank"></tr>
+      <% @additional_leave_history.each do |key,value| %>
+        <tr class="tr-<%= cycle('odd', 'even') %>">
+          <td class="col-4"><%= link_to "#{value[0]}", :controller =>"employee_attendance", :action=> "additional_leave_detailed", :id=> key , :year => @year , :month => @month %></td>
+          <td class="col-5"><%= value[1]%></td>
+          <% if value.length == 3 %>
+            <td class= "col-5" colspan = "<%= @leave_types.count + 1 %>"><%= value[2]%></td>
+          <% else %>
+            <% i = 2 %>
+            <% while i < value.length %>
+              <td class = "col-5"><%= value[i]%></td>
+              <% i+=1 %>
+            <% end %>
+          <% end %>
+        </tr>
+      <% end %>
+  </table>
+
+  <div class ="extender"></div>
+  <div class="link">
+    <% if params[:employee_department][:department_id].present? %>
+      <%= link_to "►#{t('pdf_report')}" , {:action => "additional_leave_report_pdf", :controller => "employee_attendance", :page_height => 920, :department=> params[:employee_department][:department_id],:month => @month,:year => @year }, :target => '_blank',:class => 'user_button'  %>
+    <% end %>
+  </div>
+  <% end %>
+<% else %>
+  <p class="flash-msg"><%= "No reports" %></p>
+<% end %>
+
+
+

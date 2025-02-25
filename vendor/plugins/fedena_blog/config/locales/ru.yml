@@ -1,0 +1,105 @@
+ru:
+  activerecord:
+    attributes:
+      applicant:
+        first_name: "Имя"
+        date_of_birth: "Дата рождения"
+  date:
+    formats:
+      default: "%e-%m-%Y"
+      normal: "%B %e, %Y"
+      short: "%e. %b"
+      month_year: "%B %Y"
+      long: "%A, %e %B, %Y"
+      only_day: "%e"
+      month: "%B"
+      day: "%a"
+      mont: "%d"
+      day_mon: "%a %d"
+    day_names: [Воскресенье, Понедельник, Вторник, Среда, Четверг, Пятница, Суббота]
+    abbr_day_names: [Вск, Пнд, Втр, Срд, Чтв, Птн, Сбт]
+    month_names: [~, Январь, Февраль, Март, Апрель, Май, Июнь, Июль, Август, Сентябрь,
+      Октябрь, Ноябрь, Декабрь]
+    abbr_month_names: [~, Янв, Фев, Мар, Апр, Май, Июн, Июл, Авг, Сен, Окт, Ноя,
+      Дек]
+    order: [ :день, :месяц, :год ?]
+  time:
+    formats:
+      default: "%A, %d. %B %Y, %H:%M Uhr"
+      short: "%d. %B, %H:%M Uhr"
+      long: "%A, %d. %B %Y, %H:%M Uhr"
+      time: "%H:%M"
+    am: AM/ДП
+    pm: PM/ПП
+  blog_admin_privilege: "Администратор блога"
+  blog_comments:
+    delete_comment_confirmation: "Вы уверены, что хотите удалить этот комментарий?"
+    deleted_user: "Удаленный пользователь"
+    flash_admin: "Администратор не может участвовать в ведении блогов."
+    comment_deleted: "Comment successfully deleted."
+    comment_created: "Comment successfully created."
+  blog_posts:
+    edit: "Редактировать"
+    activate: "Активировать"
+    ban_blog_post: "Сообщение в блоге успешно заблокировано"
+    ban_post: "Запретить сообщение"
+    blog_post_deleted_successfully: "Сообщение успешно удалено"
+    blogs_text: "Блог"
+    comments: "Комментарии"
+    create_post: "Создать сообщение"
+    deactivate: "Деактивировать"
+    delete_post: "Вы уверены, что хотите удалить это сообщение?"
+    deleted_blog: "Удаленный блог"
+    deleted_user: "Удаленный пользователь"
+    edit_blog: "Редактировать блог"
+    favourites: "Избранные"
+    flash2: "Ваше сообщение в блоге было успешно сохранено."
+    flash3: "Ваше сообщение в блоге было успешно опубликовано."
+    flash_admin: "Администратор не может участвовать в блогах."
+    flash_edit: "Ваше сообщение было успешно изменено"
+    flash_no_blog: "Для этого пользователя не найдено ни одного блога"
+    flash_no_user: "Пользователь не найден"
+    flash_not_available: "В настоящее время это содержимое недоступно"
+    home: "Главная"
+    latest_posts: "Последние"
+    my_blog: "Мой блог"
+    new_post: "+ Новое сообщение"
+    next_page: "Следующая страница >"
+    no_blog_found: "Ни одного блога не найдено"
+    no_blog_posts: "В блоге нет сообщений"
+    no_post: "Отсутствуют опубликованные вами блоги."
+    not_authorized: "У вас нет прав для просмотра данного содержимого"
+    notifications: "События"
+    on_text: "на"
+    popular_posts: "Популярные"
+    posted_by: "Опубликовано"
+    posts: "Сообщения"
+    prev_page: "< Предыдущая страница"
+    publish: "Опубликовать"
+    published_successfully: "Опубликовано успешно"
+    save_as_draft: "Сохранить в качестве черновика"
+    search: "Поиск"
+    search_blogs: "Поиск по блогам"
+    unban_blog_post: "Сообщение в блоге успешно разблокировано"
+    unpublish: "Отменить публикацию"
+    unpublished_successfully: "Публикация успешно отменена"
+  blog_text: "Блог"
+  blogs:
+    edit: "Редактировать"
+    activities: "События"
+    blog_activated: "Блог пользователя успешно активирован"
+    blog_deactivated: "Блог пользователя успешно деактивирован"
+    blogs_text: "Блог"
+    commented: " прокомментировал ваше сообщение"
+    deleted_user: "Удаленный пользователь"
+    flash1: "Пожалуйста, сначала создайте личный блог"
+    flash_admin: "Администратор не может участвовать в блогах."
+    flash_update: "Блог был успешно обновлен"
+    my_blog: "Мой блог"
+    no_notification: "Не найдено недавних событий"
+    notifications: "События"
+    on_text: " на"
+    register: "Регистрация"
+    search: "Поиск"
+  manage_blog: "Опубликовать блог и просмотреть блоги других пользователей"
+  blog_activity_present: "Has blog related activities"

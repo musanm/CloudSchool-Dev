@@ -1,0 +1,18 @@
+--- 
+vi: 
+  attendance_reports: 
+    no_subjects_to_show: "Không có môn nào"
+  attendances: 
+    attendance_marked_for: "Đánh dấu có mặt cho"
+    class_timings_empty: "Thời gian của các tiết học chưa được chọn."
+    mark_absent: "Đánh dấu là vắng"
+    no_subjects_to_show: "Không có môn nào"
+    no_tte_entries: "Không có thời khóa biểu cho ngày đã chọn"
+  calendar: 
+    no_events: "Không có sự kiện"
+    show_more_entries: "Hiện thêm"
+  reminder: 
+    no_reminders: "Không có thông báo nhắc nhở"
+    show_more_entries: "Hiện thêm"
+  timetable: 
+    select_weekday: "Chọn một ngày trong tuần"

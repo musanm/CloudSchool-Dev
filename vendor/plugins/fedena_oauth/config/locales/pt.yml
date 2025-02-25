@@ -1,0 +1,10 @@
+pt:
+  oauth:
+    account: account
+    could_not_authenticate_with: 'Desculpe, não foi possível autenticar usando '
+    enter_user_email: Entre seu email
+    login_with_google: Entre usando seu
+    no_user_with_email: 'Não tem usuário com email '
+    select_user: Selecione Usuário
+  manage_clients: Gerenciar Clientes
+  enable_oauth: Permitir Oauth

@@ -1,0 +1,7 @@
+<ul class="nav nav-tabs nav-stacked nav-footer">
+  <% unless @next_date.blank? %>
+    <li>
+      <%= link_to_remote t("show_more_entries"),:url=>{:action=>"mobile_events_load",:date=>@next_date.to_s},:class=>"btn btn-danger" %>
+    </li>
+  <% end %>
+</ul>

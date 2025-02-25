@@ -1,0 +1,182 @@
+<%  if params["is_batch"] == "true" %>
+  <% students = @batch.students %>
+<% else %>
+  <% students = [@student] %>
+<% end  %>
+
+<% students.each_with_index do |student,ss| %>
+  <div style="min-height: 1077px;">
+    <table>
+      <tr>
+        <td  colspan="8" class="n-b heading">
+          End-Year Examination, 2018-19
+        </td>
+      </tr>
+      <tr>
+        <td colspan="8" class="n-b heading" style="padding-">
+          Result Card
+        </td>
+      </tr>
+
+      <tr>
+        <td class="n-b padding-left88 head-color">Student Name : <%= student.full_name %></td>
+        <td class="center n-b head-color" colspan="7">Class: 8th</td>
+      </tr>
+
+      <tr>
+        <td class="n-b padding-left88 head-color">Class Teacher : <%= @batch.employees.first.full_name rescue nil %></td>
+        <td class="center head-color n-b-right" colspan="7">Attendance: <%= @leaves[student.id]['total'].to_i rescue nil %>/<%= @batch.academic_days.count %></td>
+      </tr>
+
+      <tr>
+        <% @batch.term_exams.each_with_index do |term_exam,i| %>
+          <%# term_exam.exam_groups.each do |exam_group| %>
+            <td class="n-b-left n-b-bottom"></td>
+            <td class="center term" colspan="<%= (term_exam.exam_groups.count*3) + 1 %>"><%= term_exam.name %></td>
+          <%# end %>
+        <% end %>
+      </tr>
+
+      <tr>
+        <% @batch.term_exams.each_with_index do |term_exam,i| %>
+          <% term_exam.exam_groups.each do |exam_group| %>
+            <td class="n-b-left n-b-bottom"></td>
+            <td class="center term" colspan="3"><%= exam_group.name %></td>
+          <% end %>
+        <% end %>
+      </tr>
+
+      <tr>
+        <td class="n-b-left n-b-top"></td>
+        <% @batch.term_exams.each_with_index do |term_exam,i| %>
+          <% term_exam.exam_groups.each_with_index do |exam_group, j| %>
+            <td class="center term">Total</td>
+            <td class="center term">Obt</td>
+            <td class="center term">Grade</td>
+            <% unless term_exam.exam_groups.count == j+1 %>
+              <td class="n-b-top"></td>
+            <% end %>
+          <% end %>
+        <% end %>
+      </tr>
+
+      <% @subjects.each_with_index do |subject, ii| %>
+        <tr>
+          <td class="subject n-b-bottom head-color term"><%= subject.name %></td>
+          <% @batch.term_exams.each_with_index do |term_exam,i| %>
+            <% term_exam.exam_groups.each_with_index do |exam_group, j| %>
+              
+              <% @exam = Exam.find_by_subject_id_and_exam_group_id(subject.id,exam_group.id) %>
+              <% exam_score = ExamScore.find_by_student_id(student.id, :conditions=>{:exam_id=>@exam.id})unless @exam.nil? %>
+
+                <% if exam_group.exam_type == "MarksAndGrades" %>
+                  <%#= exam_score.nil? ? '-' :  "#{(exam_score.marks || "Ab")}" +"/"+@exam.maximum_marks.to_s+"[#{(exam_score.grading_level || "---")}]" %>
+                  <td class="center"><%= @exam.maximum_marks.to_s %></td>
+                  <td class="center "><%= "#{(exam_score.try(:marks) || "Ab")}" %></td>
+                  <td class="center"><%= "#{(exam_score.try(:grading_level) || "---")}" %></td>
+                <% elsif exam_group.exam_type == "Marks" %>
+                  <%= exam_score.nil? ? '-' : "#{exam_score.try(:marks) || "-"}/"+@exam.maximum_marks.to_s %>
+                  <td class="center"><%= exam_score.nil? ? '-' : @exam.maximum_marks.to_s %></td>
+                  <td class="center "><%= exam_score.nil? ? '-' : "#{exam_score.marks || "-"}/" %></td>
+                  <td class="center"></td>
+                <% else %>
+                  <td class="center "></td>
+                  <td class="center"></td>
+                  <td class="center">
+                    <%= exam_score.nil? ? '-' : (exam_score.grading_level || '-')  %>
+                  </td>
+                <% end %>
+                <% unless term_exam.exam_groups.count == j+1 %>
+                  <td class="n-b-bottom"></td>
+                <% end %>
+              <% end %>
+          <% end %>
+        </tr>
+        <tr>
+          <td colspan="8" class="description">
+            <% term_exam = @batch.term_exams.last rescue nil %>
+            <% exam_group = term_exam.exam_groups.last rescue nil %>
+            <% @exam = Exam.find_by_subject_id_and_exam_group_id(subject.id,exam_group.id) rescue nil %>
+            <% exam_score = ExamScore.find_by_student_id(student.id, :conditions=>{:exam_id=>@exam.id}) rescue nil %>
+            <%= exam_score.try(:remarks).present? ? exam_score.try(:remarks) : "-" %>
+          </td>
+        </tr>
+        <% unless @subjects.count == ii+1 %>
+          <tr>
+            <td  class="n-b-left n-b-right" style="color: white;" colspan="8" class>
+              .
+            </td>
+          </tr>
+        <% end %>
+      <% end %>
+    </table>
+  </div>
+<% end %>
+<style type="text/css">
+  table{
+    width: 100%;
+    /*width:1250px;*/
+    border-collapse: collapse;
+  }
+  
+  table, th, td {
+    border: 1px solid #ADACAB;
+  }
+
+  .subject{
+    width: 60%;
+    padding: 4px 0 4px 6px !important;
+  }
+
+  .description{
+    padding: 0 0 10px 12px !important; 
+    font-size: 15px;
+  }
+
+  .center{
+    text-align: center;
+  }
+
+  .n-b{
+    border: 1px solid white;
+  }
+
+  .n-b-bottom{
+    border-bottom: 1px solid white;
+  }
+  
+  .n-b-left{
+    border-left: 1px solid white;
+  }
+
+  .n-b-right{
+    border-right: 1px solid white;
+  }
+
+  .n-b-top{
+    border-top: 1px solid white;
+  }
+  .padding-left88{
+    padding-left: 88px !important;
+  }
+
+  .head-color{
+     color: #A93219;
+     font-weight: bold;
+     padding: 0px 0 13px 0;
+     font-size: 15px;
+  }
+
+  .term{
+    color: #A93219;
+    font-weight: bold;
+    font-size: 15px;
+  }
+
+  .heading{
+    color: #A93219;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+  }
+</style>

@@ -1,0 +1,32 @@
+No.,Name,Employee ID,Joining date,Department,Position,Manager,Gender
+1,Abida  Parveen,E2015-50,05/03/2015 , Faculty,Teacher, ,F
+2,Admin  User,admin,15/02/2016 ,System Admin,System Admin, ,M
+3,Aftab Hussain Satti  ,E2017-90,06/08/2017 ,Janitorial Staff ,Guard,Saba Yasin,M
+4,Amna  Shamshad,E2017-79,06/03/2017 , Faculty,Teacher,Saba Yasin,F
+5,Anam  Zakria,E2017-89,28/08/2017 , Faculty,Teacher,Saba Yasin,F
+6,Anila  Sajid,E2012-05,13/07/2012 , Faculty,Teacher, ,F
+7,Asifa  Muzammil,E2015-57,01/09/2015 , Faculty,Teacher, ,F
+8,Beenish  Rehman,E2016-68,15/08/2016 , Faculty,Teacher,Saba Yasin,F
+9,Bilal  Qaisar,E2017-91,21/08/2017 ,Janitorial Staff ,Gardener,Saba Yasin,M
+10,Faiza  Obaid,E2016-01,01/05/2016 ,School Administration,Director, ,F
+11,Fariha   Jaffery,E2017-93,25/08/2017 , Faculty,Teacher,Saba Yasin,F
+12,Fatima  Mustafa,E2015-47,19/01/2016 , Faculty,Teacher,Saba Yasin,F
+13,Hina  Kanwal,E2016-65,02/05/2016 , Faculty,Teacher,Saba Yasin,F
+14,Hina  Sajid,E2016-04,01/05/2016 ,School Administration,Director, ,F
+15,Irsa   Mushtaq,E2017-87,23/08/2017 , Faculty,Teacher,Saba Yasin,F
+16,Kiran  Zahra,E2016-70,22/08/2016 , Faculty,Teacher,Saba Yasin,F
+17,Kulsoom  Naz,E2014-33,17/11/2014 , Faculty,Teacher, ,F
+18,Mehwish  Noureen,E2015-54,16/04/2015 , Faculty,Teacher, ,F
+19,Nashia   Matloob,E2017-94,14/09/2017 , Faculty,Teacher,Saba Yasin,F
+20,Natasha   Bibi,E2017-88,23/08/2017 , Faculty,Teacher,Saba Yasin,F
+21,Nazia  Bibi,E2017-92,07/09/2017 , Faculty,Teacher,Saba Yasin,F
+22,Noshaba   Butt,E2017-85,11/05/2017 , Faculty,Teacher,Saba Yasin,F
+23,Saba  Faisal,E2016-62,21/03/2016 , Faculty,Teacher, ,F
+24,Saba  Yasin,E2014-40,01/09/2014 ,School Administration,Principal, ,F
+25,Saira   Khurrum,E2016-02,01/05/2016 ,School Administration,Director, ,F
+26,Samina  BibI,E2017-95,01/08/2017 , Faculty,Teacher,Saba Yasin,F
+27,Shagufta  Bibi,E2013-03,22/01/2013 ,Janitorial Staff ,Maid,Saba Faisal,F
+28,Sumbal  Rizwan,E2017-86,16/08/2017 ,School Administration,Admin Officer,Saba Yasin,F
+29,Suvaira  Ilyas,E2016-69,19/08/2016 ,School Administration,Accounts Manager,Saba Yasin,F
+30,Syeda Hina  Gardezi,E2014-34,01/02/2014 , Faculty,Teacher, ,F
+31,Uzma  Noureen,E2015-58,01/10/2015 , Faculty,Teacher, ,F

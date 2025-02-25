@@ -1,0 +1,68 @@
+
+
+<div id="content-header">
+  <%= show_header_icon %>
+  <h1><%= t('blogs_text') %></h1>
+  <div class='header-sep'>|</div>
+  <div class='sub-header'><%= @blog_post.blog.nil? ? t('deleted_blog') : @blog_post.blog.user.nil? ? t('deleted_user') : @blog_post.blog.user.full_name %></div>
+  <div id="inner-tab-menu">
+    <ul>
+      <li class='themed_bg themed-dark-hover-background'><%= link_to t('my_blog'),my_blog_path %></li>
+      <li class='themed_bg themed-dark-hover-background'><%= link_to t('home'),blog_blog_posts_path(@current_user.id) %></li>
+      <% unless @blog_post.blog.nil? %>
+        <% if @blog_post.blog.user == @current_user  %>
+          <% unless @blog_post.blog.user.nil? %>
+            <li class='themed_bg themed-dark-hover-background'><%= link_to t('edit'),edit_blog_blog_post_path(@blog_post.blog.user_id,@blog_post) %></li>
+          <% end %>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+</div>
+<div id="page-yield">
+  <div class="bread_crumb">
+    <%unless @blog_post.blog.user.blank?%>
+      <% if @current_user == @blog_post.blog.user %>
+        <% breadcrumb :blog_posts_my_show, [@blog_post,@blog_post.blog.user_id]%>
+      <% else %>
+        <% breadcrumb :blog_posts_show1, [@blog_post,@blog_post.blog.user_id]%>
+      <% end %>
+    <%else%>
+      <%=make_breadcrumb%>
+    <%end%>
+    <%= render_breadcrumbs  %>
+  </div>
+  <div id="flash-msg1"></div>
+  <div id="flash-msg">
+    <% unless flash[:notice].nil? %>
+      <p class="flash-msg"> <%= flash[:notice] %> </p>
+    <% end %>
+  </div>
+  <div class="upper-section">
+    <div class="title">
+      <div class="title_content themed_text"><%= @blog_post.title %></div>
+      <% unless @current_user.admin? %>
+        <div class="favourite_bar">
+          <div id="favourite_details">
+            <%= render :partial => "favourite_details" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="blog_details">
+      <span><%= "#{t('posted_by')}"%><b class="themed_text"><%=" #{@blog_post.blog.nil? ? t('deleted_blog') : @blog_post.blog.user.nil? ? t('deleted_user') : (link_to @blog_post.blog.user.full_name,blog_directory_path(@blog_post.blog.user_id),:class=>"themed_text")}" %>&nbsp;</b><%= "#{t('on_text')} #{@blog_post.created_at.strftime("%A,%B" + " #{@blog_post.created_at.to_date.day.ordinalize} " + "%Y")}" %></span>
+    </div>
+  </div>
+  <div class="blog_content">
+<%#= sanitize @blog_post.body , :tags => %w[b i a h1 h2 h3 u li ol strike p img font span sup sub tr td table th tbody thead], :attributes => %w[href src style border cellspacing cellpadding]%>
+    <%= @blog_post.body %>
+  </div>
+
+  <div class="extender"></div>
+
+  <div class="comments_area" id="comments_area">
+    <%= render :partial => "blog_comments/comments" %>
+  </div>
+
+
+</div>

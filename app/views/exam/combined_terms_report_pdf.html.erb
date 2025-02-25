@@ -1,0 +1,392 @@
+<%-# Fedena
+#Copyright 2010 Foradian Technologies Private Limited
+#
+#This product includes software developed at
+#Project Fedena - http://www.projectfedena.org/
+#
+#Licensed under the Apache License, Version 2.0 (the "License");
+#you may not use this file except in compliance with the License.
+#You may obtain a copy of the License at
+#
+#  http://www.apache.org/licenses/LICENSE-2.0
+#
+#Unless required by applicable law or agreed to in writing,
+#software distributed under the License is distributed on an
+#"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#KIND, either express or implied.  See the License for the
+#specific language governing permissions and limitations
+#under the License. -%>
+
+<%# @batch = Batch.find 34 %>
+
+<div id="" style="margin-left: 50px;" width="800px" >
+
+  <!-- <div class="hor_line"></div> -->
+  <!-- <h2><%#= "Grouped Exam Report for Batch : "+@data_hash[:batch].full_name %></h2> -->
+  <!-- <div class="hor_line"></div> -->
+  
+  <% grade_type = @data_hash[:grade_type] %>
+  <% @data_hash[:students].each_with_index do |student,i| %>
+    <% general_subjects = Subject.find_all_by_batch_id(@data_hash[:batch].id, :conditions=>"elective_group_id IS NULL and is_deleted=false") %>
+    <% student_electives = StudentsSubject.find_all_by_student_id(student.id,:conditions=>"batch_id = #{@data_hash[:batch].id}") %>
+    <% elective_subjects = [] %>
+    <% student_electives.each do |elect| %>
+      <% elective_subjects.push Subject.find_by_id(elect.subject_id,:conditions => {:is_deleted => false}) %>
+    <% end %>
+    <% @subjects = general_subjects + elective_subjects %>
+    <% @subjects = @subjects.compact.flatten %>
+    <% #@subjects.reject!{|s| s.no_exams==true} %>
+    <%# exams = Exam.find_all_by_exam_group_id(@data_hash[:exam_groups].collect(&:id)) %>
+    <%# subject_ids = exams.collect(&:subject_id) %>
+    <%# @subjects.reject!{|sub| !(subject_ids.include?(sub.id))} %>
+    <% @exam_groups = @batch.term_exams.map(&:exam_groups).flatten %>
+    <% @subjects.reject!{|s| (s.exam_not_created(@exam_groups.collect(&:id)))} %>
+    <!-- <div class="extender"> </div> -->
+    <div style="height: 810px;width: 1190px;">
+      <div>
+        <div>
+          <br>
+          <div align="left" >
+            <table width="45%" cellspacing="0">
+              <tr>
+                <td class="no-border" style="text-align: center;">Student Name</td>
+                <td style="border: 1px solid #ADACAB; text-align: center;"><b><%= student.full_name %></b></td>
+              </tr>
+              <tr><td class="no-border">.</td><td class="no-border"></td></tr>
+              <tr>
+                <td class="no-border" style="text-align: center;">Admission Number</td>
+                <td style="border: 1px solid #ADACAB; text-align: center;"><b><%= student.admission_no %></b></td>
+              </tr>
+            </table>
+          </div>
+          <div align="right" style="margin-top: -75px;">
+            <table   style="margin-right: 60px;"  width="45%" cellspacing="0">
+              <tr>
+                <td class="no-border" style="text-align: center;">Guardian Name</td>
+                <td style="border: 1px solid #ADACAB; text-align: center;"><b><%= student.guardians.present? ? student.guardians.first.full_name : "No Guardian Present" %></b></td>
+              </tr>
+              <tr><td class="no-border">.</td><td class="no-border"></td></tr>
+              <tr>
+                <td class="no-border" style="text-align: center;">Class</td>
+                <td style="border: 1px solid #ADACAB; text-align: center;"><b><%= @batch.full_name %></b></td> 
+              </tr>
+            </table>
+          </div>
+        </div>
+        <br>
+      </div>
+
+      <div class="report">
+        <table id="pdf-table" width="100%" cellspacing="0" border="1">
+          <tr class="table-header">
+            <td>Term</td>
+            <td>Exam</td>
+            <% @subjects.each do |subject| %>
+              <td style="text-align: center;"><%= subject.name %></td>
+            <% end %>
+            <td>Percentage</td>
+          </tr>
+          <% j = 0 %>
+          <% c ='even' %>
+          <% @batch.term_exams.each_with_index do |term_exam,i| %>
+            <% term_exam.exam_groups.each do |exam_group| %>
+              <tr class="<%= cycle(c,(["odd","even"]-[c]).first) %>">
+                <% if i == j %>
+                  <td rowspan=<%=term_exam.exam_groups.count%> ><b><%= term_exam.name %></b></td>
+                  <% j += 1%>
+                <% end %>
+                <td><b><%= exam_group.name %></b></td>
+                <% @subjects.each do |subject| %>
+                  <% if grade_type=="GPA" or grade_type=="CWA" %>
+                    <td class="col-3"><%= subject.credit_hours.present? ? subject.credit_hours : "-" %></td>
+                  <% end %>
+
+                    <% @exam = Exam.find_by_subject_id_and_exam_group_id(subject.id,exam_group.id) %>
+                    <% exam_score = ExamScore.find_by_student_id(student.id, :conditions=>{:exam_id=>@exam.id})unless @exam.nil? %>
+                    <td class="col-3">
+                      <% if grade_type=="GPA" %>
+                        <%= exam_score.present? ? "#{exam_score.grading_level || "-"}"+" ["+"#{exam_score.grading_level.present? ? (exam_score.grading_level.credit_points || "-") : "-"}"+"]" : "-" %>
+                      <% elsif grade_type=="CWA" %>
+                        <%=valid_mark?(@exam.maximum_marks)? exam_score.present? ? "#{exam_score.marks.present? ? ("%.2f" %((exam_score.marks.to_f/@exam.maximum_marks.to_f)*100)) : "-"}"+" ["+"#{exam_score.grading_level.present? ? exam_score.grading_level : "-"}"+"]" : "-" : "-"%>
+                      <% else %>
+                        <% if exam_group.exam_type == "MarksAndGrades" %>
+                          <%= exam_score.nil? ? '-' :  "#{(exam_score.marks || "Ab")}" +"/"+@exam.maximum_marks.to_s+"[#{(exam_score.grading_level || "---")}]" %>
+                        <% elsif exam_group.exam_type == "Marks" %>
+                          <%= exam_score.nil? ? '-' : "#{exam_score.marks || "-"}/"+@exam.maximum_marks.to_s %>
+                        <% else %>
+                          <%= exam_score.nil? ? '-' : (exam_score.grading_level || '-')  %>
+                        <% end %>
+                      <% end %>
+                    </td>
+                  <% if (@current_user.student? or @current_user.parent?) and @result_published==false %>
+                    <td class="col-3">-</td>
+                  <% else %>
+                    <% subject_average = GroupedExamReport.find_by_student_id_and_subject_id_and_score_type(student.id,subject.id,"s") %>
+                  <% end %>
+                <% end %>
+                <% exam_total = GroupedExamReport.find_by_student_id_and_exam_group_id_and_score_type(student.id,exam_group.id,"e") %>
+                <td style="text-align: center;"><b><%= exam_total.present? ? exam_total.marks : "-" %></b></td>
+              </tr>
+            <% end %>
+          <% end %>
+          <tr class="tr-blank"></tr>
+          <tr class="<%#= cycle(c,(["odd","even"]-[c]).first) %>">
+            <td></td>
+            <td><b><%= t('combined') %></b></td>
+            <% @subjects.each do |subject| %>
+              <% subject_average = GroupedExamReport.find_by_student_id_and_subject_id_and_score_type(student.id,subject.id,"s") %>
+              <td style="text-align: center;"><b><%= subject_average.present? ? subject_average.marks : "-" %></b></td>
+            <% end %>
+            <td style="text-align: center;">
+              <% total_avg = GroupedExamReport.find_by_student_id_and_batch_id_and_score_type(student.id,@batch.id,"c") %>
+              <b><%= total_avg.present? ? total_avg.marks : "-" %></b>
+            </td>
+          </tr>
+        </table>
+        <br>
+        <div>
+          <div align="left" >
+            <table id="" width="25%" cellspacing="0" border="1" >
+              <% if params["add_postion"] == "true" %>
+                <tr>
+                  <td>Class Position</td>
+                  <% rank = @ranked_students.select{|rank| rank[3].id == student.id }.first %>
+                  <td><b><%= rank[0] %></b></td>
+                </tr>
+              <% end %>
+              <tr>
+                <td>Percentage</td>
+                <td><b><%= total_avg.present? ? total_avg.marks : "-" %></b></td>
+              </tr>
+              <% if total_avg.present? %>
+                <% marks = total_avg.marks%>
+                <% if  marks >= 90 %>
+                  <% remark = "Exceptional" %>
+                <% elsif (marks < 90 && marks >= 80) %>
+                  <% remark = "Excellent" %>
+                <% elsif  (marks < 80 && marks >= 70) %>
+                  <% remark = "Very Good" %>
+                <% elsif (marks < 70 && marks >= 60) %>
+                  <% remark = "Good" %>
+                <% elsif (marks < 60 && marks >= 50) %>
+                  <% remark = "Fair" %>
+                <% elsif (marks < 50 && marks >= 40) %>
+                  <% remark = "Pass" %>
+                <% else %>
+                  <% remark = "-" %>
+                <% end %>
+              <% else %>
+                <% remark = "-" %>
+              <% end %>
+              <tr>
+                <td>Teacher Remarks</td>
+                <td><b><%= remark %></b></td>
+              </tr>
+            </table>
+          </div>
+          
+          <div align="right" style="margin-top: <%= (params["add_postion"] == "false") ? '-53px' : '-85px' %>; margin-right: 10px;" >
+            <table id="" width="25%" cellspacing="0" border="1" >
+              <tr>
+                <td>Attendance:</td>
+                <td><b><%= @leaves[student.id]['percent'].round(2) unless @leaves[student.id]['percent'].nil? %></b></td>
+              </tr>
+              <tr>
+                <td>Working Days</td>
+                <td><b><%= @batch.academic_days.count %></b></td>
+              </tr>
+              <tr>
+                <td>Present</td>
+                <td><b><%= @leaves[student.id]['total'] %></b></td>
+              </tr>
+            </table>
+
+          </div>
+        </div>
+        <br>
+        
+        <table width="100%" cellspacing="0">
+          <tr>
+            <td class="no-border" style="width:300px; height: 98px; text-align: center;">
+              <hr>
+              Class Teacher
+            </td>
+            <td class="no-border" rowspan="2" style="width: 500px; text-align: center;">
+              <% school = SchoolDetail.first.try(:school) %>
+              <%# school = School.find_by_name(Configuration.get_config_value('InstitutionName')) %>
+              <%# principle_sign = (school && school.attach_signatures.present?) ?  school.attach_signatures.last : "" %>
+              <% principle_sign = (school && AttachSignature.find_all_by_school_id(school.id)) ? AttachSignature.find_all_by_school_id(school.id).last : "" %>
+              <% if principle_sign.present? && principle_sign.photo.present? %>
+                <%= wicked_pdf_image_tag principle_sign.photo ,:style=>"height: 100px; width: 100px;position:relative;top:-2px;"%>
+              <% end %>
+            </td>
+            <td class="no-border"></td>
+          </tr>
+          <tr>
+            <td class="no-border" style="height: 98px; text-align: center;">
+              <%# qr_image = (school && school.attach_signatures.present?) ?  school.attach_signatures.first : "" %>
+              <% qr_image = (school && AttachSignature.find_all_by_school_id(school.id)) ? AttachSignature.find_all_by_school_id(school.id).first : "" %>
+              <% if qr_image.present? && qr_image.photo.present? %>
+                <%= wicked_pdf_image_tag qr_image.photo ,:style=>"height: 50px; width: 100px; position:relative;top:-2px;"%>
+              <% end %>
+              <hr>
+              School Head
+            </td>
+            <td class="no-border" style="width:300px; text-align: center;">
+              <hr style="margin-top: 55px;">
+              School Stamp<br>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  <% end %>
+
+
+</div>
+
+
+<style>
+  
+  .clearfix {
+    display: inline-block;
+  }
+  #page-yield {
+      /*width:800px;*/
+      margin: 0 auto;
+      float: left;
+      overflow: hidden;
+  }
+
+
+
+  .hor_line{
+      width:800px;
+      background: #333333;
+      height: 1px;
+  }
+
+  h2.heading{
+      text-align: center;
+      margin:5px;
+  }
+
+  #main_info h4{
+      color: #555555;
+      margin-top: 18px;
+      font-weight: normal;
+  }
+
+  #main_info h2{
+      margin-bottom: 2px;
+      font-weight: normal;
+
+  }
+
+
+  .odd{
+      text-align: center;
+      /*height:auto;*/
+      background: #EEEEEE;
+
+  }
+
+  .even{
+      text-align: center;
+      /*height:auto;*/
+      background: #fff;
+
+
+  }
+/*  tr.even{
+      border: 1px solid #ADACAB;
+  }
+
+  tr.odd{
+      border: 1px solid #ADACAB;
+  }*/
+
+/*  .even td{
+
+      padding: 0px 15px 0px 15px;
+      border: 1px solid #ADACAB;
+      border-right: 0px solid #fff;
+      border-top: 0px solid #fff;
+
+  }
+
+  .odd td{
+      padding: 0px 15px 0px 15px;
+      border: 1px solid #ADACAB;
+      border-right: 0px solid #fff;
+      border-top: 0px solid #fff;
+
+  }*/
+
+
+
+  .table-header td{
+      padding: 12px 12px 12px 15px;
+      border-top: 1px solid #ADACAB;
+      border-left: 1px solid #ADACAB;
+      border-right: 1px solid #ADACAB;
+      color: #97080e;
+      background: #EEEEEE;
+  }
+
+  table#pdf-table{
+      border-top: 1px solid #ADACAB;
+      border-collapse:collapse
+  }
+
+
+  #page-extender{
+      width:100%;
+      height :300px;
+
+  }
+  #page-extender1{
+      width:100%;
+      height :500px;
+
+  }
+
+  .report{
+      height: 100%;
+      margin: 0 auto;
+  }
+
+  .report1{
+      /*min-height: 1260px;*/
+      margin: 0 auto;
+  }
+
+  #signature{
+      text-align: right;
+      width: 700px;
+      margin: 0 auto;
+      color: #999999;
+      font-size: 18px;
+      margin-bottom: 100px;
+  }
+
+
+  #page-yield h2{
+      text-align: center;
+  }
+
+
+  .page-break td{
+      height: 300px;
+      border: 1px solid #fff;
+      border-bottom: 1px solid #ADACAB;
+  }
+
+  .no-border {
+    border: none !important;
+  }
+
+
+
+
+</style>

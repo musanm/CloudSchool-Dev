@@ -1,0 +1,89 @@
+<% content_for :head do  %>
+  <%= stylesheet_link_tag("observation_groups/edit_criteria_formula.css") %>
+<% end %>
+<div id="content-header">
+  <%= show_header_icon %>
+  <h1>Formative Assessment</h1>
+  <div class='header-sep'>|</div>
+  <div class='sub-header'>Edit Criteria Formula</div>
+</div>
+<div id="page-yield">
+  <div class="bread_crumb">
+    <% breadcrumb :fa_groups_edit_criteria_formula,@fa_group %>
+    <%= render_breadcrumbs %>
+  </div>
+  <div id="flash-box">
+    <% unless flash[:notice].nil? %>
+      <p class="flash-msg"> <%= flash[:notice] %> </p>
+    <% end %>
+  </div>
+  <% form_for(@fa_group, :url => {:action=> 'update_criteria_formula',:id=>@fa_group.id}, :html=> {:multipart=>true}) do |fa| %>
+    <%= error_messages_for 'fa_group', :header_message => nil %>
+
+    <div id="formula_keys">
+      <label for="formula_keys">Formula Keys</label>
+      <div id="indicator_lists" style="display: none;">
+        <div class="indicator_list">
+          <%fa.object.fa_criterias.active.each do |fa_criteria|%>
+            <div class="list_pair1">
+              <div class="list_pair">
+                <span class="sub_head"><%=fa_criteria.fa_name%> -</span>
+                <span class="header"><%=fa_criteria.formula_key%></span>
+              </div>
+            </div>
+          <%end%>
+        </div>
+      </div>
+    </div>
+    <div id="calculation">
+      <div id="text_area_info">Create formula using the formula keys listed above</div>
+      <div class="label-field-pair-text-area">
+        <label for="formula">Formula</label>
+        <div class="textarea-input-bg"><%= fa.text_area :criteria_formula,:cols => 30, :rows => 5,:class => 'fa_calcutaion-textarea',:placeholder=>"Enter the formula" %></div>
+        <div id="submit-button">
+          <%=  submit_tag "► #{t('create_text')}",:class=>'submit_button',:disable_with => "► Please Wait.." %>
+        </div>
+      </div>
+      <div class="info themed_text" id="info">
+        <div class="helper_info">
+          <div class="info_list"><span class="head">FORMULA EXPLANATION</span></div>
+          <div class="info_list"><span class="head">SUM : </span>A+B</div>
+          <div class="info_list"><span class="head">DIFFERENCE : </span>A-B</div>
+          <div class="info_list"><span class="head">AVERAGE </span></div>
+          <div class="info_sub_list">avg(Indicator1,Indicator2,Indicator3,IndicatorN)</div>
+          <div class="clear_space"></div>
+          <div class="info_list"><span class="head">BEST OF </span></div>
+          <div class="info_sub_list">best(Number of best score required,list of Indicators)</div>
+          <div class="clear_space"></div>
+          <div class="info_sub_list">Example</div>
+          <div class="info_sub_list">best(2,A,B,C,D,F)</div>
+          <div class="info_sub_list">best(1,A,B,C,D)</div>
+          <div class="clear_space"></div>
+          <div class="info_list"><span class="head">EXAMPLES</span></div>
+          <div class="info_sub_list">A+B+C</div>
+          <div class="info_sub_list">A-(B+C+D)</div>
+          <div class="info_sub_list">A+best(4,B,C,D,E,F,G)+H+I</div>
+          <div class="info_sub_list">((A+B+C+D+E+F+G)*5)/35</div>
+          <div class="info_sub_list">(A+B+C+D)/3+avg(E,F)</div>
+          <div class="info_sub_list">A+avg(B,C,D)+best(1,E,F)</div>
+          <div class="info_list"></div>
+        </div>
+      </div>
+    </div>
+    <div class="extender"></div>
+  <%#= render :partial=>"fa_edit_criteria_form",:locals=>{:fa=>fa} %>
+  <%end%>
+</div>
+<script type="text/javascript">
+  j('.indicator_list').append("<div class='div_1'></div>");
+  j('.indicator_list').append("<div class='div_2'></div>");
+  var i=1;var k=1;
+  j('.list_pair1').each(function(){
+    j('.div_'+k).append(this);
+    i=i+1;
+    if(i==((Math.ceil(j('.list_pair1').length/2))+1)){
+      k=2;
+    }
+  });
+  j('#indicator_lists').css('display','block');
+</script>

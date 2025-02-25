@@ -1,0 +1,25 @@
+<% unless @current_user.admin? %>
+  <% unless @blog_post.blog.nil? %>
+    <% if @blog_post.is_active == true %>
+      <div id="comment_notice"></div>
+      <div class="comment_form">
+        <h3 id="leave-a-comment"><%= " #{@blog_post.blog_comments.showable.count} #{t('comments')}" %>
+          <%= image_tag("loader.gif",
+            :align => "absmiddle",
+            :border => 0,
+            :id =>"loader",
+            :style =>"display: none;" ) %></h3>
+        <% form_remote_for [@blog,@blog_post,@blog_comment],:before => "$('submit_button').disable();",:complete => "setTimeout(function(){$('submit_button').enable();},5000);",:loading => "$('loader').show()", :loaded => "$('loader').hide();" do |f| %>
+          <div id="form_error"></div>
+          <div id="comment_content"><%= f.text_area :body %></div>
+          <%= f.hidden_field :user_id,:value => @current_user.id %>
+          <%= f.hidden_field :is_deleted,:value => 0 %>
+          <%= f.submit t('submit'),:class => "submit-button", :id => "submit_button" %>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+<%end%>
+<div class="list_comments" id="list_comments">
+  <%= render :partial => "blog_comments/list_blog_comments" %>
+</div>

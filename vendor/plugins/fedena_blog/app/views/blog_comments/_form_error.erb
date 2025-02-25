@@ -1,0 +1,9 @@
+<div class="errorExplanation">
+  <h2><%= "#{form_error.errors.count}" %> errors prohibited this from being saved</h2>
+  <p>there were problems with the following fields:</p>
+  <ul>
+    <% form_error.errors.each_full do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+</div>

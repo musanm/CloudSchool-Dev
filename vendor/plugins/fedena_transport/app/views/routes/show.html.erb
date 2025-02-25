@@ -1,0 +1,75 @@
+<div id="content-header">
+  <%= show_header_icon %>
+  <h1><%= "#{t('route_details')}"%></h1>
+  <div class='header-sep'>|</div>
+  <div class='sub-header'><%= "#{t('view_route_details')}"%></div>
+  <div id="inner-tab-menu">
+    <ul>
+      <li class="themed_bg themed-dark-hover-background"><%= link_to "#{t('edit')}", edit_route_path(@route.id) %></li>
+      <li class="themed_bg themed-dark-hover-background"><%= link_to "#{t('view_all')}", routes_path %></li>
+    </ul>
+  </div>
+</div>
+<div id="page-yield">
+  <div class="bread_crumb">
+    <% breadcrumb :routes_show, @route %>
+    <%= render_breadcrumbs  %>
+  </div>
+  <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+
+  <div class="detail_box">
+    <div class="name"><%= t('destination') %></div><div class="val themed_text"><span class="themed_text">:</span><%= @route.destination %></div>
+    <div class="name"><%= t('cost') %></div><div class="val themed_text"><span class="themed_text">:</span><%= precision_label @route.cost %></div>
+    <% @additional_details.each do |additional_detail| %>
+      <%if additional_detail.additional_info.present?%>
+        <div class="name"><%= additional_detail.route_vehicle_additional_field.name %></div><div class="val themed_text"><span>:</span><span class="additional_value"><%=h additional_detail.additional_info %></span></div>
+      <%end%>
+    <% end %>
+  </div>
+  <table id="listing" align="right" width="60%" cellpadding="1" cellspacing="1">
+    <% unless @vehicles.blank? %>
+      <tr class="tr-head">
+        <td><%= t('sl_no') %></td>
+        <td><%= t('vehicle_no') %></td>
+        <td><%= t('vehicles.no_of_seats') %></td>
+        <td><%= t('vehicles.available_seats') %></td>
+        <td><%= t('status') %></td>
+      </tr>
+      <tr class="tr-blank"></tr>
+      <% @vehicles.each_with_index do |v,i| %>
+        <tr class="tr-<%= cycle('odd', 'even') %>">
+          <td class="col-3">
+            <%= ((params[:page].to_i==0 ? 0 : params[:page].to_i-1) * 20) + (i + 1) %>
+          </td>
+          <td class="col-3">
+            <%=  link_to v.vehicle_no,vehicle_path(v.id) %>
+          </td>
+          <td class="col-3">
+            <%= v.no_of_seats %>
+          </td>
+          <!-- <td class="col-3">
+             <small>
+    <%#= link_to "#{t('change')}", :controller=>'room_allocate', :action=>'change_room', :id=>s.id %>
+               |
+    <%#= link_to "#{t('vacate')}",
+    { :controller=>'room_allocate', :action=>'vacate', :id=>s.id},
+    {:confirm => "#{t('are_you_sure')}"} %>
+             </small>
+           </td>-->
+          <td class="col-3">
+            <%= v.available_seats  %>
+          </td>
+          <td class="col-3">
+            <%= t("#{v.status.downcase}") %>
+          </td>
+        </tr>
+      <% end %>
+    <% else %>
+      <tr class="tr-head"><td><%= "#{t('no_vehicles_in_this_route')}"%></td></tr>
+    <% end %>
+  </table>
+  <%= will_paginate @vehicles%>
+</div>
+

@@ -1,0 +1,18 @@
+--- 
+ch: 
+  attendance_reports: 
+    no_subjects_to_show: "没有課目"
+  attendances: 
+    attendance_marked_for: "標注出勤給"
+    class_timings_empty: "没有選擇班級計時。"
+    mark_absent: "標注爲缺席"
+    no_subjects_to_show: "没有課目"
+    no_tte_entries: "選擇的日期無課程表項"
+  calendar: 
+    no_events: "没有活動"
+    show_more_entries: "顯示更多"
+  reminder: 
+    no_reminders: "没有提示"
+    show_more_entries: "顯示更多"
+  timetable: 
+    select_weekday: "選擇一個工作日"

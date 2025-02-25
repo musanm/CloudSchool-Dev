@@ -1,0 +1,17 @@
+ar:
+  attendance_reports:
+    no_subjects_to_show: "لا توجد مواد"
+  attendances:
+    attendance_marked_for: "تمييز الحضور لطالب"
+    class_timings_empty: "لم يتم تحديد توقيتات أي صف"
+    mark_absent: "تمييزه كمتغيب"
+    no_subjects_to_show: "لا توجد مواد"
+    no_tte_entries: "لا توجد إدخالات جدول مواعيد للتاريخ المحدد"
+  calendar:
+    no_events: "لا توجد أحداث"
+    show_more_entries: "إظهار المزيد"
+  reminder:
+    no_reminders: "لا توجد تذكيرات"
+    show_more_entries: "إظهار المزيد"
+  timetable:
+    select_weekday: "تحديد يوم عمل"

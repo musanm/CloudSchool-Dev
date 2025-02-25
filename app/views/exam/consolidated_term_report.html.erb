@@ -1,0 +1,201 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<% total_marks = 0 %>
+<div id="inner-tab-menu">
+  <ul>
+    <% if  @batch.present? %>
+      <li class='themed_bg themed-dark-hover-background'><%= link_to "Pdf Report", {:controller => "exam", :action => "consolidated_term_report_pdf", :type => "grouped", :batch => @batch.id, :report_format_type => "pdf"},:target => '_blank' %></li>
+    <% end %>
+    
+  </ul>
+</div>
+
+<div id="content-header">
+  <%= show_header_icon %>
+  <h1>Exam</h1>
+  <div class='header-sep'>|</div>
+  <div class='sub-header'>Consolidated Term Report</div>
+</div>
+
+
+<div id="page-yield">
+
+  <div class="bread_crumb">
+      
+    <a href="<%= root_path %>">Home</a> 
+    <div class="bread-crumb-separator"> &gt; </div> 
+    <%= link_to "Exam" ,:controller => "exam", :action =>"index" %>
+    <div class="bread-crumb-separator"> &gt; </div> 
+    <%=  link_to "Reports center", :controller=> "exam",:action=>'report_center' %>
+    <div class="bread-crumb-separator"> &gt; </div> Consolidated Term Report
+  </div>
+
+
+
+
+  <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+  <div class="box">
+
+    <% form_for :exam_report, :url=>{:action=>'consolidated_term_report'}  do |x| %>
+      <div class="label-field-pair">
+        <label for="student_course"><%= t('select_a_batch') %>:</label>
+        <div  class="text-input-bg">
+          <% if params[:exam_report] && params[:exam_report][:batch_id].present? %>
+            <% batch_id = @batch.id %>
+            <%#=@batch.full_name%>
+          <% else %>
+            <% batch_id = "" %>
+          <% end %>
+          <%= x.select :batch_id, Batch.active.map {|b| [b.full_name, b.id]},:selected => batch_id, :prompt => "Select a Batch" %>
+        </div>
+      </div>
+
+    <% end %>
+    <div class="extender"></div>
+  </div>
+</div>
+
+
+
+  <% if @batch.present? %>
+
+    <table id="listing" >
+
+      <tr class="tr-head">
+        <td colspan="2">Class : <%= @batch.full_name %></td>
+        <!-- <td>Student Name</td> -->
+        <% @subjects.each do |subject| %>
+          <td class="center" colspan=<%=@batch.exam_groups.count%>><%= subject.name %></td>
+        <% end %>
+        <td rowspan="3">Combined</td>
+      </tr>
+
+      <tr class="tr-odd">
+        <td colspan="2">Acadamic Year:<%= @batch.name %></td>
+        <% @subjects.each do |subject| %>
+          <% @batch.term_exams.each do |term_exam| %>
+            <td class="center" colspan=<%= term_exam.exam_groups.count %>><%= term_exam.name %></td>
+          <% end %>
+        <% end %>
+      </tr>
+
+      <tr class="tr-odd">
+        <td>Name</td>
+        <td>Admission no</td>
+        <% @subjects.each do |subject| %>
+          <% @batch.term_exams.each do |term_exam| %>
+            <% term_exam.exam_groups.each do |exam_group| %>
+              <% exam = Exam.find_by_exam_group_id_and_subject_id(exam_group , subject.id) %>
+              <td class="center" width="50px"><%= exam_group.name  %>(<%= exam.maximum_marks if exam.present? %>)</td>
+            <% end %>
+          <% end %>
+        <% end %>
+      </tr>
+
+      <% grade_type = "normal" %>
+      <% grade_type = "GPA" if @batch.gpa_enabled? %>
+      <% grade_type = "CWA" if @batch.cwa_enabled? %>
+
+      <% @batch.students.each do |student| %>
+        <tr class="tr-odd">
+          <td ><%= student.full_name %></td>
+          <td ><%= student.admission_no %></td>
+          <% @subjects.each do |subject| %>
+            <% @batch.term_exams.each do |term_exam| %>
+              <% term_exam.exam_groups.each do |exam_group| %>
+
+                <% exam = Exam.find_by_exam_group_id_and_subject_id(exam_group.id,subject.id)  %>
+                <% if exam.present? %>
+                  <% exam_score = ExamScore.find_by_student_id_and_exam_id(student.id,exam.id) %>
+                  <% if grade_type=="GPA" %>
+                    <td class="col-3"><%= exam_score.grading_level.present? ? exam_score.grading_level : "-" %></td>
+                  <% elsif grade_type=="CWA" %>
+                    <td class="col-3"><%= valid_mark?(exam.maximum_marks) ? exam_score.marks.present? ? "%.2f" %((exam_score.marks.to_f/exam.maximum_marks.to_f)*100) : "-" : "-" %></td>
+                  <% else %>
+                    <td class="col-3">
+                      <% if exam_group.exam_type == "MarksAndGrades" %>
+                        <%= exam_score.nil? ? '-' :  "#{(exam_score.marks || "Ab")}" + "(#{(exam_score.grading_level || "---")})" %>
+                      <% else %>
+                        <%= exam_score.nil? ? '-' : exam_score.marks || "-" %>
+                      <% end %>
+                    </td>
+                  <% end %>
+                <% else %>
+                  <td class="col-3">-</td>
+                <% end %>
+                
+              <% end %>
+            <% end %>
+          <% end %>
+          <% total_avg = GroupedExamReport.find_by_student_id_and_batch_id_and_score_type(student.id,@batch.id,"c") %>
+          <td class="center"><%= total_avg.present? ? total_avg.marks : "-" %></td>
+          <% total_marks += total_avg.marks if total_avg.present? %>
+        </tr>
+        </tr>
+      <% end %>
+
+
+      <tr class="tr-odd">
+        <td colspan="2">Class Percentage</td>
+        
+        <% @subjects.each do |subject| %>
+          <% @batch.term_exams.each do |term_exam| %>
+            <% term_exam.exam_groups.each do |exam_group| %>
+
+              <% exam = Exam.find_by_exam_group_id_and_subject_id(exam_group , subject.id) %>
+              <td class="center"><%= exam.class_average_marks.to_f.round(2)  if exam.present? %></td>
+            <% end %>
+          <% end %>
+        <% end %>
+        <td class="center"><%= (total_marks/@batch.students.count).to_f.round(2) unless total_marks == 0 %></td>
+        
+      </tr>
+
+      <tr class="tr-head">
+        <td colspan="2">Subject Average</td>
+          <% total_average = 0 %>
+          <% @subjects.each do |subject| %>
+            <% total = 0 %>
+            <td class="center" colspan=<%=@batch.exam_groups.count%>>
+              <% @batch.term_exams.each do |term_exam| %>
+                <% term_exam.exam_groups.each do |exam_group| %>
+
+                  <% exam = Exam.find_by_exam_group_id_and_subject_id(exam_group , subject.id) %>
+                  <% total += exam.class_average_marks.to_f.round(2)  if exam.present? %>
+                <% end %>
+              <% end %>
+              <%= total/@batch.exam_groups.count == 0 ? 0 : (total/@batch.exam_groups.count).round(2) %>
+              <% total_average += (total/@batch.exam_groups.count) %>
+            </td>
+          <% end %>
+        <td class="center"><%#= (total_average/@subjects.count).round(2) %></td>
+      </tr>
+
+
+    
+    </table>
+  <% end %>
+
+
+
+
+<script>
+  $(document).ready(function() {
+    $("#exam_report_batch_id").change(function(){
+      $('#exam_report_student_id :selected').remove();
+      $("form").submit();
+    });
+    $("#exam_report_student_id").change(function(){
+      $("form").submit();
+    });
+  });
+
+</script>
+
+
+<style>
+  .center {
+    text-align: center;
+  }
+</style>

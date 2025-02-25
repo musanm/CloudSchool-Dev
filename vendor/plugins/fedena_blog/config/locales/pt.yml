@@ -1,0 +1,103 @@
+pt:
+  activerecord:
+    attributes:
+      applicant:
+        first_name: Primeiro nome
+        date_of_birth: Data de nascimento
+  date:
+    formats:
+      default: "%e-%m-%Y"
+      normal: "%B %e, %Y"
+      short: "%e. %b"
+      month_year: "%B %Y"
+      long: "%A, %e %B, %Y"
+      only_day: "%e"
+      month: "%B"
+      day: "%a"
+      mont: "%d"
+      day_mon: "%a %d"
+    day_names: [domingo, segunda-feira, terça-feira, quarta-feira, quinta-feira,sexta-feira, sábado]
+    abbr_day_names: [dom, seg, ter, qua, qui, sex, sab]
+    month_names: [~, janeiro, fevereiro, março, abril, maio, junho, julho, agosto,setembro, outubro, novembro, dezembro]
+    abbr_month_names: [~, jan, fev, mar, abr, mai, jun, jul, ago, set, out, nov, dez]
+    order: [ :day, :month, :year ]
+  time:
+    formats:
+      default: "%A, %d. %B %Y, %H:%M Uhr"
+      short: "%d. %B, %H:%M Uhr"
+      long: "%A, %d. %B %Y, %H:%M Uhr"
+      time: "%H:%M"
+    am: AM
+    pm: PM
+  blog_admin_privilege: Blog Admin
+  blog_comments:
+    delete_comment_confirmation: Tem certeza que pretende deletar esse comentário?
+    deleted_user: Usuário Deletado
+    flash_admin: O Administrador não pode participar no blog.
+    comment_deleted: "Comment successfully deleted."
+    comment_created: "Comment successfully created."
+  blog_posts:
+    deleted_user: Usuário Deletado
+    edit: Editar
+    activate: Ativar
+    ban_blog_post: Publicação no blog foi banida com sucesso
+    ban_post: Banir a publicação
+    blog_post_deleted_successfully: Publicação deletada com sucesso
+    blogs_text: Blog
+    comments: Comentários
+    create_post: Criar Publicação
+    deactivate: Desativar
+    delete_post: Tem certeza que pretende deletar essa publicação?
+    deleted_blog: Blog Deletado
+    edit_blog: Editar blog
+    favourites: Favoritos
+    flash2: A sua publicação no blog foi gravada com sucesso.
+    flash3: A sua publicação no blog foi publicada com sucesso.
+    flash_admin: O Administrador não pode participar no blog.
+    flash_edit: Sua publicação foi editada com sucesso
+    flash_no_blog: Não foi encontrado blog para esse usuário
+    flash_no_user: Usuário não encontrado
+    flash_not_available: Esse conteúdo não se encontra disponível
+    home: Início
+    latest_posts: "Último"
+    my_blog: Meu Blog
+    new_post: "+ Nova Publicação"
+    next_page: Próxima Página >
+    no_blog_found: Não foi encontrado blog
+    no_blog_posts: Blog sem publicações
+    no_post: Você não publica um blog.
+    not_authorized: Você não está autorizado/a a ver esse conteúdo
+    notifications: Atividades
+    on_text: em
+    popular_posts: Popular
+    posted_by: Publicado por
+    posts: Publicações
+    prev_page: "< Página Anterior"
+    publish: Publicar
+    published_successfully: Publicado com Sucesso
+    save_as_draft: Gravar como rascunho
+    search: Procurar
+    search_blogs: Procurar blogs
+    unban_blog_post: Publicação de blog banida foi revertida com sucesso
+    unpublish: Reverter a publicação
+    unpublished_successfully: Publicação revertida com sucesso
+  blog_text: Blog
+  blogs:
+    edit: Editar
+    activities: Atividades
+    blog_activated: Blog do usuário foi ativado com sucesso
+    blog_deactivated: Blog do usuário foi desativado com sucesso
+    blogs_text: Blog
+    commented: " comentaram sua publicação"
+    deleted_user: Usuário Deletado
+    flash1: Por favor, crie antes um blog para si
+    flash_admin: Administrator can not participate in blogging.
+    flash_update: Blog foi atualizado com sucesso
+    my_blog: Meu Blog
+    no_notification: Não foram encontradas atividades recentes
+    notifications: Actividades
+    on_text: " em"
+    register: "Registrar"
+    search: "Procurar"
+  manage_blog: "Publicar blog e ver blogs de outros usuários"
+  blog_activity_present: "Has blog related activities"

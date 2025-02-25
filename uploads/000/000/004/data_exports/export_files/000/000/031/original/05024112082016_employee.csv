@@ -1,0 +1,612 @@
+Employee number,Employee name,Joining date,Employee department,Employee category,Employee position,Employee grade,Job title,Reporting manager,Gender,Email,Status,Qualification,Total experiance,Experiance info,Date of birth,Marital status,Children count,Father name,Mother name,Spouse name,Blood group,Nationality,Home address,City,State,Country,Pin code,Office address,Office city,Office country,Office pin code,Office phone1,Office phone2,Mobile,Home phone,Fax,Biometric,Employee additional details,Employee bank details,Employee salary details
+admin,Admin  User,2016-03-15,System Admin,System Admin,System Admin,System Admin,,,m,noreply@fedena.com,true,,0 Years 5 Months,,2015-03-16,,,,,,,Guinea (Guinée), ,,,,, ,,,,,,,,,,"Value,Name
+,
+,CNIC
+","Value,Name
+,
+,Account Number
+",
+EN-01,Siraj Ud Din   ,2003-12-03,School Administration ,School Administration,Director,,Director,,m,siraj39@hotamil.com,true,B.Sc (Hons),12 Years 8 Months,,1960-04-06,married,,,,,Unknown,Pakistan (‫پاکستان‬‎),DHA islamabad  ,,,,, ,,,,,,(322) 390-0039,,,,"Value,Name
+,
+,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+0.0,Basic
+"
+EN-101,Rashida Faiz  ,2013-03-18,School Administration ,School Administration,Principal,,School Principal,Siraj Ud Din  ,m,,true,Master's,3 Years 4 Months,,1977-10-12,married,,Faiz Muhammad Shaikh,Salma Tahira,,B+,Pakistan (‫پاکستان‬‎), ,,,,, ,,,,,,(333) 464-3887,,,,"Value,Name
+,
+37406-0706738-4,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+46580.0,Basic
+"
+EN-04,Khalida Khanam  ,2013-03-15,School Administration ,School Administration,Coordinator,,High School Coordinator,Rashida Faiz ,f,,true,Master in Islamiyat ,3 Years 5 Months,,1974-03-12,married,,,,,A+,Pakistan (‫پاکستان‬‎),"H# 3499 St # 14, Mohalla Eid Gah Taxila  ",,,,, ,,,,,,(321) 955-7496,,,,"Value,Name
+,
+37406-1510428-2,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+23743.0,Basic
+"
+EN-91,Anum Awan   ,2013-09-09,Faculty ,Teaching Staff,Teacher,,,Rashida Faiz ,f,anumawan11@yahoo.com,true,Masters in Behavioral Sciences,2 Years 11 Months,,1990-09-20,single,,Malik Shahid Nawaz,Shamim Malik,,AB+,Pakistan (‫پاکستان‬‎),H# 6ev/12 POF Wah Cantt  ,,,,, ,,,,,,,,,,"Value,Name
+,
+37406-3373445-2,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+11790.0,Basic
+"
+EN-41,Muhammad Zulfiqar   ,2004-08-12,Faculty ,Non Teaching Staff,PTI,,Physcial Trainer,Rashida Faiz ,m,,true,Matric,12 Years 0 Months,,1967-07-10,married,,Muhammad Akbar,,,O+,Pakistan (‫پاکستان‬‎),"Muhala kohsar Colony saray Khola, Taxila ",,,,, ,,,,,,(300) 580-3568,,,,"Value,Name
+,
+38401-8239769-3,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+17587.0,Basic
+"
+EN-20,Farah Batool   ,2013-04-01,Faculty ,Teaching Staff,Teacher,,Examination Incharge,Rashida Faiz ,f,,true,Bachelor ,3 Years 4 Months,,1984-09-03,single,,Syed Diladar Hussain Shah(late),Akhtar Bibi,,Unknown,Pakistan (‫پاکستان‬‎), ,,,,, ,,,,,,,,,,"Value,Name
+,
+	37406-7732439-2,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+17000.0,Basic
+"
+EN-21,Farwa Jaffri   ,2013-04-02,Faculty ,Teaching Staff,Teacher,,Pre School Teacher,Rashida Faiz ,f,,true,	Master's,3 Years 4 Months,,1989-11-27,single,,Mushtaq Hussain Jaffri,Zareena Jaffri,,Unknown,Pakistan (‫پاکستان‬‎), ,,,,, ,,,,,,,,,,"Value,Name
+,
+37406-7654930-6,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+12230.0,Basic
+"
+EN-08,Iffat Maab  ,2013-03-28,Faculty ,Teaching Staff,Teacher,,Teacher,Rashida Faiz ,f,,true,bachelors in Economics ,3 Years 4 Months,,1975-06-01,single,,Syed Mustaqeem uddin,Sajeela Tasneem Akhtar,,Unknown,Pakistan (‫پاکستان‬‎), ,,,,, ,,,,,,,,,,"Value,Name
+,
+37406-0226841-6,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+12890.0,Basic
+"
+EN-30,Misbah Amir   ,2015-03-17,Faculty ,Teaching Staff,Teacher,,Teacher,Rashida Faiz ,f,jiapari48@yahoo.com,true,Bachelors in islamic studies and politics,1 Years 4 Months,,1986-03-25,single,,Amir-ud-Din,Naima Amir,,Unknown,Pakistan (‫پاکستان‬‎),4Fv/29 Anwar Choke ,,,,, ,,,,,,(333) 902-5752,,,,"Value,Name
+,
+	37406-6323413-2,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+13935.0,Basic
+"
+EN-10,Nadia Yasmin   ,2013-03-28,Faculty ,Teaching Staff,Teacher,,Teacher,Rashida Faiz ,f,,true,Bachelor Computer science ,3 Years 4 Months,,1989-10-17,single,,Gulam Haider,Nasreen Akhtar,,A+,Pakistan (‫پاکستان‬‎), ,,,,, ,,,,,,,,,,"Value,Name
+,
+37406-9273120-0,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+12285.0,Basic
+"
+EN-11,Qurat ul ain Naqvi   ,2012-11-01,Faculty ,Teaching Staff,Teacher,System Admin,Teacher,Rashida Faiz ,f,squrat16@yahoo.com,true,Master Psychology ,3 Years 9 Months,,1986-08-14,single,,Syed Rafiq Hussain Shah,Syeda Samina Rafiq,,Unknown,Pakistan (‫پاکستان‬‎), ,,,,, ,,,,,,,,,,"Value,Name
+,
+37406-6025874-0,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+13011.0,Basic
+"
+EN-02,Rabia Rasheed   ,2013-03-23,Faculty ,Teaching Staff,Teacher,,Teacher,Rashida Faiz ,f,,true,B.Ed,3 Years 4 Months,,1985-03-04,single,,Abdul Rasheed,,,Unknown,Pakistan (‫پاکستان‬‎),Awan house faisal town st# 06 HMC Rd Taxila  ,,,,, ,,,,,,(334) 500-6278,,,,"Value,Name
+,
+37406-0850791-2,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+13737.0,Basic
+"
+EN-24,Sadia Bibi   ,2013-04-02,Faculty ,Teaching Staff,Teacher,,Teacher,Rashida Faiz ,f,,true,Master's,3 Years 4 Months,,1985-03-24,single,,Safdar Shah,Ghazala Bibi,,Unknown,Pakistan (‫پاکستان‬‎),HMC road Taxila  ,,,,, ,,,,,,(345) 509-4460,,,,"Value,Name
+,
+37406-0757315-8,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+15189.0,Basic
+"
+EN-07,Shahida Bibi   ,2013-03-28,Faculty ,Teaching Staff,Teacher,,Teacher,Rashida Faiz ,f,,true,Master's,3 Years 4 Months,,1987-06-20,single,,Sarwar Din,Mehboob Bibi,,Unknown,Pakistan (‫پاکستان‬‎), ,,,,, ,,,,,,,,,,"Value,Name
+,
+37406-1685460-2,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+14100.0,Basic
+"
+EN-47,Sidra Akhter  ,2013-09-04,Faculty ,Teaching Staff,Teacher,,Teacher,Rashida Faiz ,f,,true,Bachelor's in Sociology,2 Years 11 Months,,1989-03-20,single,,Muhammad Akhtar Khan,,,Unknown,Pakistan (‫پاکستان‬‎),House No 3499 Street 14 Muhallah Eid Gah Taxila ,,,,, ,,,,,,(313) 733-4975,,,,"Value,Name
+,
+37406-7877602-8,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+10085.0,Basic
+"
+EN-85,Sobia Shafaqat  ,2014-05-29,Faculty ,Teaching Staff,Teacher,,Teacher,Rashida Faiz ,f,,true,Masters in English,2 Years 2 Months,,1981-03-05,married,,Abdul Waheed,Gul Nargis,,Unknown,Pakistan (‫پاکستان‬‎),Hassan Colony Taxila  ,,,,, ,,,,,,(333) 547-2318,,,,"Value,Name
+,
+61101-9882814-8,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+11350.0,Basic
+"
+EN-29,Sobia Rasheed   ,2013-04-02,Faculty ,Teaching Staff,Teacher,,Teacher,Rashida Faiz ,f,,true,Master's,3 Years 4 Months,,1989-01-01,single,,Muhammad Raheed,Shahida Rasheed,,Unknown,Pakistan (‫پاکستان‬‎), ,,,,, ,,,,,,,,,,"Value,Name
+,
+37406-7957696-0,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+12714.0,Basic
+"
+EN-104,Sidra Shafique   ,2014-08-26,Faculty ,Teaching Staff,Teacher,,Teacher,Rashida Faiz ,f,,true,B.A in phycology & education,1 Years 11 Months,,1988-11-03,single,,Shafique Ahmed,Rashda Shaheen,,Unknown,Pakistan (‫پاکستان‬‎),CB-174 infrint of service station Taxila  ,,,,, ,,,,,,(315) 515-5221,,,,"Value,Name
+,
+37406-2392841-6,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+10295.0,Basic
+"
+EN-87,Sanam Bibi  ,2014-04-15,Faculty ,Teaching Staff,Teacher,,Teacher,Rashida Faiz ,f,,true,Masters in Economics,2 Years 4 Months,,1991-03-06,single,,Safdar Shah,Ghazala Bibi,,Unknown,Pakistan (‫پاکستان‬‎),Mohalla Gheela Khurad pervaiz kayana store HMC rd taxila  ,,,,, ,,,,,,(303) 596-7567,,,,"Value,Name
+,
+,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+11350.0,Basic
+"
+EN-25,Noureen Akhtar  ,2013-04-02,Faculty ,Teaching Staff,Teacher,,Teacher,Rashida Faiz ,f,fajarhoorain@yahoo.com,true,Bachelor's,3 Years 4 Months,,1976-11-23,single,,Muhammad Shafique,Zaira Sulatan,,Unknown,Pakistan (‫پاکستان‬‎),Near post office Taxila  ,,,,, ,,,,,,(312) 562-1577,,,,"Value,Name
+,
+	37406-1221647-4,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+13027.0,Basic
+"
+EN-15,Noshaba Bibi   ,2011-04-04,Faculty ,Teaching Staff,Teacher,,Teacher,Rashida Faiz ,f,,true,Bachelor's,5 Years 4 Months,,1988-09-27,single,,Syed Dildar hussain Shah,Akhtar Bibi,,B+,Pakistan (‫پاکستان‬‎), ,,,,, ,,,,,,,,,,"Value,Name
+,
+37406-7535081-6,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+10470.0,Basic
+"
+EN-103,Noor ul Huda   ,2014-09-18,Faculty ,Teaching Staff,Teacher,,Teacher,Rashida Faiz ,f,,true,Msc in organic chemistry,1 Years 10 Months,,1989-09-12,single,,BIlal Ahmed,Mushraraf Jhan,,Unknown,Pakistan (‫پاکستان‬‎),Cart III 322 HIT Taxila Cantt  ,,,,, ,,,,,,(312) 684-1947,,,,"Value,Name
+,
+37406-9722675-0,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+10900.0,Basic
+"
+EN-42,Lubna Naz   ,2013-02-05,Faculty ,Teaching Staff,Teacher,,Teacher,Rashida Faiz ,f,,true,Bachelor's,3 Years 6 Months,,1989-03-12,single,,Kaleem-ud-Din Abbasi,Rashida Parveen,,AB+,Pakistan (‫پاکستان‬‎),H No SV244 HIT Colony Taxila cantt ,,,,, ,,,,,,(345) 561-3553,,,,"Value,Name
+,
+37406-1313252-4,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+12125.0,Basic
+"
+EN-26,Iqra Khalid   ,2012-09-02,Faculty ,Teaching Staff,Teacher,,Teacher,Rashida Faiz ,f,,true,Masters in English,3 Years 11 Months,,1989-09-02,single,,Khalid Mehmood,,,Unknown,Pakistan (‫پاکستان‬‎), ,,,,, ,,,,,,(331) 523-0864,,,,"Value,Name
+,
+,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+13797.0,Basic
+"
+EN-111,Shahmeen Naqvi ,2015-03-04,Faculty ,Teaching Staff,Teacher,,Teacher,Rashida Faiz ,f,,true,MA Islamic Studies,1 Years 5 Months,,1991-07-20,single,,Mazhar Hussain Naqvi,Tehseen Kazmi,,O+,Pakistan (‫پاکستان‬‎),Wahdat colony Haideri Market GT Road Taxila ,,,,, ,,,,,,(92310) 510-2720,,,,"Value,Name
+,
+,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+10500.0,Basic
+"
+EN-113,Mehreen Sami ,2015-03-13,Faculty ,Teaching Staff,Teacher,,,Rashida Faiz ,f,,true,B.com,1 Years 5 Months,,1993-03-31,single,,Sami ullah,Farhat Sami,,Unknown,Pakistan (‫پاکستان‬‎),3G/476 Anwar chock Wah cantt ,,,,, ,,,,,,(92310) 597-1207,,,,"Value,Name
+,
+,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+9200.0,Basic
+"
+EN-115,Nida Izhar ,2015-03-12,Faculty ,Teaching Staff,Teacher,,,Rashida Faiz ,f,,true,BA,1 Years 5 Months,,1993-12-12,single,,Izhar ul Haq,Kulsoom Bano,,Unknown,Pakistan (‫پاکستان‬‎),H # s VII/3 HIT  ,,,,, ,,,,,,(92306) 057-9872,,,,"Value,Name
+,
+,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+9000.0,Basic
+"
+EN-116,Irum Fatima ,2015-03-03,Faculty ,Teaching Staff,Librarian,,,Rashida Faiz ,f,,true,BA & BLIS,1 Years 5 Months,,1985-09-12,married,,Faiz Shah,Shahnaz Bibi,Jabir Shah,B+,Pakistan (‫پاکستان‬‎),Dhok wajan near maekh shop Taxila ,,,,, ,,,,,,(92312) 577-8025,,,,"Value,Name
+,
+,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+9500.0,Basic
+"
+EN-120,Farzana Bibi ,2015-04-24,Faculty ,Teaching Staff,Teacher,,Class Teacher,Rashida Faiz ,f,,true,MA Islamic Studies,1 Years 3 Months,,1982-03-01,married,,Adbul Farooq,Azra Khanum,,Unknown,Pakistan (‫پاکستان‬‎),H # 556 POF wah cantt ,,,,, ,,,,,,0306-5752938,,,,"Value,Name
+,
+37406-1554880-2,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+11700.0,Basic
+"
+EN-121,Muhammad Waseem ,2015-08-21,Faculty ,Teaching Staff,Teacher,,Teacher,Rashida Faiz ,m,,true,BS Electrical (computer) Engineering,0 Years 11 Months,,1990-10-07,single,,Farooq shah,Tehseel Zadi,,Unknown,Pakistan (‫پاکستان‬‎),H # CB-T 113 HIT Taxila Cantt ,,,,, ,,,,,,0313-5793570,,,,"Value,Name
+,
+,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+15000.0,Basic
+"
+EN-122,Zulfiqar Ali Gulshan,2015-08-10,Faculty ,Teaching Staff,Teacher,,Computer Teacher,Rashida Faiz ,m,,true,BS in Computer Engineering,1 Years 0 Months,,1989-08-06,single,,Ghulam Ali Gulshan,Kalsoom Akhtar,,Unknown,Pakistan (‫پاکستان‬‎),"H # 40 Lane # 14, New city Phase 1 Wah Cantt ",,,,, ,,,,,,(322) 543-5783,,,,"Value,Name
+,
+,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+16000.0,Basic
+"
+EN-124,Faiza sufder ,2015-08-03,Faculty ,Teaching Staff,Teacher,,Art Teacher,Rashida Faiz ,f,,true,Master in Behavior Science,1 Years 0 Months,,1988-08-09,single,,Muhammad Sufder,Ghulam Fatima,,Unknown,Pakistan (‫پاکستان‬‎),Mohalla sakai khola taxila ,,,,, ,,,,,,0310-3050032,,,,"Value,Name
+,
+37406-9941707-0,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+10700.0,Basic
+"
+EN-201,Zamurrad Siraj  ,2008-12-01,School Administration ,School Administration,Teacher,,,Rashida Faiz ,f,,true,,7 Years 8 Months,,2005-10-19,married,,,,,Unknown,Pakistan (‫پاکستان‬‎), ,,,,, ,,,,,,,,,,"Value,Name
+,
+,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+27000.0,Basic
+"
+EN-202,Saira Noor  ,2008-12-01,School Administration ,School Administration,Admin Officer,,,Rashida Faiz ,f,,true,,7 Years 8 Months,,2005-10-19,single,,,,,Unknown,Pakistan (‫پاکستان‬‎), ,,,,, ,,,,,,,,,,"Value,Name
+,
+,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+27000.0,Basic
+"
+EN-203,Zara Khalid  ,2008-12-01,School Administration ,School Administration,Admin Officer,,,Rashida Faiz ,f,,true,,7 Years 8 Months,,2005-10-19,single,,,,,Unknown,Pakistan (‫پاکستان‬‎), ,,,,, ,,,,,,,,,,"Value,Name
+,
+,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+27000.0,Basic
+"
+EN-204,Rabia Bashir  ,2008-12-01,School Administration ,School Administration,Teacher,,,Rashida Faiz ,f,,true,,7 Years 8 Months,,2005-10-19,single,,,,,Unknown,Pakistan (‫پاکستان‬‎), ,,,,, ,,,,,,,,,,"Value,Name
+,
+,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+27000.0,Basic
+"
+EN-205,Sajjad Haider  ,2008-12-01,School Administration ,School Administration,Teacher,,,Rashida Faiz ,m,,true,,7 Years 8 Months,,2005-10-19,single,,,,,Unknown,Pakistan (‫پاکستان‬‎), ,,,,, ,,,,,,,,,,"Value,Name
+,
+,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+27000.0,Basic
+"
+EN-206,Mariam Bashir  ,2008-12-01,School Administration ,School Administration,Teacher,,,Rashida Faiz ,f,,true,,7 Years 8 Months,,2005-10-19,single,,,,,Unknown,Pakistan (‫پاکستان‬‎), ,,,,, ,,,,,,,,,,"Value,Name
+,
+,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+27000.0,Basic
+"
+EN-208,Iqra Fareed ,2015-10-26,Faculty ,Teaching Staff,Teacher,,Teacher,Rashida Faiz ,f,,true,Bsc,0 Years 9 Months,,2005-11-02,single,,Ghulam Farid,Nusrat Yasmine,,Unknown,Pakistan (‫پاکستان‬‎),H # CB-207 Hassan Colony Taxila Cantt ,,,,, ,,,,,,92333-5569326,,,,"Value,Name
+,
+37405-2774694-4,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+9900.0,Basic
+"
+EN-32,Beena Amir  ,2010-03-15,School Administration ,Admin Staff,Admin Officer,,Admin Officer,Rashida Faiz ,f,riadecent@yahoo.com,true,B.com,6 Years 5 Months,,1984-01-27,single,,Amir-ud-Din,Naima Amir,,B+,Pakistan (‫پاکستان‬‎),4Fv/29 Anwar Choke ,,,,, ,,,,,,(33) 484-5593,,,,"Value,Name
+,
+37406-3501596-4,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+13990.0,Basic
+"
+EN-33,Bushra Nawab  ,2011-01-20,School Administration ,Admin Staff,Accounts Manager ,,Accounts Manager ,Rashida Faiz ,f,bushra.nawabkhan@yahoo.com,true,Bachelor ,5 Years 6 Months,,1987-10-24,single,,Muhammad Nawab khan,Tahira Nawab,,Unknown,Pakistan (‫پاکستان‬‎),CB-70 nawababad  wah cantt  ,,,,, ,,,,,,(342) 591-8699,,,,"Value,Name
+,
+37406-7734651-0,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+13132.0,Basic
+"
+EN-98,Abdul Hameed   ,2014-07-02,Janitorial Staff ,Non Teaching Staff,Gardener,,Gardener,Rashida Faiz ,m,,true,,2 Years 1 Months,,1981-08-21,single,,Abdul Aziz,Akhtar Bib,,Unknown,Pakistan (‫پاکستان‬‎),Taxila ,,,,, ,,,,,,(322) 545-0280,,,,"Value,Name
+,
+37406-1797628-3,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+10075.0,Basic
+"
+EN-108,Fakhar Zaman   ,2014-10-20,Janitorial Staff ,Non Teaching Staff,Sweeper,,,Rashida Faiz ,m,,true,,1 Years 9 Months,,1985-03-12,single,,Muhammad Saleem,,,Unknown,Pakistan (‫پاکستان‬‎),Khurram Gujar POBox Taxila  ,,,,, ,,,,,,(92320) 504-7689,,,,"Value,Name
+,
+,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+8175.0,Basic
+"
+EN-118,Ghullam Yasin ,2015-03-13,Janitorial Staff ,Non Teaching Staff,Guard,,,Rashida Faiz ,f,,true,Matric,1 Years 5 Months,,1966-04-12,married,,Ghullam Ahmad,Sakeena Bibi,,B+,Pakistan (‫پاکستان‬‎),St # 21 MOhalla Jamilabad Taxila Distt RWP ,,,,, ,,,,,,(92321) 912-6636,,,,"Value,Name
+,
+,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+13000.0,Basic
+"
+EN-102,Nasir Hussain  ,2014-06-02,Janitorial Staff ,Non Teaching Staff,Guard,,Guard,Rashida Faiz ,m,,true,,2 Years 2 Months,,1996-01-01,single,,Jaffar Hussain,Kaneez Fatima,,Unknown,Pakistan (‫پاکستان‬‎),post office khar gondal  ,,,,, ,,,,,,(347) 977-5349,,,,"Value,Name
+,
+38404-7160259-1,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+9085.0,Basic
+"
+EN-100,Tariq Mehmood   ,2014-06-02,Janitorial Staff ,Non Teaching Staff,Guard,,Guard,Rashida Faiz ,m,,true,,2 Years 2 Months,,2004-06-02,married,,,,,Unknown,Pakistan (‫پاکستان‬‎),Moh: Muslim colony HIT Taxila  ,,,,, ,,,,,,(301) 526-1114,,,,"Value,Name
+,
+37406-7374935-3,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+11575.0,Basic
+"
+EN-95,Fukhraj Bibi   ,2014-07-02,Janitorial Staff ,Non Teaching Staff,Maid,,,Rashida Faiz ,f,,true,,2 Years 1 Months,,1965-01-01,married,,Akbar Khan,Maryam Jan,,Unknown,Pakistan (‫پاکستان‬‎),Moh: Muslim colony HIT Taxila  ,,,,, ,,,,,,(92301) 526-1114,,,,"Value,Name
+,
+37406-6976170-4,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+10075.0,Basic
+"
+EN-109,Imtiaz   ,2014-12-11,Janitorial Staff ,Non Teaching Staff,Maid,,,Rashida Faiz ,f,,true,,1 Years 8 Months,,1964-01-01,married,,,,,Unknown,Pakistan (‫پاکستان‬‎),"Mohalla Eid Gah , Taxila ",,,,, ,,,,,,(92312) 514-2564,,,,"Value,Name
+,
+,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+8175.0,Basic
+"
+EN-92,Rashida Begum   ,2014-06-02,Janitorial Staff ,Non Teaching Staff,Maid,,Maid,Rashida Faiz ,f,,true,,2 Years 2 Months,,1952-06-05,married,,Qazi Ghulam Mustafa,Ghulam Sakina,,Unknown,Pakistan (‫پاکستان‬‎),Moh: University road GanguBahadur PO Taxila ,,,,, ,,,,,,,,,,"Value,Name
+,
+37406-6989781-6,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+11890.0,Basic
+"
+EN-94,Sameena Bibi  ,2014-06-02,Janitorial Staff ,Non Teaching Staff,Maid,,Maid,Rashida Faiz ,f,,true,,2 Years 2 Months,,1977-02-11,married,,Muhammad Irshad,Razia Bibi,,Unknown,Pakistan (‫پاکستان‬‎),Gangu Bahadur Taxila PO Taxila ,,,,, ,,,,,,(332) 877-6812,,,,"Value,Name
+,
+37406-4571943-6,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+11285.0,Basic
+"
+EN-106,Suriya Begum  ,2016-02-02,Janitorial Staff ,Non Teaching Staff,Maid,,Maid,Rashida Faiz ,f,,true,,0 Years 6 Months,,1958-01-01,married,,Behram Khan,Ayesha,,Unknown,Pakistan (‫پاکستان‬‎),Muslim cilony 5 no gate taxila  ,,,,, ,,,,,,(352) 505-0523,,,,"Value,Name
+,
+37406-6351903-6,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+8000.0,Basic
+"
+EN-107,Sumair  Aleem,2016-04-01,Faculty ,Non Teaching Staff,Computer Lab Inc,,Computer Lab Incharge,Rashida Faiz ,m,Sumair1127@gmail.com,true,D.A.E Mechanical,1 Years 4 Months,D.I.T ,1992-10-11,single,,Aleem Ahmed,Rubina Aleem,,A+,Pakistan (‫پاکستان‬‎),House # A232 Gulistan colony Wah cantt. ,Wah cantt,Punjab,Pakistan (‫پاکستان‬‎),, ,,Pakistan (‫پاکستان‬‎),,,,0303-5631585,,,,"Value,Name
+,
+37101-0624854-1,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+10000.0,Basic
+"
+EN-112,Saima  Irum,2016-03-14,Faculty ,Teaching Staff,Teacher,,Teacher,Rashida Faiz ,f,,true,Masters,0 Years 9 Months,"QAAPS, English Teacher",1991-02-17,single,,Muhammad Din,Yasmeen Akhter,,Unknown,Pakistan (‫پاکستان‬‎),Village Pind Gakhra Distt Haripur Post Office Khanpur,Taxila,,Pakistan (‫پاکستان‬‎),, ,,Pakistan (‫پاکستان‬‎),,,,0303-5265281,0345-5614687,,,"Value,Name
+,
+13302-0298959-4,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+10000.0,Basic
+"
+EN-114,Beenish  Rashid,2016-03-14,Faculty ,Teaching Staff,Teacher,System Admin,Teacher,Rashida Faiz ,f,,true,Master (Pshchology),2 Years 5 Months,"Tayyab ul Aloom, Teaching",1988-05-05,married,,Abdul Rashid,Yasmeen Bibi,Ghalib Khan,Unknown,Pakistan (‫پاکستان‬‎),Khan Communication G.T. Road Taxila ,Taxila,Punjab,Pakistan (‫پاکستان‬‎),, ,,Pakistan (‫پاکستان‬‎),,,,0313-5607111,,,,"Value,Name
+,
+13302-9770739-4,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+10900.0,Basic
+"
+EN-117,Nasir  Sarfraz,2016-03-14,Faculty ,Teaching Staff,Teacher,,Teacher,Rashida Faiz ,m,nasirtaji_97@yahoo.com,true,Bachelors BS(CE),1 Years 11 Months,"KEF (NGO) IT Trainer
+Saint Pauls IT Trainer
+",1987-12-04,married,,Sarfraz Khan,Nasreen Bibi,Amina Mumtaz,A+,Pakistan (‫پاکستان‬‎),Dhoke Awan Dollian P/O Wah Village tehsil Taxila ,Taxila,,Pakistan (‫پاکستان‬‎),, ,,Pakistan (‫پاکستان‬‎),,,,0314-5217307,,,,"Value,Name
+,
+37406-6981602-7,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+13000.0,Basic
+"
+EN-123,Syeda  Zahida,2016-03-16,Faculty ,Teaching Staff,Teacher,,Teacher,Rashida Faiz ,f,,true,Masters (Political Science),8 Years 4 Months,"F.G Girls HIT, Teaching
+RPS .M.B Din, Teaching",1973-05-29,married,2,Syed Sajjad Haider,Syeda Tahira,Syed Shahid Hussain,B+,Pakistan (‫پاکستان‬‎),"Pakistan Book center, zafar Ali Khan Road Taxila  ",Taxila,Punjab,Pakistan (‫پاکستان‬‎),, ,,Pakistan (‫پاکستان‬‎),,,,0336-1566863,0333-5398955,,,"Value,Name
+,
+,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+11600.0,Basic
+"
+EN-127,Muhammad Zahir Khan,2016-03-20,Janitorial Staff ,Non Teaching Staff,Guard,,Guard,Rashida Faiz ,m,educatorzahid@gmail.com,true,Matric,0 Years 4 Months,,1989-03-28,married,2,H.M. Afzal,Dilshad,Arosa Zahir,AB+,Pakistan (‫پاکستان‬‎),Bata Colony Gate # 3 Near B.H.U ,,,Pakistan (‫پاکستان‬‎),, ,,Pakistan (‫پاکستان‬‎),,,,0311-0644999,,,,"Value,Name
+,
+42401-1556429-7,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+9000.0,Basic
+"
+EN-128,Erum  Nisa,2016-04-11,Faculty ,Teaching Staff,Teacher,,Teacher,Rashida Faiz ,f,,true,Bachelor (General),0 Years 10 Months,"J.M. School Taxila.
+Teacher.",1993-03-15,single,,Muhammad Akram,Khateeb-un-Nisa,,AB+,Pakistan (‫پاکستان‬‎),C.B 136 Muslim Colony Taxila. ,Taxila,Punjab,Pakistan (‫پاکستان‬‎),, ,,Pakistan (‫پاکستان‬‎),,,,+92345-5533615,0321-5328493,,,"Value,Name
+,
+37406-7875518-2,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+9000.0,Basic
+"
+EN-129,Sabeen  Zahra,2016-04-12,Faculty ,Teaching Staff,Teacher,,Teacher,Rashida Faiz ,f,,true,Masters (Bio Sciences),0 Years 4 Months,,1985-08-27,married,1,Syed Ejaz Hussain Abbas,Robina Tabassum,Syed Nasir Abbas,A+,Pakistan (‫پاکستان‬‎),"Village, Ban Bhola, Thatta Khalil Road Taxila. ",Taxila,Punjab,Pakistan (‫پاکستان‬‎),, ,,Pakistan (‫پاکستان‬‎),,,,+92305-5915127,,,,"Value,Name
+,
+13302-3059979-0,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+10000.0,Basic
+"
+EN-130,Farhat Afza ,2016-03-21,Faculty ,Teaching Staff,Teacher,,Class Teacher,Khalida Khanam ,f,,true,Master,0 Years 4 Months,,1991-03-12,single,,Muhammad Yaqub,,,B+,Pakistan (‫پاکستان‬‎),SIII82 HIT Taxila Cantt ,,,Pakistan (‫پاکستان‬‎),, ,,Pakistan (‫پاکستان‬‎),,,923155323320,923120538884,,,,"Value,Name
+,
+37406-7984966-2,CNIC
+","Value,Name
+,
+,Account Number
+","Amount,Payroll category
+,
+10500.0,Basic
+"

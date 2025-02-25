@@ -1,0 +1,17 @@
+ store_item:
+    primary_keys:
+      item_name: "Item name"
+    overrides:
+      store_id: "Store Code"
+      item_category_id: "Item Category Code"
+      
+    associations:
+     - :store 
+     - :item_category
+    associated_columns:
+      store: "code_as"
+      item_category: "code"
+    filters:
+     - :school_id
+     - :is_deleted
+    

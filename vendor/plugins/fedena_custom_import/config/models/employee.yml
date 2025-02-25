@@ -1,0 +1,108 @@
+ employee:
+    primary_keys:
+      employee_number: "Employee Number"
+    overrides:
+      employee_category_id: "Employee Category Name"
+      employee_position_id: "Employee Position Name"
+      employee_department_id: "Employee Department Name"
+      reporting_manager_id: "Reporting Manager Number"
+      employee_grade_id: "Employee Grade Name"
+      nationality_id: "Nationality Name"
+      home_country_id: "Home Country Name"
+      office_country_id: "Office Country Name"
+      privileges: "User Privilege"
+      husband_name: "Spouse Name"
+      biometric_id: "Biometric ID"
+    associations:
+     - :employee_category
+     - :employee_position
+     - :employee_grade
+     - :employee_department
+     - :home_country
+     - :office_country
+     - :nationality
+     - :reporting_manager
+     - :user
+    associated_columns:
+      employee_category: "name"
+      employee_position: "name"
+      employee_grade: "name"
+      employee_department: "name"
+      home_country: "name_as"
+      office_country: "name_as"
+      reporting_manager: "username"
+      nationality: "name_as"
+    filters:
+     - :status
+     - :status_description
+     - :photo_file_name
+     - :photo_content_type
+     - :photo_data
+     - :photo_file_size
+     - :library_card
+     - :user_id
+     - :school_id
+    joins:
+      privileges: "users"
+    join_column_search:
+      privileges: "name"
+    associates:
+     employee_bank_detail: "bank_field"
+     employee_additional_detail: "additional_field"
+     employee_salary_structure: "payroll_category"
+    associate_columns:
+      employee_additional_detail: "additional_info"
+      employee_bank_detail: "bank_info"
+      employee_salary_structure: "amount"
+    associate_column_search:
+      bank_field: "name"
+      additional_field: "name"
+      payroll_category: "name"
+    associate_column_condition:
+      payroll_category: "is_deleted = false"
+    dependent:  "user"
+    attr_accessor_list:
+      - :biometric_id
+    associate_primary_keys:
+      employee_bank_detail:
+        bank_field_id:
+      employee_additional_detail:
+        additional_field_id:
+      employee_salary_structure:
+        payroll_category_id:
+
+
+      
+# every YAML file should contain all the content inside model_name.underscore hash.
+
+# If database columns names needed to be modfied then it should be placed in overrides hash.
+
+# Mention all the associations those arec needed in CSV upload inside associations_array.
+
+# Assoicated columns needs a field that will be searched for getting an ID to place.For example
+# nationality_id needs to be searched in country table by name which will be present in CSV.All those
+# required field to be placed in associated_columns hash.Association name is the key and field will be value.
+
+# Mention all those database columns which u dont want to appear in CSV inside filters array.Note that
+#  id,created_at,updated_at does not needs any mention inside filters.
+
+# If there is any join table data to be uploaded with CSV.Please mention that join name as key
+# and table name as value in joins hash.In this case privilege is the privileges_users is the table.So
+# entry will be privileges: users
+
+# This concept also same as the associated data.Mention the column by which join column names will be searched.
+# In this case privilege table will be searched by name.
+
+# There can be many additional data to upload while uploading a model data.Place all those additional
+# association names and parent names in associates hash.For example we have to upload employee bank detail,
+# so all the values from bank detail to be fetched,thats why the entry is like employee_bank_details: "bank_field".
+# All the current active bank fields will be appearing then to save in the structure.
+
+# The data user will be entering needed to be saved somewhere in the assoiated model.Mention those column names
+# inside associate_columns hash.For example someone entered his passport number as an additional detail.
+# This passport_number column to be get from additional_field table,then have to save the id in
+# employee_additional_detail table with a value for that in additional_info column.So the enry should be
+# employee_additional_detail: "additional_info"
+
+# Every associated parent model value to be searched by a column.For example,all the bank fields to be
+# searched by name from the bank_field table.Mention all those values inside associate_column_search hash.

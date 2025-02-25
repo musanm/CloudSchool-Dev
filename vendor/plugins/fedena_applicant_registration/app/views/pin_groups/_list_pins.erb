@@ -1,0 +1,56 @@
+<%= javascript_include_tag "sortable" %>
+<div class="details">
+  <b><%= link_to_remote "#{pluralize(@pin_group.pin_numbers.active.count,'Active Pin')}",:url => {:controller => "pin_groups",:action =>"search_ajax",:pin_group_id => @pin_group.id,:search => {:pin_group_id_equals => @pin_group.id,:is_active_equals => true}},:complete => "sortables_init()" ,:html=>{:class=>"themed_text"}%></b>
+  <b><%= link_to_remote "#{pluralize(@pin_group.pin_numbers.inactive.count,'Inctive Pin')}",:url => {:controller => "pin_groups",:action => "search_ajax",:pin_group_id => @pin_group.id,:search => {:pin_group_id_equals => @pin_group.id,:is_active_equals => false}},:complete => "sortables_init()",:html=>{:class=>"themed_text"}%></b>
+  <b><%= link_to_remote "#{pluralize(@pin_group.pin_numbers.registered.count,'Registered Pin')}",:url => {:controller => "pin_groups",:action => "search_ajax",:pin_group_id => @pin_group.id,:search => {:pin_group_id_equals => @pin_group.id,:is_registered => true}},:complete => "sortables_init()",:html=>{:class=>"themed_text"}%></b>
+</div>
+<% unless @pin_numbers.empty? %>
+  <table  class ="sortable" id="listing" width="100%" cellpadding="1" cellspacing="1" onload="sortables_init()" >
+    <tr class="tr-head">
+      <th><%= t('pin_number') %></th>
+      <th><%= t('active') %></th>
+      <th><%= t('registered') %></th>
+      <th class="unsortable themed_text"><%= t('options') %></th>
+    </tr>
+    <% @pin_numbers.each_with_index do |pin_number,index| %>
+      <tr class="tr-<%=cycle('odd','even')%>">
+
+        <td class="col-1"><%= pin_number.number %> </td>
+        <td class="col-1"><%= pin_number.is_active? ? t('active') : t('inactive') %> </td>
+        <td class="col-1"><%= pin_number.is_registered? ? t('registered') : t('not_registered') %> </td>
+        <td class="col-1">
+          <small>
+            <%= link_to pin_number.is_active? ? t('deactivate') : t('activate'),deactivate_pin_number_pin_group_path(pin_number)   %>
+          </small>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+  <%
+  unless @repeat_search == true
+    #raise "#{params[:query]} AND #{params[:options]}"
+    search = {:pin_group_id_equals => @pin_group.id}
+    unless @query.nil?
+      if @query.length >= 14
+        search = search.merge(:number_equals => @query.strip)
+      else
+        search = search.merge(:number_begins_with => @query.strip)
+      end
+    end
+    unless @option.nil?
+      if @option == "active"
+        search = search.merge(:is_active_equals => true)
+      elsif @option == "inactive"
+        search = search.merge(:is_active_equals => false)
+      elsif @option == "registered"
+        search = search.merge(:is_registered_equals => false)
+      end
+    end
+  else
+    search = @search
+  end
+%>
+  <%= will_paginate @pin_numbers,:renderer => "RemoteLinkRendererWithSort",:params=>{:action=>"search_ajax",:pin_group_id => @pin_group.id,:search => search} %>
+<% else %>
+  <p class="flash-msg"><%= t('no_pin') %></p>
+<% end %>

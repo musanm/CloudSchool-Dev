@@ -1,0 +1,22 @@
+<% @blog_posts.each do |bp| %>
+
+  <div class="blog_post hover">
+    <div class="post_title"><%= link_to truncate(bp.title,:length => 34,:omission => '...'),show_blog_path(:user_id => bp.blog.user.nil? ? "deleted_user" : bp.blog.user_id,:title => "#{bp.title.gsub('/','%2F').gsub('.','%20S').gsub('?',"%2G")}-#{bp.id}"),:method => :post %></div>
+    <div class="total_comments"><%= link_to bp.blog.nil? ? t('deleted_blog') : shorten_string(bp.blog.name.capitalize,18),show_blog_path(:user_id => bp.blog.user.nil? ? "deleted_user" : bp.blog.user_id,:title => "#{bp.title.gsub('/','%2F').gsub('.','%20S').gsub('?',"%2G")}-#{bp.id}"),:method => :post %></div>
+    <div class="total_likes">
+      <%= link_to bp.blog.nil? ? t('deleted_blog') : bp.blog.user.nil? ? t('deleted_user') : shorten_string(bp.blog.user.full_name,15),show_blog_path(:user_id => bp.blog.user.nil? ? "deleted_user" : bp.blog.user_id,:title => "#{bp.title.gsub('/','%2F').gsub('.','%20S').gsub('?',"%2G")}-#{bp.id}"),:method => :post %>
+    </div>
+    <div class="timestamp"><%= link_to I18n.l(bp.created_at.to_date, :format=>:normal),show_blog_path(:user_id => bp.blog.user.nil? ? "deleted_user" : bp.blog.user_id,:title => "#{bp.title.gsub('/','%2F').gsub('.','%20S').gsub('?',"%2G")}-#{bp.id}"),:method => :post %></div>
+    <div class="options">
+      <div class="like_image">
+        <% unless bp.voters_who_voted.blank? %>
+          <div class="who_liked"><%= "#{bp.voters_who_voted.compact.map(&:full_name).join("<br />")}" %></div>
+        <% end %>&nbsp;
+      </div>
+      <div class="like_no"><%= bp.votes_for %></div>
+    </div>
+  </div>
+<% end %>
+<div class="blog_post">
+  <%= will_paginate @blog_posts,:renderer => 'RemoteLinkRenderer',:params => {:controller => "blog_posts",:action => "show_all_recent_blog_posts",:user_id => @user.id} %>
+</div>

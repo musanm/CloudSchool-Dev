@@ -1,0 +1,10 @@
+if @error == false
+  page.replace_html 'form_error',:text => ''
+  page.replace_html 'comment_notice',:text => "abcdef"
+  @blog_comment = @blog_post.blog_comments.build
+  page.replace_html 'comments_area',:partial => 'blog_comments/comments',:object => @blog_comments
+  page.replace_html 'flash-msg',:text=>''
+  page.replace_html 'flash-msg1',:text=>"<p class='flash-msg'>#{t('blog_comments.comment_created')}</p>"
+else
+  page.replace_html 'form_error',:partial => 'form_error',:object => @blog_comment
+end

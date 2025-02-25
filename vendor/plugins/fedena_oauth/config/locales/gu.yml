@@ -1,0 +1,11 @@
+gu:
+  oauth:
+    account: "ખાતું"
+    could_not_authenticate_with: "દિલગીર છીએ, ઉપયોગ કરીને અધિકૃત કરી શક્યા નથી"
+    enter_user_email: "તમારો ઇમેઇલ દાખલ કરો"
+    login_with_google: "તમારા આનો ઉપયોગ કરીને સાઇન ઇન કરો"
+    no_user_with_email: "ઇમેઇલ સાથે કોઇ વપરાશકર્તા નથી"
+    select_user: "વપરાશકર્તા પસંદ કરો"
+  manage_clients: "ગ્રાહકોની વ્યવસ્થા કરો"
+  enable_oauth: "શપથને સક્ષમ કરો"
+  

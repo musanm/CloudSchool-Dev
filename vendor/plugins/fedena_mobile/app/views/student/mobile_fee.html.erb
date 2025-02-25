@@ -1,0 +1,21 @@
+<table class="table table-condensed">
+  <% @dates.each do |d| %>
+    <tr>
+      <td>
+        <label class="name"><%= d.name %></label>
+        <label class="description"><%= format_date(d.due_date) %></label>
+      </td>
+      <td>
+        <% if @student.check_fee_pay(d) %>
+          <label class="paid"><%= t("paid") %></label>
+        <% else %>
+          <label class="unpaid"><%= t("unpaid") %></label>
+          <label class="description"><%= d.student_fee_balance(@student) %></label>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  <% FedenaPlugin.deliver_registered_hook(:mobile_student_profile_fees).each do |mod| %>
+    <%= render :partial=>mod.camelize.constantize.send("mobile_student_profile_fees_hook"),:locals=>{:student=>@student} %>
+  <% end %>
+</table>

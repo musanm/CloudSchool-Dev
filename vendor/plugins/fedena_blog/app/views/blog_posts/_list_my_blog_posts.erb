@@ -1,0 +1,39 @@
+
+<% unless @blog_posts.blank? %>
+  <% @blog_posts.each do |bp| %>
+
+    <div class="blog_post hover">
+      <div class="post_title"><%= link_to truncate(bp.title,:length => 34,:omission => '...'),show_blog_path(:user_id => @user.id,:title => "#{bp.title.gsub('/','%2F').gsub('.','%20S').gsub('?',"%2G")}-#{bp.id}"),:method => :post %></div>
+      <div class="total_comments">
+        <div class="comment_image">
+        </div>&nbsp;
+        <div class="comment_no"><%= bp.blog_comments.showable.count %></div>
+      </div>
+      <div class="total_likes">
+        <div class="like_image">
+          <% unless bp.voters_who_voted.blank? %>
+            <div class="who_liked"><%= "#{bp.voters_who_voted.compact.map(&:full_name).join("<br />")}" %></div>
+          <% end %>&nbsp;
+        </div>
+        <div class="like_no"><%= bp.votes_for %></div>
+      </div>
+      <div class="timestamp"><%= bp.created_at.strftime("%B" + " #{bp.created_at.to_date.day.ordinalize}," + "%Y") %></div>
+      <div class="options">
+        <% if bp.is_owner? or @current_user.privileges.map(&:name).include? "BlogAdmin" %>
+          <%= link_to t('edit'),edit_blog_blog_post_path(@user.id,bp) %>
+          <% if bp.is_owner? %>
+            | <%= link_to_remote t('delete'),:url => {:controller => "blog_posts",:action => "delete",:user_id => @user.id,:id => bp.id,:page => @blog_posts.current_page},:confirm => t('delete_post') %>
+          <% end %>
+          <% if bp.is_owner? %>
+            | <%= link_to_remote bp.is_published == true ? t('unpublish') : t('publish'),:url => {:controller => "blog_posts",:action => "publish_unpublish",:user_id => @user.id,:id => bp.id,:page => @blog_posts.current_page}  %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  <div class="blog_post">
+    <%= will_paginate @blog_posts,:renderer => 'RemoteLinkRenderer',:params => {:controller => "blog_posts",:action => "show_my_blog_posts",:user_id => @user.id} %>
+  </div>
+<% else %>
+  <p class="flash-msg"> <%= t('no_post') %> </p>
+<% end %>

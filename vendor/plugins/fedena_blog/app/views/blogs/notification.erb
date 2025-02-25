@@ -1,0 +1,32 @@
+
+
+<div id="content-header">
+  <%= show_header_icon %>
+  <h1><%= t('blogs_text') %></h1>
+<div class='header-sep'>|</div>
+<div class='sub-header'><%= t('activities') %></div>
+<div id="inner-tab-menu">
+  <ul>
+    <li class='themed_bg themed-dark-hover-background'><%= link_to t('search'),search_blog_blog_posts_path(@current_user.id) %></li>
+    <li class='themed_bg themed-dark-hover-background'><%= link_to t('my_blog'),my_blog_path %></li>
+    <li class='themed_bg themed-dark-hover-background'><%= link_to t('home'),blog_blog_posts_path(@current_user.id) %></li>
+  </ul>
+</div>
+</div>
+<div id="page-yield">
+  <div class="bread_crumb">
+    <%= make_breadcrumb %>
+    <%= render_breadcrumbs  %>
+  </div>
+  <div id="flash_notice"></div>
+  <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+
+
+
+  <div id ="list_notifications">
+    <%= render :partial => "list_notifications" %>
+  </div>
+
+</div>

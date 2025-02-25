@@ -1,0 +1,432 @@
+<div id="" align="center" style="margin-left: 50px;  width: 1150px">
+
+
+  <div>
+    <div>
+      <br>
+      <div align="left" >
+        <table width="45%" cellspacing="0">
+          <tr>
+            <td class="no-border" style="text-align: center;">Student Name</td>
+            <td style="border: 1px solid #ADACAB; text-align: center;"><b><%= @student.full_name %></b></td>
+          </tr>
+          <tr><td class="no-border">.</td><td class="no-border"></td></tr>
+          <tr>
+            <td class="no-border" style="text-align: center;">Admission Number</td>
+            <td style="border: 1px solid #ADACAB; text-align: center;"><b><%= @student.admission_no %></b></td>
+          </tr>
+        </table>
+      </div>
+      <div align="right" style="margin-top: -75px;">
+        <table   style="margin-right: 60px;"  width="45%" cellspacing="0">
+          <tr>
+            <td style="text-align: center;" class="no-border">Guardian Name</td>
+            <td style="border: 1px solid #ADACAB; text-align: center;"><b><%= @student.guardians.present? ? @student.guardians.first.full_name : "No Guardian Present" %></b></td>
+          </tr>
+          <tr><td class="no-border">.</td><td class="no-border"></td></tr>
+          <tr>
+            <td class="no-border" style="text-align: center;">Class</td>
+            <td style="border: 1px solid #ADACAB; text-align: center;"><b><%= @batch.full_name %></b></td> 
+          </tr>
+        </table>
+      </div>
+    </div>
+    <br>
+  </div>
+
+
+
+  <% exam_score = [] %>
+  <% @exams.each do |exam| %>
+    <% exam_score.push exam.exam_scores.find_by_student_id(@student.id) unless exam.exam_scores.find_by_student_id(@student.id).nil?  %>
+  <% end %>
+  <div id="pdf-info">
+    <% if @batch.cwa_enabled? %>
+      <% total_credits=0 %>
+      <% total_weighted_marks=0 %>
+      <table id="pdf-table" width="100%" cellspacing="0">
+        <% c = 'even'  %>
+        <tr class="table-header">
+          <td class="col-pdf"><%= t('subject_code') %></td>
+          <td class="col-pdf"><%= t('title') %></td>
+          <td class="col-pdf"><%= t('marks') %></td>
+          <td class="col-pdf"><%= t('credit') %></td>
+          <td class="col-pdf"><%= t('grade') %></td>
+          <td class="col-pdf"><%= t('weighted_marks') %></td>
+        </tr>
+        <tr class="tr-blank"></tr>
+        <% exam_score.each do |es| %>
+          <tr class="<%= cycle(c,(["odd","even"]-[c]).first) %>">
+            <td class="col-pdf"> <%= es.exam.subject.code %></td>
+            <td class="col-pdf"> <%= es.exam.subject.name %></td>
+            <td class="col-pdf"><%= valid_mark?(es.exam.maximum_marks) ? es.marks.present? ? mark=(es.marks.to_f/es.exam.maximum_marks.to_f)*100 : '-' : "-"%></td>
+            <td class="col-pdf"><%= es.exam.subject.credit_hours %></td>
+            <% total_credits = total_credits + es.exam.subject.credit_hours.to_f %>
+            <td class="col-pdf"><%= es.grading_level.present? ? es.grading_level : "-" %></td>
+            <% weighted_mark=0 %>
+            <% weighted_mark = mark.to_f * es.exam.subject.credit_hours.to_f if es.marks.present? %>
+            <% total_weighted_marks = total_weighted_marks + weighted_mark %>
+            <td class="col-pdf"><%= weighted_mark %></td>
+          </tr>
+        <% end %>
+        <tr class="tr-blank"></tr>
+        <tr class="table-header">
+          <td class="col-pdf" colspan="3" align="right"><%= t('total') %></td>
+          <td class="col-pdf"><%= total_credits %></td>
+          <td>-</td>
+          <td class="col-pdf"><%= total_weighted_marks %></td>
+        </tr>
+      </table>
+      <h5><%= t('weighted_average') %> =
+        <% unless total_credits==0 %>
+          <%= "%.2f" %(total_weighted_marks.to_f/total_credits.to_f) %>
+        <% else %>
+          -
+        <% end %>
+      </h5>
+    <% elsif @batch.gpa_enabled? %>
+      <% total_credit_points=0 %>
+      <% total_credit_hours=0 %>
+      <table id="pdf-table" width="100%" cellspacing="0">
+        <% c = 'even'  %>
+        <tr class="table-header">
+          <td class="col-pdf"><%= t('subject_code') %></td>
+          <td class="col-pdf"><%= t('subject_title') %></td>
+          <td class="col-pdf"><%= t('credits') %></td>
+          <td class="col-pdf"><%= t('marks') %></td>
+          <td class="col-pdf"><%= t('remarks') %></td>
+        </tr>
+        <tr class="tr-blank"></tr>
+        <% exam_score.each do |es| %>
+          <tr class="<%= cycle(c,(["odd","even"]-[c]).first) %>">
+            <td class="col-pdf"> <%= es.exam.subject.code %></td>
+            <td class="col-pdf"> <%= es.exam.subject.name %></td>
+            <td class="col-pdf"><%= es.exam.subject.credit_hours %></td>
+            <% total_credit_hours = total_credit_hours + es.exam.subject.credit_hours.to_f %>
+            <td class="col-pdf"><%= "#{es.grading_level.present? ? es.grading_level : "-"}"+" ["+"#{es.grading_level.present? ? (es.grading_level.credit_points.present? ? es.grading_level.credit_points : "-") : "-"}"+"]" %></td>
+            <% points=0 %>
+            <% points = (es.grading_level.credit_points.to_f) * (es.exam.subject.credit_hours.to_f) if es.grading_level.present? %>
+            <% total_credit_points = total_credit_points + points %>
+            <td class="col-pdf"><%= es.grading_level.present? ? (es.grading_level.description.present? ? es.grading_level.description : "-") : "-" %></td>
+          </tr>
+        <% end %>
+        <tr class="tr-blank"></tr>
+        <tr class="table-header">
+          <td class="col-pdf" colspan="2" align="right"><%= t('total') %></td>
+          <td class="col-pdf"><%= total_credit_hours %></td>
+          <td>-</td>
+          <td class="col-pdf">-</td>
+        </tr>
+      </table>
+
+      <h5><%= t('grade_point_average_gpa') %> =
+        <% unless total_credit_hours==0 %>
+          <%= "%.2f" %(total_credit_points.to_f/total_credit_hours.to_f) %>
+        <% else %>
+          -
+        <% end %> </h5>
+
+    <% else %>
+      <% total_marks_attained = 0 %>
+      <% total_max_marks = 0 %>
+      <table id="pdf-table" width="100%" cellspacing="0">
+        <% c = 'even'  %>
+        <tr class="table-header">
+          <td class="col-pdf"><%= t('subject') %></td>
+          <% if @exam_group.exam_type == 'Marks' %>
+            <td class="col-pdf"><%= t('marks_obtained') %></td>
+            <td class="col-pdf"><%= t('max') %></td>
+            <td class="col-pdf"><%= t('percentage') %>(%)</td>
+          <% elsif @exam_group.exam_type == 'Grades' %>
+            <td><%= t('grades') %></td>
+          <% else %>
+            <td class="col-pdf"><%= t('marks_obtained') %></td>
+            <td class="col-pdf"><%= t('max') %></td>
+            <td class="col-pdf"><%= t('grades') %></td>
+            <td class="col-pdf"><%= t('percentage') %>(%)</td>
+          <% end %>
+        </tr>
+        <tr class="tr-blank"></tr>
+        <% exam_score.each do |es| %>
+          <tr class="<%= cycle(c,(["odd","even"]-[c]).first) %>">
+            <td class="col-pdf"> <%= es.exam.subject.name %></td>
+            <% if @exam_group.exam_type == 'Marks' %>
+              <td class="col-pdf"><%= es.marks || '-' %></td>
+              <% total_marks_attained = total_marks_attained+(es.marks || 0) %>
+              <td class="col-pdf"><%= es.exam.maximum_marks %></td>
+              <% total_max_marks = total_max_marks+es.exam.maximum_marks%>
+              <td class="col-pdf"><%= es.calculate_percentage.round(2) %></td>
+            <% elsif @exam_group.exam_type == 'Grades' %>
+              <td class="col-pdf"><%= es.grading_level || "-" %></td>
+            <% else %>
+              <td class="col-pdf"><%= es.marks || "Ab" %></td>
+              <% total_marks_attained = total_marks_attained+(es.marks || 0) %>
+              <td class="col-pdf"><%= es.exam.maximum_marks %></td>
+              <% total_max_marks = total_max_marks+es.exam.maximum_marks%>
+              <td class="col-pdf"><%= es.grading_level || "---" %></td>
+              <td class="col-pdf"><b><%= es.calculate_percentage.round(2) %></b></td>
+            <% end %>
+          </tr>
+        <% end %>
+        <tr class="tr-blank"></tr>
+        <% if @exam_group.exam_type == 'Marks' or @exam_group.exam_type == 'MarksAndGrades' %>
+          <tr class="table-header">
+            <td class="col-pdf"><b><%= t('total_marks') %>:</b></td>
+            <td class="col-pdf"><b><%= total_marks_attained %></b></td><td class="col-pdf"><b><%= total_max_marks %></b></td>
+            <%  if @exam_group.exam_type == 'MarksAndGrades' %>
+              <% marks =  "%.2f" %(total_marks_attained*100/total_max_marks) %>
+              <td class="col-pdf"><b><%= Student.get_grades(marks)  unless total_max_marks == 0 %></td>
+            <% end %>
+            <td class="col-pdf"><b><%= "%.2f" %(total_marks_attained*100/total_max_marks) unless total_max_marks == 0 %></b></td>
+          </tr>
+        <% end %>
+      </table>
+
+    <% end %>
+  </div>
+<br><br>
+  <%# total_avg = GroupedExamReport.find_by_student_id_and_batch_id_and_score_type(@student.id,@batch.id,"c") %>
+  <div>
+    <div align="left" >
+      <table id="" width="25%" cellspacing="0" border="1" >
+        <% if params["add_position"] == "1" %>
+          <tr>
+            <td>Class Position</td>
+            <% rank = @ranked_students.select{|rank| rank[3].id == @student.id }.first %>
+            <td><b><%= rank[0] %></b></td>
+          </tr>
+        <% end %>
+        <tr>
+          <td>Percentage</td>
+          <td><b><%=  "%.2f" %(total_marks_attained*100/total_max_marks) unless total_max_marks == 0 %></b></td>
+        </tr>
+        <% unless total_max_marks == 0  %>
+          <% marks = ("%.2f" %(total_marks_attained*100/total_max_marks)).to_f  %>
+          <% if  marks >= 90 %>
+            <% remark = "Exceptional" %>
+          <% elsif (marks < 90 && marks >= 80) %>
+            <% remark = "Excellent" %>
+          <% elsif  (marks < 80 && marks >= 70) %>
+            <% remark = "Very Good" %>
+          <% elsif (marks < 70 && marks >= 60) %>
+            <% remark = "Good" %>
+          <% elsif (marks < 60 && marks >= 50) %>
+            <% remark = "Fair" %>
+          <% elsif (marks < 50 && marks >= 40) %>
+            <% remark = "Pass" %>
+          <% else %>
+            <% remark = "-" %>
+          <% end %>
+          <tr>
+            <td>Teacher Remarks</td>
+            <td><b><%= remark %></b></td>
+          </tr>
+        <% else %>
+          <% remark = "-" %>
+        <% end %>
+      </table>
+    </div>
+    
+    <div align="right" style="margin-top: <%= (params["add_postion"] == "false") ? '-53px' : '-85px' %>; margin-right: 10px;" >
+      <table id="" width="25%" cellspacing="0" border="1" >
+        <tr>
+          <td>Attendance:</td>
+          <td><b><%= @leaves[@student.id]['percent'].round(2) unless @leaves[@student.id]['percent'].nil? %></b></td>
+        </tr>
+        <tr>
+          <td>Working Days</td>
+          <td><b><%= @batch.academic_days.count %></b></td>
+        </tr>
+        <tr>
+          <td>Present</td>
+          <td><b><%= @leaves[@student.id]['total'] %></b></td>
+        </tr>
+      </table>
+
+    </div>
+  </div>
+  <br>
+  
+  <table width="100%" cellspacing="0" >
+    <tr>
+      <td class="no-border" style="width:300px; height: 98px; text-align: center;">
+        <hr>
+        Class Teacher
+      </td>
+      <td class="no-border" rowspan="2" style="width: 500px; text-align: center;">
+        <% school = SchoolDetail.first.try(:school) %>
+        <%# school = School.find_by_name(Configuration.get_config_value('InstitutionName')) %>
+        <% principle_sign = school.attach_signatures.present? ?  school.attach_signatures.last : "" %>
+        <% if principle_sign.present? && principle_sign.photo.present? %>
+          <%= wicked_pdf_image_tag principle_sign.photo ,:style=>"height: 100px; width: 100px;position:relative;top:-2px;"%>
+        <% end %>
+      </td>
+      <td class="no-border"></td>
+    </tr>
+    <tr>
+      <td class="no-border" class="no-border" style="height: 98px; text-align: center;">
+        <% qr_image = school.attach_signatures.present? ?  school.attach_signatures.first : "" %>
+        <% if qr_image.present? && qr_image.photo.present? %>
+          <%= wicked_pdf_image_tag qr_image.photo ,:style=>"height: 50px; width: 100px; position:relative;top:-2px;"%>
+        <% end %>
+        <hr>
+        School Head
+      </td>
+      <td class="no-border" style="width:300px; text-align: center;">
+        <hr style="margin-top: 55px;">
+        School Stamp<br>
+      </td>
+    </tr>
+  </table>
+
+
+</div>
+
+
+
+<style>
+  
+  .clearfix {
+    display: inline-block;
+  }
+  #page-yield {
+      /*width:800px;*/
+      margin: 0 auto;
+      float: left;
+      overflow: hidden;
+  }
+
+
+
+  .hor_line{
+      width:800px;
+      background: #333333;
+      height: 1px;
+  }
+
+  h2.heading{
+      text-align: center;
+      margin:5px;
+  }
+
+  #main_info h4{
+      color: #555555;
+      margin-top: 18px;
+      font-weight: normal;
+  }
+
+  #main_info h2{
+      margin-bottom: 2px;
+      font-weight: normal;
+
+  }
+
+
+  .odd{
+      height:auto;
+      background: #EEEEEE;
+
+  }
+
+  .even{
+
+      height:auto;
+      background: #fff;
+
+
+  }
+  tr.even{
+      border: 1px solid #ADACAB;
+  }
+
+  tr.odd{
+      border: 1px solid #ADACAB;
+  }
+
+  .even td{
+
+      padding: 5px 15px 5px 15px;
+      border: 1px solid #ADACAB;
+      border-right: 0px solid #fff;
+      border-top: 0px solid #fff;
+
+  }
+
+  .odd td{
+      padding: 5px 15px 5px 15px;
+      border: 1px solid #ADACAB;
+      border-right: 0px solid #fff;
+      border-top: 0px solid #fff;
+
+  }
+
+
+
+  .table-header td{
+      padding: 12px 12px 12px 15px;
+      border-top: 1px solid #ADACAB;
+      border-left: 1px solid #ADACAB;
+      border-right: 1px solid #ADACAB;
+      color: #97080e;
+      background: #EEEEEE;
+  }
+
+  table#pdf-table{
+      border-top: 1px solid #ADACAB;
+      border-collapse:collapse
+  }
+
+
+  #page-extender{
+      width:100%;
+      height :300px;
+
+  }
+  #page-extender1{
+      width:100%;
+      height :500px;
+
+  }
+
+  .report{
+      height: 100%;
+      margin: 0 auto;
+  }
+
+  .report1{
+      /*min-height: 1260px;*/
+      margin: 0 auto;
+  }
+
+  #signature{
+      text-align: right;
+      width: 700px;
+      margin: 0 auto;
+      color: #999999;
+      font-size: 18px;
+      margin-bottom: 100px;
+  }
+
+
+  #page-yield h2{
+      text-align: center;
+  }
+
+
+  .page-break td{
+      height: 300px;
+      border: 1px solid #fff;
+      border-bottom: 1px solid #ADACAB;
+  }
+
+
+
+.col-pdf {
+  text-align: center;
+}
+
+.no-border {
+  border: none !important;
+}
+
+</style>

@@ -1,0 +1,11 @@
+ employee_salary_structure:
+    overrides:
+      employee_id: "Employee Name"
+      payroll_category_id: "Payroll Category Name"
+    associations:
+     - :employee
+     - :payroll_category
+    filters:
+     - :employee_id
+
+# Please refer to employee.yml for basic concept.

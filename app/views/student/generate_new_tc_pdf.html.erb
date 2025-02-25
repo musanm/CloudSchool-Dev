@@ -1,0 +1,177 @@
+<!-- <table>
+	<td class="center">
+		<%#= wicked_pdf_image_tag current_school_detail.logo,:s3=>true,:style=>:original,:timestamp=>false %>
+	</td>
+</table> -->
+<% target=RemarkSetting.find_by_target('custom_remark') %>
+<% remarks=Remark.find_all_by_student_id_and_target_id(@student.former_id,target.id,:order=>"updated_at desc") %>
+<% school_detail = SchoolDetail.first %>
+<% phone_number =  Configuration.get_config_value('InstitutionPhoneNo'); %>
+
+<% finance_fees = FinanceFee.find_all_by_student_id(@student.former_id) %>
+<% fee_date = nil %>
+<% finance_fees.each do |ff| %>
+	<% if ff.is_paid %>
+		<% fee_date = ff.finance_fee_collection.name %>
+	<% end %>
+<% end %>
+
+
+<div class="header">
+  <div class="logo center" style="width: 100%; heikht: 100%">
+    <%= wicked_pdf_image_tag current_school_detail.logo,:s3=>true,:style=>:original,:timestamp=>false %>
+  </div>
+  <div class="center">
+    <h3><%=Configuration.get_config_value('InstitutionName'); %></h3>
+    <p style="margin-top: -18px;"><%=Configuration.get_config_value('InstitutionAddress'); %></p>
+    <p style="margin-top: -18px;"><%= phone_number %></p>
+  </div>
+</div>
+
+<div class="header-context">
+	<h1>School Leaving Certificate</h1>
+</div>
+
+<table>
+  <tr>
+    <td style="width:1%;">S.No</td>
+    <td style="border-bottom: 1px solid black; width: 10%; text-align: center;"><%= (@student.slc_counter + 10000) rescue "" %></td>
+    <td class="right" style="width:75%;">Admission No.</td>
+    <td style="border-bottom: 1px solid black; width: 27%; text-align: center;"><b><%= @student.admission_no %></b></td>
+  </tr>
+</table>
+
+<table class="italic">
+  <tr>
+    <td style="width: 20%;">It is to certify that </td>
+    <td style="border-bottom: 1px solid black; width: 50%; text-align: center;"><b><%= @student.full_name  %></b></td>
+    <td style="width: 2%;" class="right">S/O.D/O</td>
+    <td style="border-bottom: 1px solid black; text-align: center;"><b></b></td>
+  </tr>
+</table>
+
+<table class="italic">
+  <tr>
+    <td style="border-bottom: 1px solid black; width: 50%; text-align: center;">
+    	<b><%= @student.archived_guardians.first.full_name rescue nil %></b>
+    </td>
+    <td style="width: 16%;" class="right">has attended this school</td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td style="width: 2%;">from</td>
+    <td style="border-bottom: 1px solid black; width: 20%; text-align: center;"><b><%= format_date(@student.admission_date) %></b></td>
+    <td style="width: 1%;">to</td>
+    <td style="border-bottom: 1px solid black; width: 20%; text-align: center;"><b><%= format_date(@student.date_of_leaving) rescue nil %></b></td>
+    <td style="width: 29%;">and has paid all dues up to</td>
+    <td style="border-bottom: 1px solid black; text-align: center;"><b><%= fee_date rescue "" %></b></td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td style="width: 27%">His/Her date of birth as per school record is</td>
+    <td style="border-bottom: 1px solid black; width: 20%; text-align: center;">
+    	<b><%= format_date(@student.date_of_birth) %></b>
+  	</td>
+    <td style="width: 15%">He/She was admitted</td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td style="width: 18%">to this school in class</td>
+    <td style="border-bottom: 1px solid black; width: 20%; text-align: center;">
+    	<b><%= @student.all_batches.first.name %></b>
+    </td>
+    <td style="width: 25%">He/She was studying in class</td>
+    <td style="border-bottom: 1px solid black; width: 20%; text-align: center;">
+    	<b><%= @student.batch.name rescue "" %></b>
+  	</td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td style="width: 18%">at the time of leaving the school on</td>
+    <td style="border-bottom: 1px solid black; width: 20%; text-align: center;">
+    	<b><%= format_date(@student.date_of_leaving) rescue nil %></b>
+    </td>
+    <td style="width: 12%">Her/His character during</td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td style="width: 3%">this period was</td>
+    <td style="border-bottom: 1px solid black; width: 20%; text-align: center;"><b><%= remarks.last.remark_body rescue "" %></b></td>
+  </tr>
+</table>
+
+<table style="padding-top: 70px;">
+  <tr>
+    <td>Certified above information is in accordance with the school record.</td>
+  </tr>
+</table>
+
+
+<table style="padding-top: 60px;">
+  <tr>
+    <td style="width: 13%">Prepared By</td>
+    <td style="border-bottom: 1px solid black; width: 20%; text-align: center;"></td>
+    <td style="width: 13%">Received By</td>
+    <td style="border-bottom: 1px solid black; width: 20%; text-align: center;"></td>
+    <td style="width: 13%">Checked By</td>
+    <td style="border-bottom: 1px solid black; width: 20%; text-align: center;"></td>
+  </tr>
+</table>
+
+<table style="padding-top: 100px">
+  <tr>
+    <td style="width: 6%">Date</td>
+    <td style="border-bottom: 1px solid black; width: 20%; text-align: center;"></td>
+    <td class="right">Principal</td>
+  </tr>
+</table>
+
+<table style="padding-top: 70px; width: 100%;">
+  <tr>
+    <td style="min-widt: 33%" class="left darkgray">email: <%= school_detail.email rescue "" %></td>
+    <td class="center darkgray"><%= school_detail.website rescue "" %></td>
+    <td class="right darkgray">phone# <%= phone_number %></td>
+  </tr>
+</table>
+
+<style>
+  table{
+    width: 100%;
+    padding: 40px 50px 0 50px;
+  }
+  .darkgray{
+  	color: darkgray;
+  }
+  .left{
+    text-align: left;
+  }
+  .right{
+    text-align: right;
+  }
+  .center{
+  	text-align: center;
+  }
+
+  table.italic , td{
+    font-style: italic;
+  }
+
+  .header{
+  	padding-top: 30px;
+  }
+
+  .header-context {
+  	text-align: center;
+    font-style: italic;
+  }
+</style>

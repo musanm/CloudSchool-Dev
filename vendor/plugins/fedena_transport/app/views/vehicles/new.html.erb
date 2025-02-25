@@ -1,0 +1,105 @@
+<div id="content-header">
+  <%= show_header_icon %>
+  <h1><%= t('transport_text') %></h1>
+  <div class='header-sep'>|</div>
+  <div class='sub-header'><%= t('add_new_vehicle') %></div>
+  <div id="inner-tab-menu">
+    <ul>
+      <li class='themed_bg themed-dark-hover-background'><%= link_to "#{t('view_all')}", vehicles_path %></li>
+    </ul>
+  </div>
+
+</div>
+<div id="page-yield">
+  <div class="bread_crumb">
+    <%= make_breadcrumb %>
+    <%= render_breadcrumbs  %>
+  </div>
+  <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+  <div id="vehicle_form">
+    <% form_for(@vehicle) do |v| %>
+      <%= error_messages_for :vehicle %>
+
+      <div class="label-field-pair">
+        <label for="vehicle_no"><%= t('vehicle_no') %><span class="necessary-field">*</span> </label>
+        <div class="text-input-bg"><%= v.text_field :vehicle_no %></div>
+      </div>
+
+      <div class="label-field-pair">
+        <label for="vehicle_no"><%= t('route') %><span class="necessary-field">*</span> </label>
+        <div class="text-input-bg"><%= v.select :main_route_id, @routes.map{|r| [r.destination,r.id]}, {:prompt => "#{t('select_main_route')}"} %></div>
+      </div>
+
+
+      <div class="label-field-pair">
+        <label for="vehicle_no"><%= t('no_of_seats') %><span class="necessary-field">*</span> </label>
+        <div class="text-input-bg"><%= v.text_field :no_of_seats %></div>
+      </div>
+
+      <div class="label_field_pair">
+        <label class="label_for_status" for="status"><%= t('status') %></label>
+        <div class="status_value">
+          <%= v.radio_button  "status", "Active", :checked => "checked" %>
+          <label class="label_for_active" for="active"> <%= t('active') %></label>
+          <%= v.radio_button  "status", "Inactive" %>
+          <label class="label_for_inactive" for="inactive"><%= t('inactive') %></label>
+        </div>
+      </div>
+
+
+      <% i=0 %>
+      <%v.fields_for :route_vehicle_additional_details do |ff|%>
+        <%=ff.hidden_field :route_vehicle_additional_field_id%>
+        <% additional = @additional_fields.select{|a| a.id==ff.object.route_vehicle_additional_field_id}.first  %>
+        <% if additional.input_type=="belongs_to" %>
+          <div class="label-field-pair">
+            <label><%= additional.name %>
+              <% if additional.is_mandatory %>
+                <span class="necessary-field">*</span>
+              <% end %>
+            </label>
+            <div class="text-input-bg"><%= ff.select  :additional_info,additional.vehicle_additional_field_options.map{|b| [b.field_option,b.field_option]},:prompt=>"#{t('select_an_option')}"%></div>
+          </div>
+        <% elsif additional.input_type=="has_many" %>
+          <div class="label-field-pair">
+            <label><%= additional.name %>
+              <% if additional.is_mandatory %>
+                <span class="necessary-field">*</span>
+              <% end %></label>
+          </div>
+          <div class="fee_category_scroll">
+            <div class="sel-list">
+              <%= t('select') %>: <%= link_to_function t('all'), "$$('input.check#{i}').each(function(checkbox) { checkbox.checked = true; });" %>,
+              <%= link_to_function t('none'), "$$('input.batches_box').each(function(checkbox) { checkbox.checked = false; });" %>
+            </div>
+            <% additional.vehicle_additional_field_options.each do |k| %>
+              <div class="each_batch">
+                <% unless params[:vehicle].present? and [:route_vehicle_additional_details_attributes].present? %>
+                  <%=check_box_tag "vehicle[route_vehicle_additional_details_attributes][#{i.to_s}][additional_info][]", k.field_option, false, {:class=>"batches_box check#{i}"}%><label class="check_box_value"><%=k.field_option%></label>
+                <% else %>
+                  <%= check_box_tag "vehicle[route_vehicle_additional_details_attributes][#{i.to_s}][additional_info][]", k.field_option, params[:vehicle][:route_vehicle_additional_details_attributes][i.to_s]["additional_info"].present? ? params[:vehicle][:route_vehicle_additional_details_attributes][i.to_s]["additional_info"].include?(k.field_option) ? true :false : false, {:class=>"batches_box check#{i}"} %><label class="check_box_value"><%=k.field_option%></label>
+                <% end %>
+              </div>
+            <% end %>
+            <%= hidden_field_tag "vehicle[route_vehicle_additional_details_attributes][#{i.to_s}][additional_info][]", nil %>
+          </div>
+        <% else %>
+          <div class="label-field-pair">
+            <label><%= additional.name %>
+              <% if additional.is_mandatory %>
+                <span class="necessary-field">*</span>
+              <% end %></label>
+            <div class="text-input-bg"><%= ff.text_field :additional_info%></div>
+          </div>
+        <% end %>
+        <% i+=1 %>
+
+      <% end %>
+
+      <%= submit_tag "", :value => "► #{t('save')}", :class => "submit_button", :disable_with => "► #{t('please_wait')}"  %>
+    <% end %>
+
+  </div>
+</div>

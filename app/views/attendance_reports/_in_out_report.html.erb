@@ -1,0 +1,84 @@
+<div id="register">
+  
+  <div class="header">
+    <!-- <div class="prev"><a class="goto" batch_id="1" next="Mon Nov 27 2017 00:00:00 GMT+0530 (IST)">◄</a>
+    </div> -->
+    <div class="month"><%= @result["date"] %>
+    </div>
+    <!-- <div class="next"><a class="goto" batch_id="1" next="Sat Jan 27 2018 00:00:00 GMT+0530 (IST)">►</a>
+    </div> -->
+    <div class="extender">
+    </div>
+  </div>
+
+  <div class="box-1">
+    <% if @header.present? && @data.present? %>
+      <table id="register-table">
+        <tbody>
+          
+          <tr class="tr-head">
+            <td colspan="2" class="head-td-name head-td-name themed_text">Student</td>
+            <td class="head-td-date themed_text">
+                <div class="day"></div>
+                <div class="date themed_text"></div>
+              </td>
+            <% @header.to_a.each do |head| %>
+              <td class="head-td-date themed_text">
+                <div class="day"><%= head.first %></div>
+                <div class="date themed_text"><%= head.last %></div>
+              </td>
+            <% end %>  
+            <td class="head-td-date themed_text">
+              <div class="day"></div>
+              <div class="head-td-name head-td-name themed_text" >Present/Absent</div>
+            </td>
+          </tr>
+          <% first_day = @result["day_one"] %>
+          <% @data.each_with_index do |hash,i| %>
+            <% tem_day = first_day %>
+            <tr class="">
+              <td class="head-td-name head-td-name"><%= i+1 %></td>
+              <td class="head-td-name head-td-name"><%= hash.first %></td>
+              <td class="head-td-date">
+                <div class="day in">IN</div>
+                <div class="date out">OUT</div>
+              </td>
+              <% week_day = tem_day - 1 %>
+              <% absent_count = 0 %>
+              <% hash.last["attendance"].each_with_index do |val,j| %>
+                <% week_day += 1 %>
+                <% class_name = "sat_or_sun" if @result["not_weekdays"].include? week_day %>
+                <% class_name = "sat_or_sun" if @result["holiday_events"].include? j+1 %>
+                <td class="head-td-date <%= class_name %>">
+                  <% if val.first == "A"%>
+                    <% absent_count += 1 %>
+                    <div style="font-size: 13px;">
+                      A
+                    </div>
+                  <% else %>
+                    <div class="day in <%= class_name %> <%= 'late_in_class' if val[1] == 'Late'%>"><%= val.first %></div>
+                    <div class="date out <%= class_name %>"><%= val.last %></div>
+                  <% end %>
+                </td>
+                <% week_day = 0 if week_day == 7 %>
+              <% end %>
+              <td class="head-td-date">
+                <%= hash.last["percentage"] %>/<%= absent_count %>
+              </td>
+            </tr>
+          <% end %>
+          <tr class="" >
+            <td class="head-td-date" colspan="3">
+              <div class="daily_att">Daily Attendance (%)</div></td>
+            <% @result["daily_attendance_percentage"].sort.each do |att| %>
+              <td class="head-td-date"><%= att.last %></td>
+            <% end %>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    <% else %>
+      <div>No Records found</div>
+    <% end %>
+  </div>
+</div>

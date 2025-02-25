@@ -1,0 +1,31 @@
+<% unless flash[:notice].nil? %>
+  <p class="flash-msg"> <%= flash[:notice] %> </p>
+<% end %>
+<p style="font-weight: bold;margin-bottom:-10px; width: 100%; text-align: center;">
+  <% if @applicant.has_paid == true %>
+    Amount Paid :
+  <% else %>
+    Total Payable Amount :
+  <% end %>
+  <span class="themed_text"><%= @currency %> <%= precision_label @applicant.amount %></span>
+</p>
+<table align="center">
+  <tr>
+    <td>
+      <% form_for :token_check,:url => {:action => "print_application"},:html => {:target => '_blank', :style=>"width:150px; float:left;"} do |f| %>
+        <%= f.hidden_field :print_token,:value => @applicant.print_token %>
+        <%= f.submit 'Print Application',:class => "submit_button submit-button_print" %>
+      <% end %>
+    </td>
+    <% if FedenaPlugin.can_access_plugin? "fedena_pay" %>
+      <td>
+        <% unless @applicant.has_paid == true or @applicant.status == "discarded"  %>
+          <% return_url = url_for(:controller => "applicants", :action => "registration_return", :id =>@applicant.id, :create_transaction => 1, :only_path => false) %>
+              <% unless @active_gateway.nil? %>
+                <%= custom_gateway_pay_button(@active_gateway,@applicant.amount,"REGISTRATION FEE #{@applicant.reg_no}",return_url,Array.new,"float:left; margin-left:0; margin-right:0;") %>
+              <% end %>
+        <% end %>
+      </td>
+    <% end %>
+  </tr>
+</table>

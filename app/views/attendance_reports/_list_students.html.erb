@@ -1,0 +1,39 @@
+<div class="label-field-pair">
+  <label for="trial_date"><%= t('no_of_absentees') %></label>
+  <label class="bold-text">: <%= @absentees_count %> </label>
+</div>
+
+<% unless @students.empty? %>
+  <table id="listing" align="left" width="70%" cellpadding="1" cellspacing="1">
+    <tr class="tr-head">
+      <td>
+        <%= t('sl_no') %>
+      </td>
+      <td>
+        <%=t('absentees')%>
+      </td>
+    </tr>
+    <tr class="tr-blank">
+
+    </tr>
+    <% @students.each_with_index do |student,i| %>
+      <% if params[:page].present? %>
+        <% if params[:page].to_i >= 1 %>
+          <% i = i  + (params[:page].to_i - 1) * 10 %>
+        <% end %> <%else %> <% i = i %> <% end %>
+      <tr class="tr-<%= cycle('odd', 'even') %>">
+        <td class="col-1">
+          <%= i+1 %>
+        </td>
+        <td class="col-2">
+          <% if roll_number_enabled? %>
+            <%= "&#x200E;#{student.roll_number} - #{student.full_name}&#x200E;" %>
+          <% else %>
+            <%= "&#x200E;#{student.full_name}(#{student.admission_no})&#x200E;" %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+  <%= will_paginate @students,:renderer => 'RemoteLinkRenderer',:params=>{:controller => "attendance_reports",:action => "daily_report_batch_wise",:batch_id => @batch.id,:date => @date} %>
+<% end %>

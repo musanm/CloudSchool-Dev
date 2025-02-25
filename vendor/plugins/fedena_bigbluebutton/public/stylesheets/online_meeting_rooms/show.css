@@ -1,0 +1,18 @@
+.meeting
+{
+    font-size:16px;
+}
+.space
+{
+    margin-left: 23px;
+}
+.space1
+{
+    margin-left: 28px;
+}
+table#listing td.col-1 {
+    width: 5%;
+}
+table#listing td.col-2 {
+    width: 25%;
+}

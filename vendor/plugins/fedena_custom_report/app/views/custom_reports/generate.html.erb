@@ -1,0 +1,167 @@
+<% content_for :head do %>
+  <%= javascript_include_tag "livevalidation","report" %>
+<% end %>
+<div id="content-header">
+  <%= show_header_icon %>
+  <h1><%=t('custom_report') %></h1>
+  <div class='header-sep'>|</div>
+  <div class='sub-header'><%="#{t('new_report')}" %></div>
+  <div id="inner-tab-menu">
+    <ul>
+      <% if permitted_to? :index, :custom_reports %>
+        <li class='themed_bg themed-dark-hover-background'>
+          <%=link_to "#{t('show_all_reports')}" ,:controller=>:custom_reports,:action=>:index%>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+<div id="page-yield">
+  <div class="bread_crumb">
+    <%= make_breadcrumb %>
+    <%= render_breadcrumbs  %>
+  </div>
+  <% form_for @report, :url=>{:action=>:generate} do |form| %>
+    <%= form.error_messages %>
+    <ul id="category-list">
+      <li class="heading">
+        <%= form.label :name, "#{t('name')}" %>
+        <%= form.text_field :name%>
+      </li>
+
+      <%= form.hidden_field(:model) %>
+
+      <% i=0 %>
+      <% @search_fields.each do|key,columns| %>
+        <% columns.each do |col| %>
+          <%if i%3==0 %>
+            <li class="list<%=cycle('odd', 'even')%>">
+            <%end%>
+            <span class="col-cell">
+              <% case col
+              when Symbol %>
+                <% col = col %>
+              <% when Hash %>
+                <% col = col.keys.first %>
+              <% end %>
+              <% check_box_id = (key==:additional ? ("additional_fields_#{col.to_s.split('_additional_fields_')[1]}") : col.to_s) %>
+              <%= check_box_tag "report_fields[#{col.to_s}][]",
+                col.to_s,
+                false,:class=>"cbox",:id=>check_box_id,
+                :Onload=>"div_toggle();"%>
+              <label for="<%= check_box_id %>"><%= key==:additional ? ("#{col.to_s.split('_additional_fields_').first}").titleize : t(col) %></label>
+            </span>
+            <%if i%3==2 %>
+            </li>
+          <%end%>
+          <% i+=1 %>
+        <% end %>
+      <% end %>
+    </ul>
+    <div class="query-fields">
+      <li class="info" id="disp">
+        <p><%= t('select_search_criterias') %></p>
+      </li>
+      <% i = 0 %>
+      <% form.fields_for :report_queries do |qform|  %>
+
+        <% rq = qform.object %>
+        <% field_class = (rq.column_type == :additional ? ("additional_fields_#{rq.field_name.to_s.split('_additional_fields_')[1]}") : rq.field_name) %>
+        <div class="<%=field_class %> fields">
+          <label class="column"><%= rq.column_type == :additional ? ("#{rq.field_name.to_s.split('_additional_fields_').first}").titleize : t(rq.field_name) %></label>
+          <%= qform.hidden_field(:column_name)  %>
+          <%= qform.hidden_field(:table_name)  %>
+          <%= qform.hidden_field(:criteria)  %>
+          <%= qform.hidden_field(:column_type)  %>
+          <% case rq.column_type
+          when :string, :additional %>
+            <div class="text">
+              <label class="criteria"><%= rq.criteria_to_s %></label>
+              <%= qform.text_field :query %>
+            </div>
+          <% when :date %>
+            <div class="date">
+              <label class="criteria"><%= rq.criteria_to_s %></label>
+              <%= qform.date_select :date_query,:use_short_month=>true,:start_year=>60.years.ago.year,:end_year=>2.years.since.year,:order=>[:day,:month,:year],:include_blank => true %>
+            </div>
+
+          <% when :association %>
+            <div class="check">
+              <%= text_field_tag("#{rq.column_name}","",:class => "auto_query", :size => 30)%>
+              </br>
+              <ul class="select-list" id ="<%= rq.column_name %>" count="<%= i %>"></ul>
+            </div>
+          <% when :boolean %>
+            <div class="radio-button">
+              <label class="criteria"><%= rq.criteria_to_s %></label>
+              <%= qform.radio_button(:query, 1) %> <label>YES</label>
+              <%= qform.radio_button(:query, 0) %> <label>NO</label>
+            </div>
+          <% when :integer %>
+            <div class="text">
+              <label class="criteria"><%= rq.criteria_to_s %></label>
+              <%= rq.query.to_s %>
+              <%= qform.text_field :query   %>
+            </div>
+
+          <% end %>
+        </div>
+        <% i+=1 %>
+      <% end %>
+    </div>
+
+    <div class="report-columns">
+      <li class="info">
+        <p><%= t('select_search_fields') %></p>
+      </li>
+      <ul id="src" class="report-columns-left">
+        <%pri=0%>
+        <% form.fields_for :report_columns do |qform|  %>
+          <% rq=qform.object %>
+          <% pri +=1 %>
+          <% li_id = (rq.method.to_s.include?("_additional_fields_") ? "additional_fields_#{rq.method.to_s.split('_additional_fields_')[1]}" : "#{rq.method.to_s}") %>
+          <li id="<%= li_id.to_s %>-column"class="column-list select_<%=li_id.to_s%>-column">
+            <label class="column-label"><%= t(rq.label_name) %></label>
+            <% text_field_id = (rq.method.to_s.include?("_additional_fields_") ? "additional_fields_#{rq.method.to_s.split('_additional_fields_')[1]}-column" : "#{rq.method.to_s}-column") %>
+            <%= qform.text_field :title,:class=>'column_title',:id=>text_field_id, :value=>"#{t(rq.label_name)}"  %>
+            <%= qform.hidden_field(:method) %>
+            <%= qform.hidden_field :position,:value=>pri,:class=>'position' %>
+            <%= qform.hidden_field :_destroy,:value=>1,:class=>'destroy' %>
+            <%= qform.hidden_field(:association_method) %>
+            <a class="add button"></a>
+            <a class="remove button"></a>
+            <a class="mup button"></a>
+            <a class="mud button"></a>
+          </li>
+        <% end %>
+
+      </ul>
+      <ul id="dest" class="report-columns-right" >
+
+      </ul>
+    </div>
+    <%= form.submit "#{t('save')}", :class=>'submit_button',:onclick=>"return validate_form()"%>
+  <% end %>
+
+</div>
+<script type="text/javascript">
+<%#*var ul = j('.select-list')[0];%>
+<% @assoc_value.each do |ass,val| %>
+  <%= "var #{ass} = #{val.to_json};" %>
+<% end %>
+  var j = jQuery.noConflict();
+  j(function(){
+    j('.auto_query').autocomplete({
+      source: function(request,response){
+        response(j.ui.autocomplete.filter(window[this.element[0].id], request.term));
+      },
+      select: function(event,event_item){
+        var ul=this.next(".select-list");
+        var val_field=this.next("#query_field");
+        duplicate_check(ul,event_item.item,val_field);
+        j(this).val("");
+        return false;
+      }
+    });
+  });
+</script>

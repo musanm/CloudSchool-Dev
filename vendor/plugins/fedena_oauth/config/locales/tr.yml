@@ -1,0 +1,11 @@
+tr:
+  oauth:
+    account: "hesap"
+    could_not_authenticate_with: "Üzgünüm, şunu kullanarak yetkilendirilemedi"
+    enter_user_email: "E-posta adresinizi girin"
+    login_with_google: "Şunu kullanarak giriş yapın"
+    no_user_with_email: "E-posta ile hiç kullanıcı yok"
+    select_user: "Kullanıcı Seç"
+  manage_clients: "İstemcileri Yönet"
+  enable_oauth: "Oauth'u Etkinleştir"
+  

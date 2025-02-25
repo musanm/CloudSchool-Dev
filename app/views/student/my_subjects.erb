@@ -1,0 +1,117 @@
+<div id="content-header">
+  <%= show_header_icon %>
+  <h1><%= t('student_info') %></h1>
+  <div class='header-sep'>|</div>
+  <div class='sub-header'><%= t('student_profile') %></div>
+</div>
+<div id="page-yield">
+  <div class="bread_crumb">
+    <%breadcrumb :student_my_subjects,@student%>
+    <%= render_breadcrumbs  %>
+  </div>
+  <div id="flash_box"></div>
+  <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+
+  <div id="normal_sub"><%= "#{t('normal_subjects')}" %></div>
+  <% unless @normal_subjects.empty? %>
+    <table id="listing" align="center" width="100%" cellpadding="1" cellspacing="1">
+      <% @normal_subjects.each do |s| %>
+        <% c = cycle('even','odd') %>
+        <tr><td class="col-2-<%= "#{c}" %>"><%= s.name %></td></tr>
+      <% end %>
+    </table>
+  <% else %>
+    <div id="no_subjects"><%= "#{t('no_subjects')}" %></div>
+  <% end%>
+
+
+  <div id="elective-subjects"><%= "#{t('electives')}" %></div>
+  <% unless @can_select_elective %>
+    <div id="no_electives" style="display:none;"><%= "#{t('no_electives')}"  %> </div>
+    <% unless @student_electives.empty? %>
+      <table id="listing10" align="center" width="100%" cellpadding="1" cellspacing="1">
+        <tr class="tr-head">
+          <td class="col-2"><%= "#{t('group')}" %></td>
+          <td class="col-2"><%= "#{t('subjects_text')}" %></td>
+        </tr>
+        <tr class="tr-blank"></tr>
+        <% @student_electives.each do |elective,subjects| %>
+          <tr class="tr-<%= cycle('odd', 'even') %>">
+            <td class="col-2" rowspan ="<%=subjects.count %>"><%= elective %></td>
+            <% subjects.each do |sub| %>
+              <td class="col-2-<%= cycle('even', 'odd') %>"><%= sub %></td> </tr>
+          <% end %>
+        <%end%>
+      </table>
+    <%end%>
+  <% end %>
+
+  <% if @can_select_elective %>
+    <div id="no_electives" style="display:none;"><%= "#{t('no_electives')}" %> </div>
+    <% unless @elective_groups.empty? %>
+      <table id="listing10" align="center" width="100%" cellpadding="1" cellspacing="1">
+        <tr class="tr-head">
+          <td class="col-2"><%= "#{t('group')}" %></td>
+          <td class="col-2"><%= "#{t('subjects_text')}" %></td>
+        </tr>
+        <tr class="tr-blank"></tr>
+        <% @elective_groups.each do |eg| %>
+          <% if !(eg.count == 0) && !eg.end_date.nil? %>
+            <% if eg.end_date >= Date.today %>
+              <tr class="tr-<%= cycle('odd', 'even') %>">
+                <td class="col-2" rowspan ="<%= eg.count%>"><%= eg.name %></td>
+                <% eg.subjects.active.each do |es| %>
+                  <td class="col-2-<%= cycle('even', 'odd') %>" ><%=  es.name%>
+                    <% unless is_assigned(@student.id,es.id).nil? %>
+                      <%if permitted_to? :remove_elective, :student%>
+                        <% unless @student.subject_exam(es.id) %>
+                          <s><%= t('remove') %></s>
+                        <%else%>
+                          <div class="select" id="stud_<%=es.id%>"><%= link_to_remote "#{t('remove_elective')}" ,:url=>{:controller=>"student",:action=>"remove_elective",:id=>@student.id,:id2=>es.id},:before=>"this.style.display='none'" %></div>
+                        <% end %>
+                      <%end%>
+                    <% else %>
+                      <% if permitted_to? :choose_elective,:student%>
+                        <div class="select" id="stud_<%=es.id%>"><%= link_to_remote "#{t('choose_elective')}" ,{:url=>{:controller=>"student",:action=>"choose_elective",:id=>@student.id,:id2=>es.id}},:class => "themed_text", :before=>"this.style.display='none'" %></div>
+                      <% end %>
+                    <%end%>
+                  </td>
+                </tr>
+              <%end%>
+            <% else %>
+              <% unless @student_electives.select {|k,v| k == eg.name}.empty? %>
+                <tr class="tr-<%= cycle('odd', 'even') %>">
+                  <td class="col-2" rowspan ="<%=  @student_electives.select {|k,v| k == eg.name}[0][1].count %>"><%= @student_electives.select {|k,v| k == eg.name}[0][0] %></td>
+                  <%  @student_electives.select {|k,v| k == eg.name}[0][1].each do |es| %>
+                    <td class="col-2-<%= cycle('even', 'odd') %>"><%=  es %></td>
+                  </tr>
+                <% end %>
+              <%  end %>
+            <%end%>
+          <% else %>
+            <% unless @student_electives.select {|k,v| k == eg.name}.empty? %>
+              <tr class="tr-<%= cycle('odd', 'even') %>">
+                <td class="col-2" rowspan ="<%=  @student_electives.select {|k,v| k == eg.name}[0][1].count %>"><%= @student_electives.select {|k,v| k == eg.name}[0][0] %></td>
+                <%  @student_electives.select {|k,v| k == eg.name}[0][1].each do |es| %>
+                  <td class="col-2-<%= cycle('even', 'odd') %>"><%=  es %></td>
+                </tr>
+              <% end %>
+            <%  end %>
+          <%end%>
+        <% end %>
+      </table>
+    <% end %>
+  <% end %>
+</div>
+
+<script type="text/javascript">
+  j(document).ready(function() {
+    rows = j('#listing10 tr').length;
+    if(rows==1 || rows == 0 || rows == 2){
+      j('#listing10').hide();
+      document.getElementById('no_electives').style.display = 'block';
+    }
+  });
+</script>

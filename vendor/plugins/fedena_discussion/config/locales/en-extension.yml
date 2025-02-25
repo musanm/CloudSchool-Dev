@@ -1,0 +1,9 @@
+en-k12:
+  groups:
+    dept_name: "Dept name/Class name"
+    select_course: "Select class"
+
+en-hd:
+  groups:
+    dept_name: "Dept name/Course name"
+    select_course: "Select course"

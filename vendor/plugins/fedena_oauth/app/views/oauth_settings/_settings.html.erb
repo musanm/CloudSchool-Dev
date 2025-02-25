@@ -1,0 +1,46 @@
+<div id="settings_div">
+  <% form_remote_for @settings,:url=>{:controller=>:oauth_settings,:action=>:settings,:provider=>@provider},:html=>{:class=>'form'}  do |f| %>
+    <% setting_fields = @settings.class::SETTING_FIELDS %>
+    <% child_class = @settings.class.to_s.underscore %>
+    <% if setting_fields.is_a? Array %>
+      <% setting_fields.each do|s| %>
+        <fieldset>
+          <%= f.label s %>
+          <%= text_field_tag "#{child_class}[settings][#{s}]", @settings.settings.nil? ? " " : @settings.settings["#{s}"] %>
+        </fieldset>
+      <% end %>
+    <% elsif setting_fields.is_a? Hash %>
+      <% setting_fields.each do|k,val| %>
+        <% if val.count > 0 %>
+          <% unless k.to_s == "select" or k.to_s == "text" %>
+            <fieldset>
+              <%= k.to_s.titleize %>
+            </fieldset>
+          <% end %>
+          <% val.each do|v| %>
+            <% if k.to_s == "select" %>
+              <fieldset>
+                <%= f.label v %>
+                <%= select_tag "#{child_class}[settings][#{k}][#{v}]", options_for_select([["Select a #{v.to_s.humanize}",""]]+@settings.send("fetch_#{v.to_s}"),(@settings.settings.nil? ? nil : @settings.settings["#{k}"]["#{v}"])) %>
+              </fieldset>
+            <% else %>
+              <fieldset>
+                <%= f.label v %>
+                <%= text_field_tag "#{child_class}[settings][#{k}][#{v}]", @settings.settings.nil? ? " " : @settings.settings["#{k}"]["#{v}"] %>
+              </fieldset>
+            <% end %>
+          <% end %>
+        <% else %>
+          <fieldset>
+            <%= f.label k %>
+            <%= text_field_tag "#{child_class}[settings][#{k}]", @settings.settings.nil? ? " " : @settings.settings["#{k}"] %>
+          </fieldset>
+        <% end %>
+      <% end %>
+    <% end %>
+    <fieldset>
+      <%= f.submit 'Save', :class  => 'button-red float-right-with-margin' %>
+    </fieldset>
+  <% end %>
+</div>
+

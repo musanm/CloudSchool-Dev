@@ -1,0 +1,15 @@
+<fieldset class="margin-bottom-20">
+  <h1 class="content-head">Plugin Settings</h1>
+</fieldset>
+<div class="content-div">
+  <div class="nav-vertical width-15-pc">
+    <ul>
+      <% FedenaPlugin::ADDITIONAL_LINKS[:multi_school_settings_hook].each do |hook| %>
+      <li><%= link_to "#{hook[:title]}",hook[:destination],:class=>"active" %></li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="detail-list width-80-pc bg-light shadow grey-border" id="content_div">
+    <%= %>
+  </div>
+</div>

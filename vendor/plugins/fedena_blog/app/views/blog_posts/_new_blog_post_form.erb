@@ -1,0 +1,24 @@
+<% form_for [@blog,@blog_post] do |f| %>
+  <%= f.error_messages %>
+  <%= hidden_field_tag :user_id,@user.id %>
+  <div class="label-field-pair">
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+  <div class="label-field-pair">
+    <%= f.label :body %>
+    <div id="blog_post_content_text_field_bg">
+      <%#= fckeditor_textarea :blog_post,:body,:lang => I18n.locale,:langdir => (rtl? ? 'rtl' : 'ltr') %>
+      <%= f.redactor :body %>
+    </div>
+  </div>
+  <%= f.hidden_field :is_active,:value => true %>
+  <%= f.hidden_field :is_deleted,:value => 0  %>
+  <%= f.hidden_field :blog_id,:value => @blog.id %>
+  <div class="button_area">
+    <%= submit_tag "", :value => "#{t('publish')}", :class => "submit-button",:name => "publish", :disable_with => "#{t('please_wait')}" %>
+    <%= submit_tag "", :value => "#{t('save_as_draft')}", :class => "submit-button",:name => "draft",:id => "draft_button", :disable_with => "#{t('please_wait')}"  %>
+  </div>
+<% end %>
+<%= load_redactor_script %>
+

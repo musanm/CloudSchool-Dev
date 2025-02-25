@@ -1,0 +1,56 @@
+<div id="content-header">
+  <%= show_header_icon %>
+  <h1><%= t('transport_text') %></h1>
+  <div class='header-sep'>|</div>
+  <div class='sub-header'><%= t('home') %></div>
+
+</div>
+<div id="page-yield">
+  <div class="bread_crumb">
+    <%= make_breadcrumb %>
+    <%= render_breadcrumbs  %>
+  </div>
+  <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+
+  <div class="box">
+
+    <div class="link-box">
+      <div class="link-heading"><%= link_to "#{t('set_routes')}" ,:controller=>'routes',:action=>'index' %> </div>
+      <div class="link-descr"><%= t('set_routes_for_vehicle') %></div>
+    </div>
+
+    <div class="link-box">
+      <div class="link-heading"><%= link_to "#{t('vehicles')}" ,:controller=>'vehicles',:action=>'index'  %>  </div>
+      <div class="link-descr"><%= t('vehicle_details') %></div>
+    </div>
+
+    <div class="link-box">
+      <div class="link-heading"><%= link_to "#{t('transport_text')}" ,:controller=>'transport' , :action=>'index' %></div>
+      <div class="link-descr"><%= t('transport_details_text') %></div>
+    </div>
+
+    <div class="link-box">
+      <div class="link-heading"><%= link_to "#{t('transport_fee_text')}",:controller=>'transport_fee'  ,:action=>'index' %></div>
+      <div class="link-descr"><%= t('transport_fee_details') %></div>
+    </div>
+
+    <div class="link-box">
+      <div class="link-heading"><%= link_to "#{t('report')}",:controller=>'transport'  ,:action=>'vehicle_report' %></div>
+      <div class="link-descr"><%= "#{t('generate')} #{t('report')}" %></div>
+    </div>
+
+    <div class="link-box">
+      <div class="link-heading"><%= link_to "#{t('routes.route_additional_details')}" ,{:controller=>'routes',:action=>'add_additional_details'} %></div>
+      <div class="link-descr"><%= "#{t('additional_details')}"%></div>
+    </div>
+    <div class="link-box">
+      <div class="link-heading"><%= link_to "#{t('vehicles.vehicle_additional_details')}" ,{:controller=>'vehicles',:action=>'add_additional_details'} %></div>
+      <div class="link-descr"><%= "#{t('additional_details')}"%></div>
+    </div>
+
+    <div class="extender"></div>
+  </div>
+</div>
+

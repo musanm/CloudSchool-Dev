@@ -1,0 +1,28 @@
+<div class="span6">Periods</div>
+<% if @subject_hours.present? %>
+  <div class="span6">
+    <% @subject_hours.each do |s| %>
+      <div class="controls">
+        <label class="checkbox">
+          <%= check_box_tag "class_timing_ids[]",s.class_timing_id %>
+          <%= "#{s.class_timing.start_time.strftime("%I:%M%p")} - #{s.class_timing.end_time.strftime("%I:%M%p")}" %>
+        </label>
+      </div>
+    <% end %>
+  </div>
+  <%= hidden_field_tag "attendance[employee_id]",@subject_hours.first.try(:employee_id) %>
+<% else %>
+  <div class="span6">
+    <%= t("no_tte_entries") %>
+  </div>
+<% end %>
+<script type="text/javascript">
+  j(document).ready(function(){
+    if ('<%=@subject_hours.present?%>'=='true'){
+      j("#leave-form").show();
+    }
+    else{
+      j("#leave-form").hide();
+    }
+  })
+</script>

@@ -1,0 +1,7 @@
+--- 
+multi_school_classes:
+- PayslipTransactionJob
+- DelayedFeeCollectionJob
+- DelayedAdditionalReportCsv
+- DelayedStudentDependencyDelete
+- DelayedStudentFeeDiscount

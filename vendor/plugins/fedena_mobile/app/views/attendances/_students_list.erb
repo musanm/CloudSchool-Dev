@@ -1,0 +1,15 @@
+<% if @students.present? %>
+  <ul class="nav nav-tabs nav-stacked">
+    <% @students.each do |s| %>
+      <%   if @config.config_value=="Daily" %>
+        <li><%= link_to "#{s.full_name} #{s.admission_no}" ,:controller=>"attendances",:action=>"mobile_leave",:id=>s.id,:batch_id=>s.batch_id %></li>
+      <% else %>
+        <li><%= link_to "#{s.name}" ,:controller=>"attendances",:action=>"mobile_leave",:id=>s.id,:batch_id=>@sub.batch_id,:subject_id=>@sub.id %></li>
+      <% end %>
+    <% end %>
+  </ul>
+<% else %>
+  <div class="alert">
+    <%=@tt_error ? t('no_timetable_entry_for_batch') : t('no_students_found')%>
+  </div>
+<% end %>

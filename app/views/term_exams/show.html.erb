@@ -1,0 +1,13 @@
+<p>
+  <b>Batch:</b>
+  <%=h @term_exam.batch_id %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%=h @term_exam.name %>
+</p>
+
+
+<%= link_to 'Edit', edit_term_exam_path(@term_exam) %> |
+<%= link_to 'Back', term_exams_path %>

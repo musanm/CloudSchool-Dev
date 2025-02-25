@@ -1,0 +1,109 @@
+mn: 
+  activerecord:
+    attributes:
+       applicant:
+          first_name: "Нэр"
+          date_of_birth: "Төрсөн он сар өдөр"
+
+  date:
+    formats:
+      default: "Алдаа зөрчил"
+      normal: "Хэвийн"
+      short: "Богино"
+      month_year: "Сар жил"
+      long: "Урт/удаан"
+      only_day: "зөвхөн өдрөөр"
+      month: "Сар"
+      day: "Өдөр"
+      mont: "Сар"
+      day_mon: "Өдөр сар"
+
+
+    day_names: [Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday]
+    abbr_day_names: [Sun, Mon, Tue, Wed, Thur, Fri, Sat]
+    month_names: [~, January, February, March, April, May, June, July, August, September, October, November, December]
+    abbr_month_names: [~, Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec]
+    order: [ :day, :month, :year ]
+
+  time:
+    formats:
+      default: "Алдаа зөрчил"
+      short: "Богино Uhr"
+      long: "Урт"
+      time: "Цаг:Минут"
+
+    am: "AM"
+    pm: "PM"
+    
+  blog_admin_privilege: "Блогийн админ"
+  blog_comments: 
+    delete_comment_confirmation: "Та энэ шүүмжийг/ тайлбарыг устгахдаа итгэлтэй байна уу?"
+    deleted_user: "Устасан хэрэглэгч "
+    flash_admin: "Захиргаа энэ блогт орж болохгүй ."
+    comment_deleted: "Comment successfully deleted."
+    comment_created: "Comment successfully created."
+  blog_posts:
+    edit: "Edit"
+    activate: "Ажиллуулах"
+    ban_blog_post: "Blog post is banned successfully"
+    ban_post: "Нийтлэлийг хориглох"
+    blog_post_deleted_successfully: "Нийтлэл амжилттай усталаа"
+    blogs_text: "Блог"
+    comments: "Тайлбар / шүүмжүүд"
+    create_post: "Нийтлэл үүсгэх"
+    deactivate: "Deactivate"
+    delete_post: "Та энэ нийтлэлийг устгахдаа итгэлтэй байна уу?"
+    deleted_blog: "Устасан блог"
+    deleted_user: "Устасан хэрэглэгч "
+    edit_blog: "Блогийг засварлах"
+    favourites: "Дуртай зүйлс"
+    flash2: "Your blog post has been saved successfully."
+    flash3: "Your blog post has been posted successfully."
+    flash_admin: "Захиргаа энэ блогт орж болохгүй ."
+    flash_edit: "Таны зарлал нийтлэл амжилттай засварлагдлаа"
+    flash_no_blog: "Энэ хэрэглэгчийн блог олдсонгүй"
+    flash_no_user: "Хэрэглэгч олдсонгүй"
+    flash_not_available: "Энэ агуулга одоогоор боломжгүй байна"
+    home: "Нүүр"
+    latest_posts: "Хамгийн сүүлийнх"
+    my_blog: "Миний блог"
+    new_post: "+ Шинэ зарлал"
+    next_page: "Дараагийн хуудас >"
+    no_blog_found: "Блог олдсонгүй"
+    no_blog_posts: "No blog posts"
+    no_post: "Таниар блог зарлагдаагүй байна"
+    not_authorized: "Танд энэ агуулгы үзэх зөвшөөрөл байхгүй байна"
+    notifications: "Үйл ажиллагаанууд"
+    on_text: "on"
+    popular_posts: "Нийтлэг"
+    posted_by: "-аар нийтлэгдсэн"
+    posts: "Зарлалууд нийтлэлүүд"
+    prev_page: "< Өмнөх хуудас"
+    publish: "Нийтлэх"
+    published_successfully: "амжилттай нийтлэгдлээ"
+    save_as_draft: "Ноорог хэлбэрээр хадгалах"
+    search: "Хайх"
+    search_blogs: "Блог хаЙХ"
+    unban_blog_post: "Blog post is un-banned successfully"
+    unpublish: "Нийтлэгдээгүй/ нийтлэхгүй"
+    unpublished_successfully: "Нийтлэгдсэнгүй"
+  blog_text: "Blog"
+  blogs:
+    edit: "Edit"
+    activities: "Activities"
+    blog_activated: "User's blog is activated successfully"
+    blog_deactivated: "User's blog is deactivated successfully"
+    blogs_text: "Блог"
+    commented: " Таны зарлал нийтлэл дээр тайлбар бичигдсэн байна"
+    deleted_user: "Устгагдсан хэрэглэгч"
+    flash1: "Эхлээд өөртөө блог үүсгэх"
+    flash_admin: "н удирдлага энэ блогт хамрагдаж болохгүй."
+    flash_update: "Блог амжиллтай шинэчлэгдлээ"
+    my_blog: "Миний блог"
+    no_notification: "Сүүлийн үйл ажиллагаанууд олдсонгүй"
+    notifications: "Үйл ажиллагаанууд"
+    on_text: " on"
+    register: "Бүртгэх"
+    search: "Хайх"
+  manage_blog: "Блог нийтлэх ба бусад хэрэглэгчидэд блогийг харуулах"
+  blog_activity_present: "Has blog related activities"

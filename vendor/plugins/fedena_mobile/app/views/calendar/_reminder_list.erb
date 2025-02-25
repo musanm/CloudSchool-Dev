@@ -1,0 +1,42 @@
+<div class="paginating_partial">
+    <div class="student_name">
+    <%= @date %>
+  </div>
+  <% if @events.present? %>
+    <table class="table table-striped table-bordered table-condensed">
+      <% @events.each do |e|%>
+        <% if e.is_exam?
+          color="blue"
+          title=e.description
+          desc="#{format_date(e.start_date,:format=>:time)} - #{format_date(e.start_date,:format=>:time)}"
+        elsif e.is_due?
+          color="red"
+          title="Fee Due"
+          desc=e.description
+        elsif e.is_holiday?
+          color="green"
+          title=e.title
+          desc=e.description
+        else
+          color="black"
+          title=e.title
+          desc="#{format_date(e.start_date,:format=>:time)} - #{I18n.l(e.start_date,:format=>:time)}"
+        end %>
+        <tr>
+          <td>
+            <div class=<%= color %>></div>
+            <label class="event_name">
+              <%= e.end_date==e.start_date ? format_date(e.start_date,:format=>:long) : "#{format_date(e.start_date,:format=>:long)} - #{format_date(e.end_date,:format=>:long)}" %>
+            </label>
+            <label class="event"><%= title %></label>
+            <label class="description"><%= desc %></label></td>
+        </tr>
+      <% end %>
+    </table>
+  <% else %>
+    <div class="alert">
+      <%= t("no_events") %>
+    </div>
+  <% end %>
+</div>
+

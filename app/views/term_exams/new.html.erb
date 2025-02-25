@@ -1,0 +1,51 @@
+<div id="content-header">
+  <h1>Manage Terms</h1>
+  <div class='header-sep'>|</div>
+  <div class='sub-header'>Terms</div>
+  <div class='header-sep'>|</div>
+  <div class='sub-header'>New Term</div>
+  <div id="inner-tab-menu">
+    <ul>
+      <!-- <li class='themed_bg themed-dark-hover-background'><%#= link_to 'Create New Terms', new_term_exam_path %></li> -->
+    </ul>
+  </div>
+</div>
+<div id="page-yield">
+  <div class="bread_crumb">
+  </div>
+  <div class="box">
+    <div id="update_batch"></div>
+    <div class="extender"></div>
+  </div>
+</div>
+
+<div id="page-yield">
+  <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+
+  <% form_for(@term_exam) do |f| %>
+    <%= f.error_messages %>
+    <div id="admission1_form">
+
+      <div class="label-field-pair">
+        <label for="student_grade">Batch<span class="necessary-field">*</span> </label>
+        <div class="text-input-bg"><%= f.select :batch_id, @batches ,:prompt=> "Select Course" %></div>
+      </div>
+
+      <div class="label-field-pair">
+        <label for="student_grade">Name<span class="necessary-field">*</span> </label>
+        <div class="text-input-bg"><%= f.text_field :name %></div>
+      </div>
+
+      <div class="label-field-pair">
+        <label for="student_grade">Priority<span class="necessary-field">*</span> </label>
+        <div class="text-input-bg"><%= f.text_field :order_priority %></div>
+      </div>
+
+    </div>
+    <%= submit_tag "", :value => "► #{t('save_and_proceed')}", :class => "submit_button", :disable_with => "► #{t('please_wait')}" %>
+  <% end %>
+</div>
+
+<%= link_to 'Back', term_exams_path %>

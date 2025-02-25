@@ -1,0 +1,43 @@
+
+
+<div id="content-header">
+  <%= show_header_icon %>
+  <h1><%= t('blogs_text') %></h1>
+  <div class='header-sep'>|</div>
+  <div class='sub-header'><%= t('home') %></div>
+  <div id="inner-tab-menu">
+    <ul>
+      <li class='themed_bg themed-dark-hover-background'><%= link_to t('my_blog'),my_blog_path %></li>
+      <li class='themed_bg themed-dark-hover-background'><%= link_to t('notifications'),notification_blogs_path %></li>
+      <li class='themed_bg themed-dark-hover-background'><%= link_to t('search'),search_blog_blog_posts_path(@current_user.id) %></li>
+      <% unless @current_user.admin?  %>
+        <li class='themed_bg themed-dark-hover-background'><%= link_to t('settings'),edit_blog_path(@current_user.id) %></li>
+      <% end %>
+
+    </ul>
+  </div>
+</div>
+<div id="page-yield">
+  <div class="bread_crumb">
+    <%= make_breadcrumb %>
+    <%= render_breadcrumbs  %>
+  </div>
+  <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+  <% unless @blog_posts.empty? %>
+    <div class="toggle">
+      <div class="text-input-bg">
+        <%= select_tag "filter_posts", options_for_select([ [t('latest_posts'),"latest"], [t('popular_posts'),"popular"]], params[:toggle_blog_posts]), {:onChange => "#{remote_function(:url => {:action => "toggle_blog_posts"},:with => "'toggle_blog_post='+value",:before=>"$('loader').show();",:success=>"$('loader').hide();")}"}  %>
+        <%= image_tag("loader.gif", :align => "absmiddle", :border => 0, :id => "loader", :style =>"display: none;" ) %>
+      </div>
+    </div>
+
+    <div id ="list_blog_posts">
+      <%= render :partial => "list_all_recent_blog_posts" %>
+    </div>
+  <% else %>
+    <p class ="flash-msg"> <%= "#{t('no_blog_posts')}" %> </p>
+  <% end %>
+
+</div>

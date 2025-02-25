@@ -1,0 +1,134 @@
+---
+:fields_to_search:
+  :employee:
+    :integer: []
+
+    :date:
+    - :date_of_birth
+    - :joining_date
+    :boolean: []
+
+    :association:
+    - :employee_position
+    - :employee_department
+    - :employee_grade
+    - :employee_category
+    - :nationality
+    :string:
+    - :first_name
+    - :middle_name
+    - :last_name
+    - :employee_number
+    - :job_title
+    - :qualification
+    - :marital_status
+    - :blood_group
+    - :gender
+    
+  :student:
+    :integer: []
+
+    :date:
+    - :admission_date
+    - :date_of_birth
+    :boolean: []
+
+    :association:
+    - :country
+    - :nationality
+    - :student_category
+    - :batch: :course
+    - :immediate_contact
+    :string:
+    - :admission_no
+    - :first_name
+    - :middle_name
+    - :last_name
+    - :gender
+    - :blood_group
+    - :language
+    - :religion
+    - :city
+    - :state
+    - :pin_code
+    - :birth_place
+    - :phone1
+    - :phone2
+:fields_to_display:
+  :employee:
+  - :first_name
+  - :middle_name
+  - :last_name
+  - :employee_number
+  - :job_title
+  - :qualification
+  - :marital_status
+  - :blood_group
+  - :date_of_birth
+  - :joining_date
+  - :employee_position
+  - :employee_department
+  - :employee_category
+  - :employee_grade
+  - :nationality
+  - :home_address_line1
+  - :home_address_line2 
+  - :mobile_phone
+  - :email
+  - :gender
+  :student:
+  - :admission_date
+  - :date_of_birth
+  - :country
+  - :nationality
+  - :student_category
+  - :batch
+  - :course
+  - :admission_no
+  - :first_name
+  - :middle_name
+  - :last_name
+  - :gender
+  - :blood_group
+  - :language
+  - :religion
+  - :address_line1
+  - :address_line2
+  - :city
+  - :state
+  - :pin_code
+  - :birth_place
+  - :phone1
+  - :phone2
+  - :email
+  - :immediate_contact_first_name
+  - :immediate_contact_last_name
+  - :immediate_contact_relation
+  - :immediate_contact_username
+  - :immediate_contact_dob
+  - :immediate_contact_education
+  - :immediate_contact_occupation
+  - :immediate_contact_income
+  - :immediate_contact_email
+  - :immediate_contact_office_address_line1
+  - :immediate_contact_office_address_line2
+  - :immediate_contact_city
+  - :immediate_contact_state
+  - :immediate_contact_office_phone1
+  - :immediate_contact_mobile_phone
+  - :guardians:
+    - :first_name
+    - :last_name
+    - :relation
+    - :username
+    - :dob
+    - :education
+    - :occupation
+    - :income
+    - :email
+    - :office_address_line1
+    - :office_address_line2
+    - :city
+    - :state
+    - :office_phone1
+    - :mobile_phone

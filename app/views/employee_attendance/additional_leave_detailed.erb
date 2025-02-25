@@ -1,0 +1,41 @@
+<div id="content-header">
+  <%= show_header_icon %>
+  <h1><%= t('employee_attendance_text') %></h1>
+  <div class='header-sep'>|</div>
+  <div class='sub-header'><%= t('additional_leave_detailed') %></div>
+</div>
+
+<div id="page-yield">
+  <div class="bread_crumb">
+   <%breadcrumb :employee_attendance_additional_leave_detailed,@employee%>
+    <%=render_breadcrumbs%>
+  </div>
+  <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+  <div class="box">
+    <div id="attendance-report">
+      <% @additional_leaves_detailed.sort.each do |k,v| %>
+         <div class="type_name-<%= cycle('odd', 'even') %> "><%= k  %>:</div>
+         <% if v.length == 1 %>
+           <div class="date-<%= cycle('odd','even') %>"><%= v[0] %></div>
+         <% else %>
+           <% i  = 0 %>
+           <% while i <= v.length - 1%>
+             <div class="date-<%= cycle('odd','even') %>"><%= v[i] %></div>
+             <% i+= 1 %>
+           <% end %>
+         <% end %>
+      <% end %>
+      <% @total.sort.reverse.each do |k,v| %>
+        <div class="type_name-<%= cycle('odd', 'even') %> "><div class="total"><%= k + ":" %></div><div class="count"><%= v %></div></div>
+      <% end %>
+    </div>
+
+    <% unless @leave_types.blank? %>
+      <div class="user_button">
+        <%=  link_to "► #{t('pdf_report')}", {:controller=>"employee_attendance", :action=>"additional_leave_detailed_report_pdf", :id=>@employee.id,:month => "#{params[:month]}",:year => "#{params[:year]}"},  :format=>'pdf', :target => '_blank' %>
+      </div>
+    <% end %>
+  </div>
+</div>

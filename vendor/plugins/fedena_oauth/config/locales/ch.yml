@@ -1,0 +1,10 @@
+ch: 
+  oauth: 
+    account: "賬户"
+    could_not_authenticate_with: "抱歉，不能驗證，通過使用 "
+    enter_user_email: "輸入你的電子郵件"
+    login_with_google: "登録，使用你的"
+    no_user_with_email: "没有使用這個電子郵件地址的用户"
+    select_user: "選擇用户"
+  manage_clients: "Manage Clients"
+  enable_oauth: "啓用 Oauth"

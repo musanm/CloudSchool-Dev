@@ -1,0 +1,16 @@
+pt:
+  google_docs: Google Docs
+  upload_document: Carregar documento
+  list_documents: Listar todos documentos
+  upload: Carregar
+  download: Baixar
+  select_file: Selecionar arquivo para carregar
+  delete_text: Deletar
+  no_files_found: Não foram encontrados arquivos.
+  document_moved_to_trash: Documento movido para lixo com sucesso.
+  oauth_plugin_not_installed: O Plug-in dependente Fedena Oauth não foi instalado
+    ou configurado.
+  please_login_using_google: Por favor entre usando o google para acessar google docs.
+  document_name: Nome documento
+  file_uploaded_successfully: Arquivo carregado com sucesso.
+  view_all_docs: Ver todos documentos

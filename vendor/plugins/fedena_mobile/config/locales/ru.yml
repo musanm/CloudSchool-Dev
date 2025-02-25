@@ -1,0 +1,17 @@
+ru:
+  attendance_reports:
+    no_subjects_to_show: "Нет предметов"
+  attendances:
+    attendance_marked_for: "Посещаемость отмечена для"
+    class_timings_empty: "Учебные часы не были выбраны."
+    mark_absent: "Отметить отсутствующим"
+    no_subjects_to_show: "Нет предметов"
+    no_tte_entries: "Для выбранной даты в расписании нет записей"
+  calendar:
+    no_events: "Нет мероприятий"
+    show_more_entries: "Показать больше"
+  reminder:
+    no_reminders: "Нет напоминаний"
+    show_more_entries: "Показать больше"
+  timetable:
+    select_weekday: "Выбрать день недели"

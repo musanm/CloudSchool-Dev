@@ -1,0 +1,124 @@
+<%-# Fedena
+#Copyright 2010 Foradian Technologies Private Limited
+#
+#This product includes software developed at
+#Project Fedena - http://www.projectfedena.org/
+#
+#Licensed under the Apache License, Version 2.0 (the "License");
+#you may not use this file except in compliance with the License.
+#You may obtain a copy of the License at
+#
+#  http://www.apache.org/licenses/LICENSE-2.0
+#
+#Unless required by applicable law or agreed to in writing,
+#software distributed under the License is distributed on an
+#"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#KIND, either express or implied.  See the License for the
+#specific language governing permissions and limitations
+#under the License. -%>
+
+<div id="content-header">
+  <%= show_header_icon %>
+  <h1><%= t('inventory') %></h1>
+  <div class='header-sep'>|</div>
+  <div class='sub-header'><%= t('home') %></div>
+
+</div>
+<div id="page-yield">
+  <div class="bread_crumb">
+    <%= make_breadcrumb %>
+    <%= render_breadcrumbs  %>
+  </div>
+  <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+
+  <div class="box">
+
+
+    <%  if permitted_to? :index,:store_categories %>
+      <div class="link-box">
+        <div class="link-heading"><%= link_to "#{t('store_category')}", store_categories_path %>   </div>
+        <div class="link-descr"><%= t('store_category_create') %></div>
+      </div>
+    <%  end %>
+
+    <%  if permitted_to? :index, :store_types %>
+      <div class="link-box">
+        <div class="link-heading"><%= link_to "#{t('store_type')}", store_types_path %>  </div>
+        <div class="link-descr"><%= t('store_type_create') %></div>
+      </div>
+    <%  end %>
+
+    <%  if permitted_to? :index, :stores %>
+      <div class="link-box">
+        <div class="link-heading"><%= link_to "#{t('store')}", stores_path %> </div>
+        <div class="link-descr"><%= t('store_create') %></div>
+      </div>
+    <%  end %>
+
+    <%  if permitted_to? :index, :item_categories %>
+      <div class="link-box">
+        <div class="link-heading"><%= link_to "#{t('item_category')}", item_categories_path %>   </div>
+        <div class="link-descr"><%= t('item_category_create') %></div>
+      </div>
+    <% end %>
+    <%  if permitted_to? :index, :store_items %>
+    <div class="link-box">
+      <div class="link-heading"><%= link_to "#{t('store_items')}", store_items_path %>  </div>
+      <div class="link-descr"><%= t('store_item_create') %></div>
+    </div>
+    <% end %>
+
+
+    <%  if permitted_to? :index, :supplier_types %>
+      <div class="link-box">
+        <div class="link-heading"><%= link_to "#{t('supplier_type')}", supplier_types_path %>  </div>
+        <div class="link-descr"><%= t('supplier_type_create') %></div>
+      </div>
+    <% end %>
+
+    <%  if permitted_to? :index, :suppliers %>
+      <div class="link-box">
+        <div class="link-heading"><%= link_to "#{t('supplier')}", suppliers_path %>  </div>
+        <div class="link-descr"><%= t('supplier_create') %></div>
+      </div>
+    <% end %>
+
+    <% if permitted_to? :index, :indents %>
+    <div class="link-box">
+      <div class="link-heading"><%= link_to "#{t('indent')}", indents_path %>  </div>
+      <div class="link-descr"><%= t('indent_create') %></div>
+    </div>
+    <% end %>
+
+
+    <%  if permitted_to? :index,:purchase_orders %>
+      <div class="link-box">
+        <div class="link-heading"><%= link_to "#{t('purchase_order')}", purchase_orders_path %>  </div>
+        <div class="link-descr"><%= t('po_create') %></div>
+      </div>
+    <% end %>
+
+    <%  if permitted_to? :index, :invoices %>
+      <div class="link-box">
+        <div class="link-heading"><%= link_to "#{t('billing')}", invoices_path %>  </div>
+        <div class="link-descr"><%= t('create_invoice') %></div>
+      </div>
+    <% end %>
+    <%  if permitted_to? :index, :grns %>
+      <div class="link-box">
+        <div class="link-heading"><%= link_to "#{t('grn')}", grns_path %>  </div>
+        <div class="link-descr"><%= t('grn_create') %></div>
+      </div>
+    <% end %>
+    
+    <%  if permitted_to? :index, :inventory_reports %>
+      <div class="link-box">
+        <div class="link-heading"><%= link_to "#{t('reports_text')}",{:action=>'index', :controller => 'inventory_reports'} %>  </div>
+        <div class="link-descr"><%="#{t('generate')} #{t('reports_text')}" %></div>
+      </div>
+    <% end %>
+    <div class="extender"></div>
+  </div>
+</div>

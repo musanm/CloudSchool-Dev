@@ -1,0 +1,11 @@
+en-k12:
+  library:
+    courses: "Classes"
+    initial_library_setting_for_courses: "Initial library setting for classes"
+    select_a_course: "Select a class"
+
+en-hd:
+  library:
+    courses: "Courses"
+    initial_library_setting_for_courses: "Initial library setting for courses"
+    select_a_course: "Select a course"

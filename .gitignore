@@ -1,0 +1,6 @@
+/log/*.log
+/tmp
+/db/schema.rb
+/config/database.yml
+/public/fedena.sql
+/public/fedena.zip

@@ -1,0 +1,207 @@
+
+
+#page-yield {
+    width:1070px;
+    margin: 0 auto;
+    float: left;
+    overflow: hidden;
+}
+
+
+
+.hor_line{
+    width:1070px;
+    background: #ffffff;
+    height: 1px;
+}
+
+h2.heading{
+    text-align: center;
+    margin:5px;
+}
+
+#main_info h4{
+    color: #555555;
+    margin-top: 18px;
+    font-weight: normal;
+}
+
+#main_info h2{
+    margin-bottom: 2px;
+    font-weight: normal;
+
+}
+
+
+.odd{
+    height:auto;
+    background: #EEEEEE;
+
+}
+
+.even{
+
+    height:auto;
+    background: #fff;
+    page-break-after:auto;
+    page-break-inside: avoid;
+
+
+}
+.col-pdf{
+    text-overflow: ellipsis;
+}
+div.even{
+    width:100%;
+    float:left;
+    border-bottom:1px solid #ADACAB;
+    border-top:1px solid #ADACAB;
+    margin-top: -1px;
+    margin-bottom: -2px;
+
+
+}
+
+div.odd{
+    width:100%;
+    float:left;
+
+}
+
+.even div{
+
+    padding: 5px 5px 6px 6px;
+    border-right:1px solid #ADACAB;
+    border-bottom:1px solid #ADACAB;
+    border-top:1px solid #ADACAB;
+    float:left;
+    margin-top: -1px;
+    margin-bottom: 0px;
+
+
+}
+
+.odd div{
+    padding: 6px 6px 6px 6px;
+    border-bottom:1px solid #ADACAB;
+    border-right:1px solid #ADACAB;
+    border-top:1px solid #ADACAB;
+    float:left
+
+
+}
+
+.table-header div{
+    padding: 6px 3px 6px 6px;
+    /*    border-top: 1px solid #ADACAB;*/
+    color: #97080e;
+    background: #ffffff;
+}
+
+#pdf-table{
+    /*    border-top: 1px solid #ADACAB;*/
+    /*    border-collapse:collapse*/
+    float:left;
+
+}
+
+
+#page-extender{
+    width:100%;
+    height :300px;
+
+}
+#page-extender1{
+    width:100%;
+    height :500px;
+
+}
+
+.report{
+    /*    min-height: 1000px;*/
+    margin: 0 auto;
+    font-size: 11px;
+    font-family: Arial;
+    float:left;
+    width:1050px;
+    border:1px solid #ADACAB;
+    margin-bottom:50px;
+
+
+}
+/*
+#signature{
+    text-align: right;
+    width: 700px;
+    margin: 0 auto;
+    color: #999999;
+    font-size: 18px;
+}*/
+
+
+#page-yield h2{
+    /*    text-align: center;*/
+}
+
+
+.page-break td{
+    height: 300px;
+}
+
+.electives{
+    margin-top: 15px;
+    font-size: 12px;
+}
+.subject{
+    float: left;
+    width: 150px;
+}
+.employee{
+
+}
+.group_names{
+    font-weight: bold;
+}
+.col-pdf-slots{
+
+    width: 110px !important;
+    height:90px !important;
+
+}
+.col-pdf-slots span{
+    font-size:10px !important;
+    font-weight:normal !important;
+}
+span.pdf_period{
+    width:90px !important;
+    word-break: break-word;
+    font-size:10px !important;
+    font-weight:bold !important;
+}
+#outer_table{
+}
+div.col-pdf-break{
+    background-color: #ccc !important;
+    min-height:90px;
+    padding:5px 5px 6px 5px;
+    border-top:1px solid #ADACAB;
+    border-bottom:1px solid #ADACAB;
+}
+#pdf-info{
+    float:left;
+    background-color: #fff;
+}
+.col-pdf_weekday{
+    min-height:90px !important;
+    width: 29px;
+}
+#batch_name{
+    float:right;
+    font-size:17px;
+    font-weight:bold;
+}
+#tt_name{
+    float:left;
+    font-size:17px;
+    font-weight:bold;
+}

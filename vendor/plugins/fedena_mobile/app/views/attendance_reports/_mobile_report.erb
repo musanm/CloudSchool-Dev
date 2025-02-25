@@ -1,0 +1,47 @@
+<% unless @academic_days==0 %>
+  <% unless  @config.config_value=="Daily" %>
+    <% if @subjects.present? %>
+      <table class="table table-striped table-bordered table-condensed">
+        <tr>
+          <th style="background-color: silver; padding-top: 15px;">
+            <label class="event big"><%= "#{@percent.round(2)} %" %></label>
+            <label class="name"><%= "#{t('absent')}: #{@academic_days-@present}, #{t('total')}: #{@academic_days}" %></label>
+          </th>
+        </tr>
+        <% @leaves.each do |leave| %>
+          <tr>
+            <td>
+              <label class="name"><%= format_date(leave.month_date,:format=>:long) %></label>
+              <label class="event"><%= leave.reason %></label>
+              <label class="description"></label>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+    <% else %>
+      <%= t('no_subjects_to_show') %>
+    <% end %>
+  <% else %>
+    <table class="table table-striped table-bordered table-condensed">
+      <tr>
+        <th style="background-color: silver; padding-top: 15px;">
+          <label class="event big"><%= "#{@percent.round(2)} %" %></label>
+          <label class="name"><%= "#{t('absent')}: #{@academic_days-@present}, #{t('total')}: #{@academic_days}" %></label>
+        </th>
+      </tr>
+      <% @leaves.each do |leave| %>
+        <tr>
+          <td>
+            <label class="name"><%= format_date(leave.month_date,:format=>:long) %></label>
+            <label class="event"><%= leave.reason %></label>
+            <label class="description"></label>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  <% end %>
+<% else %>
+  <div class="alert">
+    <%= t('no_reports') %>
+  </div>
+<% end %>

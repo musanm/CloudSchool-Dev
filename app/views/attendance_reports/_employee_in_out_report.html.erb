@@ -1,0 +1,102 @@
+<div id="register">
+  
+  <div class="header">
+    <!-- <div class="prev"><a class="goto" batch_id="1" next="Mon Nov 27 2017 00:00:00 GMT+0530 (IST)">◄</a>
+    </div> -->
+    <div class="month"><%= @department.name %>
+    </div>
+    <!-- <div class="next"><a class="goto" batch_id="1" next="Sat Jan 27 2018 00:00:00 GMT+0530 (IST)">►</a>
+    </div> -->
+    <div class="extender">
+    </div>
+  </div>
+
+  <div class="box-1">
+    <% if @department.present? && @date.present? %>
+      <% start_date = @date.beginning_of_month.beginning_of_day %>
+      <% end_date   = @date.end_of_month.end_of_day %>
+      <table id="register-table">
+        <tbody>
+          
+          <tr class="tr-head">
+            <td colspan="2" class="head-td-name head-td-name themed_text">Employees</td>
+            <td class="head-td-date themed_text">
+                <div class="day"></div>
+                <div class="date themed_text"></div>
+              </td>
+            <% (start_date.to_date..end_date.to_date).each do |date| %>
+              <td class="head-td-date themed_text">
+                <div class="day"><%= date.strftime("%a") %></div>
+                <div class="date themed_text"><%= date.day %></div>
+              </td>
+            <% end %>  
+            <td class="head-td-date themed_text">
+              <div class="day"></div>
+              <div class="head-td-name head-td-name themed_text" >Present/Absent</div>
+            </td>
+          </tr>
+          
+          <% daily_attendance_percentage = Hash.new %>
+          <% school_in_time = SchoolDetail.first.try(:in_time) %>
+          <% @department.employees.each_with_index do |employee,i| %>
+            <% working_days = 0 %>
+            <% absent_days = 0 %>
+            <tr class="">
+              <td class="head-td-name head-td-name"><%= i+1 %></td>
+              <td class="head-td-name head-td-name"><%= employee.full_name %></td>
+              <td class="head-td-date">
+                <div class="day in">IN</div>
+                <div class="date out">OUT</div>
+              </td>
+              <% (start_date.to_date..end_date.to_date).each_with_index do |date, j| %>
+                <% if !daily_attendance_percentage[j].present? %>
+                  <% daily_attendance_percentage[j] = {}  %>
+                  <% daily_attendance_percentage[j]["total_days"] = 0  %>
+                  <% daily_attendance_percentage[j]["absent_days"] = 0 %>
+                <% end %>
+                <%# debugger if ((date.day.to_i == 26) && (employee.id == 504)) %>
+                <% attendance = EmployeeAttendance.find(:all, :conditions => {:employee_id =>employee.id, :attendance_date  => date.beginning_of_day..date.end_of_day}) %>
+                <% in_time = attendance.present? ? "A" : StudentAttendance.find(:all, :conditions => {:employee_id => employee.id, :in_time  => date.beginning_of_day..date.end_of_day}).first.in_time.strftime("%H:%M")  rescue nil %>
+                <% out_time = attendance.present? ? "A" : StudentAttendance.find(:all, :conditions => {:employee_id => employee.id, :out_time => date.beginning_of_day..date.end_of_day}).first.out_time.strftime("%H:%M") rescue nil %>
+                <% late_in = ((Date.today.strftime("%d-%m-%Y ") + in_time).to_datetime > (Date.today.strftime("%d-%m-%Y ") + employee.get_employee_in_time ).to_datetime) ? true : false rescue false %>
+                <td class="head-td-date <%#= class_name %>">
+                  <% if attendance.present? || in_time.present? %>
+                    <% working_days += 1 %>
+                    <% daily_attendance_percentage[j]["total_days"] += 1 %>
+                  <% end %>
+                  <% if attendance.present? %>
+                    <div style="font-size: 13px;">
+                      A
+                      <% absent_days += 1 %>
+                      <% daily_attendance_percentage[j]["absent_days"] += 1 %>
+                    </div>
+                  <% else %>
+                    <div class="day in <%#= class_name %> <%= 'late_in_class' if late_in%>"><%= in_time %></div>
+                    <div class="date out <%#= class_name %>"><%= out_time %></div>
+                  <% end %>
+                </td>
+              <% end %>
+              <td class="head-td-date">
+                <% per = ((working_days - absent_days).to_f/working_days.to_f)*100 rescue nil %>
+                <%= per.round(2) rescue nil %><%#= working_days %>/<%= absent_days rescue nil %>
+              </td>
+            </tr>
+          <% end %>
+          <tr class="" >
+            <td class="head-td-date" colspan="3">
+              <div class="daily_att">Daily Attendance (%)</div>
+            </td>
+            <% (start_date.to_date..end_date.to_date).each_with_index do |date, i| %>
+              <% total_days = daily_attendance_percentage[i]["total_days"].to_f %>
+              <% absent_days = daily_attendance_percentage[i]["absent_days"].to_f %>
+              <td class="head-td-date"><%= (((total_days - absent_days)/total_days)* 100).round(2) rescue nil %></td>
+            <% end %>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    <% else %>
+      <div>No Records found</div>
+    <% end %>
+  </div>
+</div>

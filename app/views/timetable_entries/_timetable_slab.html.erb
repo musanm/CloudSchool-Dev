@@ -1,0 +1,117 @@
+<% if @tte.is_a? TimetableEntry %>
+  <div class="select_check_box">
+    <%= check_box_tag "accept_#{week}_#{ct.id}",nil,nil%>
+  </div>
+  <div class="class_timings">
+    <span><%="#{format_date(ct.start_time,:format=>:time)} - #{format_date(ct.end_time,:format=>:time)}"%></span>
+    <div class="cross_section inactive_div"><%= link_to_remote "<div class='cross_symbol'></div>",
+        :url => {:action => "delete_employee2", :id => @tte.id},
+        :complete => "clear_selected_divs();",
+        :confirm => @confirm_msg,
+        :before => "Element.show('loader')",
+        :success => "Element.hide('loader')"%>
+    </div>
+  </div>
+  <div class="subject1">
+    <% unless @tte.subject.nil? %>
+      <% unless @tte.subject.elective_group_id.nil? %>
+        <span class="sub-line"> <%= shorten_string(@tte.subject.elective_group.name.to_s, 10) %></span>
+      <% else %>
+        <span class="sub-line"><%= shorten_string(@tte.subject.name.to_s, 10) %></span>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="employee">
+    <% unless @tte.subject.nil? %>
+      <% unless @tte.subject.elective_group_id.nil? %>
+        <span class="elective_text"><%= t('elective') %></span><span class="fright"><%=@tte.subject.elective_group.subjects.active.count%></span>
+      <% else %>
+        <%if @tte.employee.present?%>
+          <%= shorten_string(@tte.employee.first_name,10)%>
+        <%else%>
+          <%= t('no_teacher') %>
+        <%end%>
+      <% end %>
+    <% end %>
+  </div>
+  <div class ="class_timing_tooltip" style="display:none">
+    <span><%="#{format_date(ct.start_time,:format=>:time)} - #{format_date(ct.end_time,:format=>:time)}"%></span>
+    <div class="subject1">
+      <% unless @tte.subject.nil? %>
+        <% unless @tte.subject.elective_group_id.nil? %>
+          <%@tte.subject.elective_group.subjects.each do |es|%>
+            <div class="sub-line"> <%= "#{es.name.to_s} &#x200E;(#{es.code.to_s})&#x200E;" %></div>
+            <%if es.employees.present?%>
+              <%es.employees.each do |e|%>
+                <div class="emp-line"><%="#{e.full_name} &#x200E;(#{e.employee_number})&#x200E;" %></div>
+              <%end%>
+            <%else%>
+              <div class="emp-line"><%= t('no_teacher') %></div>
+            <%end%>
+          <%end%>
+        <% else %>
+          <div class="sub-line"><%= "#{@tte.subject.name.to_s} &#x200E;(#{@tte.subject.code.to_s})&#x200E;"  %></div>
+          <%if @tte.employee.present?%>
+            <div class="emp-line"><%= "#{@tte.employee.full_name} &#x200E;(#{@tte.employee.employee_number})&#x200E;" %></div>
+          <%else%>
+            <div class="emp-line"><%= t('no_teacher') %></div>
+          <%end%>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+<% else %>
+  <div class="select_check_box">
+    <%= check_box_tag "accept_#{week}_#{ct.id}",nil,nil%>
+  </div>
+  <span id="blank_timings"><%="#{format_date(ct.start_time,:format=>:time)} - #{format_date(ct.end_time,:format=>:time)}"%></span>
+  <div class="subject1"></div>
+  <div class="employee"></div>
+<% end %>
+<script type="text/javascript">
+ 
+  j('.tt-subject').each(function(){
+    j(this).bind('mouseenter', function(){
+      j(this).children('.class_timings').children('.cross_section').removeClass('inactive_div');
+      var overall_height=j('#table-viewer').height();
+      var overall_width=j('#table-viewer').width();
+      var overall_top=j('#table-viewer').position().top;
+      var overall_bottom=overall_top+overall_height;
+      var current_top=j(this).parents('.td').position().top;
+      var current_left=j(this).parents('.td').position().left;
+      var tooltip_height=j(this).children('.class_timing_tooltip').height();
+      var tooltip_width=j(this).children('.class_timing_tooltip').width();
+      if(current_top+90+tooltip_height<overall_bottom-20 && current_left+10+tooltip_width<overall_width){
+        j(this).children('.class_timing_tooltip').css('display','block').addClass('ctt_bottom');
+      }
+      else if(current_left+10+tooltip_width>overall_width && current_top-tooltip_height+10 > overall_top){
+        var top=current_top-tooltip_height+10;
+        var left=current_left-tooltip_width+90;
+        j(this).children('.class_timing_tooltip').css('display','block').offset({'top':top,'left':left});
+      }
+      else if(current_left+10+tooltip_width>overall_width && current_top-tooltip_height+10 < overall_top){
+        var top=current_top+tooltip_height+20;
+        var left=current_left-tooltip_width+90;
+        j(this).children('.class_timing_tooltip').css('display','block').offset({'top':top,'left':left});
+      }
+      else if(current_top+90+tooltip_height>overall_bottom-20){
+        var top=current_top-tooltip_height+10;
+        var left=current_left+tooltip_width-45;
+        j(this).children('.class_timing_tooltip').css('display','block').offset({'top':top,'left':left});
+      }
+      
+    }).bind('mouseleave', function(){
+      j(this).children('.class_timings').children('.cross_section').addClass('inactive_div');
+      j(this).children('.class_timing_tooltip').css('display','none');
+    });
+  });
+  j('.cross_section').each(function(){
+    j(this).bind('mouseenter', function(){
+      j(this).addClass('red_back');
+    }).bind('mouseleave', function(){
+      j(this).removeClass('red_back');
+    });
+  });
+  
+</script>

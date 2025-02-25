@@ -1,0 +1,23 @@
+<% unless  @config.config_value=="Daily" %>
+  <% unless @subjects.nil? %>
+    <div class="top_separation">
+      <div class="span6">
+        <%= select :timetable,:wday,
+          @subjects.map {|b| [b.name, b.id]},
+          {:prompt => t("select_a_subject"),:selected=>@subject},
+          {:onChange => "#{remote_function(:url => {:action => "update_student_mobile_view"},
+          :with => "'subject_id='+ value+'&id='+ #{@student.id}"
+          )}",:class=>"span3 full_width"} %>
+      </div>
+    </div>
+    <div id="report">
+      <%= render "mobile_report" %>
+    </div>
+  <% else %>
+    <%= t('no_subjects') %>
+  <% end %>
+<% else %>
+  <div id="report">
+    <%= render "mobile_report" %>
+  </div>
+<% end %>

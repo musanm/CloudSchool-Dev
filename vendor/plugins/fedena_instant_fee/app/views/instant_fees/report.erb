@@ -1,0 +1,61 @@
+<%-# Fedena
+#Copyright 2010 Foradian Technologies Private Limited
+#
+#This product includes software developed at
+#Project Fedena - http://www.projectfedena.org/
+#
+#Licensed under the Apache License, Version 2.0 (the "License");
+#you may not use this file except in compliance with the License.
+#You may obtain a copy of the License at
+#
+#  http://www.apache.org/licenses/LICENSE-2.0
+#
+#Unless required by applicable law or agreed to in writing,
+#software distributed under the License is distributed on an
+#"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#KIND, either express or implied.  See the License for the
+#specific language governing permissions and limitations
+#under the License. -%>
+
+<div id="content-header">
+  <%= show_header_icon %>
+  <h1><%= t('instant_fees_text') %></h1>
+  <div class='header-sep'>|</div>
+  <div class='sub-header'><%= t('transaction_report') %></div>
+
+</div>
+<div id="page-yield">
+  <div class="bread_crumb">
+    <% breadcrumb :instant_fees_report, [@start_date,@end_date] %>
+    <%= render_breadcrumbs  %>
+  </div>
+  <% total =0 %>
+
+  <b id="fees_report_title"><%= t('instant_fees_transaction_report')  %></b>
+  <div id="fees-table">
+    <div class="fees-th">
+      <div class="fees-table-payee"><%= t('payee') %></div>
+      <div class="fees-table-category"><%= t('category') %></div>
+      <div class="fees-table-date"><%= t('date_text') %></div>
+      <div class="fees-table-reciept"><%= t('reciept') %></div>
+      <div class="fees-table-amount"><%= t('amount') %></div>
+    </div>
+    <% total_net_amount = 0 %>
+    <% @instant_fee_transactions.each do |transaction| %>
+      <div class="list<%=cycle('odd', 'even')%>">
+        <div class="fees-table-payee"><%= link_to shorten_string(transaction.finance.payee_name,20), :action => 'report_detail',:id =>transaction.finance_id, :start_date => @start_date,:end_date => @end_date %></div>
+        <div class="fees-table-category"><%= transaction.finance.category_name %></div>
+        <div class="fees-table-date"> <%= format_date(transaction.transaction_date,:long) %> </div>
+        <div class="fees-table-reciept"><%= transaction.receipt_no %></div>
+        <div class="fees-table-amount"><%= precision_label(transaction.amount) %> </div>
+        <% total_net_amount += transaction.amount %>
+      </div>
+    <% end %>
+    <br/>
+    <div class="fees-th report">
+      <div class="fees-table-total-name"><%= t('total_fees') %>:</div>
+      <div class="fees-table-category"></div>
+      <div class="fees-table-total-amount"><%= precision_label(total_net_amount) %></div>
+    </div>
+  </div>
+</div>

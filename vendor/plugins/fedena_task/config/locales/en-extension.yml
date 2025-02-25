@@ -1,0 +1,9 @@
+en-k12:
+  tasks:
+    dept_name_course_name: "Dept. name / Class name"
+    select_course: "Select class"
+
+en-hd:
+  tasks:
+    dept_name_course_name: "Dept. name / Course name"
+    select_course: "Select course"

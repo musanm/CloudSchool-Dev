@@ -1,0 +1,26 @@
+<% if @transport_fee.nil? or @transport_fee.empty? %>
+  <p class="flash-msg"><%= t('no_defaulters') %></p>
+<% else %>
+  <table align="center" width="100%" cellpadding="1" cellspacing="1" id="listing">
+    <tr class="tr-head">
+      <td><%= t('sl_no') %></td>
+      <td><%= t('name') %></td>
+      <td><%= t('bus_fare') %></td>
+      <td></td>
+    </tr>
+    <% @transport_fee.each_with_index do |t,i| %>
+      <% s = t.receiver %>
+      <tr class="tr-<%= cycle('odd', 'even')%>">
+        <td class="col-5"><%= i+1 %></td>
+        <td class="col-6"><%= s.full_name %></td>
+        <td class="col-7"><%= precision_label t.bus_fare %></td>
+        <% if t.receiver_type == 'Student' %>
+          <td class="col-6"><%= link_to_remote "► #{t('pay_fees')}",:class=>'submit_button' ,:url=>{:action=>'fees_submission_defaulter_student'} , :with=>"'student="+s.id.to_s+'&date='+@collection_id.to_s+"'" %></td>
+        <% else %>
+          <td class="col-7"><%= link_to_remote "► #{t('pay_fees')}",:class=>'submit_button' ,:url=>{:action=>'fees_submission_employee'} , :with=>"'id="+s.id.to_s+'&date='+@collection_id.to_s+"'" %></td>
+        <% end %>
+
+      </tr>
+    <% end %>
+  </table>
+<% end %>

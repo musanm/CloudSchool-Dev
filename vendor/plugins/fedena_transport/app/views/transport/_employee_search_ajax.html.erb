@@ -1,0 +1,32 @@
+<table align="center" width="100%" cellpadding="1" cellspacing="1" id="listing">
+ <% if @employees.blank? %>
+  <tr class="tr-<%= cycle('odd', 'even')%>">
+    <td class="col-1">
+      <div><%= t('no_users') %></div>
+    </td>
+  </tr>
+ <% else %>
+    <tr class="tr-head">
+      <td><%= t('sl_no') %></td>
+      <td class="col-4"><%= t('employee_name') %></td>
+      <td><%= t('department') %></td>
+      <td><%= t('employee_no') %></td>
+      <td></td>
+    </tr>
+    <% @employees.each_with_index do |r, i| %>
+      <tr class="tr-<%= cycle('odd', 'even')%>">
+        <td class="col-1"><%= i+1 %></td>
+        <td class="col-4"><%= r.full_name %></td>
+        <td class="col-4"><%= "#{r.employee_department.name}" %></td>
+        <td class="col-7"><%= r.employee_number %></td>
+        <td class="col-1">
+          <% if r.transport.nil?%>
+            <%= link_to "#{t('assign')}", :controller => "transport", :action => "add_transport", :id => r.id,:user=>'employee' %>
+          <%else%>
+            <%= link_to "#{t('assign')}", :controller => "transport", :action => "edit_transport", :id => r.transport.id %><br/>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  <% end %>
+</table>

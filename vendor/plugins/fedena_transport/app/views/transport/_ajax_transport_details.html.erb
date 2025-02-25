@@ -1,0 +1,42 @@
+<% if !@transport.empty? %>
+  <div class="students-table">
+    <table align="center" width="100%" cellpadding="1" cellspacing="1" id="listing">
+      <tr class="tr-head">
+        <td> <%= t('sl_no') %></td><td><%= t('name') %></td><td><%= t('route') %></td> <td><%= t('fare') %></td> <td> </td></tr>
+    
+
+      <% @transport.each_with_index do |t, i| %>
+        <% unless t.receiver.nil? %>
+        <tr class="tr-<%= cycle('odd', 'even') %>">
+          <td class="col-1">
+            <%= i+1 %>
+          </td>
+
+          <td class="col-2">
+            <%=  t.receiver.full_name unless t.receiver.nil?%>
+          </td>
+
+          <td class="col-3">
+            <%= t.route.destination unless t.route.nil? %>
+          </td>
+          <td class="col-4">
+            <%= precision_label t.bus_fare %>
+          </td>
+          <td class="col-5">
+            <%=  link_to "#{t('edit_text')}", :controller => "transport", :action => "edit_transport", :id => t.id %>
+            <%=  link_to "#{t('delete_text')}", {:controller => "transport", :action => "delete_transport", :id => t.id }, :confirm => "#{t('delete_confirm_msg')}" %>
+          </td>
+        </tr>
+        <% end %>
+      <% end %>
+     
+    </table>
+    <div class="seat_occupancy"><div class="info"><div class="label"> <%="#{t('seat_occupancy')}"%></div><div class="record themed_text"><span>:</span>  <%="#{t('out_of', :start_value=>(@vehicle.no_of_seats-@vehicle.available_seats), :end_value=>@vehicle.no_of_seats)}"%> </div></div>
+  </div>
+
+  <div class = "submit_button">
+    <%=  link_to "#{t('pdf_report')}", {:controller => "transport", :action => "pdf_report",:id=>@vehicle.id,:page_height=>900},:target => '_blank',:class=>"user_button" %>
+  </div>
+<% else %>
+  <div class= "msg"><p class= "flash-msg"><%= t('no_users') %></p></div>
+<% end %>

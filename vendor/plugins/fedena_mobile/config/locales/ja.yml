@@ -1,0 +1,18 @@
+--- 
+ja: 
+  attendance_reports: 
+    no_subjects_to_show: "ない被験者ません"
+  attendances: 
+    attendance_marked_for: "出席のためにマーク"
+    class_timings_empty: "いいえクラスのタイミングは、選択されていません"
+    mark_absent: "欠席としてマーク"
+    no_subjects_to_show: "ない被験者ません"
+    no_tte_entries: "選択した日付のない時刻表のエントリはありません"
+  calendar: 
+    no_events: "イベントはありません"
+    show_more_entries: "もっと表示"
+  reminder: 
+    no_reminders: "いいえリマインダません"
+    show_more_entries: "もっと表示"
+  timetable: 
+    select_weekday: "平日を選択します。"

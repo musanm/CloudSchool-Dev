@@ -1,0 +1,10 @@
+hi:
+  oauth:
+    account: "खाता"
+    could_not_authenticate_with: "क्षमा करें, इसका उपयोग कर सत्यापित नहीं कर सके "
+    enter_user_email: "अपना ईमेल दर्ज करें"
+    login_with_google: "अपने ...का उपयोग कर साइन करें"
+    no_user_with_email: "ईमेल का कोई उपयोगकर्ता नहीं "
+    select_user: "उपयोगकर्ता का चयन करें"
+  manage_clients: "क्लाइंट का प्रबंधन करें"
+  enable_oauth: Oauth सक्षम करें

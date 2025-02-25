@@ -1,0 +1,155 @@
+<div id="content-header">
+  <%= show_header_icon %>
+  <h1><%= t('inventory') %></h1>
+  <div class='header-sep'>|</div>
+  <div class='sub-header'><%= t('edit') %></div>
+  <div id="inner-tab-menu"></div>
+</div>
+<div id="page-yield">
+  <div class="bread_crumb">
+    <% breadcrumb :purchase_orders_edit, @purchase_order %>
+    <%= render_breadcrumbs  %>
+  </div>
+
+  <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+  <div class="box">
+    <% form_for(@purchase_order) do |f| %>
+
+      <%= f.error_messages %>
+
+      <div class="label-field-pair">
+        <div class="label-container1"><%= "#{t('indent')}" %></div>
+        <div class="text-input-bg"><%=  f.select :indent_id, @indents.map{|i| [i.indent_no,i.id]}, {:prompt=>"#{t('select_indent')}"},:disabled => @purchase_order.indent_id.present? %></div>
+      </div>
+
+      <div class="label-field-pair">
+        <div class="label-container1"><%= "#{t('po_no')}" %> <span class="necessary-field">*</span> </div>
+        <div class="input-container"><%=  f.text_field :po_no, :value=>  @last_purchase_order.nil? ? nil : @last_purchase_order.next %></div>
+      </div>
+
+      <div class="label-field-pair">
+        <div class="label-container1"><%= "#{t( 'store')}" %></div>
+        <div class="text-input-bg"  ><%= f.select :store_id, @stores.map{|s| [s.name,s.id]}, {:prompt=>"#{t('select_store')}"},{:id=>"person_store_id",:disabled => @purchase_order.indent_id.present?} %></div>
+      </div>
+
+      <div class="label-field-pair">
+        <div class="label-container1"><%= t('supplier_type') %></div>
+        <%= image_tag("loader.gif",:align => "absmiddle",:border => 0,:id => "loader",:style =>"display: none;" ) %>
+        <div class="text-input-bg"><%= f.select :supplier_type_id,
+            @supplier_types.map{|s| [s.name, s.id]},
+            {:prompt => "#{t('select_supplier_type')}"},
+            {:onChange => "#{remote_function(:url => {:action => "update_supplier"},
+            :with => "'supplier_type_id='+ value",
+            :before => "Element.show('loader')",
+            :success => "Element.hide('loader')"
+            )}"}
+        %>
+        </div>
+      </div>
+
+      <div class="label-field-pair">
+        <div class="label-container1" ><%= "#{t('supplier')}" %></div>
+        <div class="text-input-bg" id="update_supplier">
+          <%= f.select :supplier_id, @suppliers.collect{|s| [s.name,s.id]},{:prompt => "#{t('select_supplier')}"} %>
+        </div>
+      </div>
+
+      <div class="indent_date label-field-pair">
+        <div class="label-container1"><%= "#{t('po_date')}" %></div>
+        <div class="text-input-bg-indent">
+          <%= calendar_date_select_tag 'purchase_order[po_date]', I18n.l(Date.today,:format=>:default),
+            :year_range => 15.years.ago..5.years.from_now, :readonly=>true,:popup=>"force" %>
+        </div>
+      </div>
+      <div class="label-field-pair">
+        <div class="label-container1"><%= "#{t('reference')}" %></div>
+        <div class="text-input-container"><%= f.text_field :reference %></div>
+      </div>
+
+
+      <table id="listing" align="center" width="100%" cellpadding="1" cellspacing="1">
+
+        <tr class="tr-head">
+          <td class="lable-text">
+            <%= t('user_id') %></td>
+          <td class="lable-text">
+            <%= t('store_item_id') %></td>
+
+          <td class="lable-text">   <%= t('unit_price') %></td>
+
+          <td class="lable-text">   <%= t('quantity') %></td>
+
+          <td class="lable-text">
+            <%= t('discount') %>
+          </td>
+          <td class="lable-text">  <%= t('tax') + " (%)" %></td>
+
+          <td>  </td>
+        </tr>
+      </table>
+
+      <% f.fields_for :purchase_items,@purchase_items do |po| %>
+        <%=  render 'purchase_item_fields',:f => po %>
+      <% end %>
+
+      <div class="fields"><div  id ="add_item"><%= link_to_add_fields  "#{image_tag("/images/buttons/icon-add.png",:border => 0)} #{t('add_item')}", f , :purchase_items %></div><br />
+      </div>
+      <hr class="label-underline"></hr>
+      <%= submit_tag "", :value => "► #{t('save')}", :class => "submit_button", :disable_with => "► #{t('please_wait')}" %>
+    <%  end %>
+
+    <div class="extender"></div>
+  </div>
+</div>
+<script type="text/javascript">
+  var prev_value=[];
+  function remove_fields(link) {
+    $(link).previous("input[type=hidden]").value = "1";
+    $(link).up(".fields").hide();
+  }
+
+  function add_fields(link, association, content) {
+    prev_value=[];
+    $$('select.select_value').each(function(checkbox) { prev_value.push(checkbox.value); });
+    var new_id = new Date().getTime();
+    var regexp = new RegExp("new_" + association, "g")
+    $(link).up().insert({
+      before: content.replace(regexp, new_id)
+    });
+    StoreSelected();
+    prev_value_insert();
+  }
+  function prev_value_insert()
+  {
+    j=0
+    $$('select.select_value').each(function(checkbox) {
+      checkbox.value=prev_value[j];
+      j+=1;
+    });
+  }
+  var store_items = new Array();
+<% for item in @store_items -%>
+    store_items.push(new Array(<%= item.store_id %>, '<%= escape_javascript item.item_name %>', <%= item.id %>));
+<% end -%>
+  function StoreSelected() {
+    store_id = $('person_store_id').getValue();
+    $$('#person_store_item_id select').each(function (ele){
+      options = ele.options;
+      options.length = 0;
+      options[0] = new Option('<%= t('select_item') %>', '')
+      store_items.each(function(item) {
+        if (item[0] == store_id) {
+          options[options.length] = new Option(item[1], item[2]);
+        }
+      });
+
+    });
+  }
+
+  document.observe('dom:loaded', function() {
+    $('person_store_id').observe('change', StoreSelected);
+  });
+</script>
+

@@ -1,0 +1,137 @@
+table#listing
+{
+    float: left;
+}
+table#listing .col-2-even, .col-3-even {
+    background: #f1f6ff;
+    height: 30px;
+    font-size: 13px;
+    text-align: left;
+    padding: 5px;
+    padding-left: 10px;
+    font-weight: 600;
+    color: #27292b;
+}
+table#listing tr.tr-head
+{
+    color: black !important;
+}
+table#listing .tr-even, .tr-odd
+{
+    height: 30px;
+    font-size: 13px;
+}
+table#listing .col-2-odd, .col-3-odd{
+    background: #fff;
+    height: 30px;
+    font-size: 13px;
+    text-align: left;
+    padding: 5px;
+    padding-left: 10px;
+    font-weight: 600;
+    color: #27292b;
+}
+table#listing .col-2-even, .col-2-odd
+{
+    width: 40%
+}
+table#listing .col-3-even, .col-3-odd
+{
+    width: 10%
+}
+table#listing .col-1
+{
+    width: 40% !important;
+    vertical-align: top;
+    padding-top: 12px !important;
+}
+table#listing td.col-4
+{
+    width: 6%;
+    vertical-align: top;
+    padding-top: 12px !important;
+}
+.label-field-pair label
+{
+    font-size: 13px;
+    width: auto;
+    max-width: 200px;
+    padding-top: 0px;
+}
+.label-field-pair
+{
+    float: left;
+}
+#attendance-count
+{
+    float: right; 
+    color: #444;
+    width: 300px;
+}
+
+#strength-label
+{
+    font-size: 13px;
+    float: right;
+    margin-top: 4px;
+    font-weight: 600;
+}
+#present-count
+{
+    font-weight: bold;
+    font-size: 14px;
+    float: left;
+    margin: 3px 0 0 7px;
+}
+#students-count
+{
+    font-weight: bold;
+    float: left;
+    margin: 5px 0 0 3px;
+    font-size: 12px;
+}
+#date_label
+{
+    margin: 0 30px 0 10px;
+    font-weight: bold;
+}
+.calendar_date_select_popup_icon
+{
+    float: left;
+    margin-right: 10px;
+}
+#page-yield a.themed_text
+{
+    text-decoration: none;
+    font-size: 13px;
+    float: left;
+}
+.text-input-bg select
+{
+    margin-top: 0px;
+}
+.flash-msg
+{
+    float: left;
+    width: 980px;
+}
+#loader_date
+{
+    margin-left: 10px;
+}
+#loader1
+{
+    float: right;
+    margin-top: 5px;
+}
+#count
+{
+    float: right;
+}
+.user_button
+{
+    margin-left: 394px;
+}
+.label-field-pair img.calendar_date_select_popup_icon{
+    margin-top: 0px !important;
+}

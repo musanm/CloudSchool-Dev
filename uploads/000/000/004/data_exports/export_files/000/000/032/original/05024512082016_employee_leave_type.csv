@@ -1,0 +1,5 @@
+Name,Code,Status,Max leave count,Carry forward
+Sick Leaves,SL,true,8,false
+Casual Leave,CL,true,10,false
+Marriage Leaves,ML,true,15,false
+Maternity Leaves,Mat-L,true,45,false

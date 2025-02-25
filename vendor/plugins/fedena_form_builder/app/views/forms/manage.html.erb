@@ -1,0 +1,76 @@
+<%-# Fedena
+#Copyright 2010 Foradian Technologies Private Limited
+#
+#This product includes software developed at
+#Project Fedena - http://www.projectfedena.org/
+#
+#Licensed under the Apache License, Version 2.0 (the "License");
+#you may not use this file except in compliance with the License.
+#You may obtain a copy of the License at
+#
+#  http://www.apache.org/licenses/LICENSE-2.0
+#
+#Unless required by applicable law or agreed to in writing,
+#software distributed under the License is distributed on an
+#"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#KIND, either express or implied.  See the License for the
+#specific language governing permissions and limitations
+#under the License. -%>
+
+<div id="content-header">
+  <%= show_header_icon %>
+  <h1><%= t('form_builder_text') %></h1>
+  <div class='header-sep'>|</div>
+  <div class='sub-header'><%= t('forms') %></div>
+
+  <div id="inner-tab-menu">
+    <ul>
+      <% if permitted_to? :index, :form_templates %>
+        <li class='themed_bg themed-dark-hover-background'>
+          <%= link_to "#{t('form_template_text')}", form_templates_path%>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+</div>
+<div id="page-yield">
+  <div class="bread_crumb">
+    <%= make_breadcrumb %>
+    <%= render_breadcrumbs  %>
+  </div>
+  <div id="flash-msg">
+    <% unless flash[:notice].nil? %>
+      <p class="flash-msg"> <%= flash[:notice] %> </p>
+    <% end %>
+  </div>
+  <% if @forms.present? %>
+    <div class="filter">
+      <%= label_tag :filter %>
+      <%= select :form,:type, [[t('all'),0],[t('feedback'),1],[t('public'),2],[t('private'),3]],
+        {:prompt => "#{t('select')}"},
+        {:onChange => "#{remote_function(:url => manage_filter_forms_path, :with => "'form_type='+value",
+        :before => "Element.show('loader')",
+        :success => "Element.hide('loader')")}"} %>
+
+      <%= image_tag("loader.gif",
+        :align => "absmiddle",
+        :border => 0,
+        :id => "loader",
+        :style =>"display: none;" ) %>
+    </div>
+  <% end %>
+  <div id="manage_forms_list">
+    <%= render :partial => 'manage_forms_list' %>
+  </div>
+
+
+
+
+
+</div>
+<script>
+  if(j('.pagination').length == 0){
+    j('table').addClass('narrow_border')
+  }
+</script>

@@ -1,0 +1,263 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<style>
+  table {
+    border-spacing: 0;
+    border-collapse: collapse;
+    }
+
+  td, th {
+    display: table-cell;
+    vertical-align: inherit;
+  }
+
+  .border {
+    border: 1px solid black;
+    text-align: center;
+  }
+  .right{
+    text-align: right;
+  }
+  .center{
+    text-align: center;
+  }
+  .red{
+    color: red;
+  }
+  .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{
+    padding: 0px;
+    border-top: 1px solid white;
+  }
+  .up-pad{
+    padding-right: 15px;
+  }
+  table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+  }
+</style>
+
+
+<% school = School.find_by_name(Configuration.get_config_value('InstitutionName')) || "" %>
+<% bank_detail = BankDetail.find_by_school_id(school.id) %> 
+<% sch = SchoolDetail.first.school %>
+<% bnk_details =  (sch.present? && (BankDetail.find_all_by_school_id(sch.id)).present?) ? BankDetail.find_all_by_school_id(sch.id).first : "" %>
+<% bank_name = bnk_details.present? ? bnk_details.bank_name : "N/A" %>
+<% bank_acc  = bnk_details.present? ? bnk_details.account_no : "N/A" %>
+<!-- <br><br><br> -->
+<br>
+<% @batch.students.each do |student| %>
+  <% @student = student %>
+
+    <% master_fees_sql="SELECT distinct finance_fee_collections.name as collection_name,finance_fees.is_paid,finance_fees.balance,finance_fees.id as id,'FinanceFee' as fee_type,(finance_fees.balance+(select ifnull(sum(finance_transactions.amount-finance_transactions.fine_amount),0) from finance_transactions where finance_transactions.finance_id=finance_fees.id and finance_transactions.finance_type='FinanceFee')) as actual_amount,(select(fr.fine_amount) from fine_rules fr where fr.id=max(fine_rules.id)) as fine_amount,fine_rules.is_amount FROM `finance_fees` INNER JOIN `finance_fee_collections` ON `finance_fee_collections`.id = `finance_fees`.fee_collection_id INNER JOIN `fee_collection_batches` ON fee_collection_batches.finance_fee_collection_id = finance_fee_collections.id INNER JOIN `collection_particulars` ON (`finance_fee_collections`.`id` = `collection_particulars`.`finance_fee_collection_id`) INNER JOIN `finance_fee_particulars` ON (`finance_fee_particulars`.`id` = `collection_particulars`.`finance_fee_particular_id`) LEFT JOIN `fines` ON `fines`.id = `finance_fee_collections`.fine_id AND fines.is_deleted is false LEFT JOIN `fine_rules` ON fine_rules.fine_id = fines.id and fine_days <= DATEDIFF(CURDATE(),finance_fee_collections.due_date) " %>
+    <% (FedenaPlugin.can_access_plugin?("fedena_hostel") and (@current_user.admin? or @current_user.privileges.collect(&:name).include? "HostelAdmin"))? hostel_fees_sql="UNION ALL (SELECT fc.name as collection_name,if(hf.finance_transaction_id is null,false,true) is_paid,if(hf.finance_transaction_id is null,hf.rent,0) balance,hf.id as id,'HostelFee' as fee_type,hf.rent actual_amount,0 fine_amount,0 is_amount FROM `hostel_fees` hf INNER JOIN `hostel_fee_collections` fc ON `fc`.id = `hf`.hostel_fee_collection_id and fc.is_deleted=0 and hf.student_id='#{@student.id}')" : hostel_fees_sql='' %>
+    <% (FedenaPlugin.can_access_plugin?("fedena_transport") and (@current_user.admin? or @current_user.privileges.collect(&:name).include? "TransportAdmin"))? transport_fees_sql="UNION ALL (SELECT tc.name as collection_name,if(tf.transaction_id is null,false,true) is_paid,if(tf.transaction_id is null,tf.bus_fare,0) balance,tf.id as id,'TransportFee' as fee_type,tf.bus_fare actual_amount,0 fine_amount,0 is_amount FROM `transport_fees` tf INNER JOIN `transport_fee_collections` tc ON `tc`.id = `tf`.transport_fee_collection_id and tc.is_deleted=0 and tf.receiver_id='#{@student.id}' and tf.receiver_type='Student')" : transport_fees_sql='' %>
+    <% @finance_fees=FinanceFee.find_by_sql("#{master_fees_sql} WHERE (finance_fees.student_id=#{@student.id} and finance_fee_collections.is_deleted=0 and ((finance_fee_particulars.receiver_type='Batch' and finance_fee_particulars.receiver_id=finance_fees.batch_id) or (finance_fee_particulars.receiver_type='Student' and finance_fee_particulars.receiver_id=finance_fees.student_id) or (finance_fee_particulars.receiver_type='StudentCategory' and finance_fee_particulars.receiver_id=finance_fees.student_category_id))) GROUP BY finance_fees.id  #{transport_fees_sql}  #{hostel_fees_sql}") %>
+
+    <% total_amount_to_pay=0 %>
+
+    <%@finance_fees.group_by(&:fee_type).each do |fees|%>
+      <% fees.last.each_with_index do |finance_fee, k| %>
+        <%fine_amount=(finance_fee.is_paid? ? 0 : (finance_fee.is_amount? ? finance_fee.fine_amount : (finance_fee.actual_amount.to_f)*(finance_fee.fine_amount.to_f/100)))%>
+        <% total_amount_to_pay=total_amount_to_pay+finance_fee.balance.to_f+fine_amount.to_f %>
+      <% end %>
+    <% end %>
+
+
+  <% financefee = student.finance_fee_by_date @date %>
+  <% if financefee.present? %>
+    <div style="min-height: 1588px;">
+      <% ["PARENTS COPY", "SCHOOL COPY", "BANK COPY"].each do |sheet| %>
+        <div class="container border" style="width: 1100px; margin-top: 5px;">
+      <table class="table">
+        <tr>
+          <td style="padding-left: 500px;" ><%= sheet %></td>
+          <td rowspan="3" class="right"><%= wicked_pdf_image_tag current_school_detail.logo,:s3=>true,:style=>:original,:timestamp=>false, :style=>"width: 105px;height: 65px;" %></td>
+        </tr>
+        <tr>
+          <td><b>School Name</b>: <%=Configuration.get_config_value('InstitutionName'); %></td>
+          
+        </tr>
+        <tr>
+          <td>School address: <%=Configuration.get_config_value('InstitutionAddress'); %></td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <table class="table">
+              <tr>
+                <td class="right up-pad"  style="width: 180px;">Student Name&nbsp;&nbsp;</td>
+                <td class="border" style="border: 1px solid black;" ><%= @student.full_name %></td>
+                <td class="right up-pad" style="width: 207px;">Section&nbsp;&nbsp;</td>
+                <td class="border" style="border: 1px solid black;"><%= @student.batch.full_name %></td>
+              </tr>
+              <tr>
+                <td class="right up-pad">Guardian Name&nbsp;&nbsp;</td>
+                <td class="border" >
+                  <%= @student.guardians.first.full_name if @student.guardians.present? %>
+                </td>
+                <td class="right up-pad">Admission Number&nbsp;&nbsp;</td>
+                <td class="border"><%= @student.admission_no %> (<%= @student.roll_number %>)</td>
+              </tr>
+              <tr>
+                <td class="right up-pad">Invoice For&nbsp;&nbsp;</td>
+                <td class="border" ><%= @date.name.capitalize %></td>
+                <td class="right up-pad">Receipt #&nbsp;&nbsp;</td>
+                <td class="border"><%= '%05i' % @student.id %></td>
+              </tr>
+            </table>
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <table class="table" >
+              <tr>
+                <td class="center" style="border: 1px solid black;" >Start Date</td>
+                <td class="center" style="border: 1px solid black;" ><b><%= @date.start_date.present? ? @date.start_date.strftime("%d-%m-%Y") : "" %></b></td>
+                <td class="center red" style="border: 1px solid black;" >Due Date</td>
+                <td class="center" style="border: 1px solid black;" ><b><%= @date.due_date.present? ? @date.due_date.strftime("%d-%m-%Y") : "" %></b></td>
+                <td class="center" style="border: 1px solid black;" >End Date</td>
+                <td class="center" style="border: 1px solid black;" ><b><%#= @date.end_date.present? ? @date.end_date.strftime("%d-%m-%Y") : "" %><%= @date.bank_due_date.present? ? @date.bank_due_date.strftime("%d-%m-%Y") : "" %></b></td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <table class="table">
+              <tr>
+                <td></td>
+                <td><b>Fee Particulars:</b></td>
+                <td></td>
+                <td><b>Discounts:</b></td>
+                <td style="width: 225px;">
+                  <b><%= "Arrears:" unless params["arrears"] == "0" %></b>
+                </td>
+              </tr>
+              <% @fee_particulars = @date.finance_fee_particulars.all(:conditions => "batch_id=#{@financefee.batch_id}").select { |par| (par.receiver.present?) and (par.receiver==student or par.receiver==@financefee.student_category or par.receiver==@financefee.batch) } %>
+              <% @categorized_particulars=@fee_particulars.group_by(&:receiver_type) %>
+              <% @discounts=@date.fee_discounts.all(:conditions => "batch_id=#{@financefee.batch_id}").select { |par| (par.receiver.present?) and ((par.receiver==student or par.receiver==@financefee.student_category or par.receiver==@financefee.batch) and (par.master_receiver_type!='FinanceFeeParticular' or (par.master_receiver_type=='FinanceFeeParticular' and (par.master_receiver.receiver.present? and @fee_particulars.collect(&:id).include? par.master_receiver_id) and (par.master_receiver.receiver==student or par.master_receiver.receiver==@financefee.student_category or par.master_receiver.receiver==@financefee.batch)))) } %>
+
+
+              <% fees_list = {} %>
+              <% discount_list = {} %>
+              <% arrears = {} %>           
+              <% t_discount = 0 %>   
+              <% @discounts.each_with_index do |d, i| %>
+                <% if d.master_receiver_type=='FinanceFeeParticular' %>
+                    <% net_amount=d.master_receiver.amount %>
+                    <% discount_name= d.is_amount == false ? "#{shorten_string(d.name, 20)}-#{d.discount}%(#{d.master_receiver.name})" : "#{shorten_string(d.name, 20)}(#{d.master_receiver.name})" %>
+                <% else %>
+                    <% discount_name= d.is_amount == false ? "#{shorten_string(d.name, 20)}(#{d.discount}%)" : shorten_string(d.name, 20) %>
+                    <% net_amount=@total_payable %>
+                <% end %>
+                <% discount_list[i] = {"name" => discount_name, "amount" => precision_label(net_amount * d.discount.to_f/ (d.is_amount? ? net_amount : 100)) } %>
+                <% t_discount += (net_amount * d.discount.to_f/ (d.is_amount? ? net_amount : 100)) %>
+                <%#= discount_name %>
+                <%#= precision_label(net_amount * d.discount.to_f/ (d.is_amount? ? net_amount : 100)) %>
+              <% end %>
+
+              <% total_fee_particulars = 0 %>
+              <% @fee_particulars.each_with_index do |fee,i| %>
+                <% total_fee_particulars += fee.amount %>
+                <% fees_list[i] = {"name" => fee.name, "amount" => "#{precision_label(fee.amount.to_s)}" } %>
+              <% end %>
+
+              <% i = 0 %>
+              <% total_arrears = 0 %>
+              <% @student.finance_fees.reverse.each do |f| %>
+                <% if f.balance.to_i > 0 && (f.finance_fee_collection.name != @date.name.capitalize) %>
+                  <% arrears[i] =  {"name" => f.finance_fee_collection.name , "amount" => precision_label(f.balance.to_f) } %>
+                  <% total_arrears += f.balance%>
+                  <% i += 1 %>
+                <% end %>
+              <% end %>
+              <% (0..5).to_a.each do |a| %>
+                <tr>
+                  <td class="right" ><%= fees_list[a]["name"] if (fees_list[a] && fees_list[a]["name"]) %>&nbsp;&nbsp;</td>
+                  <td class="border" style="border: 1px solid black;"><%= fees_list[a]["amount"] if (fees_list[a] && fees_list[a]["amount"]) %></td>
+
+                  <% if [0,1,2,3].include? a %>
+                    <td class="right" style="width: 258px;"><%= (discount_list[a] && discount_list[a]["name"] ) ? discount_list[a]["name"] : "" %>&nbsp;&nbsp;</td>
+                    <td class="border" style="border: 1px solid black;"><%= (discount_list[a] && discount_list[a]["amount"]) ?  discount_list[a]["amount"] : "." %></td>
+                  <% else %>
+                    <% if a == 4 %>
+                      <td>.</td>
+                      <td><b>Fine</b></td>
+                    <% else %>
+                      <td class="right">Total Fine&nbsp;&nbsp;</td>
+                      <% unless params["arrears"] == "0" %>
+                        <% t_fine = total_amount_to_pay.to_f - (total_fee_particulars.to_f + total_arrears.to_f - t_discount.to_f )  %>
+                        <% t_fine = t_fine < 1 ? "-" : t_fine %>
+                      <% end %>
+                      <td class="border" style="border: 1px solid black;"><%= t_fine %><%#= @fine.to_f %></td>
+                    <% end %>
+                  <% end %>
+
+                  <td class="right">
+                    <% unless params["arrears"] == "0" %>
+                      <% if a == 5 %>
+                        <b>Total: <%= precision_label(total_arrears) %></b>
+                      <% else %>
+                        <%= "#{arrears[a]["name"]}: #{arrears[a]["amount"]}" if (arrears[a] && arrears[a]["amount"]) %>
+                      <% end %>
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
+
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <table class="table">
+              <tr>
+                <td class="center"  style="border: 1px solid black;">Bank Name</td>
+                <td class="center" style="width: 350px; border: 1px solid black;"><%= bank_name %></td>
+                <td class="center" style="border: 1px solid black;"><b>TOTAL BEFORE DUE DATE</b></td>
+                <td class="center red" style="border: 1px solid black;"><b>TOTAL AFTER DUE DATE</b></td>
+              </tr>
+              <tr>
+                <td class="center" style="border: 1px solid black;">Account</td>
+                <td class="center" style="border: 1px solid black;"><%= bank_acc %></td>
+                <% unless params["arrears"] == "0" %>
+                  <td class="center" style="border: 1px solid black;">
+                    <% std = @s.find_by_id @student.id %>
+                    <% last =  precision_label( std.present? ? std.balance : 0 ) %>
+                    <!-- <b><%#= last  %></b> -->
+                    <b>
+                      <% unless precision_label(total_amount_to_pay).to_f == 0 %>
+                        <%= precision_label(total_amount_to_pay.to_f) %>
+                      <% else %>
+                        <%= precision_label(0) %>
+                      <% end %>
+                    </b>
+                  </td>
+                  <td class="center" style="border: 1px solid black;">
+                    <b><%= precision_label((total_amount_to_pay.to_f == 0) ? 0 : (total_amount_to_pay.to_f + 100))  %></b>
+                  </td>
+                <% else %>
+                  <td class="center" style="border: 1px solid black;">
+                    <b><%= total_fee_particulars.to_f - t_discount.to_f %></b>
+                  </td>
+                  <td class="center" style="border: 1px solid black;">
+                    <b><%= total_fee_particulars.to_f < 1 ? 0 : total_fee_particulars.to_f - t_discount.to_f + 100 %></b>
+                  </td>
+                <% end %>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>     
+        </div>
+        <!-- <hr> -->
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
+

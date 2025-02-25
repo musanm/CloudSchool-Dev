@@ -1,0 +1,41 @@
+
+
+<div id="content-header">
+  <%= show_header_icon %>
+  <h1><%= t('blogs_text') %></h1>
+  <div class='header-sep'>|</div>
+  <div class='sub-header'><%= t('settings') %></div>
+  <div id="inner-tab-menu">
+    <ul>
+      <li class='themed_bg themed-dark-hover-background'><%= link_to t('home'),blog_blog_posts_path(@current_user.id) %></li>
+      <li class='themed_bg themed-dark-hover-background'><%= link_to t('my_blog'),my_blog_path %></li>
+      <li class='themed_bg themed-dark-hover-background'><%= link_to t('notifications'),notification_blogs_path %></li>
+      <li class='themed_bg themed-dark-hover-background'><%= link_to t('search'),search_blog_blog_posts_path(@current_user.id) %></li>
+    </ul>
+  </div>
+</div>
+<div id="page-yield">
+  <div class="bread_crumb">
+    <% breadcrumb :blogs_edit, @blog %>
+    <%= render_breadcrumbs  %>
+  </div>
+  <div id="flash_notice"></div>
+  <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+
+  <% form_for @blog do |f| %>
+    <%= f.error_messages %>
+    <div class="label-field-pair">
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
+    <div class="label-field-pair">
+      <%= f.label :is_published %>
+      <%= f.check_box :is_published, :checked => @blog.is_published %>
+    </div>
+    <%= f.submit t('save'),:class => 'submit-button' %>
+  <% end %>
+
+
+</div>

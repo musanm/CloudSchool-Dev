@@ -1,0 +1,18 @@
+--- 
+nl: 
+  attendance_reports: 
+    no_subjects_to_show: "Geen onderwerpen"
+  attendances: 
+    attendance_marked_for: "Aanwezigheid genoteerd voor"
+    class_timings_empty: "Er zijn geen klasuren geselecteerd."
+    mark_absent: "Als afwezig noteren"
+    no_subjects_to_show: "Geen onderwerpen"
+    no_tte_entries: "Geen rooster voor de geselecteerde datum"
+  calendar: 
+    no_events: "Geen evenementen"
+    show_more_entries: "Meer tonen"
+  reminder: 
+    no_reminders: "Geen herinneringen"
+    show_more_entries: "Meer tonen"
+  timetable: 
+    select_weekday: "Selecteer een weekdag"

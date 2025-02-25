@@ -1,0 +1,125 @@
+Attendance date,Employee number,Leave type,Reason,Half day
+2016-03-04,EN-101,CL,urgent piece of work,Full Day
+2016-03-02,EN-32,CL,urgent piece of work,Full Day
+2016-04-11,EN-101,CL,urgent piece of work,Full Day
+2016-04-12,EN-101,CL,due to fathers death,Full Day
+2016-04-13,EN-101,CL,due to fathers death,Full Day
+2016-04-11,EN-32,CL,urgent piece of work,Full Day
+2016-04-22,EN-92,CL,urgent piece of work,Full Day
+2016-04-27,EN-108,CL,urgent piece of work,Full Day
+2016-04-28,EN-108,CL,urgent piece of work,Full Day
+2016-03-16,EN-30,CL,illness,Full Day
+2016-03-22,EN-30,SL,fever,Full Day
+2016-03-24,EN-30,SL,fever,Full Day
+2016-03-25,EN-30,SL,fever,Full Day
+2016-03-18,EN-42,CL,urgent piece of work,Full Day
+2016-03-19,EN-42,CL,urgent piece of work,Full Day
+2016-03-15,EN-112,CL,urgent piece of work,Full Day
+2016-03-16,EN-29,CL,urgent piece of work,Full Day
+2016-03-19,EN-29,CL,urgent piece of work,Full Day
+2016-03-19,EN-85,CL,urgent piece of work,Full Day
+2016-03-15,EN-85,CL,urgent piece of work,Full Day
+2016-03-16,EN-113,CL,illness,Full Day
+2016-03-17,EN-113,CL,illness,Full Day
+2016-03-15,EN-21,CL,urgent piece of work,Full Day
+2016-03-19,EN-116,CL,urgent piece of work,Full Day
+2016-03-28,EN-104,CL,for papers,Full Day
+2016-03-29,EN-104,CL,for papers,Full Day
+2016-03-30,EN-104,CL,for papers,Full Day
+2016-03-18,EN-111,CL,urgent piece of work,Full Day
+2016-03-29,EN-111,CL,absent,Full Day
+2016-03-18,EN-07,CL,urgent piece of work,Full Day
+2016-03-28,EN-25,CL,urgent piece of work,Full Day
+2016-03-28,EN-208,CL,urgent piece of work,Full Day
+2016-03-24,EN-121,CL,absent,Full Day
+2016-03-28,EN-121,CL,absent,Full Day
+2016-03-19,EN-122,CL,urgent piece of work,Full Day
+2016-03-18,EN-122,CL,urgent piece of work,Full Day
+2016-03-21,EN-122,CL,urgent piece of work,Full Day
+2016-03-25,EN-122,CL,absent,Full Day
+2016-03-02,EN-109,CL,urgent piece of work,Full Day
+2016-03-19,EN-109,CL,urgent piece of work,Full Day
+2016-03-31,EN-109,CL,urgent piece of work,Full Day
+2016-03-24,EN-94,CL,urgent piece of work,Full Day
+2016-03-17,EN-95,CL,urgent piece of work,Full Day
+2016-03-17,EN-100,CL,urgent piece of work,Full Day
+2016-04-14,EN-109,CL,urgent piece of work,Full Day
+2016-04-28,EN-109,CL,urgent piece of work,Full Day
+2016-03-19,EN-117,CL,absent,Full Day
+2016-04-01,EN-42,CL,urgent piece of work,Full Day
+2016-04-18,EN-42,CL,urgent piece of work,Full Day
+2016-04-04,EN-103,CL,urgent piece of work,Full Day
+2016-04-06,EN-29,CL,absent,Full Day
+2016-04-11,EN-02,CL,absent,Full Day
+2016-04-12,EN-02,CL,absent,Full Day
+2016-04-13,EN-02,CL,urgent piece of work,Full Day
+2016-04-28,EN-91,CL,urgent piece of work,Full Day
+2016-04-28,EN-11,CL,urgent piece of work,Full Day
+2016-04-05,EN-11,CL,urgent piece of work,Full Day
+2016-04-12,EN-113,CL,urgent piece of work,Full Day
+2016-04-12,EN-21,CL,absent,Full Day
+2016-04-21,EN-21,CL,urgent piece of work,Full Day
+2016-04-26,EN-111,CL,urgent piece of work,Full Day
+2016-04-19,EN-115,CL,absent,Full Day
+2016-04-26,EN-115,CL,urgent piece of work,Full Day
+2016-04-01,EN-07,CL,urgent piece of work,Full Day
+2016-04-20,EN-10,CL,absent,Full Day
+2016-04-26,EN-10,CL,urgent piece of work,Full Day
+2016-04-07,EN-208,CL,absent,Full Day
+2016-04-20,EN-208,CL,absent,Full Day
+2016-04-26,EN-122,CL,urgent piece of work,Full Day
+2016-04-27,EN-122,CL,absent,Full Day
+2016-04-11,EN-121,CL,urgent piece of work,Full Day
+2016-04-12,EN-121,CL,urgent piece of work,Full Day
+2016-04-14,EN-121,CL,absent,Full Day
+2016-04-13,EN-121,CL,urgent piece of work,Full Day
+2016-04-22,EN-117,CL,urgent piece of work,Full Day
+2016-05-06,EN-101,CL,urgent piece of work,Full Day
+2016-05-02,EN-32,CL,son illness,Full Day
+2016-05-03,EN-32,CL,son illness,Full Day
+2016-05-02,EN-33,CL,illness,Full Day
+2016-05-02,EN-94,CL,illness,Full Day
+2016-05-09,EN-98,CL,urgent piece of work,Full Day
+2016-05-03,EN-100,CL,urgent piece of work,Full Day
+2016-05-04,EN-100,CL,urgent piece of work,Full Day
+2016-05-02,EN-108,CL,urgent piece of work,Full Day
+2016-05-03,EN-106,CL,urgent piece of work,Full Day
+2016-05-02,EN-15,CL,absent,Full Day
+2016-05-02,EN-42,CL,absent,Full Day
+2016-05-03,EN-42,CL,absent,Full Day
+2016-05-09,EN-42,CL,absent,Full Day
+2016-05-04,EN-112,CL,absent,Full Day
+2016-05-04,EN-29,CL,absent,Full Day
+2016-05-03,EN-91,CL,absent,Full Day
+2016-05-02,EN-120,CL,urgent piece of work,Full Day
+2016-05-05,EN-21,CL,absent,Full Day
+2016-05-09,EN-121,CL,absent,Full Day
+2016-05-10,EN-208,CL,urgent piece of work,Full Day
+2016-05-10,EN-113,CL,urgent piece of work,Full Day
+2016-05-11,EN-115,CL,cousin marriage,Full Day
+2016-05-12,EN-128,CL,urgent piece of work,Full Day
+2016-05-13,EN-122,CL,urgent piece of work,Full Day
+2016-05-13,EN-127,CL,absent,Full Day
+2016-05-16,EN-109,CL,absent,Full Day
+2016-05-16,EN-25,CL,urgent piece of work,Full Day
+2016-05-16,EN-10,CL,urgent piece of work,Full Day
+2016-05-17,EN-30,CL,urgent piece of work,Full Day
+2016-05-18,EN-11,CL,urgent piece of work,Full Day
+2016-05-17,EN-25,CL,urgent piece of work,Full Day
+2016-05-20,EN-103,CL,absent,Full Day
+2016-05-20,EN-104,CL,urgent piece of work,Full Day
+2016-05-23,EN-04,CL,urgent piece of work,Full Day
+2016-05-23,EN-103,CL,absent,Full Day
+2016-05-23,EN-113,CL,urgent piece of work,Full Day
+2016-05-23,EN-116,CL,absent,Full Day
+2016-05-23,EN-121,CL,absent,Full Day
+2016-05-24,EN-123,CL,urgent piece of work,Full Day
+2016-05-27,EN-24,CL,urgent piece of work,Full Day
+2016-05-27,EN-26,CL,urgent piece of work,Full Day
+2016-05-30,EN-02,CL,urgent piece of work,Full Day
+2016-05-31,EN-02,CL,urgent piece of work,Full Day
+2016-05-30,EN-91,CL,urgent piece of work,Full Day
+2016-05-30,EN-11,CL,absent,Full Day
+2016-05-30,EN-122,CL,absent,Full Day
+2016-05-30,EN-15,CL,absent,Full Day
+2016-05-30,EN-26,CL,absent,Full Day

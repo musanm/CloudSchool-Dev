@@ -1,0 +1,25 @@
+#Edit with appropriate values
+
+defaults: &defaults
+  access_key_id: 'your access key id'
+  secret_access_key: 'your secret access key'
+  cloudfront_signing_key_path: '/path/to/key'
+  cloudfront_signing_key_pair_id: 'xxxxxxxxxxxx'
+  cloudfront_public: 'your cloudfront public url'
+  cloudfront_private: 'your cloudfront private url'
+  s3_end_point_url: 'S3_END_POINT.amazonaws.com'
+  s3_url: 'https://PRIVATE_BUCKET_NAME.S3_END_POINT.amazonaws.com'
+
+development:
+  <<: *defaults
+  bucket_private: 'your private bucket name'
+  bucket_public: 'your public bucket name'
+
+test:
+  <<: *defaults
+  bucket: your_development_bucket_name
+
+production:
+  <<: *defaults
+  bucket_private: 'your private bucket name'
+  bucket_public: 'your public bucket name'

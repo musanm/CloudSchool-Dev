@@ -1,0 +1,18 @@
+<p>
+  <b>Time in:</b>
+  <%=h @reporting_time.time_in %>
+</p>
+
+<p>
+  <b>Out time:</b>
+  <%=h @reporting_time.out_time %>
+</p>
+
+<p>
+  <b>Is in time:</b>
+  <%=h @reporting_time.is_in_time %>
+</p>
+
+
+<%= link_to 'Edit', edit_reporting_time_path(@reporting_time) %> |
+<%= link_to 'Back', reporting_times_path %>

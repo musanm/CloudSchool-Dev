@@ -1,0 +1,14 @@
+<fieldset>
+  <div class="span6">
+    <%= f.label :reason , t('reason') %>
+  </div>
+  <div class="span6">
+    <%= f.text_area :reason,  :rows=>5 %>
+  </div>
+</fieldset>
+<fieldset>
+  <div class="span6"></div>
+  <div class="span6">
+    <%= submit_tag t('mark_absent'), :class => "btn btn-danger", :disable_with => "#{t('please_wait')}" %>
+  </div>
+</fieldset>

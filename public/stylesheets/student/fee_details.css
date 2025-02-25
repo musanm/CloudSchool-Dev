@@ -1,0 +1,227 @@
+#student_profile_heading1 {
+    clear: both;
+    float: left;
+    height: 50px;
+    margin: -21px 0 40px;
+    padding: 0 0 0 2px;
+    width: 100%;
+}
+#student_main_info1 span.name {
+    color: #000000;
+    float: left;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    margin: 13px 0 0;
+    padding-right: 20px;
+    width: 100%;
+    font: bold;
+}
+#student_main_info1 span.course {
+    color: #000000;
+    float: left;
+    font-size: 14px;
+    margin: 10px 0 0;
+    padding-right: 20px;
+    width: 100%;
+}
+#student_main_info1 span.adm {
+    color: #000000;
+    float: left;
+    font-size: 14px;
+    margin: 5px 0 0;
+    padding: 0;
+    width: 100%;
+}
+
+table#listing{
+    float: left;
+}
+
+
+table#listing td.col-8 {
+    padding: 5px 5px 5px 10px;
+    width: 10%;
+    text-align: right;
+}
+.label-field-pair3 {
+    height : 40px;
+    width: 230px;
+    float:left;
+    padding-top: 3px;
+}
+.label-field-pair3 label {
+    color: #444;
+    display: block;
+    font-size: 14px;
+    margin: 0 0 0px 0;
+    width: 200px;
+    padding-top: 10px;
+    font-weight: 600;
+    margin-left: 16px;
+    padding-bottom: 5px;
+    font-weight: bold;
+}
+table#listing {
+    padding: 20px 20px 20px;
+}
+table#listing td.col-1 {
+    width: 7%;
+    padding: 5px;
+    padding-left: 10px;
+}
+#payments_details{
+    margin-top:20px;
+}
+
+table#listing td a {
+    color: #27292B;
+    float: right;
+    margin-right: 0;
+    text-decoration: none;
+}
+
+.submit_button {
+    background: none repeat scroll 0 0 #27292B;
+    border: medium none;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-family: arial;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 18px 132px 0 0;
+    padding: 7px 10px;
+    border-radius: 10px 10px 10px 10px;
+    -moz-border-radius:10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+}
+p.flash-msg {
+padding-left: 20px;
+text-align: left;
+}
+
+
+.errorExplanation {
+    font-size:13px;
+    font-weight:600;
+    border:1px solid #EFDC86;
+background:  #fff1ab url(/images/_global/error.png) no-repeat 10px 14px;
+height: auto;
+/* width: 510px; */
+margin: 17px auto;
+font-size: 13px;
+padding: 11px 0 9px 49px;
+width: inherit;
+}
+
+table#listing tr.tr-head,table#listing1 tr.tr-head{
+    color: #000000 !important;
+}
+table#listing .tr-odd {
+    background: #fff;
+    padding: 50px;
+    color: #27292b;
+    font-weight: normal;
+    font-size: 14px;
+}
+
+table#listing .tr-even {
+    background: #f1f6ff;
+    padding: 50px;
+    color: #27292b;
+    font-weight: normal;
+    font-size: 14px;
+}
+.cancel-disc{
+
+    padding: 3 !important;
+    background: #c3d9ff !important;
+}
+table#listing1 tr.tr-head {
+
+    height: 30px;
+    background: #fff;
+    font-weight: bold;
+    text-align: center;
+
+}
+.col-2{
+    max-width:200px;
+    text-align: justify;
+}
+tr.tr-blank {
+    height: 10px;
+}
+table#listing1 .tr-odd {
+
+    background: #fff;
+    text-align: center;
+    padding: 50px;
+    color: #27292b;
+    font-weight: normal;
+    font-size: 14px;
+
+}
+table#listing1 .tr-even {
+
+    background: #f1f6ff;
+    text-align:center;
+    padding: 50px;
+    color: #27292b;
+    font-size: 14px;
+    font-weight: normal;
+
+}
+table#listing1 {
+    margin-bottom: 30px;
+    float: left;
+    background: #c3d9ff;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    padding: 20px 20px 40px;
+}
+table#listing1 td a {
+    background: none repeat scroll 0 0 #27292B;
+    border: medium none;
+    cursor: pointer;
+    float: right;
+    font-family: arial;
+    font-size: 14px;
+    font-weight: bold;
+    margin: -34px auto 0;
+    padding: 7px 10px;
+    text-decoration: none;
+}
+table#listing1 td.col-1 {
+    padding: 5px;
+    padding-left: 10px;
+}
+table#listing1 td a {
+    background: none repeat scroll 0 0 #27292B;
+    border: medium none;
+    /*    color: #FFFFFF;*/
+    cursor: pointer;
+    float: right;
+    font-family: arial;
+    font-size: 14px;
+    font-weight: bold;
+    margin: -34px auto 0;
+    padding: 7px 10px;
+    text-decoration: none;
+}
+
+table#listing1 td a:hover{
+    background:  #373B3F;
+    /*    color: #fff;*/
+    text-decoration: none;
+}
+
+
+
+table#listing1 td.col-8 {
+    padding: 5px 5px 5px 10px;
+    width: 10%;
+    text-align: right;
+}
+table#listing td.col-2 {
+    width: 80%;
+}

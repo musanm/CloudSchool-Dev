@@ -1,0 +1,38 @@
+
+
+<div id="content-header">
+  <%= show_header_icon %>
+  <h1><%= t('blogs_text') %></h1>
+  <div class='header-sep'>|</div>
+  <div class='sub-header'><%= t('my_blog') %></div>
+  <div id="inner-tab-menu">
+    <ul>
+      <li class='themed_bg themed-dark-hover-background'><%= link_to t('home'),blog_blog_posts_path(@current_user.id) %></li>
+      <li class='themed_bg themed-dark-hover-background'><%= link_to t('notifications'),notification_blogs_path %></li>
+      <li class='themed_bg themed-dark-hover-background'><%= link_to t('search'),search_blog_blog_posts_path(@current_user.id) %></li>
+    </ul>
+  </div>
+</div>
+<div id="page-yield">
+  <div class="bread_crumb">
+    <%= make_breadcrumb %>
+    <%= render_breadcrumbs  %>
+  </div>
+  <div id="flash_notice">
+    <% unless flash[:notice].nil? %>
+      <p class="flash-msg"> <%= flash[:notice] %> </p>
+    <% end %>
+  </div>
+  <% if @user == @current_user %>
+    <div>
+      <%= link_to t('new_post'),new_blog_blog_post_path(@current_user.blog) ,:class=>"user_button"%>
+    </div>
+    <div id="new_blog_post">
+    </div>
+  <% end %>
+
+  <div id ="list_blog_posts">
+    <%= render :partial => "list_my_blog_posts" %>
+  </div>
+
+</div>

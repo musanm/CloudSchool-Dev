@@ -1,0 +1,5 @@
+<div class="available-seat"><div class="seat"><%= t('total_no_of_seats') %>: </div> <div class="number themed_text">  <%= @no_of_seat.to_s %> </div></div>
+<br/><br/>
+<div class="available-seat"><div class="seat"><%= t('available_seats') %>: </div><div class="number3 themed_text"><%= @available_seats.to_s %>
+    <% if @available_seats.to_s=="0" %>(<%= t('all_seats_filled_in_vehicle') %>)<% end %></div>
+</div>

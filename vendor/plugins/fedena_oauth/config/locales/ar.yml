@@ -1,0 +1,10 @@
+ar:
+  oauth:
+    account: "الحساب"
+    could_not_authenticate_with: "عذرًا, غير قادر على المصادقة على استخدام"
+    enter_user_email: "أدخل عنوان البريد الإلكتروني الخاص بك"
+    login_with_google: "سجل دخولك باستخدام"
+    no_user_with_email: "لا يوجد مستخدم بالبريد الإلكتروني"
+    select_user: "تحديد المستخدم"
+  manage_clients: "إدارة العملاء"
+  enable_oauth: "تمكين بروتوكول Oauth"

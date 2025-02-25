@@ -1,0 +1,42 @@
+<script type="text/javascript">
+        Element.hide('loader')
+        </script>
+<%unless @unsubscribers.empty?%>
+      <table id="listing" align="center" width="100%" cellpadding="1" cellspacing="1">
+
+        <tr class="tr-head">
+          <td><%= t('sl_no') %></td>
+          <td><%= t('name') %></td>
+          <td><%= t('batch') %> </td>
+
+        </tr>
+        <tr class="tr-blank"></tr>
+        <% index = 0  %>
+        <% @unsubscribers.each do |us|%>
+        
+          <tr class="tr-odd">
+            <td class="col-1"><%= @i+=1 %></td>
+
+            <td class="col-2"><%= "#{us.student.full_name}(#{us.student.admission_no})" %></td>
+            <td class="col-3" align="right"><%= us.student.batch.full_name%></td>
+
+
+          </tr>
+
+        <% end %>
+
+
+
+      </table>
+    <%else%>
+      <table id="listing" align="center" width="100%" cellpadding="1" cellspacing="1">
+        <tr class="tr-head" style="text-align:center">
+          <td><%=t('no_students_unsubscribed_yet')%></td>
+        </tr>
+      </table>
+    <%end%>
+
+    <br/>
+    <br/>
+
+  <%= will_paginate @unsubscribers,:renderer => 'RemoteLinkRenderer', :previous_label=>'<', :next_label=>'>',:params=>{:date=>@date}, :style=>"margin-right: 200px;" %>

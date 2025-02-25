@@ -1,0 +1,55 @@
+<% unless @batches.empty? %>
+  <table id="listing" align="center" width="100%" cellpadding="1" cellspacing="1">
+    <tr class="tr-head">
+      <td>
+        <%= t('sl_no') %>
+      </td>
+      <td>
+        <%= t('courses_text') %>
+      </td>
+      <td>
+        <%=t('batches_text')%>
+      </td>
+      <td>
+        <%=t('absentees')%>
+      </td>
+    </tr>
+    <tr class="tr-blank">
+
+    </tr>
+    <% @grouped_batches.each do |course,batches| %>
+      <tr class="tr-odd">
+        <td class="col-4" rowspan="<%= batches.count %>">
+          <%= @active_courses.present? ? @active_courses.index(course) + 1 : 1 %>
+        </td>
+        <td class="col-1" rowspan="<%= batches.count %>">
+          <%= course %>
+        </td>
+        <% in_cycle = nil %>
+        <% batches.each do |batch| %>
+          <% in_cycle = cycle('odd', 'even')%>
+          <td class="col-2-<%= in_cycle %>">
+            <%= link_to batch.name,{:controller => 'attendance_reports', :action => 'daily_report_batch_wise',:batch_id => batch.id,:date => @date},:class => "themed_text" %>
+          </td>
+          <td class="col-3-<%= in_cycle %>">
+            <%= batch.attendance_count %>
+          </td>
+        </tr>
+      <%end%>
+    <% end %>
+  </table>
+  <% if @course.nil? %>
+    <%= will_paginate @batches,:renderer => 'RemoteLinkRenderer',:params=>{:controller => "attendance_reports",:action => "day_wise_report",:date => @date} %>
+  <% else %>
+    <%= will_paginate @batches,:renderer => 'RemoteLinkRenderer',:params=>{:controller => "attendance_reports",:action => "day_wise_report_filter_by_course",:date => @date, :course_id => @course.id} %>
+  <% end %>
+  <div id = "button">
+    <% if @course.nil? %>
+      <%= link_to "►#{t('csv_report')}", {:controller => 'csv_export', :action => 'generate_csv', :csv_report_type => 'day_wise_report',:report_format_type => "csv", :date => @date},:class => 'user_button'%>
+    <% else %>
+      <%= link_to "►#{t('csv_report')}", {:controller => 'csv_export', :action => 'generate_csv', :csv_report_type => 'day_wise_report',:report_format_type => "csv", :date => @date, :course_id => @course.id},:class => 'user_button'%>
+    <% end %>
+  </div>
+<% else %>
+  <p class="flash-msg"> <%= t('no_active_batches_present_for_the_selected_range') %> </p>
+<% end %>

@@ -1,0 +1,235 @@
+No.,Name,Employee ID,Joining date,Department,Position,Manager,Gender
+1,Admin  User,admin,16/07/2017 ,System Admin,System Admin, ,M
+2,Meera'n  Malik,E2017-090,15/05/2017 ,School Management,Principal, ,F
+3,Gouhar  Samsom Washington,E1993-010,03/02/1993 ,Pre-School,Music Teacher,Sana Rafiq,M
+4,Gulshah  Salman,E1993-011,31/07/1993 ,Pre-School,Teacher,Sana Rafiq,F
+5,Shagufta  Kamran,E1994-001,03/03/1994 ,Pre-School,Teacher,Sana Rafiq,F
+6,Jhoson  Javed,E1997-025,08/12/1997 ,Pre-School,Music Teacher,Sana Rafiq,M
+7,Aleeshia  Kanwal Waseem,E2010-050,22/03/2010 ,Pre-School,Sports Teacher,Sana Rafiq,F
+8, Huma   Abdul Aziz,E2011-060,08/02/2011 ,Pre-School,Teacher,Sana Rafiq,F
+9,Asim   Ali,E2011-061,25/04/2011 ,Pre-School,Sports Teacher,Sana Rafiq,M
+10, Hina   Mairaj,E2013-062,27/05/2013 ,Pre-School,Teacher,Sana Rafiq,F
+11,Irum  Amir,E2013-063,01/06/2013 ,Pre-School,Teacher,Sana Rafiq,F
+12,Sunita   Soneel,E2013-064,26/10/2013 ,Pre-School,Teacher,Sana Rafiq,F
+13,Naz  Rafique,E2014-061,01/04/2014 ,Pre-School,Teacher,Sana Rafiq,F
+14, Erum   Waqas,E2014-063,09/06/2014 ,Pre-School,Teacher,Sana Rafiq,F
+15,Saira  Nadir Ali,E2014-066,04/08/2014 ,Pre-School,Teacher,Sana Rafiq,F
+16, Shezadi  Behshad,E2015-061,26/05/2015 ,Pre-School,Teacher,Sana Rafiq,F
+17, Arifa   Batool,E2016-060,14/04/2016 ,Pre-School,Teacher,Sana Rafiq,F
+18,Aafia  Ghazanfar,E2016-061,01/08/2016 ,Pre-School,Teacher,Sana Rafiq,F
+19,Sarah  Raza,E2016-064,22/08/2016 ,Pre-School,Teacher,Sana Rafiq,F
+20,Abid  Ali,E2016-065,20/09/2016 ,Pre-School,Office Assistant,Sana Rafiq,M
+21,Nida  Pervaiz,E2016-066,17/10/2016 ,Pre-School,Teacher,Sana Rafiq,F
+22,Asifa  Kiran,E2017-061,07/03/2017 ,Pre-School,Teacher,Sana Rafiq,F
+23,Sehar  Rizwan,E2017-064,14/04/2017 ,Pre-School,Teacher,Sana Rafiq,F
+24,Nadira  ,E2017-067,02/05/2017 ,Pre-School,Teacher,Sana Rafiq,F
+25,Hifsah  Saeed,E2017-069,07/05/2017 ,Pre-School,Teacher,Sana Rafiq,F
+26,Misbah  Adnan,E2017-074,07/11/2017 ,Pre-School,Teacher,Sana Rafiq,F
+27,Mehrish  Yaqoob  Barkat ,E2013-061,20/05/2013 ,Pre-School,Teacher,Sana Rafiq,F
+28,Safia  Khattak,E2014-060,21/03/2014 ,Pre-School,Teacher,Sana Rafiq,F
+29,Maria   Ibrahim,E2014-062,19/05/2014 ,Pre-School,Teacher,Sana Rafiq,F
+30,Noshe   Lubna,E2014-065,04/08/2014 ,Pre-School,Teacher,Sana Rafiq,F
+31,Rida  Shoukat,E2015-060,18/05/2015 ,Pre-School,Teacher,Sana Rafiq,F
+32,Saima   Akhtar,E2015-062,27/07/2015 ,Pre-School,Teacher,Sana Rafiq,F
+33,Sameena  Rafique,E2016-062,01/08/2016 ,Pre-School,Teacher,Sana Rafiq,F
+34,Shamim   Akhtar,E2016-063,01/08/2016 ,Pre-School,Teacher,Sana Rafiq,F
+35,Shazia  Mehtab,E2017-062,13/03/2017 ,Pre-School,Teacher,Sana Rafiq,F
+36,Huma  Waris,E2017-063,07/04/2017 ,Pre-School,Teacher,Sana Rafiq,F
+37,Kubra  Shafi,E2017-065,17/04/2017 ,Pre-School,Teacher,Sana Rafiq,F
+38,Fareena  Kamran,E2017-066,02/05/2017 ,Pre-School,Teacher,Sana Rafiq,F
+39,Shazia  Muzafar Ali,E2017-068,02/05/2017 ,Pre-School,Teacher,Sana Rafiq,F
+40,Rida Saher  ,E2017-070,17/07/2017 ,Pre-School,Teacher,Sana Rafiq,F
+41,Maria   Javed,E2017-071,31/07/2017 ,Pre-School,Teacher,Sana Rafiq,F
+42,Nomana  Batool,E2017-072,31/07/2017 ,Pre-School,Teacher,Sana Rafiq,F
+43,Anees  Fatima,E2017-073,07/11/2017 ,Pre-School,Teacher,Sana Rafiq,F
+44,Sana  Rafiq,E2016-100,16/06/2016 ,Pre-School,Section Head,Meera'n Malik,F
+45,Hajra Bibi  ,E2017-116,09/10/2017 ,Pre-School,Teacher,Meera'n Malik,F
+46, Zareen   Shoukat,E2010-020,25/02/2010 ,Middle School,Teacher, ,F
+47, Ghazala   Nadeem,E2000-020,13/11/2000 ,Middle School,Teacher, ,F
+48, Midhat   Naveed,E2006-020,01/08/2006 ,Middle School,Teacher, ,F
+49, Nighat   Yasmeen,E2010-021,03/05/2010 ,Middle School,Teacher, ,F
+50, Sabira   Bano,E2010-022,03/05/2010 ,Middle School,Teacher, ,F
+51,Adeel  Javed,E2010-023,28/07/2010 ,Middle School,Office Assistan, ,M
+52,Hina   Shreen,E2012-020,04/09/2012 ,Middle School,Teacher, ,F
+53, Amna   Yousaf,E2014-020,10/03/2014 ,Middle School,Teacher, ,F
+54, Riffat   Noureen,E2014-021,10/03/2014 ,Middle School,Teacher, ,F
+55, Tahira   Firdous,E2014-022,10/03/2014 ,Middle School,Teacher, ,F
+56,Sana  Khalid,E2014-024,10/03/2014 ,Middle School,Teacher, ,F
+57, Uzma   Rani,E2014-025,01/04/2014 ,Middle School,Teacher, ,F
+58, Shazia   Akbar,E2014-027,10/04/2014 ,Middle School,Teacher, ,F
+59, Shazia   Bashir,E2014-028,11/04/2014 ,Middle School,Teacher, ,F
+60,Rafia   Imran,E2015-020,18/03/2015 ,Middle School,Teacher, ,F
+61, Iqra   Saleem,E2015-022,18/05/2015 ,Middle School,Teacher, ,F
+62, Yasir   Abbas,E2015-023,18/06/2015 ,Middle School,Teacher, ,M
+63, Tehmina   Kousar,E2015-034,26/08/2015 ,Middle School,Teacher, ,F
+64,Syeda  Tayyaba Mazhar,E2016-020,10/03/2016 ,Middle School,Teacher, ,F
+65,Attia  Shafqat,E2016-022,06/03/2017 ,Middle School,Teacher, ,F
+66, Rubeca  Daniel,E2016-023,13/07/2016 ,Middle School,Teacher, ,F
+67,Chand   Samee,E2016-024,26/07/2016 ,Middle School,Teacher, ,F
+68,Sundas  Nawaz,E2016-026,26/09/2016 ,Middle School,Teacher, ,F
+69,Shabir   Khan,E2016-027,04/10/2016 ,Middle School,Teacher, ,M
+70,Naveed   Hassan,E2016-029,18/10/2016 ,Middle School,Teacher, ,M
+71,Sadia  Saif  Cheema,E2016-030,24/10/2016 ,Middle School,Teacher, ,F
+72,Ameena   Mubashar,E2016-032,06/12/2016 ,Middle School,Teacher, ,F
+73,Shakeela  Aziz,E2017-021,15/05/2017 ,Middle School,Teacher, ,F
+74,Sakina   ,E2017-022,15/05/2017 ,Middle School,Teacher, ,F
+75,Naheed Zahid  ,E2017-023,05/06/2017 ,Middle School,Teacher, ,F
+76,Duniya   Tareen,E2017-024,03/07/2017 ,Middle School,Teacher, ,F
+77,Waleed  Khalid,E2017-025,04/07/2017 ,Middle School,Teacher, ,M
+78,Hina  Imran,E2017-026,14/07/2017 ,Middle School,Teacher, ,F
+79,Sumayya   Aziz,E2017-042,24/07/2017 ,Middle School,Section Head, ,F
+80,Rafiq Bhatti  ,E1993-105,28/02/1993 ,Middle School,Teacher,Meera'n Malik,M
+81,Hafiza Fiza Naseem  ,E2015-127,27/02/2015 ,Middle School,Teacher,Meera'n Malik,F
+82,Rizwana  Adeel,E1992-001,01/08/2017 ,Junior School,Section Head,Meera'n Malik,F
+83,Zakia  Musa,E2000-031,01/09/2000 ,Junior School,Teacher,Rizwana Adeel,F
+84,Afia  Farrukh,E2005-080,05/03/2005 ,Junior School,Teacher,Rizwana Adeel,F
+85,Sajida  Nasir,E2006-080,01/11/2006 ,Junior School,Teacher,Rizwana Adeel,F
+86,Masooma  Essa,E2012-060,31/10/2012 ,Junior School,Teacher,Rizwana Adeel,F
+87,Zoya  Bashir,E2013-080,15/06/2013 ,Junior School,Teacher,Rizwana Adeel,F
+88,Azm  Arshad,E2014-080,26/02/2014 ,Junior School,Teacher,Rizwana Adeel,F
+89,Shahnaz  Masooma,E2014-081,10/03/2014 ,Junior School,Teacher,Rizwana Adeel,F
+90,Ayatullah  Baluch,E2014-082,10/03/2014 ,Junior School,Teacher,Rizwana Adeel,M
+91,Maryam  Amjad,E2015-080,12/08/2015 ,Junior School,Teacher,Rizwana Adeel,F
+92,Lubna Naz Akbar,E2015-081,07/09/2015 ,Junior School,Teacher,Rizwana Adeel,F
+93,Ulfat  Khilji,E2016-082,07/03/2016 ,Junior School,Teacher,Rizwana Adeel,F
+94,Bibi  Razia,E2016-083,14/04/2016 ,Junior School,Teacher,Rizwana Adeel,F
+95,Samia  Syed,E2016-084,15/04/2016 ,Junior School,Teacher,Rizwana Adeel,F
+96,Parveen Noor  ,E2016-086,07/11/2016 ,Junior School,Teacher,Rizwana Adeel,F
+97,Nadia  Hashmi,E2016-087,10/11/2016 ,Junior School,Teacher,Rizwana Adeel,F
+98,Nadia  Muzafar  Ali,E2017-091,07/03/2017 ,Junior School,Teacher,Rizwana Adeel,F
+99,Farwa  Zahra,E2017-092,02/05/2017 ,Junior School,Teacher,Rizwana Adeel,F
+100,Sabiha  Iqbal,E2017-093,08/05/2017 ,Junior School,Teacher,Rizwana Adeel,F
+101,Nayab  Khan,E2017-094,10/07/2017 ,Junior School,Teacher,Rizwana Adeel,F
+102,Rubina  Yousaf,E2017-096,08/10/2017 ,Junior School,Teacher,Rizwana Adeel,F
+103,Mehwish   Akbar ,E2017-097,07/07/2017 ,Junior School,Teacher,Rizwana Adeel,F
+104,Sumera  Saeed,E2013-081,30/09/2013 ,Junior School,Teacher,Rizwana Adeel,F
+105,Saima  Batool,E2016-099,07/03/2016 ,Junior School,Teacher,Rizwana Adeel,F
+106,Saba  ,E2017-012,10/09/2017 ,Junior School,Teacher,Meera'n Malik,F
+107,Uzma  ,E2017-013,10/09/2017 ,Junior School,Teacher,Meera'n Malik,F
+108,Madiha Raza  ,E2017-014,21/08/2017 ,Junior School,Teacher,Meera'n Malik,F
+109,Narjis  ,E2006-015,03/01/2006 ,Junior School,Teacher,Meera'n Malik,F
+110,Muhammad Rasheed  ,E2009-016,16/02/2009 ,Junior School,Teacher,Meera'n Malik,M
+111,Arsalan  ,E2016-017,17/06/2016 ,Junior School,Teacher,Meera'n Malik,M
+112,Rabecca Iram  ,E2007-018,15/09/2007 ,Junior School,Teacher,Meera'n Malik,F
+113,Seher Anam  ,E2014-019,11/10/2014 ,Junior School,Teacher,Meera'n Malik,F
+114,Shamsig Begum  ,E2016-088,03/09/2016 ,Junior School,Teacher,Meera'n Malik,F
+115,Fatima Ali  ,E2017-089,07/05/2017 ,Junior School,Teacher,Meera'n Malik,M
+116,Sabahat Musa  ,E2017-098,16/09/2017 ,Junior School,Teacher,Meera'n Malik,F
+117,Alec  ,E1993-100,21/02/1993 ,Junior School,Music Teacher,Meera'n Malik,M
+118,Iqbal Ud Din  ,E2012-101,25/03/2012 ,Junior School,Sports Teacher,Meera'n Malik,M
+119,Sanober Washintgon  ,E2001-102,04/01/2001 ,Junior School,Music Teacher,Meera'n Malik,F
+120,Nasima Nazr  ,E2017-106,10/10/2017 ,Junior School,Teacher,Meera'n Malik,F
+121,Waseem  Ahmed,E2017-075,14/08/2017 ,Information Technology,Office Assistan, ,M
+122,Rana Muhammad Haseeb,E2017-099,26/09/2017 ,Information Technology,AMS Head,Meera'n Malik,M
+123,Tahira  Batool,E2010-024,28/07/2010 ,College,Coordinator, ,F
+124,Zahra  ,E2016-021,09/06/2016 ,College,Teacher, ,F
+125,Syed   Muhammad Iqbal,E2016-025,15/08/2016 ,College,Teacher, ,M
+126,Asma  ,E2016-031,01/11/2016 ,College,Teacher, ,F
+127,Hina   Raza,E2017-020,08/03/2017 ,College,Teacher, ,F
+128,Abdul Mateen  ,E2016-040,09/06/2016 ,College,Lecturer, ,M
+129,Zeeshan  rasheed,E2016-041,09/06/2016 ,College,Lecturer, ,M
+130,Zainab  Ali,E2017-041,12/07/2017 ,College,Teacher, ,F
+131,Muhammad  Iqbal,E2016-042,15/08/2016 ,College,Lecturer, ,M
+132,Mobeen  Mohsin,E1989-001,25/02/1989 ,College,Lecturer, ,F
+133,Waseem   Younas,E1996-031,01/11/1996 ,College,Lab Assistant, ,M
+134,Shabana  Zahid,E1997-031,08/05/1997 ,College,Lecturer, ,F
+135,Saima  Nagi,E2004-030,09/01/2004 ,College,Lecturer, ,F
+136,Ghulam  Sarwar,E2004-031,04/07/2004 ,College,Lecturer, ,M
+137,Fakhra  Khurshed,E2007-030,08/06/2007 ,College,Lecturer, ,F
+138,Sheraz  Kokhar,E2011-030,17/03/2011 ,College,Lab Assistant, ,M
+139,Zakir  Zaman,E2011-031,08/06/2011 ,College,Lab Assistant, ,M
+140,Bibi   Nusrat,E2013-030,04/04/2013 ,College,Lecturer, ,F
+141,Ashir  Kamran,E2014-030,10/09/2014 ,College,Office Assistant, ,M
+142,Sakina  ,E2015-030,12/01/2015 ,College,Lecturer, ,F
+143,Safdar  Abbas,E2015-031,12/03/2015 ,College,Lecturer, ,M
+144,M Afzaal  ,E2016-034,17/09/2016 ,College,Lecturer, ,M
+145,Sanaullah  Khan,E2016-035,04/10/2016 ,College,Lecturer, ,M
+146,Muhammad  Yahya,E2016-037,11/10/2016 ,College,Lecturer, ,M
+147,Qadir  Shah,E2016-039,26/10/2016 ,College,Lecturer, ,M
+148,Mustafa   Yousaf,E1997-030,03/03/1997 ,College,Sports Teacher, ,M
+149,Gulnaz  Kanwal,E2015-032,05/07/2015 ,College,Lecturer, ,F
+150,Gulshan  Ara,E2016-033,30/08/2016 ,College,Lecturer, ,F
+151,Muhammad  Bilal,E2016-038,20/10/2016 ,College,Lecturer, ,M
+152,Abdul   Hakeem,E2017-050,06/01/2017 ,College,Lecturer, ,M
+153,Humaira   Akbar,E2017-051,07/03/2017 ,College,Lecturer, ,F
+154,Jamshaid  Elahi,E2017-052,07/03/2017 ,College,Lecturer, ,M
+155,Muhammad   Uzair,E2017-053,09/06/2017 ,College,Lecturer, ,M
+156,Muhammad Mateen  ,E2017-128,18/09/2017 ,College,Lecturer,Meera'n Malik,M
+157,Um-e-Habiba  ,E2017-129,17/07/2017 ,College,Lecturer,Meera'n Malik,F
+158,Rabia  ,E2017-130,17/09/2017 ,College,Lecturer,Meera'n Malik,F
+159,Nematullah  ,E2016-131,06/02/2016 ,College,Lecturer,Meera'n Malik,M
+160,Samra  Jabeen,E2016-011,16/04/2016 ,Cambridge,Teacher, ,F
+161,Muhammad  Nadeem,E2011-040,01/09/2011 ,Cambridge,Teacher, ,M
+162,Asma  Khayam,E2014-040,28/11/2014 ,Cambridge,Teacher, ,F
+163,Musarrat  Mirza,E2017-043,11/09/2017 ,Cambridge,Teacher, ,F
+164,Saba Khan  ,E2017-107,10/02/2017 ,Cambridge,Teacher,Meera'n Malik,F
+165,Sidra Batool  ,E2016-123,06/10/2016 ,Cambridge,Teacher, ,F
+166,Sonia Munir  ,E2017-124,23/10/2017 ,Cambridge,Teacher,Meera'n Malik,F
+167,Aqsa Iqbal  ,E2017-125,10/04/2017 ,Cambridge,Teacher,Meera'n Malik,F
+168,Muhammad Shahjhan  ,E2016-126,13/10/2016 ,Cambridge,Teacher,Meera'n Malik,M
+169,Muhammad Waseem Anwar  ,E2013-093,10/08/2013 ,Cambridge,Section Head,Meera'n Malik,M
+170,Donald  Fazal  Ellahi,E1993-045,15/05/1993 ,Admin & Accounts,School Secretary, ,M
+171, Tahir   Khan ,E2013-070,15/03/2013 ,Admin & Accounts,Office Assistant, ,M
+172,Shamrooz  Sarfaraz,E2017-081,07/03/2017 ,Admin & Accounts,Receptionist, ,M
+173,Ashraf   masih,E1992-060,16/10/1992 ,Admin & Accounts,Janitor, ,M
+174,Muhammad   anwar,E1993-060,05/01/1993 ,Admin & Accounts,Gate keeper, ,M
+175,Feroze   Masih,E1994-060,04/01/1994 ,Admin & Accounts,Photocopier Operator, ,M
+176,Ghullam   haider,E1995-060,04/01/1995 ,Admin & Accounts,Mali, ,M
+177,Nazar khan  ,E1995-061,04/01/1995 ,Admin & Accounts,Gate keeper, ,M
+178,Lazras   ,E1996-060,07/01/1996 ,Admin & Accounts,Janitor, ,M
+179,Muhammad   riaz,E1999-060,19/04/1999 ,Admin & Accounts,Driver, ,M
+180,Muhammad   ejaz ,E2003-050,09/01/2003 ,Admin & Accounts,Gate keeper, ,M
+181,Chand   bibi,E2003-051,01/10/2003 ,Admin & Accounts,Aya, ,F
+182,Pervaiza   bibi,E2005-050,03/01/2005 ,Admin & Accounts,Aya, ,F
+183,Zamaan   khan,E2007-070,02/01/2007 ,Admin & Accounts,Mali, ,M
+184,Aurangzaib  ,E2007-071,01/11/2007 ,Admin & Accounts,Photocopier Operator, ,M
+185,Gul Nisa   bibi,E2009-070,03/05/2009 ,Admin & Accounts,Aya, ,F
+186,Fozia   nadeem,E2010-090,23/09/2010 ,Admin & Accounts,Aya, ,F
+187,Ali   Hassan ,E2011-090,02/01/2011 ,Admin & Accounts,Mali, ,M
+188,Moras   masi,E2012-090,02/01/2012 ,Admin & Accounts,Janitor, ,M
+189,Fukraj   begum,E2012-091,08/10/2012 ,Admin & Accounts,Aya, ,F
+190,Markus  ,E2013-090,03/01/2013 ,Admin & Accounts,Janitor, ,M
+191,Asiya   Bibi,E2013-091,07/06/2013 ,Admin & Accounts,Aya, ,F
+192,Shehnaz   bibi,E2013-092,09/09/2013 ,Admin & Accounts,Aya, ,F
+193,Sakina   bibi,E2014-090,04/04/2014 ,Admin & Accounts,Aya, ,F
+194,Fehmida   kousar,E2014-091,06/04/2014 ,Admin & Accounts,Aya, ,F
+195,Munir   Masi,E2014-092,09/04/2014 ,Admin & Accounts,Janitor, ,M
+196,Hossan   nisa,E2014-093,03/05/2014 ,Admin & Accounts,Aya, ,F
+197,Razia   ,E2014-094,03/05/2014 ,Admin & Accounts,Aya, ,F
+198,Shahida   amir,E2014-095,03/05/2014 ,Admin & Accounts,Aya, ,F
+199,Shazia   bibi,E2014-096,12/05/2014 ,Admin & Accounts,Aya, ,F
+200,Zeeshan   waris,E2015-090,23/02/2015 ,Admin & Accounts,Janitor, ,M
+201,Jiwan   masi,E2015-091,26/02/2015 ,Admin & Accounts,Janitor, ,M
+202,Maria  ,E2015-092,23/03/2015 ,Admin & Accounts,Aya, ,F
+203,Shahida   perveen,E2015-093,19/05/2015 ,Admin & Accounts,Aya, ,F
+204,Kousar   bibi,E2015-094,10/06/2015 ,Admin & Accounts,Aya, ,F
+205,Abdul baqi  ,E2015-095,09/07/2015 ,Admin & Accounts,Mali, ,M
+206,Agha   Muhammad,E2015-096,02/08/2015 ,Admin & Accounts,Mali, ,M
+207,Muhammad   Kamran,E2016-114,08/01/2016 ,Admin & Accounts,Driver, ,M
+208,Noman-ullah  ,E2016-101,10/01/2016 ,Admin & Accounts,Runner, ,M
+209,Sharoon   ,E2016-102,08/02/2016 ,Admin & Accounts,Janitor, ,M
+210,Syed  Muhammad  amjad,E2016-103,10/03/2016 ,Admin & Accounts,Runner, ,M
+211,Syed  ayaz  ahmed,E2016-104,19/04/2016 ,Admin & Accounts,Runner, ,M
+212,Jahanzaib   ,E2016-105,27/04/2016 ,Admin & Accounts,Runner, ,M
+213,Syed  waseem  shah,E2016-106,28/05/2016 ,Admin & Accounts,Runner, ,M
+214,Muhammad   Hayat,E2016-107,26/06/2016 ,Admin & Accounts,Supervisor, ,M
+215,Ajeet   ,E2016-108,17/07/2016 ,Admin & Accounts,Janitor, ,M
+216,Farhan   khan,E2016-109,18/07/2016 ,Admin & Accounts,Electrician, ,M
+217,Youail   naz,E2016-110,15/08/2016 ,Admin & Accounts,Janitor, ,F
+218,Imtiyaz ali  ,E2016-112,15/10/2016 ,Admin & Accounts,Runner, ,M
+219,Naveed   Akhter ,E2016-113,15/10/2016 ,Admin & Accounts,Runner, ,M
+220,Asif   raza ,E2017-110,06/01/2017 ,Admin & Accounts,Janitor, ,M
+221,Bibi hazar   naz,E2017-111,14/04/2017 ,Admin & Accounts,Aya, ,F
+222,Noor   Zaman,E2017-113,01/08/2017 ,Admin & Accounts,Gate keeper, ,M
+223,Taj   Muhammad,E2017-114,01/08/2017 ,Admin & Accounts,Gate keeper, ,M
+224,Hamida   bibi,E1995-071,06/01/1995 ,Admin & Accounts,Aya, ,F
+225,Abdul Wahab  ,E2017-103,30/08/2017 ,Admin & Accounts,Assistant,Meera'n Malik,M
+226,Shan Yousaf  ,E2017-104,11/01/2017 ,Admin & Accounts,Admin Officer,Meera'n Malik,M
+227,Ashraf Masih  ,E2004-032,01/06/2004 ,Admin & Accounts,Office Assistant,Meera'n Malik,M
+228,Ahmed Abdullah  ,E2016-019,15/08/2016 ,Admin & Accounts,Accountant,Meera'n Malik,M
+229,Raza  ,E2015-097,24/12/2015 ,Admin & Accounts,Assistant,Meera'n Malik,M
+230,Shafaqat  ,E1993-012,10/11/1993 ,Admin & Accounts,Assistant,Meera'n Malik,M
+231,Saqlain Iftikhar  ,E2017-115,23/09/2017 ,Admin & Accounts,Office Assistant,Meera'n Malik,M
+232,Naheed Bibi  ,E2014-097,10/04/2014 ,Admin & Accounts,Aya,Meera'n Malik,F
+233,Mishal  ,E2017-117,07/11/2017 ,Admin & Accounts,Janitor,Meera'n Malik,F
+234,Majid Masih  ,E2017-118,25/09/2017 ,Admin & Accounts,Janitor,Meera'n Malik,M

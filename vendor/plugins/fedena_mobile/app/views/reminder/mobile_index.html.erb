@@ -1,0 +1,26 @@
+<% unless @reminders.empty? %>
+  <ul class="nav nav-tabs nav-stacked">
+    <% @reminders.each do |r| %>
+      <% if r.is_read %>
+        <li><%= link_to "<label class='name read'>#{r.user.try(:first_name)}</label><label class='subject read'>#{r.subject}</label>",:action=>"mobile_view",:id2=>r.id %></li>
+      <% else %>
+        <li><%= link_to "<label class='name'>#{r.user.try(:first_name)}</label><label class='subject-unread'>#{r.subject}</label>",:action=>"mobile_view",:id2=>r.id %></li>
+      <% end %>
+    <% end %>
+  </ul>
+<% else %>
+<div class="alert">
+      <%= t("no_reminders") %>
+    </div>
+<% end %>
+<% content_for :footer_link do  %>
+  <% if @reminders.count>=12 %>
+    <div id="footer_link">
+      <ul class="nav nav-tabs nav-stacked">
+        <li>
+          <%= link_to t("show_more_entries"), :action=>"mobile_index",:page=>(params[:page].present? ? params[:page].to_i+1 : 2) %>
+        </li>
+      </ul>
+    </div>
+  <% end %>
+<% end %>

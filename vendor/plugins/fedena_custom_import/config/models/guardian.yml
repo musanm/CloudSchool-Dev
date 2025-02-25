@@ -1,0 +1,55 @@
+ guardian:
+    primary_keys:
+      ward_id: "Ward Admission Number"
+      first_name: "First name"
+      relation: "Relation"
+    overrides:
+      ward_id: "Ward Admission Number"
+      country_id: "Country Name"
+      dob: "Date of Birth"
+      biometric_id: "Set Immediate Contact"
+    associations:
+     - :country
+     - :wards
+     - :user
+    associated_columns:
+      wards: "admission_no"
+      country: "name_as"
+    filters:
+     - :user_id
+     - :school_id
+    attr_accessor_list:
+     - :set_immediate_contact
+# every YAML file should contain all the content inside model_name.underscore hash.
+
+# If database columns names needed to be modfied then it should be placed in overrides hash.
+
+# Mention all the associations those arec needed in CSV upload inside associations_array.
+
+# Assoicated columns needs a field that will be searched for getting an ID to place.For example
+# nationality_id needs to be searched in country table by name which will be present in CSV.All those
+# required field to be placed in associated_columns hash.Association name is the key and field will be value.
+
+# Mention all those database columns which u dont want to appear in CSV inside filters array.Note that
+#  id,created_at,updated_at does not needs any mention inside filters.
+
+# If there is any join table data to be uploaded with CSV.Please mention that join name as key
+# and table name as value in joins hash.In this case privilege is the privileges_users is the table.So
+# entry will be privileges: users
+
+# This concept also same as the associated data.Mention the column by which join column names will be searched.
+# In this case privilege table will be searched by name.
+
+# There can be many additional data to upload while uploading a model data.Place all those additional
+# association names and parent names in associates hash.For example we have to upload employee bank detail,
+# so all the values from bank detail to be fetched,thats why the entry is like employee_bank_details: "bank_field".
+# All the current active bank fields will be appearing then to save in the structure.
+
+# The data user will be entering needed to be saved somewhere in the assoiated model.Mention those column names
+# inside associate_columns hash.For example someone entered his passport number as an additional detail.
+# This passport_number column to be get from additional_field table,then have to save the id in
+# employee_additional_detail table with a value for that in additional_info column.So the enry should be
+# employee_additional_detail: "additional_info"
+
+# Every associated parent model value to be searched by a column.For example,all the bank fields to be
+# searched by name from the bank_field table.Mention all those values inside associate_column_search hash.

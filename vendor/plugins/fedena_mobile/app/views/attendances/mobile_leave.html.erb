@@ -1,0 +1,77 @@
+<div class="page_with_footer">
+  <div class="student_name">
+    <%= "#{@student.full_name} - #{@student.admission_no}" %>
+  </div>
+  <% form_for :attendance do |f| %>
+    <% unless (error_messages_for :attendance).empty? %>
+      <div class="alert alert-error">
+        <%= error_messages_for :attendance ,:header_message => nil,:message =>nil %>
+      </div>
+    <% end %>
+    <%= hidden_field_tag :id, @student.id %>
+    <%= f.hidden_field :student_id, :value=>@student.id %>
+    <%= f.hidden_field :batch_id, :value=>@student.batch_id %>
+
+    <% if @config.config_value=="Daily" %>
+      <fieldset>
+        <div class="span6">
+          <%= f.label :month_date , t("date_text") %>
+        </div>
+        <div class="span6">
+          <%= f.date_select :month_date,:use_month_numbers=>true,:order=> [ :day, :month, :year ] %>
+        </div>
+      </fieldset>
+      <fieldset>
+        <div class="span6">Sessions</div>
+        <div class="span6">
+          <div class="controls">
+            <label class="checkbox inline">
+              <%= f.check_box :forenoon,:checked=>true  %>
+              <%= f.label :forenoon , t("forenoon") %>
+            </label>
+            <label class="checkbox inline">
+              <%= f.check_box :afternoon,:checked=>true  %>
+              <%= f.label :afternoon , t("afternoon") %>
+            </label>
+          </div>
+        </div>
+      </fieldset>
+      <%= render :partial=>'leave_form',:locals=>{:f=>f} %>
+    <% else %>
+      <%= hidden_field_tag :subject_id, @subject.id %>
+      <%= f.hidden_field :subject_id, :value=>@subject.id %>
+      <fieldset>
+        <div class="span6">
+          <%= f.label :month_date , t("date_text") %>
+        </div>
+        <div class="span6" id="date">
+          <%= f.date_select :month_date,:use_month_numbers=>true,:order=> [ :day, :month, :year ] %>
+        </div>
+      </fieldset>
+      <div id="class_hours">
+        <%= render "subject_hours" %>
+      </div>
+      <div id="leave-form">
+        <%= render :partial=>'leave_form',:locals=>{:f=>f} %>
+      </div>
+    <% end %>
+  <% end %>
+  <% unless @config.config_value=="Daily" %>
+    <script>
+      function load_hours(){
+        sel_date = $$('#date select')[2].value+"-"+$$('#date select')[1].value+"-"+$$('#date select')[0].value;
+  <%= "#{remote_function(:url => {:action => "load_class_hours"}, :with => "'date='+sel_date+'&subject_id='+ #{@subject.id}")}" %>
+  }
+  document.observe("dom:loaded", function() {
+    $$('#date').invoke('observe','change',load_hours);
+  });
+    </script>
+  <% end %>
+  <% content_for :nav_button do %>
+    <% if @config.config_value=="Daily" %>
+      <%= link_to image_tag("/images/fedena_mobile/back.png",:border => 0), {:controller=>"attendances",:action=>"mobile_attendance",:batch_id=>@batch.id} %>
+    <% else %>
+      <%= link_to image_tag("/images/fedena_mobile/back.png",:border => 0), {:controller=>"attendances",:action=>"mobile_attendance",:batch_id=>@batch.id, :subject_id=>@subject.id} %>
+    <% end %>
+  <% end %>
+</div>

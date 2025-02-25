@@ -1,0 +1,18 @@
+--- 
+ku: 
+  attendance_reports: 
+    no_subjects_to_show: "هیچ بابەتێک نیە"
+  attendances: 
+    attendance_marked_for: "هاتن نیشانە کرا بۆ"
+    class_timings_empty: "هیچ پۆلێک دیاری نەکراوە بۆ خشتەی کاتەکان"
+    mark_absent: "وەکو نەهاتوو نیشانی بکە"
+    no_subjects_to_show: "هیچ بابەتێک نیە"
+    no_tte_entries: "هیچ خشتەیەک بۆ ڕۆژی دیاری کراو بەردەست نیە"
+  calendar: 
+    no_events: "هیچ ڕووداوێک نیە"
+    show_more_entries: "زۆرتر نیشان بدە"
+  reminder: 
+    no_reminders: "هیچ بیرخستنەوەیەک نیە"
+    show_more_entries: "زۆرتر نیشان بدە"
+  timetable: 
+    select_weekday: "ڕۆژێکی هەفتە دیاری بکە"

@@ -1,0 +1,32 @@
+<div id="content-header">
+  <%= show_header_icon %>
+  <h1><%= t('gallery_category') %></h1>
+<div class='header-sep'>|</div>
+<div class='sub-header'><%= t('neew') %></div>
+
+
+</div>
+<div id="page-yield">
+<div class="bread_crumb">
+    <%= make_breadcrumb %>
+    <%= render_breadcrumbs  %>
+  </div>
+  <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice]  %> </p>
+  <% end %>
+  <div class="box">
+    <% form_for(:category, :url => {:action=> 'category_create'}) do |f| %>
+
+      <%= error_messages_for :category %>
+
+      <div class="label-field-pair">
+        <label class="student_grade"><%= t('name') %><span class="necessary-field">*</span></label>
+        <div class="input-container"><%= f.text_field :name %></div>
+      </div>
+    
+      <%= submit_tag "", :value => "#{t('savee')}", :class => "submit_button", :disable_with => "#{t('please_wait')}"  %>
+
+    <% end %>
+  </div>
+
+</div>

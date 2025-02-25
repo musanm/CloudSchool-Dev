@@ -1,0 +1,18 @@
+--- 
+gl: 
+  attendance_reports: 
+    no_subjects_to_show: "No subjects"
+  attendances: 
+    attendance_marked_for: "Attendance marked for"
+    class_timings_empty: "No class timings have been selected."
+    mark_absent: "Mark as absent"
+    no_subjects_to_show: "No subjects"
+    no_tte_entries: "No timetable entries for selected date"
+  calendar: 
+    no_events: "No events"
+    show_more_entries: "Show more"
+  reminder: 
+    no_reminders: "No reminders"
+    show_more_entries: "Show more"
+  timetable: 
+    select_weekday: "Select a weekday"

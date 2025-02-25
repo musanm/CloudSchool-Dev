@@ -1,0 +1,30 @@
+<div id="content-header">
+  <%= show_header_icon %>
+  <h1><%= t('employee_attendance_text') %></h1>
+  <div class='header-sep'>|</div>
+  <div class='sub-header'><%= t('additional_leave_history') %></div>
+</div>
+
+<div id="page-yield">
+  <div class="bread_crumb">
+    <%= make_breadcrumb %>
+    <%= render_breadcrumbs  %>
+  </div>
+  <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+
+  <div class="advanced_options">
+    <% remote_form_for :additional_leave,:url=>{:action=>'additional_leave_history'},:before => "Element.show('loader')",:success => "Element.hide('loader')" do |s| %>
+      <div class="advanced-options-select"><%= select :month, :month_id,
+      [["#{t('jan')}",'01'], ["#{t('feb')}",'02'], ["#{t('mar')}",'03'], ["#{t('apr')}",'04'], ["#{t('may')}",'05'], ["#{t('jun')}",'06'], ["#{t('jul')}",'07'], ["#{t('aug')}",'08'], ["#{t('sep')}",'09'], ["#{t('oct')}",'10'], ["#{t('nov')}",'11'], ["#{t('dec')}",'12']],
+      {:prompt => "#{t('select_month')}"}%></div>
+      <div class="advanced-options-select"><%= select :year, :year_id,[Time.now.year - 1,Time.now.year,Time.now.year + 1],{:prompt => "#{t('select_year')}"}%></div>
+      <div class="advanced-options-select"><%= select :employee_department, :department_id, ["All Departments"]+@departments.map {|c| [c.name, c.id]},{:prompt => "#{t('select_department')}"}%></div>
+      <%= submit_tag "", :value => "► #{t('view')}", :class => "submit_button" , :id => 'submit_button' %>
+      <%= image_tag("loader.gif", :align => "absmiddle", :border => 0, :id => "loader", :style =>"display: none; margin-top: 5px;" ) %><div class="extender"></div>
+      </div>
+    <% end %>
+
+    <div id= "additional-leave-report"></div>
+</div>

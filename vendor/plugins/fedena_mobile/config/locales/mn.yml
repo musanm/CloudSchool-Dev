@@ -1,0 +1,18 @@
+--- 
+mn: 
+  attendance_reports: 
+    no_subjects_to_show: "Хичээлүүд байхгүй"
+  attendances: 
+    attendance_marked_for: "Мрц тэмдэглэхдэх "
+    class_timings_empty: "Ямар ч ангийн цагийн тов сонгогдоогүй байна."
+    mark_absent: "Байхгүй эзгүй байна гэж тэмдэглэх"
+    no_subjects_to_show: "Хичээлүүд байхгүй"
+    no_tte_entries: "Сонгогдсон сар өдөрт орох цагийн хүснэгт байхгүй"
+  calendar: 
+    no_events: "Үйл ажиллагаа байхгүй "
+    show_more_entries: "Илүүг үзэх"
+  reminder: 
+    no_reminders: "Сануулга байхгүй"
+    show_more_entries: "Илүүг үзэх"
+  timetable: 
+    select_weekday: "Ажлын өдрийн сонгох"

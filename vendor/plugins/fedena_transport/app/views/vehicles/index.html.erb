@@ -1,0 +1,51 @@
+<div id="content-header">
+  <%= show_header_icon %>
+  <h1><%= t('transport_text') %></h1>
+  <div class='header-sep'>|</div>
+  <div class='sub-header'><%= t('vehicle_details') %></div>
+  <div id="inner-tab-menu">
+    <ul>
+      <li class='themed_bg themed-dark-hover-background'><%= link_to "#{t('add_vehicle')}", new_vehicle_path %></li>
+    </ul>
+  </div>
+</div>
+<div id="page-yield">
+  <div class="bread_crumb">
+    <%= make_breadcrumb %>
+    <%= render_breadcrumbs  %>
+  </div>
+  <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+  <% unless flash[:warn_notice].nil? %>
+    <div id="errorExplanation" class="errorExplanation"> <%= flash[:warn_notice] %> </div>
+  <% end %>
+  <%if @vehicle.present?%>
+    <table align="center" width="100%" cellpadding="1" cellspacing="1" id="listing">
+      <tr class="tr-head"><td><%= t('vehicle_no') %></td>
+        <td><%= t('route') %></td>
+        <td><%= t('no_of_seats') %></td>
+        <td><%= t('available_seats') %></td>
+        <td><%= t('status') %></td>
+        <td></td>
+      </tr>
+      <% @vehicle.each do |v| %>
+        <tr class="tr-<%= cycle('odd', 'even')%>">
+
+          <td class="col-1 route_link"><%= link_to v.vehicle_no,vehicle_path(v.id) %></td>
+          <td class="col-2"> <%= v.main_route.nil? ? t('deleted_route') : v.main_route.destination %></td>
+          <td class="col-3"> <%= v.no_of_seats %></td>
+          <td class="col-3"> <%= v.available_seats %></td>
+          <td class="col-4"> <%= t("#{v.status.downcase}") %></td>
+
+          <td class="col-5"><%= link_to "#{t('edit_text')}", edit_vehicle_path(v) %>
+            <%= link_to "#{t('delete_text')}", v, :confirm => "#{t('delete_confirm_msg')}", :method => :delete %></td>
+        </tr>
+      <% end %>
+
+    </table>
+  <%else%>
+    <p class="flash-msg"> <%= t('no_vehicles') %> </p>
+  <%end%>
+
+</div>

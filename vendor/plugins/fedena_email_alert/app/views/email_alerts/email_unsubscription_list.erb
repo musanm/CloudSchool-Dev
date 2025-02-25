@@ -1,0 +1,83 @@
+
+<div id="content-header">
+  <%= show_header_icon %>
+  <h1><%= t('email_send') %></h1>
+  <div class='header-sep'>|</div>
+  <div class='sub-header'><%= t('unsubscription_list') %></div>
+</div>
+<div id="page-yield">
+  <div class="bread_crumb">
+    <%= make_breadcrumb %>
+    <%= render_breadcrumbs  %>
+  </div> 
+  <% unless flash[:warn_notice].nil? %>
+    <div id="errorExplanation" class="errorExplanation"><%= flash[:warn_notice] %> </div>
+  <% end %>
+  <div class="form-space"></div>
+  <div class="box">
+    <% remote_form_for(:student, :url => {:action=> 'email_unsubscription_list'},:before => "Element.show('loader')",:success => "Element.hide('loader')", :html=> {:multipart=>true,:id=>"date_search_form"}) do |s| %>
+      <div class="date-select">
+        <label for="student_date_of_birth"><%= t('select_date') %> </label>
+        <div class="date-search">
+          <%= calendar_date_select_tag 'date', I18n.l(@date.present? ? @date.to_date : Date.today , :format=> :default),
+            :year_range => 15.years.ago..5.years.from_now, :readonly=>true, :popup=>"force", :onChange => "Element.show('loader');this.form.request();"%>
+          <%= image_tag("loader.gif",
+            :align => "absmiddle",
+            :border => 0,
+            :id => "loader",
+            :style =>"display: none; margin-bottom:10px;" ) %>
+        </div>
+      </div>
+    <%end%>
+  </div>
+  <% i = 0  %>
+  <% if params[:page].present? %>
+    <% if params[:page].to_i >= 1 %>
+      <% i = i  + (params[:page].to_i - 1) * 10 %>
+    <% end %> <%else %> <% i = i %> <% end %>
+  <div id="u-list">
+    <script type="text/javascript">
+      Element.hide('loader')
+    </script>
+    <%unless @unsubscribers.empty?%>
+      <table id="listing" align="center" width="100%" cellpadding="1" cellspacing="1">
+
+        <tr class="tr-head">
+          <td><%= t('sl_no') %></td>
+          <td><%= t('name') %></td>
+          <td><%= t('batch') %> </td>
+
+        </tr>
+        <tr class="tr-blank"></tr>
+
+
+        <% @unsubscribers.each do |us|%>
+
+          <tr class="tr-odd">
+            <td class="col-1"><%= @i+=1 %></td>
+
+            <td class="col-2"><%= "#{us.student.full_name}(#{us.student.admission_no})" %></td>
+            <td class="col-3" align="right"><%= us.student.batch.full_name%></td>
+
+
+          </tr>
+
+        <% end %>
+
+
+
+      </table>
+    <%else%>
+      <table id="listing" align="center" width="100%" cellpadding="1" cellspacing="1">
+        <tr class="tr-head" style="text-align:center">
+          <td><%=t('no_students_unsubscribed_yet')%></td>
+        </tr>
+      </table>
+    <%end%>
+
+    <br/>
+    <br/>
+
+    <%= will_paginate @unsubscribers,:renderer => 'RemoteLinkRenderer', :previous_label=>'<', :next_label=>'>',:params=>{:date=>@date}, :style=>"margin-right: 200px;" %>
+  </div>
+</div>

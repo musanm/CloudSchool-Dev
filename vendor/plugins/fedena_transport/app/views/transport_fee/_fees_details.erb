@@ -1,0 +1,162 @@
+<div id="fees_details">
+  <% total_fees =0 %>
+  <% remote_form_for :fees, :url => {:action => 'transport_fee_collection_pay'} do |form| %>
+    <%if @transport_fee.receiver_type=='Student'%>
+  <%=form.hidden_field :student,:value=>@transport_fee.receiver_id%>
+    <%end%>
+    <% unless @transport_fee.bus_fare.nil?%>
+      <table id="listing" align="center" width="100%" cellpadding="1" cellspacing="1">
+        <tr class="tr-head">
+          <td><%= "#{t('name')}"%></td>
+          <td><%= "#{t('amount')}"%> (<%= currency %>  )</td>
+        </tr>
+        <tr class="tr-blank"></tr>
+        <tr class="tr-<%= cycle("odd","even") %>">
+          <td class="col-2"><%= @transport_fee.receiver.full_name %></td>
+          <td class="col-6">
+    <%#= @transport_fee.bus_fare %>
+            <%= precision_label(@transport_fee.bus_fare) %>
+          </td>
+        </tr>
+        <% total_fees += @transport_fee.bus_fare %>
+
+        <%if @transport_fee.transaction_id.nil? %>
+          <% unless @fine.nil? %>
+            <tr class="tr-blank"></tr>
+            <tr class="tr-<%= cycle("odd","even") %>">
+              <td class="col-2"><%= t('fine') %></td>
+              <td class="col-6">
+        <%#= @fine %>
+                <%= precision_label(@fine) %>
+              </td>
+            </tr>
+            <% total_fees += @fine.to_f %>
+            <tr class="tr-blank"></tr>
+            <tr class="tr-blank"></tr>
+            <tr class="tr-<%= cycle("odd","even") %>" cellpadding="1" cellspacing="1">
+              <td class="col-2" ><%= t('total_fees') %></td>
+              <td class="col-6" >
+        <%#= total_fees%>
+                <%= precision_label(total_fees)%>
+              </td>
+            </tr>
+          <% end %>
+        <%else%>
+          <% unless @transaction.blank? %>
+            <% if @transaction.fine_included == true %>
+              <tr class="tr-blank"></tr>
+              <tr class="tr-<%= cycle("odd","even") %>">
+                <td class="col-2"><%= t('fine_paid') %></td>
+                <% fine = @transaction.fine_amount %>
+                <td class="col-6"><%#= fine %><%= precision_label(fine) %></td>
+              </tr>
+              <tr class="tr-blank"></tr>
+              <tr class="tr-blank"></tr>
+              <tr class="tr-<%= cycle("odd","even") %>" cellpadding="1" cellspacing="1">
+                <td class="col-2" ><%= t('total_fees') %></td>
+                <td class="col-6" ><%#= @transaction.amount %>
+                  <%= precision_label(@transaction.amount) %>
+                </td>
+              </tr>
+            <%end%>
+          <% end %>
+        <%end%>
+
+
+        <%if @transport_fee.transaction_id.nil? and @fine.nil?%>
+          <% unless @student.blank? %>
+            <%= render :partial => "student_fine_submission" %>
+          <% else %>
+            <%= render :partial => "employee_fine_submission" %>
+          <% end %>
+        <%end%>
+
+
+
+        <%if @transport_fee.transaction_id.nil? %>
+          <tr>
+            <td colspan="2">
+              <div class="payment_details">
+                <div class="label-field-pair3">
+                  <label><%= t('payment_mode') %>  <%= image_tag("loader.gif",
+                      :align => "absmiddle",
+                      :border => 0,
+                      :id => "loader1",
+                      :style =>"display: none;" ) %></label>
+                  <div class="text-input-bg3"><%= select :fees, :payment_mode, [["#{t('cash')}", "#{t('cash')}"],["#{t('online_payment')}", "#{t('online_payment')}"],["#{t('cheque')}", "#{t('cheque')}"],["#{t('dd')}","#{t('dd')}"],["#{t('others')}", "#{t('others')}"]], {} ,{:onChange => "#{remote_function(:url => {:action => "select_payment_mode"},
+                      :with => "'payment_mode='+value",:before => "$('loader1').show();",
+                      :success => "$('loader1').hide();")}"}  %>
+                  </div>
+                </div>
+                <div class="label-field-pair3-text-area">
+                  <label><%= t('payment_notes') %> </label>
+                  <div class="textarea-input-bg3"><%= form.text_area :payment_note,:cols => 50, :rows => 1 %>
+                  </div>
+                </div>
+                <div class="pay_fees_button">
+                  <%= form.hidden_field :transport_fee_id , :value =>@transport_fee.id %>
+                  <% unless @fine.nil? %>
+                    <%= form.hidden_field :fine , :value =>@fine %>
+                  <% end %>
+                  <%= form.submit "► #{t('pay_fees')}" ,:class=>"user_button",:id => 'submit_button',:onClick => "return validate_payment_mode()"%>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="5">
+              <div id="payment_mode"></div>
+            </td>
+          </tr>
+        <% else %>
+          <tr>
+            <td colspan="2">
+              <div>
+                <h4><%= "#{t('fees_paid')}"%>  </h4>
+                <%= link_to " ► #{t('print_receipt')}",
+                  { :action => "transport_fee_receipt_pdf", :id =>@transaction.id },:target => '_blank', :class=> 'user_button',:id=>"print-receipt" %>
+              </div>
+            </td>
+          </tr>
+        <%end%>
+      </table>
+    <% else %>
+      <p class="flash-msg"> No fees </p>
+    <%end%>
+
+  <% end %>
+
+  <%unless @transport_fee.transaction_id.nil? %>
+    <div class="label-field-pair3">
+      <label><%= t('payment_history') %> </label>
+    </div>
+    <div id="payments_details" style="margin-top:40px;">
+
+      <table id="listing1" align="center" width="100%" cellpadding="1" cellspacing="1">
+        <tr class="tr-head">
+          <td><%= t('sl_no') %></td>
+          <td><%= t('payment_date') %></td>
+          <td><%= t('payment_mode') %></td>
+          <td><%= t('payment_notes') %></td>
+          <td><%= t('amount') %> (<%= currency %>)</td>
+          <td class="col-3" style="width:2%;"></td>
+        </tr>
+        <tr class="tr-blank"></tr>
+
+        <tr class="tr-<%= cycle("odd","even") %>">
+          <td class="col-1"><%= i =1 %></td>
+          <td class="col-3"><%= format_date(@transport_fee.finance_transaction.transaction_date) %></td>
+          <td class="col-3"><%= @transport_fee.finance_transaction.payment_mode %></td>
+          <td class="col-2"><%= @transport_fee.finance_transaction.payment_note %></td>
+          <td class="col-3" >
+  <%#= @transport_fee.finance_transaction.amount.to_f %>
+            <%= precision_label(@transport_fee.finance_transaction.amount.to_f) %>
+          </td>
+          <td class="col-3" style="width:2%;"> <div class="cancel" ><%=link_to_remote ("&times"),{:url=>{:controller=>:transport_fee,:action=>:delete_transport_transaction,:transaction_id=>@transport_fee.id,:id=>@transport_fee.receiver_id,:date=>@transport_fee.transport_fee_collection_id},:confirm=>"#{t('are_you_sure_want_delete_this_transaction')}"},{:class=>"themed_text"}%></div></td>
+        </tr>
+
+      </table>
+
+    </div>
+  <%end%>
+</div>

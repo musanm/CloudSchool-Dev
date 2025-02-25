@@ -1,0 +1,9 @@
+<%= select :transport , :route_id,
+  @destination.map{|d| [d.destination,d.id]},
+  {:prompt => "#{t('select_destination')}"},
+  {:onChange => "#{remote_function(:url => {:action => "load_fare"},
+  :with => "'route='+ value",
+  :before => "Element.show('loader')",
+  :success => "Element.hide('loader')"
+  )}"}
+%>

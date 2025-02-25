@@ -1,0 +1,68 @@
+<div id="content-header">
+  <%= show_header_icon %>
+  <h1><%= t('applicant_regi_label') %></h1>
+  <div class='header-sep'>|</div>
+  <div class='sub-header'><%= t('search') %></div>
+
+  <div id="inner-tab-menu">
+    <ul>
+    </ul>
+  </div>
+
+
+</div>
+<div id="page-yield">
+  <div class="bread_crumb">
+    <%= make_breadcrumb %>
+    <%= render_breadcrumbs  %>
+  </div>
+  <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+  <% if @applicants.present? %>
+    <table id="listing_applicant" align="center" width="100%" cellpadding="1" cellspacing="1">
+      <tr class="tr-head">
+        <td class="name">
+          <%= t('registration_no') %>
+        </td>
+        <td class="name">
+          <%= t('course_name') %>
+        </td>
+        <td class="name">
+          <%= t('name') %>
+        </td>
+        <td class="date">
+          <%= t('registration_date') %>
+        </td>
+        <td class="applicant_status">
+          <%= t('status') %>
+        </td>
+        <td class="telephone_interview">
+          <%= t('has_paid_fees') %>
+        </td>
+      </tr>
+      <% @applicants.each do |applicant| %>
+        <tr class="tr-<%=cycle('even', 'odd')%>">
+          <td class="batch"><%= applicant.reg_no %></td>
+          <td class="batch"><%= applicant.registration_course.try(:course).try(:full_name) %></td>
+          <td class="name"><%= link_to applicant.full_name, :action=>:view_applicant,:id=>applicant.id%></td>
+          <td><%= format_date(applicant.created_at.to_date,:format=>:long) unless applicant.created_at.nil? %></td>
+          <td class="status">
+            <span class="<%=applicant.status%>"><%= t("#{applicant.status}") %></span>
+          </td>
+          <td><%= applicant.has_paid? ? t('y_es') : t('n_o') %></td>
+        </tr>
+      <% end %>
+    </table>
+  
+  <%= will_paginate @applicants,:params=>{:controller => "applicants_admins",:action => "search_by_registration",:search => {:registration_no => @registration_no}} %>
+  <div id = "button">
+  <%= link_to "Pdf Report", {:controller=>"applicants_admins", :action => "search_by_registration_pdf",:reg_no => params[:search][:registration_no],:report_format_type => "pdf", :applicants => @applicants, :page_height => 750}, :target => '_blank', :class => "user_button" %>
+  <%= link_to "CSV Export", {:controller=>"csv_export", :action => "generate_csv", :csv_report_type => "search_by_registration", :reg_no => params[:search][:registration_no],:report_format_type => "csv", :applicants => @applicants}, :class => "user_button" %>
+  </div>
+<% else %>
+    <p class="flash-msg"> <%= t('no_search_result') %> </p>
+  <% end  %>
+  </div>
+
+

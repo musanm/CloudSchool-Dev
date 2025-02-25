@@ -1,0 +1,10 @@
+ku: 
+  oauth: 
+    account: "هەژمار"
+    could_not_authenticate_with: "ببورە، ناتوانرێت ڕێگە بدرێت بە "
+    enter_user_email: "ئیمەیلەکەت بنووسە"
+    login_with_google: "بچۆ ناوەوە بە"
+    no_user_with_email: "بەکارهێنەری بێ ئیمەیل "
+    select_user: "دەستنیشان کردنی بەکارهێنەر"
+  manage_clients: "Manage Clients"
+  enable_oauth: "Enable Oauth"

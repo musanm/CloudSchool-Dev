@@ -1,0 +1,17 @@
+<table class="table">
+  <thead>
+  <th>
+    <label class="name"><%= @sender.nil? ? "#{t('user_unavailable')}" : @sender.full_name %></label>
+    <label class="subject-unread"><%= @new_reminder.subject %></label>
+    <label class="subject-read"><%= I18n.l(@new_reminder.created_at,:format=>"%A, %d %B, %Y") %></label>
+  </th>
+</thead>
+<tr>
+  <td>
+    <%= @new_reminder.body %>
+  </td>
+</tr>
+</table>
+<% content_for :nav_button do %>
+  <%= link_to_function image_tag("/images/fedena_mobile/back.png",:border => 0), "history.back()" %>
+<% end %>

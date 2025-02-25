@@ -1,0 +1,23 @@
+<% unless @blog_comments.blank? %>
+  <% @blog_comments.each do |bc| %>
+
+    <div class="blog_notification">
+      <div class="in_line">
+        <% unless bc.user.nil? %>
+          <div class="who"><%= link_to bc.user.full_name,blog_directory_blog_blog_posts_path(bc.user.id) %></div>&nbsp;
+        <% else %>
+          <div class="who"><span><%= t('deleted_user') %></span></div>
+        <% end %>
+        <div class="what"><%= t('commented') %></div>&nbsp;
+        <div class="notification_content">&nbsp;"<%= link_to truncate("#{bc.body}",:length => 70,:omission => '...'),show_blog_path(:user_id => bc.blog_post.blog.user.nil? ? "deleted_user" : bc.blog_post.blog.user_id,:title => "#{bc.blog_post.title.gsub('/','%2F').gsub('.','%20S').gsub('?',"%2G")}-#{bc.blog_post.id}"),:method => :post, :class => "themed_text" %>"</div>
+        <div class="timestamp"><%= "#{t('on_text')} #{bc.created_at.strftime("%B" + " #{bc.created_at.to_date.day.ordinalize}," + "%Y")}" %></div>
+      </div>
+    </div>
+  <% end %>
+  <div class="blog_paginator">
+    <%= will_paginate @blog_comments,:renderer => 'RemoteLinkRenderer',:params => {:controller => "blogs",:action => "show_notification",:user_id => @user.id} %>
+  </div>
+<% else %>
+  <p class="flash-msg"> <%= t('no_notification') %> </p>
+<% end %>
+

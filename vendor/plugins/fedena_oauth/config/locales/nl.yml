@@ -1,0 +1,11 @@
+nl: 
+  oauth: 
+    account: "account"
+    could_not_authenticate_with: "Sorry, kan niet waarborgen met gebruik van "
+    enter_user_email: "Uw emailadres invoeren"
+    login_with_google: "Inloggen met gebruik van"
+    no_user_with_email: "Geen gebruiker met emailadres"
+    select_user: "Selecteer gebruiker"
+  manage_clients: "Klanten beheren"
+  enable_oauth: "Oauth aanzetten"
+  

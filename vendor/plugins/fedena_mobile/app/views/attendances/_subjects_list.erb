@@ -1,0 +1,14 @@
+<% if @subjects.present?  %>
+  <div class="span6 top_separation" style="margin-left: 2%" >
+    <%= select :attendances,:subject,
+      @subjects.map {|s| [s.name, s.id]},
+      {:prompt => t("select_subject"),:selected=>@sub.id},
+      {:onChange => "#{remote_function(:url => {:action => "mobile_attendance"},
+      :with => "'subject_id='+ value+'&batch_id='+ #{@batch.id}"
+      )}",:class=>"span3 full_width"} %>
+  </div>
+<% else %>
+  <div class="alert">
+    <b><%= t("no_subjects_to_show") %></b>
+  </div>
+<% end %>

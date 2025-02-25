@@ -1,0 +1,139 @@
+<%- # Fedena
+    #Copyright 2010 Foradian Technologies Private Limited
+    #
+    #This product includes software developed at
+    #Project Fedena - http://www.projectfedena.org/
+    #
+    #Licensed under the Apache License, Version 2.0 (the "License");
+    #you may not use this file except in compliance with the License.
+    #You may obtain a copy of the License at
+    #
+    #  http://www.apache.org/licenses/LICENSE-2.0
+    #
+    #Unless required by applicable law or agreed to in writing,
+    #software distributed under the License is distributed on an
+    #"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+    #KIND, either express or implied.  See the License for the
+    #specific language governing permissions and limitations
+    #under the License.     -%>
+<div id="content-header">
+  <%= show_header_icon %>
+  <h1><%= t('fees_submission') %></h1>
+
+  <div class='header-sep'>|</div>
+  <div class='sub-header'><%= t('student_fees_submission') %></div>
+  <div id="inner-tab-menu">
+
+  </div>
+</div>
+<div id="page-yield">
+  <div class="bread_crumb">
+    <% breadcrumb :finance_extensions_pay_all_fees, @student %>
+    <%= render_breadcrumbs %>
+  </div>
+  <div id="student">
+    <div class="details">
+
+
+      <div class="name">
+        <%= t('student_name') %>
+      </div>
+      <div class="val themed_text">
+        <span>:</span>
+          <div class="val-align">
+            <%= @student.full_name %>
+          </div>
+        
+      </div>
+
+      <div class="name">
+        <%= t('admission_no') %>
+      </div>
+      <div class="val themed_text">
+        <span>:</span>
+
+        <div class="val-align">
+          <%= @student.admission_no %>
+        </div>
+      </div>
+
+      <% if roll_number_enabled? %>
+      <div class="name">
+        <%= t('roll_no') %>
+      </div>
+      <div class="val themed_text">
+        <span>:</span>
+
+        <div class="val-align">
+          <%= @student.roll_number %>
+        </div>
+      </div>
+      <% end %>
+
+
+      <div class="name">
+        <%= t('batch') %>
+      </div>
+      <div class="val themed_text">
+        <span>:</span>
+
+        <div class="val-align">
+          <%= @student.batch.full_name %>
+        </div>
+
+      </div>
+    </div>
+    <br/>
+    <%= error_messages_for "financefee", :header_message => nil %>
+
+    <div class="height-fixer"></div>
+    <div id="pay_fees">
+      <%= render :partial => 'pay_fees_form' %>
+    </div>
+
+  </div>
+</div>
+<script type="text/javascript">
+    j(function () {
+
+
+        j('.disabled-link').hover(function (e) {
+            console.log('dffs')
+            if (j('.disabled-link').children().length == 1) {
+                var moveLeft = 0
+                var moveDown = 0
+
+
+                var moveLeft = ((j(this).position().left) + (j(this).width()) / 2)
+                var moveDown = (j(this).position().top) - 35
+                revert_message_show(moveLeft, moveDown, this)
+
+            }
+        }, function () {
+            j('div#revert-pop-up').hide();
+        });
+
+
+    });
+
+    function revert_message_show(moveLeft, moveDown, e) {
+        j('div#pop-up').hide();
+        var rtl = "<%= (rtl?) ? 'rtl' : 'ltr'  %>"
+
+        if (rtl == 'rtl') {
+            left_index = -40
+        }
+        else {
+            left_index = -285
+        }
+
+        moveLeft = moveLeft + left_index
+
+        j('div#revert-pop-up').delay(350).show(0);
+
+        moveDown = moveDown - (j('div#revert-pop-up').height())
+
+
+        j("div#revert-pop-up").css('top', moveDown).css('left', moveLeft);
+    }
+</script>

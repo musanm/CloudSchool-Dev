@@ -1,0 +1,17 @@
+hi:
+  google_docs: Google Docs
+  upload_document: "दस्तावेज़ अपलोड करें"
+  list_documents: "सभी दस्तावेज़ों की सूची बनाएँ"
+  upload: "अपलोड करें"
+  download: "डाउनलोड करें"
+  select_file: "अपलोड करने के लिए फाइल का चयन करें"
+  delete_text: "हटाएँ"
+  no_files_found: "कोई फाइल नहीं मिली।"
+  document_moved_to_trash: "दस्तावेज़ ट्रैश में सफलतापूर्वक स्थानांतरित किया गया।"
+  oauth_plugin_not_installed: "निर्भर प्लगिन Fedena Oauth इन्स्टॉल या कॉन्फिगर नहीं
+    किया गया है।"
+  please_login_using_google: google docs पर पहुँचने के लिए कृपया google द्वारा लॉगिन
+    करें।
+  document_name: "दस्तावेज़ का नाम"
+  file_uploaded_successfully: "फाइल सफलतापूर्वक अपलोड किया गया।"
+  view_all_docs: "सभी दस्तावेज़ देखें"

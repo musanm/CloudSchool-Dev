@@ -1,0 +1,34 @@
+<% @blog_posts.each do |bp| %>
+  <div class="single_blog">
+    <div class="upper-section">
+      <div class="title">
+        <div class="post_date">
+          <%= bp.created_at.strftime("%A,%d %B %Y") %>
+          <div class ="comment_count">
+            <%= link_to "#{bp.blog_comments.showable.count}" + " " + t('comments'),show_blog_path(:user_id => @user.id,:title => "#{bp.title.gsub('/','%2F').gsub('.','%20S').gsub('?',"%2G")}-#{bp.id}",:anchor => "comments_list") ,:class=>"themed_text"%>
+          </div>
+        </div>
+        <div class="title_content"><%= link_to bp.title,show_blog_path(:user_id => bp.blog.user.nil? ? "deleted_user" : bp.blog.user.id,:title => "#{bp.title.gsub('/','%2F').gsub('.','%20S').gsub('?',"%2G")}-#{bp.id}") %></div>
+        <div class="favourite_bar">
+            <div id="favourite_details">
+              <%= render :partial => "favourite_details_blog_directory",:locals => {:bp => bp} %>
+            </div>
+        </div>
+      </div>
+      <div class="blog_details">
+      </div>
+    </div>
+    <div class="blog_content">
+      <%= bp.body %>
+    </div>
+
+  </div>
+<% end %>
+<div class="show_pagination">
+  <% if @blog_posts.current_page > 1 %>
+    <div class="prev_page"><%= link_to t('prev_page'),:controller => "blog_posts",:action => "blog_directory",:page => @blog_posts.current_page - 1 %></div>
+  <% end %>
+  <% if @blog_posts.current_page < @blog_posts.total_pages %>
+    <div class="next_page"><%= link_to t('next_page'),:controller => "blog_posts",:action => "blog_directory",:page => @blog_posts.current_page + 1 %></div>
+  <% end %>
+</div>

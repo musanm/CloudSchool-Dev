@@ -1,0 +1,18 @@
+--- 
+tr:
+  attendance_reports:
+    no_subjects_to_show: "Hiç konu yok"
+  attendances:
+    attendance_marked_for: "Katılım şunun için işaretlendi"
+    class_timings_empty: "Hiç sınıf zamanlaması seçilmedi."
+    mark_absent: "Yok olarak işaretle"
+    no_subjects_to_show: "Hiç konu yok"
+    no_tte_entries: "Seçilen tarih için hiç ders programı kaydı yok"
+  calendar:
+    no_events: "Hiç olay yok"
+    show_more_entries: "Devamını göster"
+  reminder:
+    no_reminders: "Hiç hatırlatma yok"
+    show_more_entries: "Devamını göster"
+  timetable:
+    select_weekday: "Hafta içi bir gün seç"

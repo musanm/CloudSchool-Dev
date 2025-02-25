@@ -1,0 +1,27 @@
+<ul id="comments_list">
+  <h3 id="comment_heading"><%= t('comments') %></h3>
+  <% @blog_comments.each do |blog_comment| %>
+    <li id ="comment_item_<%= blog_comment.id %>">
+      <div class="comment_details">
+        <div class="commentor themed_text"><%= blog_comment.user.nil? ? t('deleted_user'): blog_comment.user.full_name %></div>
+        <div class="delete_comment">
+          <% if (blog_comment.is_owner? or blog_comment.is_owner_of_post? @current_user or @current_user.privileges.map(&:name).include? "BlogAdmin") %>
+            <%= link_to_remote  "#{t('delete_text')}", :url => { :controller => 'blog_comments', :action => 'delete', :id => blog_comment,:blog_post_id => @blog_post.id,:page => @blog_comments.current_page }, :confirm => "#{t('delete_comment_confirmation')}" %>
+          <% end %>
+        </div>
+      </div>
+      <div class="comment_content">
+        <%# if blog_comment.is_owner? @current_user %>
+          <% @blog_comment = blog_comment %>
+          <div id =<%= "blog_comment_body_#{@blog_comment.id}_edit" %>>
+            <%#= in_place_editor_field :blog_comment, :body, :script => true %>
+          </div>
+        <%# else %>
+          <%= sanitize  blog_comment.body.strip.gsub("\n", "<br/>"),:tags => %w[b i a ], :attributes => %w[href] %>
+        <%# end %>
+      </div>
+      <div class="comment_posted_at"><%= blog_comment.created_at.strftime("%A,%B" + " #{blog_comment.created_at.to_date.day.ordinalize} " + "%Y") %></div>
+    </li>
+  <% end %>
+  <%= will_paginate @blog_comments,:renderer => 'RemoteLinkRenderer',:params => {:controller => "blog_comments",:action => "show_comments",:blog_post_id => @blog_post.id} %>
+</ul>

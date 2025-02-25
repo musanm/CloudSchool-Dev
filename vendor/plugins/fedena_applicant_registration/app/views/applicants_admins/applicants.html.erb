@@ -1,0 +1,29 @@
+<div id="content-header">
+<%= show_header_icon %>
+  <h1><%= t('applicant_regi_label') %></h1>
+<div class='header-sep'>|</div>
+<div class='sub-header'><%= t('settings') %></div>
+
+<div id="inner-tab-menu">
+  <ul>
+    <li class='themed_bg themed-dark-hover-background'><%= link_to t('course_s'), {:action => "show"} %></li>
+  </ul>
+</div>
+
+
+</div>
+<div id="page-yield">
+  <div class="bread_crumb">
+    <% breadcrumb :applicants_admins_applicants ,@registration_course%>
+    <%= render_breadcrumbs  %>
+  </div>
+  <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+
+    <%= render :partial => "list_applicants" %>
+
+</div>
+
+
+

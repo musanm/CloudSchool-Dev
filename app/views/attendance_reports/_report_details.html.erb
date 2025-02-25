@@ -1,0 +1,26 @@
+<div id="attendance-count">
+  <div id="count">
+    <div id="present-count"><%= @students_count - @leave_count %></div>
+    <div id="students-count"><%= "&#x200E;/ #{@students_count}&#x200E;" %></div>
+  </div>
+  <div id="strength-label"><%= t('overall_strength') %> : </div> 
+</div>
+<div class="label-field-pair">
+  <label style="margin-top: 5px;"><%= t('select_a_course') %></label>
+  <div class="text-input-bg">
+    <%= select :batch, :id,
+      @courses.map {|c| [c.course_name, c.id] },
+      {:prompt => "#{t('select_a_course')}"},
+      {:onchange => "#{remote_function(
+      :url => { :action => 'day_wise_report_filter_by_course' },
+      :with => "'course_id='+value+'&date=#{@date}'",
+
+      :before => "Element.show('loader1')",
+      :success => "Element.hide('loader1')"  )}"} %>
+
+    <%= image_tag("loader.gif", :align => "absmiddle", :border => 0, :id => "loader1", :style =>"display: none;" ) %>
+  </div>
+</div>
+<div id="list">
+  <%= render :partial => "list_batches" %>
+</div>

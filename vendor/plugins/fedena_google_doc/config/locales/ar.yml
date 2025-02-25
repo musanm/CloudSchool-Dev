@@ -1,0 +1,17 @@
+ar:
+  google_docs: "مستندات جوجل"
+  upload_document: "تحميل مستند"
+  list_documents: "إدراج قائمة بجميع المستندات"
+  upload: "تحميل"
+  download: "تنزيل"
+  select_file: "تحديد ملف لتحميله"
+  delete_text: "حذف"
+  no_files_found: "لم يتم العثور على ملفات."
+  document_moved_to_trash: "تم نقل المستند إلى المهملات بنجاح."
+  oauth_plugin_not_installed: "لم يتم تكوين أو تثبيت المكون الإضافي التابع Fedena
+    Oauth."
+  please_login_using_google: "يُرجى تسجيل الدخول باستخدام جوجل للوصول إلى مستندات
+    جوجل"
+  document_name: "اسم المستند"
+  file_uploaded_successfully: "تم رفع الملف بنجاح."
+  view_all_docs: "عرض كافة المستندات"

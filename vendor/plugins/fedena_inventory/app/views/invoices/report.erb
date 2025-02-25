@@ -1,0 +1,46 @@
+
+<div id="content-header">
+<%= show_header_icon %>
+  <h1><%= t('inventory') %> <%= t('transaction_report') %></h1>
+<div class='header-sep'>|</div>
+<div class='sub-header'><%= t('transaction_report') %></div>
+
+
+</div>
+<div id="page-yield">
+  <div class="bread_crumb">
+    <%= breadcrumb :report, [@start_date,@end_date] %>
+    <%= render_breadcrumbs  %>
+  </div>
+  <% total =0 %>
+
+  <b id="fees_report_title"><%= t('inventory_transaction_report')  %></b>
+  <div id="fees-table">
+    <div class="fees-th">
+      <div class="fees-table-payee"><%= t('category') %></div>
+      <div class="fees-table-category"><%= t('description') %></div>
+      <div class="fees-table-date"><%= t('date_text') %></div>
+      <div class="fees-table-reciept"><%= t('receipt_no') %></div>
+      <div class="fees-table-amount"><%= t('amount') %></div>
+    </div>
+    <% total_net_amount = 0 %>
+    <% @inventory_transactions.each do |t| %>
+      <div class="list<%=cycle('odd', 'even')%>">
+        <div class="fees-table-payee"><%= link_to t.title, :controller => 'invoices',:action=> 'show', :id=>t.finance_id, :start_date => @start_date,:end_date => @end_date  %></div>
+        <div class="fees-table-category"><%= t.finance_type  %></div>
+        <div class="fees-table-date"> <%= format_date(t.transaction_date,:format=>:long_date) %> </div>
+        <div class="fees-table-reciept">&nbsp;<%= t.receipt_no %></div>
+        <div class="fees-table-amount"><%= precision_label t.amount %> </div>
+
+        <% total_net_amount += t.amount %>
+      </div>
+    <% end %>
+    <br/>
+    <div class="fees-th">
+      <div class="fees-table-total-name"><%= t('total_fees') %>:</div>
+      <div class="fees-table-category"></div>
+      <div class="fees-table-total-amount"><%= precision_label total_net_amount %></div>
+    </div>
+  </div>
+</div>
+

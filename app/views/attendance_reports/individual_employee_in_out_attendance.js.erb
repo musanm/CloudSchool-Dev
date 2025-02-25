@@ -1,0 +1,16 @@
+<% if @department_changed %>
+  var list = []
+  <% @employees.each do |employee| %>
+    list += "<option value=<%= employee.id %>><%= employee.full_name %></option>"
+  <% end %>
+  j('#advance_search_employee_id').find('option').remove().end().append(list)
+
+  <% if @employee.present? %>
+    // j("#employeee_register").html('<%#=escape_javascript(render :partial => "attendance_reports/individual_employee_in_out_attendance.html.erb", :employee => @employee ) %>');
+  <% end %>
+<% else %>
+<% end %>
+  <%#debugger%>
+<% if !@department_changed && params[:advance_search].present? %>
+  j("#employeee_register").html('<%=escape_javascript(render :partial => "attendance_reports/individual_employee_in_out_attendance.html.erb", :locals => {:employee => @employee, :start_date => @start_date} ) %>');
+<% end %>

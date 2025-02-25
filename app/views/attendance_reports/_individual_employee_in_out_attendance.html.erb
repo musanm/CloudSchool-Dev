@@ -1,0 +1,60 @@
+<div style="float: right; padding-bottom: 5px;">
+  <%= link_to " ► #{t('pdf_report')}", {:controller => "attendance_reports", :action => "individual_employee_in_out_attendance_pdf", :id => @employee.id, :date => @start_date}, :target => '_blank', :class=> 'user_button' %>
+</div><br>
+<% late_in_count = 0 %>
+<% late_out_count = 0 %>
+<table id="listing" align="center" width="100%">
+  <tbody>
+    <tr class="tr-head">
+      <td></td>
+      <td>IN</td>
+      <td>OUT</td>
+      <td>Late IN</td>
+      <td>Early OUT</td>
+      <td>Total Hours</td>
+    </tr>
+    <tr class="blank"></tr>
+    <% start_date = @start_date %>
+    <% (@start_date.day..30).to_a.each_with_index do |day, i| %>
+      <% in_time = @employee.student_attendances.find(:all, :conditions => {:in_time => (start_date..(start_date.end_of_day)) }).first %>
+      <% out_time = @employee.student_attendances.find(:all, :conditions => {:out_time => (start_date..(start_date.end_of_day)) }).first %>
+      <%  
+        late_in = false 
+        reporting_in_time = ("#{in_time.in_time.to_date} " + @employee.reporting_in_time).to_datetime rescue nil
+        late_in = (in_time.in_time > reporting_in_time) rescue false
+        late_in_count += 1 if (late_in == true)
+      %>
+
+      <%
+        early_out = false
+        reporting_out_time = ("#{out_time.out_time.to_date} " + @employee.reporting_out_time).to_datetime rescue nil
+        early_out = (out_time.out_time < reporting_out_time) rescue false
+        late_out_count += 1 if (early_out == true)
+      %>
+      <tr class=<%= i.odd? ? "tr-even" : "tr-odd" %>>
+        <td class="align-center"><%= start_date.strftime("%a %d") %></td>
+        <td class="align-center <%="late" if late_in %>">
+          <%= in_time.in_time.strftime("%H:%M:%S") if in_time.present? %>
+        </td>
+        <td class="align-center <%="late" if early_out %>">
+          <%= out_time.out_time.strftime("%H:%M:%S") if out_time.present? %>
+        </td>
+        <td class="align-center"><%= "Yes" if late_in %></td>
+        <td  class="align-center"><%= "Yes" if early_out %></td>
+        <td class="align-right">
+          <% time = ((out_time.out_time - in_time.in_time) ) rescue nil %>
+          <%= (Time.at time ).utc.strftime("%H:%M:%S") rescue nil %>
+        </td>
+      </tr>
+      <% start_date = start_date + 1.day %>
+    <% end %>
+    <tr <tr class="tr-even">
+      <td class="align-center"><b>Total</b></td>
+      <td></td>
+      <td></td>
+      <td class="align-center"><%= late_in_count %></td>
+      <td class="align-center"><%= late_out_count %></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>

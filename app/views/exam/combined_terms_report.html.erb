@@ -1,0 +1,169 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+<div id="inner-tab-menu">
+  <ul>
+    <% if  @batch.present? %>
+      <li class='themed_bg themed-dark-hover-background'><%= link_to "Pdf Report", {:controller => "exam", :action => "combined_terms_report_pdf", :type => "grouped", :add_postion => ((params["exam_report"]["add_postion"] != "0") rescue true),  :batch => @batch.id, :report_format_type => "pdf"},:target => '_blank' %></li>
+    <% end %>
+    <% if  @student.present? %>
+      <%#= link_to " ► #{t('pdf_report')}",
+      { :action => "generated_report4_pdf", :batch_id => @batch.id, :student=>@student.id, :type=> @type, :page_height=>450},:target => '_blank', :class=> 'user_button' %>
+      <li class='themed_bg themed-dark-hover-background'><%= link_to "Student Exam Pdf Report", {:controller => "exam", :action => "student_exam_report_pdf", :type => "grouped", :add_postion => ((params["exam_report"]["add_postion"] != "0") rescue true), :batch => @batch.id,:student => @student.id , :report_format_type => "pdf"},:target => '_blank' %></li>
+      <li class='themed_bg themed-dark-hover-background'><%= link_to "Batch Exam Pdf Report", {:controller => "exam", :action => "student_exam_report_pdf", :type => "grouped", :is_batch => true, :add_postion => ((params["exam_report"]["add_postion"] != "0") rescue true), :batch => @batch.id,:student => @student.id , :report_format_type => "pdf"},:target => '_blank' %></li>
+
+      <li class='themed_bg themed-dark-hover-background'><%= link_to "Student Pdf Report", {:controller => "exam", :action => "student_term_report_pdf", :type => "grouped", :add_postion => ((params["exam_report"]["add_postion"] != "0") rescue true), :batch => @batch.id,:student => @student.id , :report_format_type => "pdf"},:target => '_blank' %></li>
+    <% end %>
+    
+  </ul>
+</div>
+
+<div id="content-header">
+  <%= show_header_icon %>
+  <h1>Exam</h1>
+  <div class='header-sep'>|</div>
+  <div class='sub-header'>Combined Terms Report</div>
+</div>
+
+
+<div id="page-yield">
+  <div class="bread_crumb">
+    <a href="<%= root_url %>">Home</a> 
+    <div class="bread-crumb-separator"> &gt; </div> 
+    <%= link_to "Exam" ,:controller => "exam", :action =>"index" %>
+    <div class="bread-crumb-separator"> &gt; </div> 
+    <%=  link_to "Reports center", :controller=> "exam",:action=>'report_center' %> 
+    <div class="bread-crumb-separator"> &gt; </div>Combined Terms Report
+  </div>
+
+  <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+  <div class="box">
+
+    <% form_for :exam_report, :url=>{:action=>'combined_terms_report'}  do |x| %>
+      <div class="label-field-pair">
+        <label for="student_course"><%= t('select_a_batch') %>:</label>
+        <div  class="text-input-bg">
+          <% if params[:exam_report] && params[:exam_report][:batch_id].present? %>
+            <% batch_id = @batch.id %>
+            <%#=@batch.full_name%>
+          <% else %>
+            <% batch_id = "" %>
+          <% end %>
+          <%= x.select :batch_id, Batch.active.map {|b| [b.full_name, b.id]},:selected => batch_id, :prompt => "Select a Batch" %>
+        </div>
+      </div>
+      
+      <div class="label-field-pair">
+        <label for="student_course">Select Student:</label>
+        <div  class="text-input-bg">
+          <% if params[:exam_report] && params[:exam_report][:student_id].present? %>
+            <% student_id = @student.id %>
+            <%#= @student.full_name %>
+          <% else %>
+            <% student_id = "" %>
+          <% end %>
+          <%= x.select :student_id , @students.map {|b| [b.full_name, b.id]},:selected => student_id, :prompt => "Select a Student" %>
+        </div>
+      </div>
+
+      <div class="label-field-pair">
+        <label for="student_course">Add Postion</label>
+        <div  class="text-input-bg">
+          <%= x.check_box :add_postion, :checked => ((params["exam_report"]["add_postion"] != "0") rescue true) %>
+        </div>
+      </div>
+
+    <% end %>
+    <div class="extender"></div>
+  </div>
+</div>
+
+<% if params[:exam_report] && params[:exam_report][:student_id].present? && params[:exam_report][:batch_id].present? %>
+  <% grade_type = "normal" %>
+  <% grade_type = "GPA" if @batch.gpa_enabled? %>
+  <% grade_type = "CWA" if @batch.cwa_enabled? %>
+
+Student Name: <%= @student.full_name %>
+
+  <table id="listing" align="center" width="100%" cellpadding="1" cellspacing="1">
+    <tbody>
+      <tr class="tr-head">
+        <td>Term</td>
+        <td>Exam</td>
+        <% @subjects.each do |subject| %>
+          <td><%= subject.name %></td>
+        <% end %>
+        <td>Percentage</td>
+      </tr>
+      <% j = 0 %>
+      <% @batch.term_exams.each_with_index do |term_exam,i| %>
+        <% term_exam.exam_groups.each do |exam_group| %>
+          <tr class="tr-odd">
+            <% if i == j %>
+              <td rowspan=<%=term_exam.exam_groups.count%> ><b><%= term_exam.name %></b></td>
+              <% j += 1%>
+            <% end %>
+            <td><b><%= exam_group.name %></b></td>
+            <% @subjects.each do |subject| %>
+              <% if grade_type=="GPA" or grade_type=="CWA" %>
+                <td class="col-3"><%= subject.credit_hours.present? ? subject.credit_hours : "-" %></td>
+              <% end %>
+
+                <% @exam = Exam.find_by_subject_id_and_exam_group_id(subject.id,exam_group.id) %>
+                <% exam_score = ExamScore.find_by_student_id(@student.id, :conditions=>{:exam_id=>@exam.id})unless @exam.nil? %>
+                <td class="col-3">
+                  <% if grade_type=="GPA" %>
+                    <%= exam_score.present? ? "#{exam_score.grading_level || "-"}"+" ["+"#{exam_score.grading_level.present? ? (exam_score.grading_level.credit_points || "-") : "-"}"+"]" : "-" %>
+                  <% elsif grade_type=="CWA" %>
+                    <%=valid_mark?(@exam.maximum_marks)? exam_score.present? ? "#{exam_score.marks.present? ? ("%.2f" %((exam_score.marks.to_f/@exam.maximum_marks.to_f)*100)) : "-"}"+" ["+"#{exam_score.grading_level.present? ? exam_score.grading_level : "-"}"+"]" : "-" : "-"%>
+                  <% else %>
+                    <% if exam_group.exam_type == "MarksAndGrades" %>
+                      <%= exam_score.nil? ? '-' :  "#{(exam_score.marks || "Ab")}" +"/"+@exam.maximum_marks.to_s+"[#{(exam_score.grading_level || "---")}]" %>
+                    <% elsif exam_group.exam_type == "Marks" %>
+                      <%= exam_score.nil? ? '-' : "#{exam_score.marks || "-"}/"+@exam.maximum_marks.to_s %>
+                    <% else %>
+                      <%= exam_score.nil? ? '-' : (exam_score.grading_level || '-')  %>
+                    <% end %>
+                  <% end %>
+                </td>
+              <% if (@current_user.student? or @current_user.parent?) and @result_published==false %>
+                <td class="col-3">-</td>
+              <% else %>
+                <% subject_average = GroupedExamReport.find_by_student_id_and_subject_id_and_score_type(@student.id,subject.id,"s") %>
+              <% end %>
+            <% end %>
+            <% exam_total = GroupedExamReport.find_by_student_id_and_exam_group_id_and_score_type(@student.id,exam_group.id,"e") %>
+            <td><%= exam_total.present? ? exam_total.marks : "-" %></td>
+          </tr>
+        <% end %>
+      <% end %>
+      <tr class="tr-blank"></tr>
+      <tr class="tr-odd">
+        <td><%= t('combined') %></td>
+        <td></td>
+        <% @subjects.each do |subject| %>
+          <% subject_average = GroupedExamReport.find_by_student_id_and_subject_id_and_score_type(@student.id,subject.id,"s") %>
+          <td><%= subject_average.present? ? subject_average.marks : "-" %></td>
+        <% end %>
+        <td>
+          <% total_avg = GroupedExamReport.find_by_student_id_and_batch_id_and_score_type(@student.id,@batch.id,"c") %>
+          <%= total_avg.present? ? total_avg.marks : "-" %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+<% end %>
+
+<script>
+  $(document).ready(function() {
+    $("#exam_report_batch_id").change(function(){
+      $('#exam_report_student_id :selected').remove();
+      $("form").submit();
+    });
+    $("#exam_report_student_id").change(function(){
+      $("form").submit();
+    });
+  });
+
+</script>

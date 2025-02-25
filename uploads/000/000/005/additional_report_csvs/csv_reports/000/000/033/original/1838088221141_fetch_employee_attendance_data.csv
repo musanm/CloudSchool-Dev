@@ -1,0 +1,238 @@
+Employee Department Attendance
+Department - All departments
+Total Members - 234
+Name,Employee number,CL,Total
+Admin,admin,0,0
+Samra,E2016-011,0,0
+ Zareen ,E2010-020,0,0
+Tahira,E2010-024,0,0
+ Ghazala ,E2000-020,0,0
+ Midhat,E2006-020,0,0
+ Nighat ,E2010-021,0,0
+ Sabira ,E2010-022,0,0
+Adeel,E2010-023,0,0
+Hina,E2012-020,0,0
+ Amna ,E2014-020,0,0
+ Riffat ,E2014-021,0,0
+ Tahira ,E2014-022,1,1
+Sana,E2014-024,0,0
+ Uzma,E2014-025,0,0
+ Shazia ,E2014-027,0,0
+ Shazia ,E2014-028,0,0
+Rafia,E2015-020,0,0
+ Iqra ,E2015-022,0,0
+ Yasir ,E2015-023,0,0
+ Tehmina,E2015-034,0,0
+Syeda,E2016-020,0,0
+Zahra,E2016-021,0,0
+Attia,E2016-022,0,0
+ Rubeca,E2016-023,0,0
+Chand ,E2016-024,0,0
+Syed ,E2016-025,0,0
+Sundas,E2016-026,0,0
+Shabir,E2016-027,0,0
+Naveed ,E2016-029,0,0
+Sadia ,E2016-030,0,0
+Asma,E2016-031,0,0
+Ameena ,E2016-032,0,0
+Hina ,E2017-020,0,0
+Shakeela,E2017-021,0,0
+Sakina ,E2017-022,0,0
+Naheed Zahid,E2017-023,0,0
+Duniya,E2017-024,0,0
+Waleed,E2017-025,0,0
+Hina,E2017-026,0,0
+Abdul Mateen,E2016-040,0,0
+Zeeshan,E2016-041,0,0
+Muhammad,E2011-040,0,0
+Asma,E2014-040,0,0
+Zainab,E2017-041,0,0
+Sumayya ,E2017-042,0,0
+Muhammad,E2016-042,0,0
+Musarrat,E2017-043,1,1
+Mobeen,E1989-001,0,0
+Waseem ,E1996-031,0,0
+Shabana,E1997-031,0,0
+Saima,E2004-030,0,0
+Ghulam,E2004-031,0,0
+Fakhra,E2007-030,0,0
+Sheraz,E2011-030,0,0
+Zakir,E2011-031,0,0
+Bibi ,E2013-030,0,0
+Ashir,E2014-030,0,0
+Sakina,E2015-030,0,0
+Safdar,E2015-031,0,0
+M Afzaal,E2016-034,0,0
+Sanaullah,E2016-035,1,1
+Muhammad,E2016-037,1,1
+Qadir,E2016-039,1,1
+Mustafa ,E1997-030,0,0
+Gulnaz,E2015-032,0,0
+Gulshan,E2016-033,0,0
+Muhammad,E2016-038,0,0
+Abdul ,E2017-050,0,0
+Humaira ,E2017-051,0,0
+Jamshaid,E2017-052,0,0
+Muhammad ,E2017-053,0,0
+Gouhar ,E1993-010,0,0
+Gulshah,E1993-011,0,0
+Shagufta,E1994-001,1,1
+Jhoson,E1997-025,1,1
+Aleeshia ,E2010-050,0,0
+ Huma,E2011-060,0,0
+Asim ,E2011-061,0,0
+ Hina ,E2013-062,0,0
+Irum,E2013-063,0,0
+Sunita ,E2013-064,0,0
+Naz,E2014-061,1,1
+ Erum,E2014-063,0,0
+Saira,E2014-066,0,0
+ Shezadi,E2015-061,0,0
+ Arifa ,E2016-060,0,0
+Aafia,E2016-061,0,0
+Sarah,E2016-064,0,0
+Abid,E2016-065,0,0
+Nida,E2016-066,0,0
+Asifa,E2017-061,1,1
+Sehar,E2017-064,0,0
+Nadira,E2017-067,1,1
+Hifsah,E2017-069,0,0
+Misbah,E2017-074,1,1
+Mehrish ,E2013-061,0,0
+Safia,E2014-060,0,0
+Maria ,E2014-062,1,1
+Noshe ,E2014-065,0,0
+Rida,E2015-060,0,0
+Saima ,E2015-062,0,0
+Sameena,E2016-062,0,0
+Shamim ,E2016-063,0,0
+Shazia,E2017-062,1,1
+Huma,E2017-063,1,1
+Kubra,E2017-065,0,0
+Fareena,E2017-066,0,0
+Shazia,E2017-068,0,0
+Rida Saher,E2017-070,0,0
+Maria ,E2017-071,0,0
+Nomana,E2017-072,0,0
+Anees,E2017-073,1,1
+Waseem,E2017-075,0,0
+Donald,E1993-045,0,0
+ Tahir,E2013-070,0,0
+Shamrooz,E2017-081,0,0
+Meera'n,E2017-090,0,0
+Rizwana,E1992-001,0,0
+Zakia,E2000-031,0,0
+Aafia,E2005-080,0,0
+Sajida,E2006-080,0,0
+Masooma,E2012-060,0,0
+Zoya,E2013-080,0,0
+Azm,E2014-080,0,0
+Shahnaz,E2014-081,0,0
+Ayatullah,E2014-082,0,0
+Maryam,E2015-080,0,0
+Lubna,E2015-081,1,1
+Ulfat,E2016-082,0,0
+Bibi,E2016-083,0,0
+Samia,E2016-084,0,0
+Parveen Noor,E2016-086,0,0
+Nadia,E2016-087,0,0
+Nadia ,E2017-091,1,1
+Farwa,E2017-092,0,0
+Sabiha,E2017-093,0,0
+Nayab,E2017-094,0,0
+Rubina,E2017-096,0,0
+Mehwish ,E2017-097,0,0
+Sumera,E2013-081,0,0
+Saima,E2016-099,0,0
+Sana,E2016-100,0,0
+Ashraf ,E1992-060,0,0
+Muhammad ,E1993-060,0,0
+Feroze ,E1994-060,0,0
+Ghullam ,E1995-060,1,1
+Nazar khan,E1995-061,0,0
+Lazras ,E1996-060,0,0
+Muhammad ,E1999-060,0,0
+Muhammad ,E2003-050,0,0
+Chand ,E2003-051,0,0
+Pervaiza,E2005-050,0,0
+Zaman,E2007-070,0,0
+Aurangzaib,E2007-071,0,0
+Gul Nisa,E2009-070,0,0
+Fozia ,E2010-090,0,0
+Ali ,E2011-090,0,0
+Moras ,E2012-090,0,0
+Fukraj ,E2012-091,0,0
+Markus,E2013-090,1,1
+Asiya ,E2013-091,0,0
+Shehnaz,E2013-092,0,0
+Sakina ,E2014-090,0,0
+Fehmida ,E2014-091,0,0
+Munir ,E2014-092,0,0
+Hossan ,E2014-093,0,0
+Razia ,E2014-094,0,0
+Shahida ,E2014-095,0,0
+Shazia,E2014-096,0,0
+Zeeshan ,E2015-090,1,1
+Jiwan ,E2015-091,0,0
+Maria,E2015-092,0,0
+Shahida,E2015-093,0,0
+Kousar ,E2015-094,0,0
+Abdul baqi,E2015-095,0,0
+Agha,E2015-096,0,0
+Muhammad ,E2016-114,1,1
+Noman-ullah,E2016-101,0,0
+Sharoon ,E2016-102,0,0
+Syed ,E2016-103,0,0
+Syed ,E2016-104,1,1
+Jahanzaib ,E2016-105,0,0
+Syed,E2016-106,1,1
+Muhammad ,E2016-107,0,0
+Ajeet ,E2016-108,0,0
+Farhan ,E2016-109,0,0
+Youail ,E2016-110,0,0
+Imtiyaz ali,E2016-112,1,1
+Naveed,E2016-113,0,0
+Asif ,E2017-110,0,0
+Bibi hazar ,E2017-111,0,0
+Noor ,E2017-113,1,1
+Taj ,E2017-114,1,1
+Hamida,E1995-071,0,0
+Rana,E2017-099,0,0
+Saba,E2017-012,0,0
+Uzma,E2017-013,0,0
+Madiha Raza,E2017-014,0,0
+Narjis,E2006-015,0,0
+Muhammad Rasheed,E2009-016,0,0
+Arsalan,E2016-017,0,0
+Rabecca Iram,E2007-018,0,0
+Seher Anam,E2014-019,0,0
+Shamsig Begum,E2016-088,0,0
+Fatima Ali,E2017-089,0,0
+Sabahat Musa,E2017-098,0,0
+Alec,E1993-100,0,0
+Iqbal Ud Din,E2012-101,0,0
+Sanober Washintgon,E2001-102,0,0
+Abdul Wahab,E2017-103,0,0
+Shan Yousaf,E2017-104,0,0
+Rafiq Bhatti,E1993-105,0,0
+Nasima Nazr,E2017-106,0,0
+Saba Khan,E2017-107,0,0
+Sidra Batool,E2016-123,1,1
+Sonia Munir,E2017-124,0,0
+Aqsa Iqbal,E2017-125,1,1
+Muhammad Shahjhan,E2016-126,0,0
+Hafiza Fiza Naseem,E2015-127,0,0
+Muhammad Mateen,E2017-128,0,0
+Um-E-,E2017-129,0,0
+Rabia,E2017-130,0,0
+Nematullah,E2016-131,0,0
+Ashraf Masih,E2004-032,1,1
+Hajra Bibi,E2017-116,0,0
+Ahmed Abdullah,E2016-019,0,0
+Raza,E2015-097,0,0
+Shafaqat,E1993-012,1,1
+Saqlain Iftikhar,E2017-115,0,0
+Muhammad Waseem Anwar,E2013-093,1,1
+Naheed Bibi,E2014-097,0,0
+Mishal,E2017-117,0,0
+Majid Masih,E2017-118,0,0

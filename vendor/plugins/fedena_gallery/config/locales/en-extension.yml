@@ -1,0 +1,7 @@
+en-k12:
+  galleries:
+    select_course: "Select class"
+
+en-hd:
+  galleries:
+    select_course: "Select course"

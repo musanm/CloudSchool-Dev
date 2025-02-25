@@ -1,0 +1,19 @@
+--- 
+fr:
+  attendance_reports:
+    no_subjects_to_show: "Aucun sujet"
+  attendances:
+    attendance_marked_for: "Présence marquée pour"
+    class_timings_empty: "Aucune classe d'horaire n'a été sélectionnée."
+    mark_absent: "Marquer comme absent"
+    no_subjects_to_show: "Aucun sujet"
+    no_tte_entries: "Aucune entrée dans le calendrier pour la date sélectionnée"
+    attendance_date_is_invalid: "La date de présence est invalide"
+  calendar:
+    no_events: "Aucun événement"
+    show_more_entries: "Afficher la suite"
+  reminder:
+    no_reminders: "Aucun rappel"
+    show_more_entries: "Afficher la suite"
+  timetable:
+    select_weekday: "Sélection un jour de la semaine"

@@ -1,0 +1,125 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+<% total_marks = 0 %>
+<div id="inner-tab-menu">
+  <ul>
+    <% if  @batch.present? %>
+      <li class='themed_bg themed-dark-hover-background'><%= link_to "Pdf Report", {:controller => "finance", :action => "finance_fee_report_pdf", :type => "grouped", :batch => @batch.id, :report_format_type => "pdf"},:target => '_blank' %></li>
+    <% end %>
+  </ul>
+</div>
+
+<div id="content-header">
+  <%= show_header_icon %>
+  <h1>Finance Reports</h1>
+  <div class='header-sep'>|</div>
+  <div class='sub-header'>Fee Repost</div>
+</div>
+
+
+<div id="page-yield">
+  <div class="bread_crumb">
+    <a href="<%= root_path %>">Home</a>
+    <div class="bread-crumb-separator"> &gt; </div>
+    <%= link_to "Finance" ,:controller => "finance", :action =>"index" %>
+    <div class="bread-crumb-separator"> &gt; </div>
+    <%= link_to "Finance Reports" ,:controller => "finance", :action =>"finance_reports" %>
+    <div class="bread-crumb-separator"> &gt;</div>Fee Report
+  </div>
+
+  <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+
+  <div class="box">
+    <% form_for :finance, :url=>{:action=>'fee_report'}  do |x| %>
+      <div class="label-field-pair">
+        <label for="student_course"><%= t('select_a_batch') %>:</label>
+        <div class="text-input-bg">
+          <% if params[:finance] && params[:finance][:batch_id].present? %>
+            <% batch_id = @batch.id %>
+          <% else %>
+            <% batch_id = "" %>
+          <% end %>
+          <%= x.select :batch_id, Batch.active.map {|b| [b.full_name, b.id]},:selected => batch_id, :prompt => "Select a Batch" %>
+        </div>
+      </div>
+    <% end %>
+    <div class="extender"></div>
+  </div>
+</div>
+
+
+
+<script>
+  $(document).ready(function() {
+    $("#finance_batch_id").change(function(){
+      $("form").submit();
+    });
+  });
+
+</script>
+
+
+
+<% if @batch.present? %>
+  <h2>
+    Fee collections:<%= @date.name%>,
+    Class:<%= @batch.try(:name)%>,
+    Date: <%=Date.today%>
+  </h2>
+  <table id="listing" align="center" width="100%" cellpadding="1" cellspacing="1"> 
+    <tr class="tr-head">
+      <td>Sr #</td>
+      <td>Roll #</td>
+      <td>Admn #</td>
+      <td>Invoice #</td>
+      <td>Student Name</td>
+      <td>Guardian Name</td>
+      <td>Amount</td>
+    </tr>
+    <% @batch.students.each_with_index do |student,ind| %>
+
+      <% @student = student %>
+      <% @student = student %>
+
+      <% master_fees_sql="SELECT distinct finance_fee_collections.name as collection_name,finance_fees.is_paid,finance_fees.balance,finance_fees.id as id,'FinanceFee' as fee_type,(finance_fees.balance+(select ifnull(sum(finance_transactions.amount-finance_transactions.fine_amount),0) from finance_transactions where finance_transactions.finance_id=finance_fees.id and finance_transactions.finance_type='FinanceFee')) as actual_amount,(select(fr.fine_amount) from fine_rules fr where fr.id=max(fine_rules.id)) as fine_amount,fine_rules.is_amount FROM `finance_fees` INNER JOIN `finance_fee_collections` ON `finance_fee_collections`.id = `finance_fees`.fee_collection_id INNER JOIN `fee_collection_batches` ON fee_collection_batches.finance_fee_collection_id = finance_fee_collections.id INNER JOIN `collection_particulars` ON (`finance_fee_collections`.`id` = `collection_particulars`.`finance_fee_collection_id`) INNER JOIN `finance_fee_particulars` ON (`finance_fee_particulars`.`id` = `collection_particulars`.`finance_fee_particular_id`) LEFT JOIN `fines` ON `fines`.id = `finance_fee_collections`.fine_id AND fines.is_deleted is false LEFT JOIN `fine_rules` ON fine_rules.fine_id = fines.id and fine_days <= DATEDIFF(CURDATE(),finance_fee_collections.due_date) " %>
+      <% (FedenaPlugin.can_access_plugin?("fedena_hostel") and (@current_user.admin? or @current_user.privileges.collect(&:name).include? "HostelAdmin"))? hostel_fees_sql="UNION ALL (SELECT fc.name as collection_name,if(hf.finance_transaction_id is null,false,true) is_paid,if(hf.finance_transaction_id is null,hf.rent,0) balance,hf.id as id,'HostelFee' as fee_type,hf.rent actual_amount,0 fine_amount,0 is_amount FROM `hostel_fees` hf INNER JOIN `hostel_fee_collections` fc ON `fc`.id = `hf`.hostel_fee_collection_id and fc.is_deleted=0 and hf.student_id='#{@student.id}')" : hostel_fees_sql='' %>
+      <% (FedenaPlugin.can_access_plugin?("fedena_transport") and (@current_user.admin? or @current_user.privileges.collect(&:name).include? "TransportAdmin"))? transport_fees_sql="UNION ALL (SELECT tc.name as collection_name,if(tf.transaction_id is null,false,true) is_paid,if(tf.transaction_id is null,tf.bus_fare,0) balance,tf.id as id,'TransportFee' as fee_type,tf.bus_fare actual_amount,0 fine_amount,0 is_amount FROM `transport_fees` tf INNER JOIN `transport_fee_collections` tc ON `tc`.id = `tf`.transport_fee_collection_id and tc.is_deleted=0 and tf.receiver_id='#{@student.id}' and tf.receiver_type='Student')" : transport_fees_sql='' %>
+      <% @finance_fees=FinanceFee.find_by_sql("#{master_fees_sql} WHERE (finance_fees.student_id=#{@student.id} and finance_fee_collections.is_deleted=0 and ((finance_fee_particulars.receiver_type='Batch' and finance_fee_particulars.receiver_id=finance_fees.batch_id) or (finance_fee_particulars.receiver_type='Student' and finance_fee_particulars.receiver_id=finance_fees.student_id) or (finance_fee_particulars.receiver_type='StudentCategory' and finance_fee_particulars.receiver_id=finance_fees.student_category_id))) GROUP BY finance_fees.id  #{transport_fees_sql}  #{hostel_fees_sql}") %>
+
+      <% total_amount_to_pay=0 %>
+
+      <%@finance_fees.group_by(&:fee_type).each do |fees|%>
+        <% fees.last.each_with_index do |finance_fee, k| %>
+          <%fine_amount=(finance_fee.is_paid? ? 0 : (finance_fee.is_amount? ? finance_fee.fine_amount : (finance_fee.actual_amount.to_f)*(finance_fee.fine_amount.to_f/100)))%>
+          <% total_amount_to_pay=total_amount_to_pay+finance_fee.balance.to_f+fine_amount.to_f %>
+        <% end %>
+      <% end %>
+      <tr class="tr-odd">
+        <td><%= ind+1 %></td>
+        <td><%= @student.roll_number %></td>
+        <td><%= @student.admission_no %></td>
+        <td><%= '%05i' % @student.id %></td>
+        <td><%= @student.full_name %></td>
+        <td><%= @student.guardians.first.full_name if @student.guardians.present? %></td>
+        <td>
+          <b>
+            <% unless precision_label(total_amount_to_pay).to_f == 0 %>
+              <%= precision_label(total_amount_to_pay.to_f) %>
+            <% else %>
+              <%= precision_label(0) %>
+            <% end %>
+          </b>
+                  
+        </td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+
+<style>
+  td{
+    text-align: center;
+  }
+</style>

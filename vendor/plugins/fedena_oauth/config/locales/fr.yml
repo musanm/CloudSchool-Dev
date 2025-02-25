@@ -1,0 +1,11 @@
+fr:
+  oauth:
+    account: "Compte"
+    could_not_authenticate_with: "Désolé, n'a pas pu s'authentifier utilisant"
+    enter_user_email: "Entrer votre email"
+    login_with_google: "Connectez-vous utilisant votre"
+    no_user_with_email: "Aucun utilisateur avec email"
+    select_user: "Sélectionner un utilisateur"
+  manage_clients: "Manage Clients"
+  enable_oauth: "Activer Oauth"
+  

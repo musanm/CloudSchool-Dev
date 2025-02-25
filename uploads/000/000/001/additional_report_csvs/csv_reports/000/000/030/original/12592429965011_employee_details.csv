@@ -1,0 +1,21 @@
+No.,Name,Employee ID,Joining date,Department,Position,Manager,Gender
+1,Admin  User,admin,08/10/2015 ,System Admin,System Admin, ,M
+2,Amjad Ali Khan,EN-15,16/09/2017 ,Faculty,Teacher, ,M
+3,Asma  ,EN-02,16/09/2017 ,Faculty,Teacher, ,F
+4,Hassan  Shahid,hassan,02/08/2016 ,System Admin,System Admin, ,M
+5,Khatija  ,EN-10,16/09/2017 ,Faculty,Teacher, ,F
+6,Nadeem  ,EN-17,12/09/2017 ,Faculty,Teacher,Usman ,M
+7,Test  ,exam,14/09/2017 ,Faculty,Teacher,Admin User,M
+8,Test Accounts  ,account,14/09/2017 ,Faculty,Teacher,Admin User,M
+9,User 03  ,EN-03,28/03/2013 ,Faculty,Teacher, ,F
+10,User 04  ,EN-04,17/03/2015 ,Faculty,Teacher, ,F
+11,User 05  ,EN-05,28/03/2013 ,Faculty,Teacher, ,F
+12,User 06  ,EN-06,01/11/2012 ,Faculty,Teacher, ,F
+13,User 07  ,EN-07,23/03/2013 ,Faculty,Teacher, ,F
+14,User 08  ,EN-08,02/04/2013 ,Faculty,Teacher, ,F
+15,User 09  ,EN-09,28/03/2013 ,Faculty,Teacher, ,F
+16,User 11  ,EN-11,29/05/2014 ,Faculty,Teacher, ,F
+17,User 12  ,EN-12,02/04/2013 ,Faculty,Teacher, ,F
+18,User 13  ,EN-13,26/08/2014 ,Faculty,Teacher, ,F
+19,User 14  ,EN-14,15/04/2014 ,Faculty,Teacher, ,F
+20,Usman  ,EN-01,07/07/2017 ,Faculty,Teacher,Admin User,M

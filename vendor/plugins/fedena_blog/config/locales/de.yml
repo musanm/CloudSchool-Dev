@@ -1,0 +1,105 @@
+de:
+  activerecord:
+    attributes:
+      applicant:
+        first_name: Voornaam
+        date_of_birth: Geboortedatum
+  date:
+    formats:
+      default: "%e-%m-%Y"
+      normal: "%B %e, %Y"
+      short: "%e. %b"
+      month_year: "%B %Y"
+      long: "%A, %e %B, %Y"
+      only_day: "%e"
+      month: "%B"
+      day: "%a"
+      mont: "%d"
+      day_mon: "%a %d"
+    day_names: "[zondag, maandag, dinsdag, woensdag, donderdag, vrijdag,zaterdag]"
+    abbr_day_names: "[zo, ma, di, wo, do, vr, za]"
+    month_names: "[~, januari, februari, maart, april, mei, juni, juli, augustus,
+      september, oktober, november, december]"
+    abbr_month_names: "[~, jan, feb, mrt, apr, mei, jun, jul, aug, sep, okt, nov,
+      dec]"
+    order: "[ dag, maand, jaar ]"
+  time:
+    formats:
+      default: "%A, %d. %B %Y, %H:%M Uhr"
+      short: "%d. %B, %H:%M Uhr"
+      long: "%A, %d. %B %Y, %H:%M Uhr"
+      time: "%H:%M"
+    am: AM
+    pm: PM
+  blog_admin_privilege: Blog Admin
+  blog_comments:
+    delete_comment_confirmation: Weet u zeker dat u dit commentaar wilt wissen?
+    deleted_user: Gewiste gebruiker
+    flash_admin: Administrateur kan niet deelnemen aan de blog.
+    comment_deleted: "Comment successfully deleted."
+    comment_created: "Comment successfully created."
+  blog_posts:
+    deleted_user: 'Gewiste gebruiker '
+    edit: Bewerken
+    activate: Activeren
+    ban_blog_post: Publicatie op blog is met succes geblokkeerd
+    ban_post: Publicatie blokkeren
+    blog_post_deleted_successfully: Publicatie met succes gewist
+    blogs_text: Blog
+    comments: Commentaar
+    create_post: Publicatie aanmaken
+    deactivate: Desactiveren
+    delete_post: Weet u zeker dat u deze publicatie wil wissen?
+    deleted_blog: Gewist Blog
+    edit_blog: Blog bijwerken
+    favourites: Favorieten
+    flash2: Uw publicatie op de blog is met succes opgeslagen.
+    flash3: Uw publicatie op de blog is met succes gepubliceerd.
+    flash_admin: Administrateur kan niet deelnemen aan de blog.
+    flash_edit: Uw publicatie is met succes bijgewerkt
+    flash_no_blog: Geen blog gevonden voor deze gebruiker
+    flash_no_user: Gebruiker niet gevonden
+    flash_not_available: Deze inhoud is momenteel niet beschikbaar
+    home: Home
+    latest_posts: Meest recent
+    my_blog: Mijn Blog
+    new_post: "+ Nieuwe publicatie"
+    next_page: Volgende bladzijde >
+    no_blog_found: Geen blog gevonden
+    no_blog_posts: Geen blog publicaties
+    no_post: Geen blog door u gepubliceerd.
+    not_authorized: U mag deze inhoud niet bekijken
+    notifications: Activiteiten
+    on_text: op
+    popular_posts: Populair
+    posted_by: Gepubliceerd door
+    posts: Publicaties
+    prev_page: "< Vorige bladzijde"
+    publish: Publiceren
+    published_successfully: Met succes gepubliceerd
+    save_as_draft: Opgeslagen als klad
+    search: Zoeken
+    search_blogs: Blogs zoeken
+    unban_blog_post: Uw blog publicatie is met succes gedeblokkeerd
+    unpublish: Niet publiceren
+    unpublished_successfully: Met succes de publicatie geannuleerd
+  blog_text: Blog
+  blogs:
+    edit: Bijwerken
+    activities: Activiteiten
+    blog_activated: Gebuikers blog is met succes geactiveerd
+    blog_deactivated: Gebuikers blog is met succes gedesactiveerd
+    blogs_text: Blog
+    commented: " commentaar over uw publicatie"
+    deleted_user: Gewiste gebruiker
+    flash1: Maak eerst voor uzelf een blog aan
+    flash_admin: Administrateur kan niet deelnemen aan de blog.
+    flash_update: Blog is met succes geüpdatet
+    my_blog: Mijn Blog
+    no_notification: Geen recente activiteiten gevonden
+    notifications: Activiteiten
+    on_text: " op"
+    register: Registreren
+    search: Zoeken
+  manage_blog: Blog publiceren en blogs van andere gebruikers bekijken
+  blog_activity_present: "Has blog related activities"

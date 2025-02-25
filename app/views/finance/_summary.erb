@@ -1,0 +1,59 @@
+<tr class="tr-blank"></tr>
+<tr class="tr-head" cellpadding="1" cellspacing="1">
+  <td class="col-1"></td>
+  <td class="col-1 bold_font" colspan="2"><span><%= t('summary') %></span></td>
+</tr>
+
+<tr class="tr-<%= cycle("odd", "even") %> ">
+  <td class="col-1 normal_font">1</td>
+  <td class="col-2 normal_font"><%= "#{t('total')} #{t('particular')} #{t('fees_text')}" %></td>
+  <td class="col-6 normal_font"> <%= precision_label(@total_payable) %></td>
+</tr>
+<tr class="tr-<%= cycle("odd", "even") %> ">
+  <td class="col-1 normal_font">2</td>
+  <td class="col-2 normal_font"><%= "#{t('total')} #{t('discount')} #{t('amount')}" %></td>
+  <td class="col-6 normal_font"> <%= precision_label(@total_discount) %></td>
+</tr>
+
+<tr class="tr-<%= cycle("odd", "even") %> ">
+  <td class="col-1 normal_font">3</td>
+  <td class="col-2 normal_font"><%= "#{t('total')} #{t('fine_amount')}" %></td>
+  <td class="col-6 normal_font"> <%= precision_label(total_fine) %></td>
+</tr>
+
+<tr class="tr-blank"></tr>
+<% total_fees = (@total_payable-@total_discount) %>
+<tr class="tr-<%= cycle("odd", "even") %>" cellpadding="1" cellspacing="1">
+  <td class="bold_font col-6" colspan="2"><%= t('total_fees') %> </td>
+  <td class="col-6 bold_font total_fees">
+    <%= precision_label(total_fees) %>
+  </td>
+</tr>
+<% balance=@financefee.balance.to_f+@fine.to_f %>
+<% unless @paid_fees.nil? %>
+    <% paid=0 %>
+    <% @paid_fees.each { |a| paid += a.amount.to_f } %>
+    <% total_fees -= paid %>
+    <tr class="tr-blank"></tr>
+    <tr class="tr-<%= cycle("odd", "even") %>" cellpadding="1" cellspacing="1">
+      <td class="bold_font col-6" colspan="2"><%= t('payment_done') %></td>
+      <td class="col-6 bold_font payment_done">
+        <%= precision_label(paid) %>
+      </td>
+      <% if precision_label(balance+@fine_amount.to_f).to_f <= 0 %>
+          <td class="cancel-disc"><%= "&#10004;" %></td>
+      <% end %>
+    </tr>
+<% end %>
+
+<% unless precision_label(balance+@fine_amount.to_f).to_f <= 0 %>
+    <tr class="tr-blank"></tr>
+    <tr class="tr-<%= cycle("odd", "even") %>" cellpadding="1" cellspacing="1">
+      <td class="bold_font col-6" colspan="2"><%= t('amount_to_pay') %> </td>
+      <td class="bold_font col-6 amount_to_pay">
+        <% unless precision_label(balance+@fine_amount.to_f).to_f < 0 %>
+            <%= precision_label(balance+@fine_amount.to_f) %>
+        <% end %>
+      </td>
+    </tr>
+<% end %>
